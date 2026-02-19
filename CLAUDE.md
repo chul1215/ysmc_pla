@@ -21,18 +21,18 @@ ysmc_pla/
 ├── trauma.html         ← 외상
 ├── reconstruction.html ← 재건·종괴
 ├── dashboard.html      ← 관리자 대시보드 (Tailwind CSS)
-├── deploy/             ← 배포용 파일 (루트 HTML과 동기화 유지)
 ├── images/             ← 이미지 파일
-└── plan/               ← 기획서 및 마케팅 전략 문서
+├── plan/               ← 기획서 및 마케팅 전략 문서
+└── reference/          ← 참고 자료 및 기획 문서
 ```
 
 ## 배포 워크플로우
 
-루트 HTML 파일 수정 후 `deploy/` 폴더에 반드시 동기화해야 한다:
+GitHub Pages를 통해 자동 배포된다:
 
-```bash
-cp index.html eye.html lifting.html petit.html trauma.html reconstruction.html dashboard.html deploy/
-```
+- **배포 URL**: `https://chul1215.github.io/ysmc_pla/`
+- **설정**: GitHub 저장소의 Settings → Pages → Source: `main` branch, `/ (root)` folder
+- 변경사항을 `main` 브랜치에 푸시하면 자동으로 배포됨
 
 ## CSS 색상 시스템
 
