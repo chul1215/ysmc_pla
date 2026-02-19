@@ -390,6 +390,169 @@
       line-height: 1.7;
     }
 
+    /* ===== Category Split Banner ===== */
+    .category-split {
+      display: flex;
+      height: 420px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 80px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .category-panel {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 48px;
+      cursor: pointer;
+      transition: flex 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+
+    .category-panel:hover {
+      flex: 1.6;
+    }
+
+    .category-panel:hover .category-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .category-cosmetic {
+      background: linear-gradient(155deg, #7a1f12 0%, var(--primary-dark) 45%, var(--primary) 100%);
+    }
+
+    .category-medical {
+      background: linear-gradient(155deg, #0d2744 0%, #1a3a5c 50%, #245a8a 100%);
+    }
+
+    .category-divider {
+      width: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .category-panel-content {
+      position: relative;
+      z-index: 1;
+      color: var(--white);
+    }
+
+    .category-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      opacity: 0.65;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .category-title {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .category-desc {
+      font-size: 15px;
+      opacity: 0.8;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .category-services {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .category-services li {
+      font-size: 14px;
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-services li::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      flex-shrink: 0;
+    }
+
+    .category-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      padding: 10px 22px;
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      border-radius: 6px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s 0.1s, transform 0.3s 0.1s, background 0.2s;
+    }
+
+    .category-cta:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ===== Category Group ===== */
+    .category-group {
+      margin-bottom: 72px;
+    }
+
+    .category-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .category-group-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e8e0d8;
+    }
+
+    .category-group-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 22px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .cosmetic-badge {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .medical-badge {
+      background: #1a3a5c;
+      color: var(--white);
+    }
+
+    .category-group-label {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
     /* ===== 4-Block Center Section ===== */
     .centers {
       background: var(--bg-light);
@@ -399,6 +562,10 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+    }
+
+    .center-grid-2col {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .center-card {
@@ -870,7 +1037,43 @@
 
     /* ===== Responsive ===== */
     @media (max-width: 1024px) {
+      .category-split {
+        height: 560px;
+        flex-direction: column;
+        border-radius: 16px;
+      }
+
+      .category-panel {
+        flex: 1 !important;
+        padding: 36px;
+      }
+
+      .category-panel:hover {
+        flex: 1 !important;
+      }
+
+      .category-panel:hover .category-cta {
+        opacity: 0;
+      }
+
+      .category-divider {
+        width: 100%;
+        height: 2px;
+      }
+
+      .category-title {
+        font-size: 32px;
+      }
+
+      .category-cta {
+        display: none;
+      }
+
       .center-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .center-grid-2col {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -968,7 +1171,31 @@
         font-size: 28px;
       }
 
+      .category-split {
+        height: auto;
+        margin-bottom: 48px;
+      }
+
+      .category-panel {
+        padding: 32px 24px;
+        min-height: 200px;
+      }
+
+      .category-title {
+        font-size: 26px;
+      }
+
+      .category-group-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
       .center-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .center-grid-2col {
         grid-template-columns: 1fr;
       }
 
@@ -1079,117 +1306,174 @@
     </div>
   </section>
 
-  <!-- ===== 4-BLOCK CENTERS ===== -->
+  <!-- ===== CENTERS / 진료 분야 ===== -->
   <section class="section centers" id="centers">
     <div class="section-inner">
+
       <div class="section-header fade-up">
-        <div class="section-label">The 5 Key Centers</div>
-        <h2 class="section-title">핵심 진료 센터</h2>
-        <p class="section-desc">유성선병원 성형외과의 5대 핵심 진료 센터로<br>안전하고 섬세한 치료를 제공합니다.</p>
+        <div class="section-label">Medical Specialty</div>
+        <h2 class="section-title">진료 분야</h2>
+        <p class="section-desc">유성선병원 성형외과는 두 가지 핵심 분야로<br>안전하고 전문적인 진료를 제공합니다.</p>
       </div>
-      <div class="center-grid">
 
-        <!-- BLOCK 1: EYE -->
-        <div class="center-card fade-up">
-          <div class="center-card-visual">
-            <img src="images/eye-correction.png" alt="눈 성형">
-            <div class="center-card-num">01</div>
-          </div>
-          <div class="center-card-body">
-            <div class="center-card-label">Eye Center</div>
-            <h3 class="center-card-title">라인보다,<br>눈이 편안해지는 게 먼저</h3>
-            <p class="center-card-desc">처진 눈꺼풀·눈밑 고민을 기능과 인상 기준으로 함께 봅니다.</p>
-            <div class="center-card-tags">
-              <span class="center-card-tag">#처진눈꺼풀</span>
-              <span class="center-card-tag">#눈밑지방</span>
-              <span class="center-card-tag">#눈매교정</span>
-              <span class="center-card-tag">#자연스러운라인</span>
-            </div>
-            <a href="eye.html" class="center-card-link">자세히 보기 &#8594;</a>
+      <!-- ===== 카테고리 스플릿 배너 ===== -->
+      <div class="category-split fade-up">
+
+        <!-- 미용·성형 -->
+        <div class="category-panel category-cosmetic" onclick="document.getElementById('cosmetic-group').scrollIntoView({behavior:'smooth'})">
+          <div class="category-panel-content">
+            <div class="category-tag">COSMETIC &amp; AESTHETIC</div>
+            <h3 class="category-title">미용·성형</h3>
+            <p class="category-desc">아름다움을 섬세하게 설계합니다</p>
+            <ul class="category-services">
+              <li>Eye Center · 눈 성형</li>
+              <li>Lifting &amp; Anti-Aging · 리프팅</li>
+              <li>Petit &amp; Skin · 쁘띠 / 스킨</li>
+            </ul>
+            <span class="category-cta">진료 안내 보기 &#8594;</span>
           </div>
         </div>
 
-        <!-- BLOCK 2: LIFTING -->
-        <div class="center-card fade-up">
-          <div class="center-card-visual">
-            <img src="images/lifting.jpg" alt="리프팅">
-            <div class="center-card-num">02</div>
-          </div>
-          <div class="center-card-body">
-            <div class="center-card-label">Lifting &amp; Anti-Aging</div>
-            <h3 class="center-card-title">티 나지 않게,<br>얼굴이 정돈되는 설계</h3>
-            <p class="center-card-desc">피부 두께·처짐 방향을 보고 단계적으로 계획합니다.</p>
-            <div class="center-card-tags">
-              <span class="center-card-tag">#울쎄라</span>
-              <span class="center-card-tag">#써마지</span>
-              <span class="center-card-tag">#안면거상</span>
-              <span class="center-card-tag">#복합리프팅</span>
-            </div>
-            <a href="lifting.html" class="center-card-link">자세히 보기 &#8594;</a>
-          </div>
-        </div>
+        <div class="category-divider"></div>
 
-        <!-- BLOCK 3: TRAUMA -->
-        <div class="center-card fade-up">
-          <div class="center-card-visual">
-            <img src="images/surgery-room.jpg" alt="외상/재건">
-            <div class="center-card-num">03</div>
-          </div>
-          <div class="center-card-body">
-            <div class="center-card-label">Trauma &amp; Reconstruction</div>
-            <h3 class="center-card-title">다친 직후부터<br>흉터 관리까지 이어지는 체계</h3>
-            <p class="center-card-desc">상처 봉합은 '속도'보다 '흉터까지의 계획'입니다.</p>
-            <div class="center-card-tags">
-              <span class="center-card-tag">#안면골절</span>
-              <span class="center-card-tag">#상처봉합</span>
-              <span class="center-card-tag">#흉터최소화</span>
-              <span class="center-card-tag">#초기처치</span>
-            </div>
-            <a href="trauma.html" class="center-card-link">자세히 보기 &#8594;</a>
-          </div>
-        </div>
-
-        <!-- BLOCK 4: PETIT -->
-        <div class="center-card fade-up">
-          <div class="center-card-visual">
-            <img src="images/petit-skin.png" alt="쁘띠/스킨">
-            <div class="center-card-num">04</div>
-          </div>
-          <div class="center-card-body">
-            <div class="center-card-label">Petit &amp; Skin</div>
-            <h3 class="center-card-title">필요한 만큼만,<br>과하지 않게</h3>
-            <p class="center-card-desc">표정·비대칭·생활 일정까지 고려해서 안전하게.</p>
-            <div class="center-card-tags">
-              <span class="center-card-tag">#보톡스</span>
-              <span class="center-card-tag">#필러</span>
-              <span class="center-card-tag">#스킨부스터</span>
-              <span class="center-card-tag">#레이저</span>
-            </div>
-            <a href="petit.html" class="center-card-link">자세히 보기 &#8594;</a>
-          </div>
-        </div>
-
-        <!-- BLOCK 5: RECONSTRUCTION -->
-        <div class="center-card fade-up">
-          <div class="center-card-visual">
-            <img src="images/eye-correction.png" alt="재건/종괴">
-            <div class="center-card-num">05</div>
-          </div>
-          <div class="center-card-body">
-            <div class="center-card-label">Reconstruction</div>
-            <h3 class="center-card-title">불안할 땐,<br>정확히 확인하는 게 먼저</h3>
-            <p class="center-card-desc">몽우리/혹을 진단하고 필요한 치료를 세밀하게 안내합니다.</p>
-            <div class="center-card-tags">
-              <span class="center-card-tag">#몽우리</span>
-              <span class="center-card-tag">#혹제거</span>
-              <span class="center-card-tag">#흉터최소화</span>
-              <span class="center-card-tag">#정밀진단</span>
-            </div>
-            <a href="reconstruction.html" class="center-card-link">자세히 보기 &#8594;</a>
+        <!-- 치료·재건 -->
+        <div class="category-panel category-medical" onclick="document.getElementById('medical-group').scrollIntoView({behavior:'smooth'})">
+          <div class="category-panel-content">
+            <div class="category-tag">TREATMENT &amp; RECONSTRUCTION</div>
+            <h3 class="category-title">치료·재건</h3>
+            <p class="category-desc">종합병원의 안전함으로 치료합니다</p>
+            <ul class="category-services">
+              <li>Trauma · 외상 / 상처</li>
+              <li>Reconstruction · 재건 / 종괴</li>
+            </ul>
+            <span class="category-cta">진료 안내 보기 &#8594;</span>
           </div>
         </div>
 
       </div>
+
+      <!-- ===== 미용·성형 그룹 ===== -->
+      <div class="category-group" id="cosmetic-group">
+        <div class="category-group-header fade-up">
+          <span class="category-group-badge cosmetic-badge">미용·성형</span>
+          <span class="category-group-label">외모적 아름다움과 자신감 회복을 위한 전문 진료</span>
+        </div>
+        <div class="center-grid">
+
+          <!-- BLOCK 1: EYE -->
+          <div class="center-card fade-up">
+            <div class="center-card-visual">
+              <img src="images/eye-correction.png" alt="눈 성형">
+              <div class="center-card-num">01</div>
+            </div>
+            <div class="center-card-body">
+              <div class="center-card-label">Eye Center</div>
+              <h3 class="center-card-title">라인보다,<br>눈이 편안해지는 게 먼저</h3>
+              <p class="center-card-desc">처진 눈꺼풀·눈밑 고민을 기능과 인상 기준으로 함께 봅니다.</p>
+              <div class="center-card-tags">
+                <span class="center-card-tag">#처진눈꺼풀</span>
+                <span class="center-card-tag">#눈밑지방</span>
+                <span class="center-card-tag">#눈매교정</span>
+                <span class="center-card-tag">#자연스러운라인</span>
+              </div>
+              <a href="eye.html" class="center-card-link">자세히 보기 &#8594;</a>
+            </div>
+          </div>
+
+          <!-- BLOCK 2: LIFTING -->
+          <div class="center-card fade-up">
+            <div class="center-card-visual">
+              <img src="images/lifting.jpg" alt="리프팅">
+              <div class="center-card-num">02</div>
+            </div>
+            <div class="center-card-body">
+              <div class="center-card-label">Lifting &amp; Anti-Aging</div>
+              <h3 class="center-card-title">티 나지 않게,<br>얼굴이 정돈되는 설계</h3>
+              <p class="center-card-desc">피부 두께·처짐 방향을 보고 단계적으로 계획합니다.</p>
+              <div class="center-card-tags">
+                <span class="center-card-tag">#울쎄라</span>
+                <span class="center-card-tag">#써마지</span>
+                <span class="center-card-tag">#안면거상</span>
+                <span class="center-card-tag">#복합리프팅</span>
+              </div>
+              <a href="lifting.html" class="center-card-link">자세히 보기 &#8594;</a>
+            </div>
+          </div>
+
+          <!-- BLOCK 3: PETIT -->
+          <div class="center-card fade-up">
+            <div class="center-card-visual">
+              <img src="images/petit-skin.png" alt="쁘띠/스킨">
+              <div class="center-card-num">03</div>
+            </div>
+            <div class="center-card-body">
+              <div class="center-card-label">Petit &amp; Skin</div>
+              <h3 class="center-card-title">필요한 만큼만,<br>과하지 않게</h3>
+              <p class="center-card-desc">표정·비대칭·생활 일정까지 고려해서 안전하게.</p>
+              <div class="center-card-tags">
+                <span class="center-card-tag">#보톡스</span>
+                <span class="center-card-tag">#필러</span>
+                <span class="center-card-tag">#스킨부스터</span>
+                <span class="center-card-tag">#레이저</span>
+              </div>
+              <a href="petit.html" class="center-card-link">자세히 보기 &#8594;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== 치료·재건 그룹 ===== -->
+      <div class="category-group" id="medical-group">
+        <div class="category-group-header fade-up">
+          <span class="category-group-badge medical-badge">치료·재건</span>
+          <span class="category-group-label">기능 회복과 안전한 치료를 위한 전문 진료</span>
+        </div>
+        <div class="center-grid center-grid-2col">
+
+          <!-- BLOCK 4: TRAUMA -->
+          <div class="center-card fade-up">
+            <div class="center-card-visual">
+              <img src="images/surgery-room.jpg" alt="외상/재건">
+              <div class="center-card-num">04</div>
+            </div>
+            <div class="center-card-body">
+              <div class="center-card-label">Trauma &amp; Reconstruction</div>
+              <h3 class="center-card-title">다친 직후부터<br>흉터 관리까지 이어지는 체계</h3>
+              <p class="center-card-desc">상처 봉합은 '속도'보다 '흉터까지의 계획'입니다.</p>
+              <div class="center-card-tags">
+                <span class="center-card-tag">#안면골절</span>
+                <span class="center-card-tag">#상처봉합</span>
+                <span class="center-card-tag">#흉터최소화</span>
+                <span class="center-card-tag">#초기처치</span>
+              </div>
+              <a href="trauma.html" class="center-card-link">자세히 보기 &#8594;</a>
+            </div>
+          </div>
+
+          <!-- BLOCK 5: RECONSTRUCTION -->
+          <div class="center-card fade-up">
+            <div class="center-card-visual">
+              <img src="images/eye-correction.png" alt="재건/종괴">
+              <div class="center-card-num">05</div>
+            </div>
+            <div class="center-card-body">
+              <div class="center-card-label">Reconstruction</div>
+              <h3 class="center-card-title">불안할 땐,<br>정확히 확인하는 게 먼저</h3>
+              <p class="center-card-desc">몽우리/혹을 진단하고 필요한 치료를 세밀하게 안내합니다.</p>
+              <div class="center-card-tags">
+                <span class="center-card-tag">#몽우리</span>
+                <span class="center-card-tag">#혹제거</span>
+                <span class="center-card-tag">#흉터최소화</span>
+                <span class="center-card-tag">#정밀진단</span>
+              </div>
+              <a href="reconstruction.html" class="center-card-link">자세히 보기 &#8594;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
