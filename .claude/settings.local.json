@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(~/.zshrc)",
+      "Bash(source:*)",
+      "Bash(grep:*)",
+      "WebFetch(domain:ysmcpla.netlify.app)"
+    ]
+  }
+}

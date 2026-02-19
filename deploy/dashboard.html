@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>유성선병원 성형외과 신설 기획안 대시보드</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#cd4631",
+                        "accent": "#f8f2dc",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Sans KR", "Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mesh-gradient {
+            background-color: #0d1117;
+            background-image:
+                radial-gradient(at 0% 0%, hsla(7, 65%, 30%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(7, 70%, 25%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(47, 45%, 45%, 0.2) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(7, 60%, 35%, 0.2) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, hsla(7, 65%, 30%, 0.2) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(47, 50%, 40%, 0.2) 0px, transparent 50%);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark font-display text-white overflow-hidden h-screen flex items-center justify-center">
+    <!-- Background Layer -->
+    <div class="fixed inset-0 mesh-gradient z-0"></div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 w-full h-full p-6 flex gap-6 max-w-[1800px] mx-auto overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="w-40 lg:w-64 flex flex-col items-stretch h-full glass-panel rounded-xl py-8 px-4">
+
+            <nav class="flex-1 space-y-2">
+                <a class="flex items-center gap-3 px-4 py-3 bg-primary/20 text-primary border border-primary/20 rounded-xl transition-all"
+                    href="#overview">
+                    <span class="font-medium text-sm">개요</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    href="#website">
+                    <span class="font-medium text-sm">홈페이지</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    href="#content">
+                    <span class="font-medium text-sm">콘텐츠</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    href="#schedule">
+                    <span class="font-medium text-sm">일정</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    href="#faq">
+                    <span class="font-medium text-sm">FAQ</span>
+                </a>
+            </nav>
+
+            <div class="mt-auto space-y-2">
+                <div class="pt-6 mt-6 border-t border-white/10 px-2">
+                    <p class="text-xs text-white/40 mb-2">프로젝트</p>
+                    <p class="text-sm font-semibold">성형외과 신설</p>
+                    <p class="text-xs text-white/40 mt-1">2026년 2분기</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col gap-6 overflow-hidden">
+            <!-- Top Header -->
+            <header class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold">유성선병원 성형외과 신설 홍보 마켓팅 기획안</h1>
+                    <p class="text-white/50 text-sm">홍보·마케팅 최종 실행 계획 대시보드</p>
+                </div>
+                <div class="flex items-center gap-4">
+
+                </div>
+            </header>
+
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar pr-2 space-y-6">
+                <!-- Quick Metrics Grid -->
+                <div id="overview" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-panel p-5 rounded-xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-2 bg-primary/20 rounded-lg text-primary">
+                                <span class="material-icons-round">layers</span>
+                            </div>
+                            <span class="text-xs font-medium text-accent">5개</span>
+                        </div>
+                        <h3 class="text-white/50 text-sm font-medium">진료축</h3>
+                        <p class="text-2xl font-bold mt-1">5대 센터</p>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-2 bg-accent/20 rounded-lg text-accent">
+                                <span class="material-icons-round">web</span>
+                            </div>
+                            <span class="text-xs font-medium text-green-400">신규</span>
+                        </div>
+                        <h3 class="text-white/50 text-sm font-medium">홈페이지 페이지</h3>
+                        <p class="text-2xl font-bold mt-1">6 pages</p>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-2 bg-blue-500/20 rounded-lg text-blue-400">
+                                <span class="material-icons-round">content_paste</span>
+                            </div>
+                            <span class="text-xs font-medium text-white/40">12주</span>
+                        </div>
+                        <h3 class="text-white/50 text-sm font-medium">콘텐츠 캘린더</h3>
+                        <p class="text-2xl font-bold mt-1">36개 콘텐츠</p>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-2 bg-purple-500/20 rounded-lg text-purple-400">
+                                <span class="material-icons-round">schedule</span>
+                            </div>
+                            <span class="text-xs font-medium text-white/40">D-11W</span>
+                        </div>
+                        <h3 class="text-white/50 text-sm font-medium">실행 기간</h3>
+                        <p class="text-2xl font-bold mt-1">11주 준비</p>
+                    </div>
+                </div>
+
+                <!-- 브랜드 포지셔닝 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-primary/20 rounded-lg">
+                            <span class="material-icons-round text-primary">star</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">브랜드 포지셔닝</h2>
+                            <p class="text-white/40 text-xs">핵심 가치와 메시지</p>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-primary/20 to-accent/20 p-6 rounded-xl border border-white/10">
+                        <p class="text-xl font-bold text-center mb-2">"종합병원급 안전성과 성형외과의 섬세함을 함께 제공한다"</p>
+                        <p class="text-sm text-white/60 text-center">신뢰 기반 전환을 만드는 정답 프레임</p>
+                    </div>
+                </div>
+
+                <!-- 5대 진료축 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-accent/20 rounded-lg">
+                            <span class="material-icons-round text-accent">category</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">5대 진료축</h2>
+                            <p class="text-white/40 text-xs">각 진료과목별 전략적 역할</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div class="bg-white/5 p-4 rounded-xl border border-blue-500/20">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                                <h3 class="font-bold text-sm">쁘띠/스킨</h3>
+                            </div>
+                            <p class="text-xs text-white/60 mb-2">보톡스, 레이저, 필러</p>
+                            <p class="text-xs text-accent font-semibold">반복 내원/유입 확대</p>
+                        </div>
+
+                        <div class="bg-white/5 p-4 rounded-xl border border-purple-500/20">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-2 h-2 rounded-full bg-purple-500"></div>
+                                <h3 class="font-bold text-sm">리프팅</h3>
+                            </div>
+                            <p class="text-xs text-white/60 mb-2">울쎄라, 써마지</p>
+                            <p class="text-xs text-accent font-semibold">고수익/프리미엄 신뢰</p>
+                        </div>
+
+                        <div class="bg-white/5 p-4 rounded-xl border border-amber-500/20">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+                                <h3 class="font-bold text-sm">눈</h3>
+                            </div>
+                            <p class="text-xs text-white/60 mb-2">쌍꺼풀, 하안검</p>
+                            <p class="text-xs text-accent font-semibold">시그니처 전환축</p>
+                        </div>
+
+                        <div class="bg-white/5 p-4 rounded-xl border border-red-500/20">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                                <h3 class="font-bold text-sm">외상</h3>
+                            </div>
+                            <p class="text-xs text-white/60 mb-2">미세봉합, 골절수술</p>
+                            <p class="text-xs text-accent font-semibold">독보 차별화</p>
+                        </div>
+
+                        <div class="bg-white/5 p-4 rounded-xl border border-emerald-500/20">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                <h3 class="font-bold text-sm">재건/종괴</h3>
+                            </div>
+                            <p class="text-xs text-white/60 mb-2">몽우리, 종괴</p>
+                            <p class="text-xs text-accent font-semibold">의료 신뢰 정점</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 홈페이지 섹션 -->
+                <div id="website" class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-primary/20 rounded-lg">
+                            <span class="material-icons-round text-primary">language</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">홈페이지 초안</h2>
+                            <p class="text-white/40 text-xs">전용 마이크로사이트 페이지</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <a href="index.html" target="_blank"
+                            class="group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-primary/50 transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="material-icons-round text-primary text-xl">home</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">메인 페이지</h3>
+                                    <p class="text-xs text-white/40">index.html</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-white/60">5대 진료축 소개</p>
+                        </a>
+
+                        <a href="eye.html" target="_blank"
+                            class="group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-amber-500/50 transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="material-icons-round text-amber-400 text-xl">visibility</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">눈 성형</h3>
+                                    <p class="text-xs text-white/40">eye.html</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-white/60">눈이 편안해지는 게 먼저</p>
+                        </a>
+
+                        <a href="lifting.html" target="_blank"
+                            class="group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-purple-500/50 transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="material-icons-round text-purple-400 text-xl">trending_up</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">리프팅</h3>
+                                    <p class="text-xs text-white/40">lifting.html</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-white/60">얼굴이 정돈되는 설계</p>
+                        </a>
+
+                        <a href="petit.html" target="_blank"
+                            class="group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/50 transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="material-icons-round text-blue-400 text-xl">spa</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">쁘띠/스킨</h3>
+                                    <p class="text-xs text-white/40">petit.html</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-white/60">필요한 만큼만, 과하지 않게</p>
+                        </a>
+
+                        <a href="trauma.html" target="_blank"
+                            class="group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-red-500/50 transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="material-icons-round text-red-400 text-xl">healing</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">외상</h3>
+                                    <p class="text-xs text-white/40">trauma.html</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-white/60">흉터 관리까지 이어지는 체계</p>
+                        </a>
+
+                        <a href="reconstruction.html" target="_blank"
+                            class="group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-emerald-500/50 transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="material-icons-round text-emerald-400 text-xl">build_circle</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">재건/종괴</h3>
+                                    <p class="text-xs text-white/40">reconstruction.html</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-white/60">정확히 확인하는 게 먼저</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 콘텐츠 전략 -->
+                <div id="content" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-2 bg-accent/20 rounded-lg">
+                                <span class="material-icons-round text-accent">edit_calendar</span>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-bold">12주 콘텐츠 캘린더</h2>
+                                <p class="text-white/40 text-xs">주 3편 릴스 기준 36개</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3 max-h-96 overflow-y-auto custom-scrollbar pr-2">
+                            <div class="bg-white/5 p-3 rounded-lg border border-white/10">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold text-primary">Week 1</span>
+                                    <span class="text-xs text-white/40">오픈 인지</span>
+                                </div>
+                                <p class="text-xs text-white/70">성형외과 신설, 뭐가 달라지나요?</p>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-lg border border-white/10">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold text-amber-400">Week 2</span>
+                                    <span class="text-xs text-white/40">눈 1: 기능/인상</span>
+                                </div>
+                                <p class="text-xs text-white/70">눈이 피곤해 보이는 진짜 이유</p>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-lg border border-white/10">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold text-purple-400">Week 3</span>
+                                    <span class="text-xs text-white/40">리프팅 1: 원리/선택</span>
+                                </div>
+                                <p class="text-xs text-white/70">울쎄라 vs 써마지, 뭐가 다를까요?</p>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-lg border border-white/10">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold text-blue-400">Week 4</span>
+                                    <span class="text-xs text-white/40">쁘띠 1: 안전</span>
+                                </div>
+                                <p class="text-xs text-white/70">보톡스가 '안 듣는' 것처럼 느껴질 때</p>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-lg border border-white/10">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold text-emerald-400">Week 5-12</span>
+                                    <span class="text-xs text-white/40">지속적 콘텐츠</span>
+                                </div>
+                                <p class="text-xs text-white/70">스킨, 외상, 재건, 신뢰강화 등</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-2 bg-blue-500/20 rounded-lg">
+                                <span class="material-icons-round text-blue-400">campaign</span>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-bold">채널별 운영 전략</h2>
+                                <p class="text-white/40 text-xs">2트랙 운영 구조</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div
+                                class="bg-gradient-to-r from-primary/10 to-primary/5 p-4 rounded-xl border border-primary/20">
+                                <h3 class="font-bold text-sm mb-2 text-primary">Track A - 본원 채널</h3>
+                                <p class="text-xs text-white/60 mb-3">신뢰·공식성·인지 확산</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs px-2 py-1 bg-white/10 rounded">본원 홈페이지</span>
+                                    <span class="text-xs px-2 py-1 bg-white/10 rounded">대표 SNS</span>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-gradient-to-r from-accent/10 to-accent/5 p-4 rounded-xl border border-accent/20">
+                                <h3 class="font-bold text-sm mb-2 text-accent">Track B - 전용 채널</h3>
+                                <p class="text-xs text-white/60 mb-3">정보·교육·상담 전환</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs px-2 py-1 bg-white/10 rounded">전용 마이크로사이트</span>
+                                    <span class="text-xs px-2 py-1 bg-white/10 rounded">전용 인스타</span>
+                                    <span class="text-xs px-2 py-1 bg-white/10 rounded">네이버 플레이스</span>
+                                    <span class="text-xs px-2 py-1 bg-white/10 rounded">유튜브 쇼츠</span>
+                                </div>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-xl">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h4 class="text-sm font-bold">인스타그램 운영</h4>
+                                    <span class="text-xs text-accent">주 3편</span>
+                                </div>
+                                <div class="space-y-2 text-xs text-white/60">
+                                    <p>• 교육형 15~30초 릴스</p>
+                                    <p>• 공감형: 자주 묻는 질문</p>
+                                    <p>• 프로세스형: 상담→회복 루틴</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 상담 마케팅 전략 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-emerald-500/20 rounded-lg">
+                            <span class="material-icons-round text-emerald-400">chat</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">상담 마케팅 전략</h2>
+                            <p class="text-white/40 text-xs">온라인 상담 채널 운영</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div
+                            class="bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 p-5 rounded-xl border border-yellow-500/20">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center">
+                                    <span class="material-icons-round text-yellow-400 text-2xl">chat_bubble</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">카카오톡 케어챗</h3>
+                                    <p class="text-xs text-white/40">고객 상담 및 CRM</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs text-white/70">
+                                <p>• 24시간 실시간 상담 대응</p>
+                                <p>• 예약·문의 자동 연결</p>
+                                <p>• 상담 이력 관리 및 추적</p>
+                                <p>• 맞춤형 안내 메시지 발송</p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-white/10">
+                                <p class="text-xs text-yellow-400 font-semibold">✓ 본원 운영 중인 시스템 활용</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-gradient-to-br from-pink-500/10 to-purple-600/5 p-5 rounded-xl border border-pink-500/20">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center">
+                                    <span class="material-icons-round text-pink-400 text-2xl">forum</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">SNS 직접 상담창구</h3>
+                                    <p class="text-xs text-white/40">인스타그램 DM 운영</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs text-white/70">
+                                <p>• DM 문의 전담 응대 체계</p>
+                                <p>• 릴스·게시물 댓글 관리</p>
+                                <p>• 시술 후기 및 상담 연결</p>
+                                <p>• 빠른 응답으로 신뢰 구축</p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-white/10">
+                                <p class="text-xs text-pink-400 font-semibold">✓ 전용 계정 전담 운영</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 bg-white/5 p-4 rounded-xl">
+                        <div class="flex items-start gap-3">
+                            <span class="material-icons-round text-accent text-xl">info</span>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-bold mb-2">통합 상담 운영 원칙</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-white/70">
+                                    <div>
+                                        <p class="font-semibold text-white/90 mb-1">신속 응답</p>
+                                        <p>30분 이내 1차 응답 목표</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-white/90 mb-1">정확한 안내</p>
+                                        <p>과장 없는 현실적 정보 제공</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-white/90 mb-1">예약 전환</p>
+                                        <p>상담→내원 자연스러운 유도</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 일정 섹션 -->
+                <div id="schedule" class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-primary/20 rounded-lg">
+                            <span class="material-icons-round text-primary">calendar_today</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">실행 타임테이블</h2>
+                            <p class="text-white/40 text-xs">11주 준비 일정</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="relative pl-6 pb-6 border-l-2 border-primary/30">
+                            <div
+                                class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-primary shadow-lg shadow-primary/50">
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-lg">
+                                <p class="text-xs text-primary font-bold mb-1">D-11W ~ D-8W</p>
+                                <p class="text-sm font-semibold mb-2">기반 세팅</p>
+                                <p class="text-xs text-white/60">채널 개설, CI/BI 보강</p>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-6 pb-6 border-l-2 border-accent/30">
+                            <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-accent"></div>
+                            <div class="bg-white/5 p-3 rounded-lg">
+                                <p class="text-xs text-accent font-bold mb-1">D-7W ~ D-4W</p>
+                                <p class="text-sm font-semibold mb-2">콘텐츠 자산 제작</p>
+                                <p class="text-xs text-white/60">모델 콘텐츠, 홈페이지</p>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-6 pb-6 border-l-2 border-blue-500/30">
+                            <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-blue-500"></div>
+                            <div class="bg-white/5 p-3 rounded-lg">
+                                <p class="text-xs text-blue-400 font-bold mb-1">D-3W ~ 오픈</p>
+                                <p class="text-sm font-semibold mb-2">최종 준비</p>
+                                <p class="text-xs text-white/60">X배너, 플레이스, 릴스 선제작</p>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-6">
+                            <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-emerald-500"></div>
+                            <div class="bg-white/5 p-3 rounded-lg">
+                                <p class="text-xs text-emerald-400 font-bold mb-1">오픈 후</p>
+                                <p class="text-sm font-semibold mb-2">운영 시작</p>
+                                <p class="text-xs text-white/60">광고 테스트 (초기 300~500)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 예산 계획 -->
+                    <div class="mt-8">
+                        <h3 class="font-bold mb-4">예산 계획</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs mb-2">
+                                    <span class="font-medium">홈페이지</span>
+                                    <span class="text-primary font-bold">800~1,000만</span>
+                                </div>
+                                <div class="w-full bg-white/5 h-1.5 rounded-full">
+                                    <div class="bg-primary h-full w-[35%] rounded-full"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs mb-2">
+                                    <span class="font-medium">콘텐츠 제작</span>
+                                    <span class="text-accent font-bold">500만</span>
+                                </div>
+                                <div class="w-full bg-white/5 h-1.5 rounded-full">
+                                    <div class="bg-accent h-full w-[20%] rounded-full"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs mb-2">
+                                    <span class="font-medium">홍보 인쇄물 제작</span>
+                                    <span class="text-blue-400 font-bold">100만</span>
+                                </div>
+                                <div class="w-full bg-white/5 h-1.5 rounded-full">
+                                    <div class="bg-blue-500 h-full w-[10%] rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 섹션 -->
+                <div id="faq" class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-purple-500/20 rounded-lg">
+                            <span class="material-icons-round text-purple-400">help_outline</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">FAQ 20문 20답</h2>
+                            <p class="text-white/40 text-xs">주요 질문과 답변 (좌우 스크롤)</p>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto custom-scrollbar pb-4">
+                        <div class="flex gap-4" style="width: max-content;">
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q1</span>
+                                    <p class="text-sm font-semibold">예약은 어떻게 하나요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">전화/온라인 예약 후 내원, 상담→진료축 확인→계획 안내 순입니다.
+                                </p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q2</span>
+                                    <p class="text-sm font-semibold">상담만 받아도 되나요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">네. 내 상태에 맞는 선택지를 정리하는 것이 1차 목표입니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q3</span>
+                                    <p class="text-sm font-semibold">상담 시간은요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">고민 범위에 따라 다릅니다. 질문 리스트를 준비하면 더 효율적입니다.
+                                </p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q4</span>
+                                    <p class="text-sm font-semibold">바로 일상생활 가능해요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">항목별로 다릅니다. 출근/세안/운동 기준으로 현실적으로 안내합니다.
+                                </p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q5</span>
+                                    <p class="text-sm font-semibold">붓기·멍은 얼마나 가요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">개인차가 있습니다. 예상 범위와 관리 루틴을 함께 안내합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q6</span>
+                                    <p class="text-sm font-semibold">울쎄라 vs 써마지 기준은요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">피부 두께/처짐 방향/원하는 느낌에 따라 달라집니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q7</span>
+                                    <p class="text-sm font-semibold">보톡스 주기는요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">부위와 상태에 따라 다릅니다. 무리하지 않는 간격을 권합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q8</span>
+                                    <p class="text-sm font-semibold">필러가 무서워요.</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">불안한 포인트를 먼저 확인하고 필요 시 대안을 함께 안내합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q9</span>
+                                    <p class="text-sm font-semibold">레이저는 몇 번 해야 하나요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">보통은 횟수보다 간격과 누적이 더 중요합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q10</span>
+                                    <p class="text-sm font-semibold">눈 수술은 라인만 잡나요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">뜨는 힘/인상/좌우 균형까지 함께 봐야 만족도가 높습니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q11</span>
+                                    <p class="text-sm font-semibold">처진 눈꺼풀/눈밑은 언제 상담하나요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">처짐이 기능·인상에 영향을 줄 때 권합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q12</span>
+                                    <p class="text-sm font-semibold">세안/화장은 언제부터?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">항목별로 다르며 생활 일정에 맞춰 안내합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q13</span>
+                                    <p class="text-sm font-semibold">운동은 언제부터?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">회복에 따라 단계적으로 늘리는 방식을 권합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q14</span>
+                                    <p class="text-sm font-semibold">상처가 찢어졌는데 바로 가야 하나요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">깊이/오염/출혈에 따라 빠른 진료가 중요합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q15</span>
+                                    <p class="text-sm font-semibold">미세봉합은 뭐가 달라요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">상처 방향·피부 긴장·흉터까지 고려해 정교하게 접근합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q16</span>
+                                    <p class="text-sm font-semibold">얼굴 몽우리는 큰 병인가요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">원인이 다양하므로 정확히 확인 후 치료 방향을 잡아야 합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q17</span>
+                                    <p class="text-sm font-semibold">종괴 제거하면 흉터가 크게 남나요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">위치·크기에 따라 다르며 흉터 관리 루틴을 안내합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q18</span>
+                                    <p class="text-sm font-semibold">어떤 진료가 가능한가요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">쁘띠/스킨, 리프팅, 눈, 외상, 재건/종괴 상담이 가능합니다.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q19</span>
+                                    <p class="text-sm font-semibold">상담 전 준비할 건요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">고민 메모, 참고 이미지, 중요한 일정(행사/면접 등)을 알려주세요.
+                                </p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-purple-500/20"
+                                style="min-width: 320px; max-width: 320px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-purple-400">Q20</span>
+                                    <p class="text-sm font-semibold">주차는 편리한가요?</p>
+                                </div>
+                                <p class="text-xs text-white/60 leading-relaxed">유성선병원 주차 시스템을 이용합니다. 상세는 플레이스 정보를
+                                    참고하세요.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Toolbelt -->
+        <aside class="hidden xl:flex w-80 flex-col gap-6">
+            <!-- 실행 타임테이블 -->
+            <div class="glass-panel p-6 rounded-xl flex-1 overflow-hidden flex flex-col">
+                <h3 class="font-bold mb-6">실행 타임테이블</h3>
+                <div class="space-y-4 flex-1 overflow-y-auto custom-scrollbar pr-2">
+                    <div class="relative pl-6 pb-6 border-l-2 border-primary/30">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-primary shadow-lg shadow-primary/50">
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-lg">
+                            <p class="text-xs text-primary font-bold mb-1">D-11W ~ D-8W</p>
+                            <p class="text-sm font-semibold mb-2">기반 세팅</p>
+                            <p class="text-xs text-white/60">채널 개설, CI/BI 보강</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-6 pb-6 border-l-2 border-accent/30">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-accent"></div>
+                        <div class="bg-white/5 p-3 rounded-lg">
+                            <p class="text-xs text-accent font-bold mb-1">D-7W ~ D-4W</p>
+                            <p class="text-sm font-semibold mb-2">콘텐츠 자산 제작</p>
+                            <p class="text-xs text-white/60">모델 콘텐츠, 홈페이지</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-6 pb-6 border-l-2 border-blue-500/30">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-blue-500"></div>
+                        <div class="bg-white/5 p-3 rounded-lg">
+                            <p class="text-xs text-blue-400 font-bold mb-1">D-3W ~ 오픈</p>
+                            <p class="text-sm font-semibold mb-2">최종 준비</p>
+                            <p class="text-xs text-white/60">X배너, 플레이스, 릴스 선제작</p>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-6">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-emerald-500"></div>
+                        <div class="bg-white/5 p-3 rounded-lg">
+                            <p class="text-xs text-emerald-400 font-bold mb-1">오픈 후</p>
+                            <p class="text-sm font-semibold mb-2">운영 시작</p>
+                            <p class="text-xs text-white/60">광고 테스트 (초기 300~500)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 예산 계획 -->
+            <div class="glass-panel p-6 rounded-xl">
+                <h3 class="font-bold mb-6">예산 계획</h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs mb-2">
+                            <span class="font-medium">홈페이지</span>
+                            <span class="text-primary font-bold">800~1,000만</span>
+                        </div>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full">
+                            <div class="bg-primary h-full w-[35%] rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs mb-2">
+                            <span class="font-medium">콘텐츠 제작</span>
+                            <span class="text-accent font-bold">500만</span>
+                        </div>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full">
+                            <div class="bg-accent h-full w-[20%] rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs mb-2">
+                            <span class="font-medium">홍보 인쇄물 제작</span>
+                            <span class="text-blue-400 font-bold">100만</span>
+                        </div>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full">
+                            <div class="bg-blue-500 h-full w-[10%] rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 주요 성과 -->
+            <div class="glass-panel-light p-5 rounded-xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Summary</p>
+                    <h4 class="text-sm font-bold mb-3">주요 성과</h4>
+                    <div class="space-y-2 text-xs text-white/80">
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons-round text-green-400"
+                                style="font-size: 16px;">check_circle</span>
+                            <span>5대 진료축 체계화</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons-round text-green-400"
+                                style="font-size: 16px;">check_circle</span>
+                            <span>전용 홈페이지 6페이지</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons-round text-green-400"
+                                style="font-size: 16px;">check_circle</span>
+                            <span>12주 콘텐츠 캘린더</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons-round text-green-400"
+                                style="font-size: 16px;">check_circle</span>
+                            <span>친숙한 용어 전환</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary/20 rounded-full blur-2xl"></div>
+            </div>
+        </aside>
+    </div>
+</body>
+
+</html>
