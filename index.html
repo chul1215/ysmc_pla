@@ -1264,6 +1264,65 @@
       }
     }
 
+    /* ===== Draft Switcher ===== */
+    .draft-switcher {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .draft-switcher-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: rgba(100,80,70,0.55);
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .draft-tabs {
+      display: flex;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 6px;
+      padding: 4px;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    .draft-tab {
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+      color: var(--text-light);
+      background: transparent;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .draft-tab.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .draft-tab:not(.active):hover {
+      color: var(--text-dark);
+      background: rgba(0,0,0,0.04);
+    }
+
+    @media (max-width: 768px) {
+      .draft-switcher { bottom: 80px; right: 16px; }
+    }
+
     /* ===== Animations ===== */
     .fade-up {
       opacity: 0;
@@ -1677,6 +1736,15 @@
     <div class="mobile-cta-inner">
       <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">&#128222; 전화 상담</a>
       <a href="#" class="mobile-cta-btn cta-kakao">&#128172; 카톡 문의</a>
+    </div>
+  </div>
+
+  <!-- ===== DRAFT SWITCHER ===== -->
+  <div class="draft-switcher">
+    <div class="draft-switcher-label">시안 선택</div>
+    <div class="draft-tabs">
+      <a href="index.html" class="draft-tab active">시안 1</a>
+      <a href="index2.html" class="draft-tab">시안 2</a>
     </div>
   </div>
 
