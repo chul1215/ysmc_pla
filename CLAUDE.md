@@ -14,7 +14,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```
 ysmc_pla/
-├── index.html          ← 메인 랜딩 페이지
+├── index.html          ← 메인 랜딩 페이지 (시안 1, 시안 스위처 포함)
+├── index2.html         ← 메인 랜딩 페이지 (시안 2, 스플릿 히어로 디자인)
 ├── eye.html            ← 눈 센터
 ├── lifting.html        ← 리프팅
 ├── petit.html          ← 쁘띠/스킨
@@ -22,6 +23,7 @@ ysmc_pla/
 ├── reconstruction.html ← 재건·종괴
 ├── dashboard.html      ← 관리자 대시보드 (Tailwind CSS)
 ├── images/             ← 이미지 파일
+├── briefing/           ← 브리핑 자료 (dashboard_briefing.md)
 ├── plan/               ← 기획서 및 마케팅 전략 문서
 └── reference/          ← 참고 자료 및 기획 문서
 ```
@@ -79,6 +81,18 @@ RGB 변환값 (rgba 하드코딩 시 사용):
 6. FAQ 아코디언
 7. CTA 섹션
 8. 푸터
+
+## index2.html 특이사항 (시안 2)
+
+스플릿 히어로 패널 방식으로, index.html과 구조가 다르다:
+
+- **스플릿 패널**: `flex` 비율 transition으로 패널 확장 (`flex: 1` → `flex: 1.6`). `clip-path` 미사용.
+- **대각선 심(seam)**: 0-width flex item + `::before { skewX(-6deg) }`으로 구현
+- **iOS Safari 대응**: `height: 100svh` (svh 단위 필수)
+- **모바일 column 전환**: `flex-direction: column` + 동일 flex transition 재사용
+- **모바일 콘텐츠**: hover 없는 환경에서 `opacity: 1 !important` 오버라이드 필요
+- **JS**: IIFE 패턴. 모바일 터치 시 1차 탭→패널 확장, 2차 탭→링크 이동, 2.2초 자동 축소
+- **시안 스위처**: 두 파일 모두 하단 고정 버튼(`draft-switcher`)으로 상호 전환 가능
 
 ## 브랜드 포지셔닝
 
