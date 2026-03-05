@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유성선병원 성형외과 — 시안 2</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      color: #1a1a1a;
+      line-height: 1.6;
+      background: #fff;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ===== Color Variables ===== */
+    :root {
+      --primary: #cd4631;
+      --primary-light: #d96858;
+      --primary-dark: #a33828;
+      --wine: #3d0f09;
+      --navy: #0a1828;
+      --navy-mid: #1a3a5c;
+      --accent: #f8f2dc;
+      --accent-light: #faf6e8;
+      --bg-off: #f5f3ef;
+      --text-dark: #1A1A1A;
+      --text-mid: #555;
+      --text-light: #888;
+      --white: #FFFFFF;
+    }
+
+    /* ===== Header ===== */
+    .header {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 1000;
+      padding: 0 40px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s, box-shadow 0.35s;
+    }
+
+    /* Always dark on non-hero sections (JS adds class) */
+    .header.scrolled {
+      background: rgba(8, 8, 14, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .logo-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.4px;
+      flex-shrink: 0;
+    }
+
+    .gnb {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .gnb a {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .gnb a:hover { color: #fff; }
+
+    .header-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .header-cta a {
+      padding: 7px 18px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.25s;
+    }
+
+    .btn-outline-w {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.8);
+    }
+    .btn-outline-w:hover { border-color: #fff; color: #fff; }
+
+    .btn-solid-w { background: var(--primary); color: #fff; }
+    .btn-solid-w:hover { background: var(--primary-light); }
+
+    /* ===== Mobile Menu Toggle ===== */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 8px;
+      z-index: 1100;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+      transform-origin: center;
+    }
+
+    .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ===== Mobile Nav Overlay ===== */
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8,8,14,0.97);
+      z-index: 1050;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .mobile-nav-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .mobile-nav-overlay a {
+      font-size: 28px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: -0.5px;
+      padding: 16px 0;
+      transition: color 0.2s;
+    }
+
+    .mobile-nav-overlay a:hover { color: #fff; }
+
+    .mobile-nav-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 16px 0;
+    }
+
+    .mobile-nav-cta {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 200px;
+    }
+
+    .mobile-nav-cta a {
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      padding: 14px 0 !important;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .mobile-nav-cta .nav-phone { background: var(--primary); color: #fff !important; }
+    .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
+
+    /* ===== HERO SPLIT ===== */
+    .hero-split {
+      height: 100vh;
+      height: 100svh; /* iOS Safari safe viewport */
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sp {
+      flex: 1;
+      min-height: 0; /* prevent flex overflow */
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      cursor: pointer;
+      transition: flex 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Hover states via JS classes on parent */
+    .hero-split.hover-cosmetic .sp-cosmetic { flex: 1.6; }
+    .hero-split.hover-cosmetic .sp-medical  { flex: 0.4; }
+    .hero-split.hover-medical  .sp-cosmetic { flex: 0.4; }
+    .hero-split.hover-medical  .sp-medical  { flex: 1.6; }
+
+    /* Panel backgrounds */
+    .sp-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1s ease;
+      transform: scale(1.06);
+      will-change: transform;
+    }
+
+    .sp.active .sp-bg,
+    .sp:hover .sp-bg { transform: scale(1); }
+
+    .sp-cosmetic .sp-bg {
+      background-image: url('images/lifting.jpg');
+      background-color: #3d0f09;
+    }
+
+    .sp-cosmetic .sp-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(61,15,9,0.92) 0%, rgba(163,56,40,0.68) 100%);
+    }
+
+    .sp-medical .sp-bg {
+      background-image: url('images/surgery-room.jpg');
+      background-color: #0a1828;
+    }
+
+    .sp-medical .sp-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(10,24,40,0.93) 0%, rgba(26,58,92,0.72) 100%);
+    }
+
+    /* ===== Skewed seam divider ===== */
+    /* 0-width flex item with a skewed pseudo-element for the diagonal seam */
+    .sp-seam {
+      width: 0;
+      flex-shrink: 0;
+      flex-grow: 0;
+      position: relative;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .sp-seam::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: -22px;
+      width: 44px;
+      height: 120%;
+      background: rgba(6,6,10,0.88);
+      transform: skewX(-6deg);
+    }
+
+    /* ===== Panel Content ===== */
+    .sp-content {
+      position: relative;
+      z-index: 5;
+      color: #fff;
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      width: 100%;
+      pointer-events: none; /* let parent handle click */
+    }
+
+    .sp-content a { pointer-events: auto; }
+
+    .sp-cosmetic .sp-content { padding-right: 100px; }
+    .sp-medical  .sp-content { padding-left: 100px; }
+
+    .sp-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.35s, transform 0.35s;
+    }
+
+    .sp-title {
+      font-size: clamp(54px, 5.5vw, 90px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -3px;
+      color: #fff;
+      /* Always visible */
+    }
+
+    .sp-cosmetic .sp-title { text-align: left; }
+    .sp-medical  .sp-title { text-align: right; }
+
+    .sp-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.75;
+      max-width: 320px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s 0.06s, transform 0.35s 0.06s;
+    }
+
+    .sp-medical .sp-desc { margin-left: auto; text-align: right; }
+
+    .sp-services {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s 0.1s, transform 0.35s 0.1s;
+    }
+
+    .sp-medical .sp-services { align-items: flex-end; }
+
+    .sp-services li {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sp-services li::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 1px;
+      background: rgba(255,255,255,0.4);
+      flex-shrink: 0;
+    }
+
+    .sp-medical .sp-services li { flex-direction: row-reverse; }
+    .sp-medical .sp-services li::before { order: -1; }
+
+    .sp-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 26px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #fff;
+      width: fit-content;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s 0.15s, transform 0.35s 0.15s, background 0.2s, border-color 0.2s;
+    }
+
+    .sp-cta-btn:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.55);
+    }
+
+    .sp-medical .sp-cta-btn { align-self: flex-end; }
+
+    /* Show detail content when panel is active (hover or touch) */
+    .sp.active .sp-eyebrow,
+    .sp.active .sp-desc,
+    .sp.active .sp-services,
+    .sp.active .sp-cta-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Center floating logo */
+    .sp-center-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 25;
+      text-align: center;
+      color: #fff;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+
+    .hero-split.hover-cosmetic .sp-center-logo,
+    .hero-split.hover-medical  .sp-center-logo { opacity: 0; }
+
+    .sp-center-name {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.88);
+      white-space: nowrap;
+    }
+
+    .sp-center-line {
+      width: 36px;
+      height: 1px;
+      background: rgba(255,255,255,0.35);
+      margin: 10px auto;
+    }
+
+    .sp-center-tagline {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+
+    /* Scroll hint */
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.35);
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      pointer-events: none;
+      animation: heroScrollBounce 2.2s ease-in-out infinite;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    @keyframes heroScrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      55%       { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ===== Trust Bar ===== */
+    .trust-bar {
+      background: var(--text-dark);
+      padding: 28px 40px;
+    }
+
+    .trust-bar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .trust-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -1px;
+    }
+
+    .trust-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+
+    .trust-sep {
+      width: 1px;
+      height: 32px;
+      background: rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+
+    /* ===== Section Common ===== */
+    .section { padding: 100px 40px; }
+
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.8px;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    /* ===== Centers ===== */
+    .centers { background: var(--bg-off); }
+
+    .centers-header { margin-bottom: 60px; }
+
+    .centers-group { margin-bottom: 60px; }
+    .centers-group:last-child { margin-bottom: 0; }
+
+    .group-label-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .group-pill {
+      padding: 6px 18px;
+      border-radius: 3px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .pill-cosmetic { background: var(--primary); color: #fff; }
+    .pill-medical  { background: var(--navy-mid); color: #fff; }
+
+    .group-sub { font-size: 14px; color: var(--text-light); }
+
+    .cards-grid { display: grid; gap: 14px; }
+    .cards-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .cards-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .service-card {
+      background: #fff;
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.09);
+    }
+
+    .card-img {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background: #e4e0da;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .service-card:hover .card-img img { transform: scale(1.05); }
+
+    .card-num {
+      position: absolute;
+      top: 14px; left: 14px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.65);
+      background: rgba(0,0,0,0.28);
+      padding: 3px 9px;
+      border-radius: 2px;
+    }
+
+    .card-body { padding: 26px 26px 30px; }
+
+    .card-category {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      line-height: 1.4;
+      color: var(--text-dark);
+      margin-bottom: 9px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 18px;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      color: var(--text-light);
+      background: #f2f0ed;
+      padding: 4px 9px;
+      border-radius: 2px;
+    }
+
+    .card-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: gap 0.25s;
+    }
+
+    .service-card:hover .card-link { gap: 9px; }
+
+    /* ===== Doctor ===== */
+    .doctor { background: var(--navy); padding: 100px 40px; }
+
+    .doctor-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .doctor-img-wrap { position: relative; }
+
+    .doctor-img-wrap img {
+      width: 100%;
+      height: 580px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 2px;
+      display: block;
+    }
+
+    .doctor-img-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 2px;
+    }
+
+    .doctor-img-badge strong { display: block; font-size: 15px; font-weight: 700; }
+    .doctor-img-badge span  { font-size: 12px; opacity: 0.8; }
+
+    .doctor-content .section-label { color: rgba(255,255,255,0.4); }
+    .doctor-content .section-title { color: #fff; margin-bottom: 8px; }
+
+    .doctor-role {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 28px;
+    }
+
+    .doctor-quote {
+      font-size: 17px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.8);
+      border-left: 3px solid var(--primary);
+      padding-left: 22px;
+      margin-bottom: 36px;
+      font-style: italic;
+    }
+
+    .credentials { display: flex; flex-direction: column; gap: 10px; }
+
+    .credential-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    .credential-item::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ===== Safety ===== */
+    .safety { background: #fff; }
+
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+
+    .safety-card {
+      padding: 44px 32px;
+      background: var(--bg-off);
+      transition: background 0.3s, transform 0.3s;
+      cursor: default;
+    }
+
+    .safety-card:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .safety-icon {
+      font-size: 34px;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .safety-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+      transition: color 0.3s;
+    }
+
+    .safety-card p {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      transition: color 0.3s;
+    }
+
+    .safety-card:hover h3,
+    .safety-card:hover p { color: #fff; }
+
+    /* ===== SNS / Dr. Log ===== */
+    .drlog { background: var(--bg-off); }
+
+    .drlog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 52px;
+    }
+
+    .drlog-card {
+      background: #fff;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .drlog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.08);
+    }
+
+    .drlog-thumb {
+      height: 154px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .drlog-thumb-icon { font-size: 38px; color: rgba(255,255,255,0.35); }
+
+    .drlog-type {
+      position: absolute;
+      top: 12px; right: 12px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 4px 9px;
+      border-radius: 2px;
+    }
+
+    .drlog-type-video  { background: var(--primary); color: #fff; }
+    .drlog-type-column { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.18); }
+    .drlog-type-case   { background: var(--navy-mid); color: #fff; }
+
+    .drlog-body { padding: 22px; }
+
+    .drlog-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .drlog-meta { font-size: 12px; color: var(--text-light); }
+
+    .drlog-cta {
+      margin-top: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .drlog-cta-text { font-size: 14px; color: var(--text-mid); }
+
+    .drlog-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      color: #fff;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .drlog-cta-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    /* ===== Footer ===== */
+    .footer { background: #111; color: rgba(255,255,255,0.58); }
+
+    .footer-top {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 40px 40px;
+      display: flex;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .footer-detail { font-size: 13px; line-height: 2.1; }
+
+    .footer-quick {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      flex: 1;
+      max-width: 460px;
+    }
+
+    .footer-quick-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+      padding: 22px 10px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 2px;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.25s;
+    }
+
+    .footer-quick-item:hover { background: rgba(255,255,255,0.08); }
+
+    .footer-quick-icon {
+      width: 42px; height: 42px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+    }
+
+    .footer-quick-label { font-size: 12px; color: rgba(255,255,255,0.65); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 22px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.28); }
+
+    /* ===== Mobile Sticky CTA ===== */
+    .mobile-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; width: 100%;
+      z-index: 990;
+      background: #0a0a0f;
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.4);
+      padding: 10px 16px;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+
+    .mobile-cta-inner { display: flex; gap: 10px; }
+
+    .mobile-cta-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 14px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.25s;
+    }
+
+    .mobile-cta-btn:active { opacity: 0.8; }
+    .cta-phone { background: var(--primary); color: #fff; }
+    .cta-kakao { background: #FEE500; color: #3C1E1E; }
+
+    /* ===== Draft Switcher ===== */
+    .draft-switcher {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+    }
+
+    .draft-switcher-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+    }
+
+    .draft-tabs {
+      display: flex;
+      background: rgba(8,8,14,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 6px;
+      padding: 4px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.45);
+    }
+
+    .draft-tab {
+      padding: 7px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.22s;
+      color: rgba(255,255,255,0.45);
+      background: transparent;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .draft-tab.active { background: var(--primary); color: #fff; }
+    .draft-tab:not(.active):hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.06); }
+
+    /* ===== Scroll Animations ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+    }
+
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== Responsive — Tablet (≤ 1024px) ===== */
+    @media (max-width: 1024px) {
+      .doctor-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .doctor-img-wrap img { height: 420px; }
+
+      .cards-grid-3 { grid-template-columns: repeat(2, 1fr); }
+
+      .safety-grid { grid-template-columns: 1fr; }
+
+      .sp-content { padding: 60px; }
+      .sp-cosmetic .sp-content { padding-right: 80px; }
+      .sp-medical  .sp-content { padding-left: 80px; }
+    }
+
+    /* ===== Responsive — Mobile (≤ 768px) ===== */
+    @media (max-width: 768px) {
+
+      /* Header */
+      .header { padding: 0 20px; height: 60px; }
+      .gnb, .header-cta { display: none; }
+      .menu-toggle { display: flex; }
+
+      /* Hero: vertical split */
+      .hero-split {
+        flex-direction: column;
+        /* height: 100svh inherited */
+      }
+
+      .sp {
+        flex: 1;
+        min-height: 0;
+        /* transition on flex handles vertical resize */
+      }
+
+      /* Hover states in column mode use flex ratios */
+      .hero-split.hover-cosmetic .sp-cosmetic { flex: 1.45; }
+      .hero-split.hover-cosmetic .sp-medical  { flex: 0.55; }
+      .hero-split.hover-medical  .sp-cosmetic { flex: 0.55; }
+      .hero-split.hover-medical  .sp-medical  { flex: 1.45; }
+
+      /* Seam becomes horizontal */
+      .sp-seam {
+        width: 100%;
+        height: 0;
+        flex: none;
+        flex-shrink: 0;
+      }
+
+      .sp-seam::before {
+        top: -14px;
+        left: -5%;
+        width: 110%;
+        height: 28px;
+        transform: skewY(-2deg);
+      }
+
+      /* Content: always fully visible on mobile (no hover needed) */
+      .sp-content {
+        padding: 32px 24px;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .sp-cosmetic .sp-content { padding-right: 24px; }
+      .sp-medical  .sp-content { padding-left: 24px; }
+
+      .sp-title {
+        font-size: 42px;
+        letter-spacing: -2px;
+        line-height: 1.0;
+      }
+
+      /* Medical: switch to left alignment on mobile */
+      .sp-medical .sp-title    { text-align: left; }
+      .sp-medical .sp-desc     { text-align: left; margin-left: 0; }
+      .sp-medical .sp-services { align-items: flex-start; }
+      .sp-medical .sp-services li { flex-direction: row; }
+      .sp-medical .sp-services li::before { order: 0; }
+      .sp-medical .sp-cta-btn  { align-self: flex-start; }
+
+      /* Content always visible on mobile */
+      .sp-eyebrow,
+      .sp-desc,
+      .sp-services,
+      .sp-cta-btn {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+
+      /* Reduce desc text slightly */
+      .sp-desc { font-size: 13px; max-width: 100%; }
+
+      /* Hide decorative elements on mobile */
+      .sp-center-logo { display: none; }
+      .hero-scroll     { display: none; }
+
+      /* Trust bar: 2×2 grid */
+      .trust-bar { padding: 24px 20px; }
+      .trust-bar-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        justify-items: start;
+      }
+      .trust-sep { display: none; }
+      .trust-num { font-size: 24px; }
+
+      /* Sections */
+      .section { padding: 56px 20px; }
+      .section-title { font-size: 26px; }
+      .section-desc  { font-size: 14px; }
+
+      /* Centers header */
+      .centers-header { margin-bottom: 44px; }
+
+      /* Cards */
+      .cards-grid-3,
+      .cards-grid-2 { grid-template-columns: 1fr; }
+
+      .card-img { height: 180px; }
+
+      /* Doctor */
+      .doctor { padding: 64px 20px; }
+      .doctor-inner { grid-template-columns: 1fr; gap: 36px; }
+      .doctor-img-wrap img { height: 320px; }
+      .doctor-quote { font-size: 15px; }
+
+      /* Safety */
+      .safety-grid { grid-template-columns: 1fr; }
+      .safety-card { padding: 32px 24px; }
+
+      /* SNS */
+      .drlog-grid { grid-template-columns: 1fr; }
+      .drlog-cta { flex-direction: column; gap: 12px; text-align: center; }
+
+      /* Footer */
+      .footer-top {
+        flex-direction: column;
+        gap: 36px;
+        padding: 44px 20px 28px;
+      }
+      .footer-info { max-width: 100%; }
+      .footer-quick {
+        max-width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 18px 20px;
+      }
+
+      /* Mobile sticky CTA */
+      .mobile-cta { display: block; }
+      .footer { padding-bottom: 76px; }
+
+      /* Draft switcher: above mobile CTA */
+      .draft-switcher { bottom: 84px; right: 14px; }
+    }
+
+    /* ===== Very small screens (≤ 380px) ===== */
+    @media (max-width: 380px) {
+      .sp-title { font-size: 36px; }
+      .sp-cta-btn { font-size: 11px; padding: 9px 18px; }
+      .trust-bar-inner { grid-template-columns: 1fr; }
+      .trust-sep { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <nav class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-label="모바일 메뉴">
+    <a href="index2.html#about">ABOUT</a>
+    <a href="eye.html">EYE</a>
+    <a href="lifting.html">LIFTING</a>
+    <a href="trauma.html">TRAUMA</a>
+    <a href="petit.html">PETIT</a>
+    <a href="reconstruction.html">RECON</a>
+    <div class="mobile-nav-divider"></div>
+    <div class="mobile-nav-cta">
+      <a href="tel:042-000-0000" class="nav-phone">📞 042-000-0000</a>
+      <a href="#" class="nav-kakao">💬 카카오톡 문의</a>
+    </div>
+  </nav>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <a href="index2.html" class="logo-text">유성선병원 성형외과</a>
+    <nav class="gnb" aria-label="주 메뉴">
+      <a href="#about">ABOUT</a>
+      <a href="eye.html">EYE</a>
+      <a href="lifting.html">LIFTING</a>
+      <a href="trauma.html">TRAUMA</a>
+      <a href="petit.html">PETIT</a>
+      <a href="reconstruction.html">RECON</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#contact" class="btn-outline-w">진료시간 확인</a>
+      <a href="tel:042-000-0000" class="btn-solid-w">042-000-0000</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===== HERO SPLIT ===== -->
+  <section class="hero-split" id="hero" aria-label="진료 분야 선택">
+
+    <!-- Left: 미용·성형 -->
+    <div class="sp sp-cosmetic" id="spLeft" role="button" tabindex="0" aria-label="미용·성형 진료 안내">
+      <div class="sp-bg" aria-hidden="true"></div>
+      <div class="sp-content">
+        <div class="sp-eyebrow">COSMETIC &amp; AESTHETIC</div>
+        <h2 class="sp-title">미용<br>성형</h2>
+        <p class="sp-desc">아름다움을 섬세하게 설계합니다.<br>눈·리프팅·쁘띠 스킨케어까지.</p>
+        <ul class="sp-services" aria-label="미용·성형 진료 목록">
+          <li>Eye Center · 눈 성형</li>
+          <li>Lifting &amp; Anti-Aging</li>
+          <li>Petit &amp; Skin Care</li>
+        </ul>
+        <a href="#cosmetic-group" class="sp-cta-btn">진료 안내 보기</a>
+      </div>
+    </div>
+
+    <!-- Skewed seam divider -->
+    <div class="sp-seam" aria-hidden="true"></div>
+
+    <!-- Right: 치료·재건 -->
+    <div class="sp sp-medical" id="spRight" role="button" tabindex="0" aria-label="치료·재건 진료 안내">
+      <div class="sp-bg" aria-hidden="true"></div>
+      <div class="sp-content">
+        <div class="sp-eyebrow">TREATMENT &amp; RECONSTRUCTION</div>
+        <h2 class="sp-title">치료<br>재건</h2>
+        <p class="sp-desc">종합병원의 안전함으로 치료합니다.<br>외상·재건·종괴 전문 진료.</p>
+        <ul class="sp-services" aria-label="치료·재건 진료 목록">
+          <li>Trauma · 외상 / 상처</li>
+          <li>Reconstruction · 재건 / 종괴</li>
+        </ul>
+        <a href="#medical-group" class="sp-cta-btn">진료 안내 보기</a>
+      </div>
+    </div>
+
+    <!-- Center floating logo -->
+    <div class="sp-center-logo" aria-hidden="true">
+      <div class="sp-center-name">Yuseong Sun Hospital</div>
+      <div class="sp-center-line"></div>
+      <div class="sp-center-tagline">PLASTIC SURGERY</div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="hero-scroll" aria-hidden="true">scroll</div>
+
+  </section>
+
+  <!-- ===== TRUST BAR ===== -->
+  <div class="trust-bar fade-up">
+    <div class="trust-bar-inner">
+      <div class="trust-item">
+        <div class="trust-num">20+</div>
+        <div class="trust-label">성형외과<br>전문 경력(년)</div>
+      </div>
+      <div class="trust-sep" aria-hidden="true"></div>
+      <div class="trust-item">
+        <div class="trust-num">10,000+</div>
+        <div class="trust-label">누적 수술<br>케이스</div>
+      </div>
+      <div class="trust-sep" aria-hidden="true"></div>
+      <div class="trust-item">
+        <div class="trust-num">24h</div>
+        <div class="trust-label">종합병원<br>응급 체계</div>
+      </div>
+      <div class="trust-sep" aria-hidden="true"></div>
+      <div class="trust-item">
+        <div class="trust-num">5</div>
+        <div class="trust-label">전문<br>진료 분야</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CENTERS ===== -->
+  <section class="section centers" id="centers">
+    <div class="section-inner">
+
+      <div class="centers-header fade-up">
+        <div class="section-label">Medical Specialty</div>
+        <h2 class="section-title">진료 분야</h2>
+        <p class="section-desc">유성선병원 성형외과는 두 가지 핵심 분야로 안전하고 전문적인 진료를 제공합니다.</p>
+      </div>
+
+      <!-- 미용·성형 -->
+      <div class="centers-group" id="cosmetic-group">
+        <div class="group-label-row fade-up">
+          <span class="group-pill pill-cosmetic">미용·성형</span>
+          <span class="group-sub">외모적 아름다움과 자신감 회복을 위한 전문 진료</span>
+        </div>
+        <div class="cards-grid cards-grid-3">
+
+          <article class="service-card fade-up">
+            <div class="card-img">
+              <img src="images/eye-correction.png" alt="눈 성형 수술" loading="lazy">
+              <div class="card-num">01</div>
+            </div>
+            <div class="card-body">
+              <div class="card-category">Eye Center</div>
+              <h3 class="card-title">라인보다,<br>눈이 편안해지는 게 먼저</h3>
+              <p class="card-desc">처진 눈꺼풀·눈밑 고민을 기능과 인상 기준으로 함께 봅니다.</p>
+              <div class="card-tags">
+                <span class="card-tag">#처진눈꺼풀</span>
+                <span class="card-tag">#눈밑지방</span>
+                <span class="card-tag">#눈매교정</span>
+              </div>
+              <a href="eye.html" class="card-link">자세히 보기 →</a>
+            </div>
+          </article>
+
+          <article class="service-card fade-up">
+            <div class="card-img">
+              <img src="images/lifting.jpg" alt="리프팅 시술" loading="lazy">
+              <div class="card-num">02</div>
+            </div>
+            <div class="card-body">
+              <div class="card-category">Lifting &amp; Anti-Aging</div>
+              <h3 class="card-title">티 나지 않게,<br>얼굴이 정돈되는 설계</h3>
+              <p class="card-desc">피부 두께·처짐 방향을 보고 단계적으로 계획합니다.</p>
+              <div class="card-tags">
+                <span class="card-tag">#울쎄라</span>
+                <span class="card-tag">#써마지</span>
+                <span class="card-tag">#안면거상</span>
+              </div>
+              <a href="lifting.html" class="card-link">자세히 보기 →</a>
+            </div>
+          </article>
+
+          <article class="service-card fade-up">
+            <div class="card-img">
+              <img src="images/petit-skin.png" alt="쁘띠·스킨케어" loading="lazy">
+              <div class="card-num">03</div>
+            </div>
+            <div class="card-body">
+              <div class="card-category">Petit &amp; Skin</div>
+              <h3 class="card-title">필요한 만큼만,<br>과하지 않게</h3>
+              <p class="card-desc">표정·비대칭·생활 일정까지 고려해서 안전하게.</p>
+              <div class="card-tags">
+                <span class="card-tag">#보톡스</span>
+                <span class="card-tag">#필러</span>
+                <span class="card-tag">#스킨부스터</span>
+              </div>
+              <a href="petit.html" class="card-link">자세히 보기 →</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- 치료·재건 -->
+      <div class="centers-group" id="medical-group">
+        <div class="group-label-row fade-up">
+          <span class="group-pill pill-medical">치료·재건</span>
+          <span class="group-sub">기능 회복과 안전한 치료를 위한 전문 진료</span>
+        </div>
+        <div class="cards-grid cards-grid-2">
+
+          <article class="service-card fade-up">
+            <div class="card-img">
+              <img src="images/surgery-room.jpg" alt="외상·재건 수술실" loading="lazy">
+              <div class="card-num">04</div>
+            </div>
+            <div class="card-body">
+              <div class="card-category">Trauma &amp; Reconstruction</div>
+              <h3 class="card-title">다친 직후부터<br>흉터 관리까지 이어지는 체계</h3>
+              <p class="card-desc">상처 봉합은 '속도'보다 '흉터까지의 계획'입니다.</p>
+              <div class="card-tags">
+                <span class="card-tag">#안면골절</span>
+                <span class="card-tag">#상처봉합</span>
+                <span class="card-tag">#흉터최소화</span>
+              </div>
+              <a href="trauma.html" class="card-link">자세히 보기 →</a>
+            </div>
+          </article>
+
+          <article class="service-card fade-up">
+            <div class="card-img">
+              <img src="images/eye-correction.png" alt="재건·종괴 수술" loading="lazy">
+              <div class="card-num">05</div>
+            </div>
+            <div class="card-body">
+              <div class="card-category">Reconstruction</div>
+              <h3 class="card-title">불안할 땐,<br>정확히 확인하는 게 먼저</h3>
+              <p class="card-desc">몽우리/혹을 진단하고 필요한 치료를 세밀하게 안내합니다.</p>
+              <div class="card-tags">
+                <span class="card-tag">#몽우리</span>
+                <span class="card-tag">#혹제거</span>
+                <span class="card-tag">#정밀진단</span>
+              </div>
+              <a href="reconstruction.html" class="card-link">자세히 보기 →</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== DOCTOR ===== -->
+  <section class="doctor" id="about">
+    <div class="doctor-inner fade-up">
+      <div class="doctor-img-wrap">
+        <img src="images/shin_profile.jpg" alt="신정환 원장 프로필 사진" loading="lazy">
+        <div class="doctor-img-badge">
+          <strong>신정환 원장</strong>
+          <span>성형외과 전문의 · 의학박사 수료</span>
+        </div>
+      </div>
+      <div class="doctor-content">
+        <div class="section-label">About Doctor</div>
+        <h2 class="section-title">의료진 소개</h2>
+        <p class="doctor-role">유성선병원 성형외과 | 가톨릭중앙의료원 출신</p>
+        <blockquote class="doctor-quote">
+          "안전한 환경에서 정확한 진단과 섬세한 수술을 통해<br>
+          환자분들의 자연스러운 아름다움을 되찾아 드립니다."
+        </blockquote>
+        <div class="credentials">
+          <div class="credential-item">성형외과 전문의 / 의학박사 수료</div>
+          <div class="credential-item">가톨릭중앙의료원 성형외과 전공의 수료</div>
+          <div class="credential-item">대한성형외과학회 정회원</div>
+          <div class="credential-item">대한두개안면성형외과학회 정회원</div>
+          <div class="credential-item">대한미용성형외과학회 정회원</div>
+          <div class="credential-item">36대·37대 대한공중보건의사협의회 회장</div>
+          <div class="credential-item">2023·2024년도 보건복지부 장관 표창</div>
+          <div class="credential-item">현) 유성선병원 성형외과 과장</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SAFETY ===== -->
+  <section class="section safety" id="safety">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-label">Safety System</div>
+        <h2 class="section-title">종합병원의 안전 시스템</h2>
+        <p class="section-desc">개인 의원과는 차원이 다른 종합병원 인프라 안에서<br>성형외과 전문의의 섬세한 수술이 이루어집니다.</p>
+      </div>
+      <div class="safety-grid">
+        <div class="safety-card fade-up">
+          <span class="safety-icon" aria-hidden="true">🚑</span>
+          <h3>24시간 응급 체계</h3>
+          <p>수술 중 어떤 상황에서도 즉시 대응할 수 있는 종합병원 응급의료 시스템을 갖추고 있습니다.</p>
+        </div>
+        <div class="safety-card fade-up">
+          <span class="safety-icon" aria-hidden="true">🫀</span>
+          <h3>전문 마취 시스템</h3>
+          <p>마취통증의학과 전문의 상주로 수술 전후 안전한 마취 관리가 이루어집니다.</p>
+        </div>
+        <div class="safety-card fade-up">
+          <span class="safety-icon" aria-hidden="true">🔬</span>
+          <h3>다과 협진 시스템</h3>
+          <p>내과, 응급의학과 등 타 진료과와 즉시 협진이 가능하여 기저 질환자도 안심하고 수술받을 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DR. SNS LOG ===== -->
+  <section class="section drlog" id="drlog">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-label">Dr. SNS Log</div>
+        <h2 class="section-title">전문의 SNS 채널</h2>
+        <p class="section-desc">신정환 원장이 직접 전하는 의료 정보와 상담 콘텐츠.</p>
+      </div>
+      <div class="drlog-grid">
+
+        <div class="drlog-card fade-up">
+          <div class="drlog-thumb" style="background:linear-gradient(135deg,#2a0a05,#a33828)">
+            <div class="drlog-thumb-icon" aria-hidden="true">▶</div>
+            <span class="drlog-type drlog-type-video">REELS</span>
+          </div>
+          <div class="drlog-body">
+            <h3 class="drlog-title">처진 눈꺼풀 vs 안검하수,<br>차이 아세요?</h3>
+            <p class="drlog-meta">교육형 · 눈 성형</p>
+          </div>
+        </div>
+
+        <div class="drlog-card fade-up">
+          <div class="drlog-thumb" style="background:linear-gradient(135deg,#0a1828,#245a8a)">
+            <div class="drlog-thumb-icon" aria-hidden="true">💬</div>
+            <span class="drlog-type drlog-type-column">Q&amp;A</span>
+          </div>
+          <div class="drlog-body">
+            <h3 class="drlog-title">얼굴 몽우리, 무조건<br>큰 병일까요?</h3>
+            <p class="drlog-meta">공감형 · 치료·재건</p>
+          </div>
+        </div>
+
+        <div class="drlog-card fade-up">
+          <div class="drlog-thumb" style="background:linear-gradient(135deg,#1a1a1a,#2e2e2e)">
+            <div class="drlog-thumb-icon" aria-hidden="true">🏥</div>
+            <span class="drlog-type drlog-type-case">TRUST</span>
+          </div>
+          <div class="drlog-body">
+            <h3 class="drlog-title">종합병원 성형외과,<br>뭐가 다를까요?</h3>
+            <p class="drlog-meta">신뢰형 · 안전 시스템</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="drlog-cta fade-up">
+        <p class="drlog-cta-text">더 많은 의료 정보는 인스타그램에서 확인하세요</p>
+        <a href="#" class="drlog-cta-btn" aria-label="인스타그램 팔로우">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          인스타그램 팔로우
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="contact">
+    <div class="footer-top">
+      <div class="footer-info">
+        <div class="footer-logo">유성선병원 성형외과</div>
+        <address class="footer-detail" style="font-style:normal">
+          의료법인 영훈의료재단 유성선병원<br>
+          진료과: 성형외과<br>
+          주소: 대전광역시 유성구 북유성대로 93 (지족동)<br>
+          대표전화: <a href="tel:042-000-0000" style="color:inherit">042-000-0000</a><br>
+          진료시간: 평일 09:00 – 17:30 | 토요일 09:00 – 12:30<br>
+          (일요일 및 공휴일 휴진 / 응급환자 24시간 대응)
+        </address>
+      </div>
+      <div class="footer-quick">
+        <div class="footer-quick-item">
+          <div class="footer-quick-icon">📍</div>
+          <div class="footer-quick-label">오시는 길</div>
+        </div>
+        <div class="footer-quick-item">
+          <div class="footer-quick-icon">🕐</div>
+          <div class="footer-quick-label">진료 시간</div>
+        </div>
+        <div class="footer-quick-item">
+          <div class="footer-quick-icon">💬</div>
+          <div class="footer-quick-label">카카오톡 상담</div>
+        </div>
+        <div class="footer-quick-item">
+          <div class="footer-quick-icon">📅</div>
+          <div class="footer-quick-label">네이버 예약</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 유성선병원 성형외과. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== MOBILE STICKY CTA ===== -->
+  <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
+    <div class="mobile-cta-inner">
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+    </div>
+  </div>
+
+  <!-- ===== DRAFT SWITCHER ===== -->
+  <div class="draft-switcher" role="navigation" aria-label="시안 전환">
+    <div class="draft-switcher-label">시안 선택</div>
+    <div class="draft-tabs">
+      <a href="index.html"  class="draft-tab">시안 1</a>
+      <a href="index2.html" class="draft-tab active">시안 2</a>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── Header scroll state ── */
+      const header   = document.getElementById('header');
+      const heroEl   = document.getElementById('hero');
+
+      function updateHeader() {
+        const heroBottom = heroEl.getBoundingClientRect().bottom;
+        if (heroBottom <= 80 || window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      updateHeader();
+
+      /* ── Mobile menu ── */
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileNav  = document.getElementById('mobileNav');
+      let menuOpen = false;
+
+      function openMenu() {
+        menuOpen = true;
+        menuToggle.classList.add('open');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        mobileNav.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        menuOpen = false;
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      menuToggle.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
+
+      // Close on nav link click
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && menuOpen) closeMenu();
+      });
+
+      /* ── Hero split interaction ── */
+      const heroSplit = document.querySelector('.hero-split');
+      const spLeft    = document.getElementById('spLeft');
+      const spRight   = document.getElementById('spRight');
+
+      function isMobile() {
+        return window.innerWidth <= 768;
+      }
+
+      function activatePanel(side) {
+        heroSplit.classList.remove('hover-cosmetic', 'hover-medical');
+        spLeft.classList.remove('active');
+        spRight.classList.remove('active');
+
+        if (side === 'cosmetic') {
+          heroSplit.classList.add('hover-cosmetic');
+          spLeft.classList.add('active');
+        } else if (side === 'medical') {
+          heroSplit.classList.add('hover-medical');
+          spRight.classList.add('active');
+        }
+      }
+
+      function deactivate() {
+        heroSplit.classList.remove('hover-cosmetic', 'hover-medical');
+        spLeft.classList.remove('active');
+        spRight.classList.remove('active');
+      }
+
+      /* Desktop: mouse hover */
+      spLeft.addEventListener('mouseenter',  () => { if (!isMobile()) activatePanel('cosmetic'); });
+      spLeft.addEventListener('mouseleave',  () => { if (!isMobile()) deactivate(); });
+      spRight.addEventListener('mouseenter', () => { if (!isMobile()) activatePanel('medical'); });
+      spRight.addEventListener('mouseleave', () => { if (!isMobile()) deactivate(); });
+
+      /* Keyboard accessibility */
+      spLeft.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          spLeft.querySelector('a.sp-cta-btn')?.click();
+        }
+      });
+
+      spRight.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          spRight.querySelector('a.sp-cta-btn')?.click();
+        }
+      });
+
+      /* Mobile: touch expand then navigate */
+      let touchTimer = null;
+
+      function handlePanelTouch(panel, side) {
+        if (!isMobile()) return;
+        const isActive = panel.classList.contains('active');
+
+        if (!isActive) {
+          // First tap: expand to show
+          activatePanel(side);
+          clearTimeout(touchTimer);
+          touchTimer = setTimeout(deactivate, 2200);
+        }
+        // If already active: allow default link navigation
+      }
+
+      spLeft.addEventListener('touchstart',  () => handlePanelTouch(spLeft,  'cosmetic'), { passive: true });
+      spRight.addEventListener('touchstart', () => handlePanelTouch(spRight, 'medical'),  { passive: true });
+
+      /* ── Scroll fade-up animation ── */
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // fire once
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    })();
+  </script>
+
+</body>
+</html>
