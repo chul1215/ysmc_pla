@@ -16,7 +16,9 @@
       "Bash(git reset:*)",
       "WebFetch(domain:www.cherryps.com)",
       "WebFetch(domain:www.instagram.com)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)"
     ]
   }
 }
