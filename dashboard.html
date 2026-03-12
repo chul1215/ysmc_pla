@@ -195,6 +195,22 @@
         html.light-mode .border-white\/20        { border-color: rgba(0,0,0,0.12) !important; }
         /* Mobile overlay */
         html.light-mode #mobile-overlay          { background: rgba(0,0,0,0.35); }
+
+        /* Competitor Modal */
+        @keyframes modal-in {
+            from { opacity: 0; transform: translateY(18px) scale(0.96); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-animate { animation: modal-in 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+        html.light-mode #competitor-modal-card {
+            background: rgba(255,255,255,0.95) !important;
+            border: 1px solid rgba(0,0,0,0.1) !important;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+        }
+        html.light-mode #competitor-modal-backdrop {
+            background: rgba(0,0,0,0.4);
+        }
     </style>
 </head>
 
@@ -2003,92 +2019,91 @@
                             </thead>
                             <tbody class="divide-y divide-white/5">
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">닥터스미</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('닥터스미')">닥터스미</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">안면윤곽, 가슴, 눈, 코, 쁘띠 (3인 전문의)</td>
                                     <td class="py-2.5 pr-4 text-white/60">인스타+플랫폼</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">페이스</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('페이스')">페이스</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">안면윤곽, 양악, 눈, 코, 리프팅</td>
                                     <td class="py-2.5 pr-4 text-white/60">유튜브+인스타</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">미래</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('미래')">미래</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 탄방동</td>
                                     <td class="py-2.5 pr-4 text-white/60">눈, 코, 쁘띠, 리프팅, 피부</td>
                                     <td class="py-2.5 pr-4 text-white/60">블로그</td>
                                     <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">숨은그림</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('숨은그림')">숨은그림</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">눈 전문 (쌍꺼풀, 눈매교정, 트임)</td>
                                     <td class="py-2.5 pr-4 text-white/60">블로그</td>
                                     <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">희소</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('희소')">희소</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
-                                    <td class="py-2.5 pr-4 text-white/60">눈, 코, 리프팅, 줄기세포 <span class="text-amber-400">⚠
-                                            메시지 유사</span></td>
+                                    <td class="py-2.5 pr-4 text-white/60">눈, 코, 리프팅, 줄기세포 <span class="text-amber-400">⚠ 메시지 유사</span></td>
                                     <td class="py-2.5 pr-4 text-white/60">인스타+유튜브</td>
                                     <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">비포애프</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('비포애프')">비포애프</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">눈, 코, 지방성형, 리프팅</td>
                                     <td class="py-2.5 pr-4 text-white/60">인스타+플랫폼</td>
                                     <td class="py-2.5 text-center text-blue-400 font-bold text-[11px]">★★☆☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">오체안 대전</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('오체안 대전')">오체안 대전</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">양성종양, 흉터, 상처봉합, 재건 (치료특화)</td>
                                     <td class="py-2.5 pr-4 text-white/60">유튜브(본사)</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">갤러리</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('갤러리')">갤러리</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">성형외과 일반</td>
                                     <td class="py-2.5 pr-4 text-white/60">최소</td>
                                     <td class="py-2.5 text-center text-white/40 font-bold text-[11px]">★☆☆☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">뉴진</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('뉴진')">뉴진</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">코, 눈, 리프팅, 지방이식</td>
                                     <td class="py-2.5 pr-4 text-white/60">인스타 활발</td>
                                     <td class="py-2.5 text-center text-blue-400 font-bold text-[11px]">★★☆☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors bg-amber-500/5">
-                                    <td class="py-2.5 pr-4 font-bold text-amber-300">올웨이즈윤대영 ①</td>
+                                    <td class="py-2.5 pr-4 font-bold text-amber-300 cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('올웨이즈윤대영')">올웨이즈윤대영 ①</td>
                                     <td class="py-2.5 pr-4 text-amber-300/80">유성구 봉명동</td>
                                     <td class="py-2.5 pr-4 text-white/60">성형+피부+외과 복합의원</td>
                                     <td class="py-2.5 pr-4 text-white/60">미약</td>
                                     <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors bg-red-500/5">
-                                    <td class="py-2.5 pr-4 font-bold text-red-300">을지대병원 ②</td>
+                                    <td class="py-2.5 pr-4 font-bold text-red-300 cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('을지대병원')">을지대병원 ②</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">미용+재건 양축 (대학병원 인프라)</td>
                                     <td class="py-2.5 pr-4 text-white/60">소극적</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★★</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">건양대병원</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('건양대병원')">건양대병원</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 관저동</td>
                                     <td class="py-2.5 pr-4 text-white/60">눈, 코, 외상, 수부재건, 화상 (상급종합)</td>
                                     <td class="py-2.5 pr-4 text-white/60">소극적</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold">충남대병원</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('충남대병원')">충남대병원</td>
                                     <td class="py-2.5 pr-4 text-white/60">중구</td>
                                     <td class="py-2.5 pr-4 text-white/60">재건, 수부, 안면외상, 유방재건 (6교수)</td>
                                     <td class="py-2.5 pr-4 text-white/60">소극적</td>
@@ -2467,7 +2482,211 @@
                 tabPlan.classList.add(...inactiveClass);
             }
         }
+        /* ===== COMPETITOR MODAL DATA ===== */
+        const COMPETITOR_DATA = {
+            '닥터스미': {
+                fullName: '닥터스미성형외과', type: '개원의원 (다인 체제)',
+                location: '서구 대덕대로 203, 4-5층 (둔산동)', phone: '042-471-1116',
+                doctors: '이윤주 · 정지원 · 한동완 (전문의 3인)',
+                specialty: '안면윤곽, 가슴성형, 쌍꺼풀, 코성형, 쁘띠성형', slogan: null,
+                threat: '★★★★☆', threatLabel: '높음', threatClass: 'text-red-400 bg-red-500/15',
+                strengths: ['대전 최대 규모 — 전문의 3인 분업 체제', '인스타그램 등 SNS 활발 운영', '강남언니·바비톡·성예사 등 플랫폼 다중 입점'],
+                weaknesses: ['"공장식 수술" 인식 가능성', '대학병원급 안전 인프라 부재 (의원급 한계)'],
+                strategy: '종합병원 전담 전문의 체제·학력 경력 상세 공개로 신뢰 우위 확보. 가격 경쟁 불참 — "안전의 가치"로 프리미엄 정당화.', note: null,
+            },
+            '페이스': {
+                fullName: '페이스성형외과', type: '개원의원',
+                location: '서구 대덕대로 203, 둔산미래빌딩 3층 (둔산동)', phone: '042-484-2300',
+                doctors: '윤영묵 외', specialty: '안면윤곽, 양악수술, 눈, 코, 가슴, 리프팅',
+                slogan: '"세상에서 가장 소중한 당신을 위해"',
+                threat: '★★★★☆', threatLabel: '높음', threatClass: 'text-red-400 bg-red-500/15',
+                strengths: ['양악수술까지 커버하는 풀라인업 진료', '페이스 숏츠 비디오 시리즈 등 영상 콘텐츠 활발', '유튜브·인스타·카카오톡 멀티채널 운영', '정기 시즌 이벤트 진행'],
+                weaknesses: ['수요일 휴진으로 접근성 제한', '고난이도 수술 대비 병원급 시설 부재'],
+                strategy: '리프팅·눈 영역 직접 경쟁. 유성구 접근성 우위와 종합병원 인프라 안전성으로 차별화.', note: null,
+            },
+            '미래': {
+                fullName: '미래성형외과', type: '개원의원',
+                location: '서구 계룡로 595, 골드뱅크 G빌딩 4층 (탄방동)', phone: '042-524-4720',
+                doctors: '정광민 (1인 전문의)', specialty: '눈, 코, 가슴, 안면윤곽, 쁘띠, 피부',
+                slogan: '"심미성과 기능적인 면을 고려하는 성형외과 전문의"',
+                threat: '★★★☆☆', threatLabel: '중간', threatClass: 'text-yellow-400 bg-yellow-500/15',
+                strengths: ['1:1 맞춤 상담으로 친밀감 형성', '쁘띠 시술과 피부 시술 병행 (슈링크, CO₂ 프락셀 등)', '의료칼럼·전후사진·FAQ 등 교육 콘텐츠 풍부'],
+                weaknesses: ['1인 전문의 체제로 수술 볼륨 한계', '탄방동 위치 — 둔산동 핵심 상권 대비 접근성 약함'],
+                strategy: '쁘띠/스킨 영역 부분 경쟁. 종합병원 내 쁘띠 시술의 "안전한 환경" 메시지로 차별화.', note: null,
+            },
+            '숨은그림': {
+                fullName: '숨은그림성형외과', type: '개원의원 (눈 특화)',
+                location: '서구 둔산동', phone: null,
+                doctors: '1~2인', specialty: '눈 성형 전문 (쌍꺼풀, 눈매교정, 트임, 상하안검)',
+                slogan: '(병원명 자체가 "자연스러운 변화" 암시)',
+                threat: '★★★☆☆', threatLabel: '중간', threatClass: 'text-yellow-400 bg-yellow-500/15',
+                strengths: ['눈 성형 단일 분야 집중으로 전문성 극대화', '병원명 자체가 "자연스러운 변화"를 암시하는 네이밍 전략', '눈 성형 키워드 SEO 유리'],
+                weaknesses: ['눈 이외 분야 미커버 — 환자 유출', '구형 웹사이트 디자인으로 신뢰도 저하 가능'],
+                strategy: '눈 센터 영역 직접 경쟁. 종합병원 마취과 전문의 상주 등 안전 인프라 차별화 포인트 강조.', note: null,
+            },
+            '희소': {
+                fullName: '희소성형외과', type: '개원의원',
+                location: '서구 대덕대로 202, 경구빌딩 8층 (둔산동)', phone: '042-721-7600',
+                doctors: '임정수 (1인 전문의)', specialty: '눈, 코, 리프팅, 줄기세포(셀테라피)',
+                slogan: '"속부터 차오르는 젊음테라피" / "정확한 분석, 섬세한 계획"',
+                threat: '★★★☆☆', threatLabel: '중간', threatClass: 'text-yellow-400 bg-yellow-500/15',
+                strengths: ['줄기세포 시술(셀테라피) 차별화 메뉴 보유', '"드라마틱한 변화도 함부로 약속 안 합니다" — 신뢰 기반 메시지', '강남 경력 강조 의료진 브랜딩', '금요일 야간진료 (21시까지)'],
+                weaknesses: ['1인 전문의 체제', '줄기세포 시술의 의료광고 규제 리스크'],
+                strategy: '리프팅 영역 직접 경쟁. ⚠ "섬세한 계획" 메시지가 유성선병원 슬로건과 유사 — 차별화 메시지 재검토 필요.',
+                note: '⚠ 핵심 메시지 유사 주의: "정확한 분석, 섬세한 계획" ↔ 유성선 "섬세함을 더하다"',
+            },
+            '비포애프': {
+                fullName: '비포애프(b4F)성형외과', type: '개원의원',
+                location: '서구 대덕대로 223, 203-204호 (둔산동)', phone: '042-721-0199',
+                doctors: '박재범 (1인 전문의)', specialty: '눈, 코, 지방성형, 가슴, 인모드리프팅',
+                slogan: '"속도보다는 장인정신"',
+                threat: '★★☆☆☆', threatLabel: '낮음~중간', threatClass: 'text-blue-400 bg-blue-500/15',
+                strengths: ['"장인정신"이라는 독특한 포지셔닝으로 꼼꼼함 강조', '강남언니·바비톡·성예사·모두닥 폭넓은 플랫폼 입점', '카카오톡 채널 운영, 모던 Wix 웹사이트'],
+                weaknesses: ['1인 전문의 체제', '목요일 휴진', 'Wix 기반 웹사이트로 SEO 최적화 한계'],
+                strategy: '눈·리프팅 부분 경쟁. 종합병원 인프라 안전성으로 "장인정신" 대비 차별화.', note: null,
+            },
+            '오체안 대전': {
+                fullName: '오체안성형외과 대전점', type: '프랜차이즈 (치료 특화)',
+                location: '서구 대덕대로 195, 2층 (둔산동)', phone: '042-721-4100',
+                doctors: '김종림', specialty: '양성종양, 흉터, 상처봉합, 켈로이드, 소아수술',
+                slogan: '"명확한 진단을 통한 정확한 치료"',
+                threat: '★★★★☆', threatLabel: '높음', threatClass: 'text-red-400 bg-red-500/15',
+                strengths: ['10,000건 이상 수술 실적 공개 — 압도적 신뢰도', '프랜차이즈 브랜드 인지도 (오체안 네트워크)', 'OZHEAN TV 유튜브 채널 의학 교육 콘텐츠', '목요일 야간진료(21시), 소아수술 보호자 참관 가능'],
+                weaknesses: ['미용 성형 비중 낮음 — 직접 경쟁 범위 제한', '프랜차이즈 특성상 지역 맞춤 마케팅 어려움'],
+                strategy: '외상·재건·종괴 영역 핵심 경쟁자. "조직검사+수술 원스톱" 종합병원 장점과 마취과 상주 안전성으로 대응.',
+                note: '★ 핵심 경쟁자: 외상·재건·종괴 진료축 직접 경쟁. 의원급 최대 위협.',
+            },
+            '갤러리': {
+                fullName: '갤러리성형외과', type: '개원의원',
+                location: '서구 둔산동', phone: '042-489-3377',
+                doctors: '김형수', specialty: '성형외과 일반', slogan: null,
+                threat: '★☆☆☆☆', threatLabel: '낮음', threatClass: 'text-white/50 bg-white/10',
+                strengths: ['둔산동 상권 내 기존 환자 베이스'],
+                weaknesses: ['최소한의 온라인 존재감', '특화 분야 및 차별화 메시지 불명확'],
+                strategy: '위협도 낮음. 직접 경쟁 구도 아님.', note: null,
+            },
+            '뉴진': {
+                fullName: '뉴진성형외과', type: '개원의원',
+                location: '서구 대덕대로 189, 7층 (둔산동)', phone: null,
+                doctors: '권유진 (1인 전문의)', specialty: '코성형, 눈성형, 리프팅, 지방이식', slogan: null,
+                threat: '★★☆☆☆', threatLabel: '낮음~중간', threatClass: 'text-blue-400 bg-blue-500/15',
+                strengths: ['인스타그램 중심 SNS 마케팅 활발', '젊은 원장의 감각적 비주얼 브랜딩', '둔산동 핵심 상권 위치로 접근성 우수'],
+                weaknesses: ['1인 전문의 신생 의원 — 인지도 축적 중', '대형 의원 대비 전문 분야 범위 제한'],
+                strategy: '코·눈·리프팅 부분 경쟁. 현재 위협도 낮으나 성장 모니터링 필요.', note: null,
+            },
+            '올웨이즈윤대영': {
+                fullName: '올웨이즈윤대영성형외과', type: '개원의원 (복합)',
+                location: '유성구 계룡로 114, BYC유성빌딩 2층 (봉명동)', phone: null,
+                doctors: '윤대영 (1인 전문의)', specialty: '성형외과 전반, 피부과, 외과', slogan: null,
+                threat: '★★★☆☆', threatLabel: '중간', threatClass: 'text-yellow-400 bg-yellow-500/15',
+                strengths: ['유성구 소재 — 유성선병원과 동일 상권, 기존 환자 기반 보유', '복합 진료(성형+피부+외과) 원스톱 편의성'],
+                weaknesses: ['성형외과 단일 특화가 아닌 복합의원 — 전문성 인식 약함', '규모·인프라·마케팅 면에서 한계'],
+                strategy: '유성구 동일 상권 직접 경쟁. 종합병원 인프라와 전문성을 강조해 "복합의원" 대비 명확한 차별화.',
+                note: '① 유성구 상권 직접 경쟁: 유성구 유일한 성형외과로 기존 환자 기반 보유. 신설 시 환자 유치 직접 경쟁.',
+            },
+            '을지대병원': {
+                fullName: '을지대학교병원 성형외과', type: '대학병원',
+                location: '서구 둔산서로 95 (둔산동)', phone: null,
+                doctors: '교수진 다수', specialty: '미용성형(눈, 코, 안면윤곽, 가슴) + 재건(유방재건, 외상)', slogan: null,
+                threat: '★★★★★', threatLabel: '매우 높음', threatClass: 'text-red-500 bg-red-500/20',
+                strengths: ['"종합병원 인프라 + 미용/재건 양축" 포지션 이미 점유', '둔산동 위치로 성형 수요 집중 상권 접근성 우수', '대학병원 신뢰도·학술 배경·기존 환자 베이스', '타과 연계 진료 체계'],
+                weaknesses: ['긴 대기시간 및 복잡한 예약 절차', '마케팅 활동 소극적', '미용 시술 접근성(감성·편의성) 개원의원 대비 낮음'],
+                strategy: '유성선병원이 추구하는 포지션을 이미 점유한 가장 강력한 경쟁자. 유성구 입지 독점성·전문의 직접 집도·빠른 접근성을 핵심 차별화로 강화.',
+                note: '② 동일 포지셔닝 주의: 가장 강력한 경쟁자. "종합병원 성형외과" 포지션 차별화 전략 필수.',
+            },
+            '건양대병원': {
+                fullName: '건양대학교병원 성형외과', type: '상급종합병원',
+                location: '서구 관저동', phone: null,
+                doctors: '교수진 다수', specialty: '눈, 코, 안면윤곽, 유방, 외상/골절, 수부재건, 화상, 선천성기형', slogan: null,
+                threat: '★★★★☆', threatLabel: '높음', threatClass: 'text-red-400 bg-red-500/15',
+                strengths: ['상급종합병원 지위 — 안전성 신뢰도 최상위 (2023년 신규 지정)', '다양한 성형외과 세부 클리닉 운영', '화상·선천성기형 등 고난이도 재건 영역 강점'],
+                weaknesses: ['관저동 위치 — 둔산동·유성구 환자 접근성 다소 낮음', '대학병원 특성상 미용 마케팅 소극적', '예약 대기 및 행정 복잡도'],
+                strategy: '재건·외상 영역 및 신뢰도 경쟁. "상급종합병원"에는 없는 빠른 접근성·짧은 대기·전문의 직접 상담으로 차별화.', note: null,
+            },
+            '충남대병원': {
+                fullName: '충남대학교병원 성형외과', type: '대학병원 (거점)',
+                location: '대전 중구', phone: null,
+                doctors: '교수 6명 + 전공의 4명', specialty: '재건, 수부외과, 안면외상, 유방재건, 눈성형, 코성형, 항노화', slogan: null,
+                threat: '★★★☆☆', threatLabel: '중간', threatClass: 'text-yellow-400 bg-yellow-500/15',
+                strengths: ['1984년 설립, 대전 지역 최대 규모 성형외과 (6교수)', '연 12,000명 외래 / 1,700건 수술의 압도적 볼륨', '세부 전문 클리닉 11개 운영', '대학병원 인프라 (중환자실, 마취과, 응급실 연계)'],
+                weaknesses: ['긴 대기시간, 복잡한 예약 절차', '미용 시술 가격 경쟁력 낮음', '마케팅·홍보 활동 소극적', '1:1 맞춤 상담 어려움'],
+                strategy: '재건·외상 영역 경쟁. "가톨릭중앙의료원 수련" 경력으로 동급 학술 배경 어필. 전담 전문의의 빠른 상담·짧은 대기 차별화.', note: null,
+            },
+        };
+
+        function openCompetitorModal(key) {
+            const data = COMPETITOR_DATA[key];
+            if (!data) return;
+
+            const infoRows = [
+                data.location && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">위치</span><span class="text-white/80">${data.location}</span></div>`,
+                data.phone    && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">전화</span><span class="text-white/80">${data.phone}</span></div>`,
+                data.doctors  && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">의료진</span><span class="text-white/80">${data.doctors}</span></div>`,
+                data.specialty && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">주력</span><span class="text-white/80">${data.specialty}</span></div>`,
+                data.slogan   && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">슬로건</span><span class="text-white/80 italic">${data.slogan}</span></div>`,
+            ].filter(Boolean).join('');
+
+            const toList = (items, color) => items.map(s =>
+                `<li class="flex gap-2 items-start"><span class="${color} shrink-0 leading-relaxed">•</span><span>${s}</span></li>`
+            ).join('');
+
+            document.getElementById('competitor-modal-body').innerHTML = `
+                <div class="flex items-start justify-between mb-4 pr-8">
+                    <div>
+                        <h3 class="text-base font-bold">${data.fullName}</h3>
+                        <p class="text-white/40 text-xs mt-0.5">${data.type}</p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg text-xs font-bold border border-current/20 ${data.threatClass}">${data.threat} ${data.threatLabel}</span>
+                </div>
+                <div class="bg-white/5 rounded-xl p-4 mb-4 space-y-2 text-xs">${infoRows}</div>
+                <div class="mb-3">
+                    <p class="text-xs font-bold text-green-400 mb-2 flex items-center gap-1.5">
+                        <span class="material-icons-round" style="font-size:14px">thumb_up</span>강점
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-white/70">${toList(data.strengths, 'text-green-400')}</ul>
+                </div>
+                <div class="mb-4">
+                    <p class="text-xs font-bold text-orange-400 mb-2 flex items-center gap-1.5">
+                        <span class="material-icons-round" style="font-size:14px">thumb_down</span>약점
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-white/70">${toList(data.weaknesses, 'text-orange-400')}</ul>
+                </div>
+                <div class="bg-primary/10 border border-primary/20 rounded-xl p-4">
+                    <p class="text-xs font-bold text-primary mb-1.5 flex items-center gap-1.5">
+                        <span class="material-icons-round" style="font-size:14px">bolt</span>대응 전략
+                    </p>
+                    <p class="text-xs text-white/70">${data.strategy}</p>
+                </div>
+                ${data.note ? `<div class="mt-3 bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-xs text-amber-300">${data.note}</div>` : ''}
+            `;
+
+            const modal = document.getElementById('competitor-modal');
+            const card  = document.getElementById('competitor-modal-card');
+            modal.classList.remove('hidden');
+            card.classList.remove('modal-animate');
+            void card.offsetWidth;
+            card.classList.add('modal-animate');
+        }
+
+        function closeCompetitorModal() {
+            document.getElementById('competitor-modal').classList.add('hidden');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeCompetitorModal();
+        });
     </script>
+
+    <!-- Competitor Detail Modal -->
+    <div id="competitor-modal" class="fixed inset-0 z-[300] hidden flex items-center justify-center p-4">
+        <div id="competitor-modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCompetitorModal()"></div>
+        <div id="competitor-modal-card" class="relative glass-panel rounded-2xl p-6 w-full max-w-lg max-h-[82vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeCompetitorModal()" class="absolute top-4 right-4 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors z-10">
+                <span class="material-icons-round text-sm">close</span>
+            </button>
+            <div id="competitor-modal-body"></div>
+        </div>
+    </div>
 </body>
 
 </html>
