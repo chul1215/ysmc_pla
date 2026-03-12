@@ -130,6 +130,71 @@
                 display: none !important;
             }
         }
+
+        /* Smooth theme transition */
+        .mesh-gradient, .glass-panel, .glass-panel-light, body {
+            transition: background 0.35s ease, background-color 0.35s ease,
+                        border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
+        }
+
+        /* ===== LIGHT MODE ===== */
+        html.light-mode body {
+            color: #1c1c2e;
+            background-color: #f5f1ec !important;
+        }
+        html.light-mode .mesh-gradient {
+            background-color: #f5f1ec;
+            background-image:
+                radial-gradient(at 0% 0%,   hsla(7,  80%, 88%, 0.55) 0px, transparent 50%),
+                radial-gradient(at 50% 0%,  hsla(7,  70%, 85%, 0.4)  0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(47, 60%, 88%, 0.4)  0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(7,  60%, 90%, 0.3)  0px, transparent 50%),
+                radial-gradient(at 50% 100%,hsla(220,30%, 88%, 0.3)  0px, transparent 50%),
+                radial-gradient(at 100% 100%,hsla(47,50%, 88%, 0.3)  0px, transparent 50%);
+        }
+        html.light-mode .glass-panel {
+            background: rgba(255,255,255,0.72) !important;
+            border: 1px solid rgba(0,0,0,0.07) !important;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+        html.light-mode .glass-panel:hover {
+            background: rgba(255,255,255,0.92) !important;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05) !important;
+            transform: translateY(-2px);
+        }
+        html.light-mode .glass-panel-light {
+            background: rgba(255,255,255,0.85);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        /* Scrollbar */
+        html.light-mode .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.12);
+        }
+        html.light-mode .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,0.22);
+        }
+        /* Text */
+        html.light-mode .text-white               { color: #1c1c2e !important; }
+        html.light-mode .text-white\/90           { color: rgba(28,28,46,0.9) !important; }
+        html.light-mode .text-white\/80           { color: rgba(28,28,46,0.8) !important; }
+        html.light-mode .text-white\/70           { color: rgba(28,28,46,0.7) !important; }
+        html.light-mode .text-white\/60           { color: rgba(28,28,46,0.6) !important; }
+        html.light-mode .text-white\/50           { color: rgba(28,28,46,0.5) !important; }
+        html.light-mode .text-white\/40           { color: rgba(28,28,46,0.4) !important; }
+        html.light-mode .text-white\/30           { color: rgba(28,28,46,0.3) !important; }
+        html.light-mode .hover\:text-white:hover  { color: #1c1c2e !important; }
+        /* Backgrounds */
+        html.light-mode .bg-white\/5             { background-color: rgba(0,0,0,0.04) !important; }
+        html.light-mode .bg-white\/10            { background-color: rgba(0,0,0,0.06) !important; }
+        html.light-mode .bg-white\/15            { background-color: rgba(0,0,0,0.08) !important; }
+        html.light-mode .bg-white\/20            { background-color: rgba(0,0,0,0.10) !important; }
+        html.light-mode .hover\:bg-white\/5:hover  { background-color: rgba(0,0,0,0.05) !important; }
+        html.light-mode .hover\:bg-white\/20:hover { background-color: rgba(0,0,0,0.09) !important; }
+        /* Borders */
+        html.light-mode .border-white\/10        { border-color: rgba(0,0,0,0.08) !important; }
+        html.light-mode .border-white\/20        { border-color: rgba(0,0,0,0.12) !important; }
+        /* Mobile overlay */
+        html.light-mode #mobile-overlay          { background: rgba(0,0,0,0.35); }
     </style>
 </head>
 
@@ -253,7 +318,10 @@
                     <p class="text-white/50 text-xs md:text-sm hidden sm:block">홍보·마케팅 최종 실행 계획 대시보드</p>
                 </div>
                 <div class="flex items-center gap-4">
-
+                    <button onclick="toggleTheme()" id="theme-toggle-btn" title="라이트/다크 모드 전환"
+                        class="p-2 rounded-lg bg-white/10 text-white transition-all hover:bg-white/20 flex-shrink-0">
+                        <span class="material-icons-round" style="font-size:20px" id="theme-icon">light_mode</span>
+                    </button>
                 </div>
             </header>
 
@@ -2355,6 +2423,24 @@
             document.getElementById('mobile-sidebar').classList.remove('open');
             document.getElementById('mobile-overlay').classList.remove('open');
         }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isLight = html.classList.toggle('light-mode');
+            document.getElementById('theme-icon').textContent = isLight ? 'dark_mode' : 'light_mode';
+            localStorage.setItem('dashboardTheme', isLight ? 'light' : 'dark');
+        }
+        // Restore saved theme
+        (function() {
+            if (localStorage.getItem('dashboardTheme') === 'light') {
+                document.documentElement.classList.add('light-mode');
+            }
+        })();
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.documentElement.classList.contains('light-mode')) {
+                document.getElementById('theme-icon').textContent = 'dark_mode';
+            }
+        });
 
         function switchTab(tab) {
             const planPane = document.getElementById('pane-plan');

@@ -97,7 +97,9 @@ RGB 변환값 (rgba 하드코딩 시 사용):
 
 다른 페이지와 달리 Tailwind CSS (CDN)를 사용하며, 색상은 Tailwind config와 `hsla()` 메시 그라디언트로 정의된다. CSS 변수 블록이 없으므로 색상 변경 시 별도로 처리해야 한다.
 
-- **다크모드**: `<html class="dark">` 고정, `.glass-panel` / `.mesh-gradient` 커스텀 클래스 사용
+- **테마 토글**: `<html class="dark">` 기본값. 헤더 버튼이 `html.light-mode` 클래스를 토글하며 `localStorage('dashboardTheme')`에 저장한다.
+- **라이트 모드 CSS**: `<style>` 내 `html.light-mode ...` 셀렉터로 `.mesh-gradient`, `.glass-panel`, `text-white/XX`, `bg-white/XX`, `border-white/XX` 등을 일괄 오버라이드. Tailwind utility 클래스명에 `/`가 포함되어 CSS 셀렉터에서 백슬래시 이스케이프(`text-white\/60`) 필요.
+- **커스텀 클래스**: `.glass-panel` / `.mesh-gradient` — Tailwind 유틸리티가 아닌 인라인 `<style>` 정의
 - **레이아웃**: `overflow-hidden h-screen` 고정 높이 앱 레이아웃. 모바일에서는 햄버거 드로어 사이드바 사용.
 
 ## 레이아웃 패턴 (상세 페이지)
