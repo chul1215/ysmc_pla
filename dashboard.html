@@ -45,6 +45,12 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.125);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        .glass-panel:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.065);
+            box-shadow: 0 14px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.14);
         }
 
         .glass-panel-light {
@@ -97,9 +103,11 @@
             padding: 1.5rem 1rem;
             overflow-y: auto;
         }
+
         #mobile-sidebar.open {
             transform: translateX(0);
         }
+
         #mobile-overlay {
             display: none;
             position: fixed;
@@ -109,11 +117,18 @@
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
         }
+
         #mobile-overlay.open {
             display: block;
         }
+
         @media (min-width: 768px) {
-            #mobile-sidebar, #mobile-overlay, #mobile-menu-btn { display: none !important; }
+
+            #mobile-sidebar,
+            #mobile-overlay,
+            #mobile-menu-btn {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -127,28 +142,43 @@
 
     <!-- Mobile Sidebar Drawer -->
     <aside id="mobile-sidebar" class="glass-panel">
-        <button onclick="closeMobileMenu()" class="self-end mb-5 p-2 rounded-lg bg-white/10 text-white flex items-center justify-center">
+        <button onclick="closeMobileMenu()"
+            class="self-end mb-5 p-2 rounded-lg bg-white/10 text-white flex items-center justify-center">
             <span class="material-icons-round text-sm">close</span>
         </button>
         <nav class="flex-1 space-y-2">
-            <a class="flex items-center gap-3 px-4 py-3 bg-primary/20 text-primary border border-primary/20 rounded-xl transition-all" href="#overview" onclick="closeMobileMenu()">
+            <a class="flex items-center gap-3 px-4 py-3 bg-primary/20 text-primary border border-primary/20 rounded-xl transition-all"
+                href="#overview" onclick="closeMobileMenu()">
                 <span class="font-medium text-sm">개요</span>
             </a>
-            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#website" onclick="closeMobileMenu()">
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                href="#website" onclick="closeMobileMenu()">
                 <span class="font-medium text-sm">홈페이지</span>
             </a>
-            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#content" onclick="closeMobileMenu()">
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                href="#content" onclick="closeMobileMenu()">
                 <span class="font-medium text-sm">콘텐츠</span>
             </a>
-            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#schedule" onclick="closeMobileMenu()">
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                href="#schedule" onclick="closeMobileMenu()">
                 <span class="font-medium text-sm">일정</span>
             </a>
-            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#sns" onclick="closeMobileMenu()">
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                href="#sns" onclick="closeMobileMenu()">
                 <span class="font-medium text-sm">SNS전략</span>
             </a>
-            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#faq" onclick="closeMobileMenu()">
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                href="#faq" onclick="closeMobileMenu()">
                 <span class="font-medium text-sm">FAQ</span>
             </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                href="#strategy" onclick="closeMobileMenu()">
+                <span class="font-medium text-sm">전략</span>
+            </a>
+            <button onclick="switchTab('competitor'); closeMobileMenu();"
+                class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all w-full text-left">
+                <span class="font-medium text-sm">경쟁분석</span>
+            </button>
         </nav>
         <div class="mt-auto pt-6 border-t border-white/10 px-2">
             <p class="text-xs text-white/40 mb-2">프로젝트</p>
@@ -191,6 +221,14 @@
                     href="#faq">
                     <span class="font-medium text-sm">FAQ</span>
                 </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    href="#strategy">
+                    <span class="font-medium text-sm">전략</span>
+                </a>
+                <button onclick="switchTab('competitor')" id="sidebar-competitor-btn"
+                    class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all w-full text-left">
+                    <span class="font-medium text-sm">경쟁분석</span>
+                </button>
             </nav>
 
             <div class="mt-auto space-y-2">
@@ -206,7 +244,8 @@
         <main class="flex-1 flex flex-col gap-4 md:gap-6 overflow-hidden min-w-0">
             <!-- Top Header -->
             <header class="flex items-center justify-between gap-3">
-                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg bg-white/10 text-white flex-shrink-0">
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()"
+                    class="p-2 rounded-lg bg-white/10 text-white flex-shrink-0">
                     <span class="material-icons-round">menu</span>
                 </button>
                 <div class="min-w-0 flex-1">
@@ -218,8 +257,17 @@
                 </div>
             </header>
 
-            <!-- Scrollable Content -->
-            <div class="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar pr-1 md:pr-2 space-y-4 md:space-y-6">
+            <!-- Tab Bar -->
+            <div class="flex gap-2 flex-shrink-0">
+                <button onclick="switchTab('plan')" id="tab-plan"
+                    class="px-4 py-2 text-sm font-semibold rounded-lg bg-primary/20 text-primary border border-primary/20 transition-all">기획안</button>
+                <button onclick="switchTab('competitor')" id="tab-competitor"
+                    class="px-4 py-2 text-sm font-semibold rounded-lg text-white/50 hover:text-white hover:bg-white/5 border border-transparent transition-all">경쟁분석</button>
+            </div>
+
+            <!-- 기획안 Tab Pane -->
+            <div id="pane-plan"
+                class="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar pr-1 md:pr-2 space-y-4 md:space-y-6">
                 <!-- Quick Metrics Grid -->
                 <div id="overview" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="glass-panel p-5 rounded-xl">
@@ -264,23 +312,6 @@
                         </div>
                         <h3 class="text-white/50 text-sm font-medium">실행 기간</h3>
                         <p class="text-2xl font-bold mt-1">11주 준비</p>
-                    </div>
-                </div>
-
-                <!-- 브랜드 포지셔닝 -->
-                <div class="glass-panel p-6 rounded-xl">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-2 bg-primary/20 rounded-lg">
-                            <span class="material-icons-round text-primary">star</span>
-                        </div>
-                        <div>
-                            <h2 class="text-lg font-bold">브랜드 포지셔닝</h2>
-                            <p class="text-white/40 text-xs">핵심 가치와 메시지</p>
-                        </div>
-                    </div>
-                    <div class="bg-gradient-to-r from-primary/20 to-accent/20 p-6 rounded-xl border border-white/10">
-                        <p class="text-sm md:text-xl font-bold text-center mb-2">"종합병원급 안전성과 성형외과의 섬세함을 함께 제공한다"</p>
-                        <p class="text-sm text-white/60 text-center">신뢰 기반 전환을 만드는 정답 프레임</p>
                     </div>
                 </div>
 
@@ -339,6 +370,135 @@
                             </div>
                             <p class="text-xs text-white/60 mb-2">몽우리, 종괴</p>
                             <p class="text-xs text-accent font-semibold">의료 신뢰 정점</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 브랜드 포지셔닝 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-primary/20 rounded-lg">
+                            <span class="material-icons-round text-primary">star</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">브랜드 포지셔닝</h2>
+                            <p class="text-white/40 text-xs">핵심 가치와 메시지</p>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-primary/20 to-accent/20 p-6 rounded-xl border border-white/10">
+                        <p class="text-sm md:text-xl font-bold text-center mb-2">"종합병원급 안전성과 성형외과의 섬세함을 함께 제공한다"</p>
+                        <p class="text-sm text-white/60 text-center">신뢰 기반 전환을 만드는 정답 프레임</p>
+                    </div>
+                </div>
+
+                <!-- 포지셔닝 전략 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-primary/20 rounded-lg">
+                            <span class="material-icons-round text-primary">my_location</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">포지셔닝 전략</h2>
+                            <p class="text-white/40 text-xs">대전 성형외과 시장 내 차별화 포지션</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-primary/10 border border-primary/30 p-4 rounded-xl">
+                            <div class="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center mb-3">
+                                <span class="material-icons-round text-primary text-sm">location_on</span>
+                            </div>
+                            <h4 class="font-bold text-sm mb-2 text-primary">유성구 입지 독점</h4>
+                            <p class="text-xs text-white/60">유성구 내 미용 성형외과 개원의원 부재. 반경 내 직접 경쟁 없음</p>
+                        </div>
+                        <div class="bg-blue-500/10 border border-blue-500/30 p-4 rounded-xl">
+                            <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mb-3">
+                                <span class="material-icons-round text-blue-400 text-sm">local_hospital</span>
+                            </div>
+                            <h4 class="font-bold text-sm mb-2 text-blue-400">종합병원 인프라</h4>
+                            <p class="text-xs text-white/60">마취과 전문의 상주, 중환자실, 응급 체계 — 개원의원이 가질 수 없는 안전 우위</p>
+                        </div>
+                        <div class="bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-xl">
+                            <div class="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-3">
+                                <span class="material-icons-round text-emerald-400 text-sm">balance</span>
+                            </div>
+                            <h4 class="font-bold text-sm mb-2 text-emerald-400">미용·재건 양축</h4>
+                            <p class="text-xs text-white/60">눈/리프팅/쁘띠(미용) + 외상/재건/종괴(치료) 단일 전문의 풀커버</p>
+                        </div>
+                        <div class="bg-purple-500/10 border border-purple-500/30 p-4 rounded-xl">
+                            <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mb-3">
+                                <span class="material-icons-round text-purple-400 text-sm">school</span>
+                            </div>
+                            <h4 class="font-bold text-sm mb-2 text-purple-400">의료진 신뢰</h4>
+                            <p class="text-xs text-white/60">가톨릭중앙의료원 수련 경력으로 지역 개원의원 대비 학술 배경 우위</p>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-primary/15 to-blue-500/10 p-4 rounded-xl border border-white/10">
+                        <p class="text-xs text-white/50 mb-2 font-semibold uppercase tracking-wider">핵심 포지셔닝 문장</p>
+                        <p class="text-sm font-bold">"유성구 유일 — 종합병원의 안전 인프라 위에서, 성형외과 전문의가 직접 집도하는 미용과 재건"</p>
+                    </div>
+                </div>
+
+                <!-- SWOT 분석 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="p-2 bg-accent/20 rounded-lg">
+                            <span class="material-icons-round text-accent">analytics</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">SWOT 분석</h2>
+                            <p class="text-white/40 text-xs">유성선병원 성형외과</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl">
+                            <p class="text-xs font-bold text-emerald-400 mb-3 flex items-center gap-1">
+                                <span class="material-icons-round" style="font-size:14px">thumb_up</span> 강점 (S)
+                            </p>
+                            <div class="space-y-1.5 text-xs text-white/70">
+                                <p>• 종합병원 안전 인프라 완비</p>
+                                <p>• 가톨릭중앙의료원 출신 전문의</p>
+                                <p>• 미용·재건 양축 풀커버</p>
+                                <p>• 유성구 위치 지역 독점</p>
+                                <p>• 기존 유성선병원 환자 베이스</p>
+                            </div>
+                        </div>
+                        <div class="bg-red-500/10 border border-red-500/20 p-4 rounded-xl">
+                            <p class="text-xs font-bold text-red-400 mb-3 flex items-center gap-1">
+                                <span class="material-icons-round" style="font-size:14px">thumb_down</span> 약점
+                                (W)
+                            </p>
+                            <div class="space-y-1.5 text-xs text-white/70">
+                                <p>• 신설 부서 인지도 제로</p>
+                                <p>• 둔산동 주요 상권과 거리</p>
+                                <p>• 의원 대비 미용 이미지 약함</p>
+                                <p>• 공격적 할인/이벤트 제한</p>
+                                <p>• 1인 전문의 수술 볼륨 한계</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl">
+                            <p class="text-xs font-bold text-blue-400 mb-3 flex items-center gap-1">
+                                <span class="material-icons-round" style="font-size:14px">trending_up</span> 기회
+                                (O)
+                            </p>
+                            <div class="space-y-1.5 text-xs text-white/70">
+                                <p>• 유성구 성형외과 수요 공백</p>
+                                <p>• 안전 중시 트렌드 상승</p>
+                                <p>• 외상/재건 틈새 시장</p>
+                                <p>• 타과 협진 환자 내부 연계</p>
+                                <p>• 네이버 SEO 비경쟁 키워드</p>
+                            </div>
+                        </div>
+                        <div class="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl">
+                            <p class="text-xs font-bold text-amber-400 mb-3 flex items-center gap-1">
+                                <span class="material-icons-round" style="font-size:14px">warning</span> 위협 (T)
+                            </p>
+                            <div class="space-y-1.5 text-xs text-white/70">
+                                <p>• 둔산동 의원 9곳+ 밀집</p>
+                                <p>• 서울 KTX 고가 수술 유출</p>
+                                <p>• 대학병원 동일 포지션 선점</p>
+                                <p>• 이벤트 가격 경쟁 압박</p>
+                                <p>• 의료광고 규제 제약</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -543,83 +703,78 @@
                     </div>
                 </div>
 
-                <!-- 상담 마케팅 전략 -->
+
+                <!-- 마케팅 채널 우선순위 -->
                 <div class="glass-panel p-6 rounded-xl">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-2 bg-emerald-500/20 rounded-lg">
-                            <span class="material-icons-round text-emerald-400">chat</span>
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="p-2 bg-blue-500/20 rounded-lg">
+                            <span class="material-icons-round text-blue-400">bar_chart</span>
                         </div>
                         <div>
-                            <h2 class="text-lg font-bold">상담 마케팅 전략</h2>
-                            <p class="text-white/40 text-xs">온라인 상담 채널 운영</p>
+                            <h2 class="text-lg font-bold">마케팅 채널 우선순위</h2>
+                            <p class="text-white/40 text-xs">단계별 채널 집중 전략</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div
-                            class="bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 p-5 rounded-xl border border-yellow-500/20">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center">
-                                    <span class="material-icons-round text-yellow-400 text-2xl">chat_bubble</span>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-sm">카카오톡 케어챗</h3>
-                                    <p class="text-xs text-white/40">고객 상담 및 CRM</p>
-                                </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-primary/20">
+                            <div
+                                class="w-7 h-7 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-xs font-bold text-primary">1</span>
                             </div>
-                            <div class="space-y-2 text-xs text-white/70">
-                                <p>• 24시간 실시간 상담 대응</p>
-                                <p>• 예약·문의 자동 연결</p>
-                                <p>• 상담 이력 관리 및 추적</p>
-                                <p>• 맞춤형 안내 메시지 발송</p>
-                            </div>
-                            <div class="mt-4 pt-4 border-t border-white/10">
-                                <p class="text-xs text-yellow-400 font-semibold">✓ 본원 운영 중인 시스템 활용</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="bg-gradient-to-br from-pink-500/10 to-purple-600/5 p-5 rounded-xl border border-pink-500/20">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center">
-                                    <span class="material-icons-round text-pink-400 text-2xl">forum</span>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-sm">SNS 직접 상담창구</h3>
-                                    <p class="text-xs text-white/40">인스타그램 DM 운영</p>
-                                </div>
-                            </div>
-                            <div class="space-y-2 text-xs text-white/70">
-                                <p>• DM 문의 전담 응대 체계</p>
-                                <p>• 릴스·게시물 댓글 관리</p>
-                                <p>• 시술 후기 및 상담 연결</p>
-                                <p>• 빠른 응답으로 신뢰 구축</p>
-                            </div>
-                            <div class="mt-4 pt-4 border-t border-white/10">
-                                <p class="text-xs text-pink-400 font-semibold">✓ 전용 계정 전담 운영</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 bg-white/5 p-4 rounded-xl">
-                        <div class="flex items-start gap-3">
-                            <span class="material-icons-round text-accent text-xl">info</span>
                             <div class="flex-1">
-                                <h4 class="text-sm font-bold mb-2">통합 상담 운영 원칙</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-white/70">
-                                    <div>
-                                        <p class="font-semibold text-white/90 mb-1">신속 응답</p>
-                                        <p>30분 이내 1차 응답 목표</p>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-white/90 mb-1">정확한 안내</p>
-                                        <p>과장 없는 현실적 정보 제공</p>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-white/90 mb-1">예약 전환</p>
-                                        <p>상담→내원 자연스러운 유도</p>
-                                    </div>
-                                </div>
+                                <p class="text-sm font-bold">네이버 플레이스 + 블로그</p>
+                                <p class="text-xs text-white/50">환자 유입 70%+ 네이버 경유 — 즉시 시작</p>
                             </div>
+                            <span
+                                class="text-xs px-2 py-0.5 bg-primary/20 text-primary rounded-full flex-shrink-0">최우선</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-yellow-500/20">
+                            <div
+                                class="w-7 h-7 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-xs font-bold text-yellow-400">2</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-bold">카카오톡 채널</p>
+                                <p class="text-xs text-white/50">1:1 전문의 직접 상담 → 예약 전환</p>
+                            </div>
+                            <span
+                                class="text-xs px-2 py-0.5 bg-yellow-500/20 text-yellow-400 rounded-full flex-shrink-0">2순위</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-pink-500/20">
+                            <div
+                                class="w-7 h-7 bg-pink-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-xs font-bold text-pink-400">3</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-bold">인스타그램 릴스</p>
+                                <p class="text-xs text-white/50">교육·신뢰형 콘텐츠 — 오픈 후 즉시</p>
+                            </div>
+                            <span
+                                class="text-xs px-2 py-0.5 bg-pink-500/20 text-pink-400 rounded-full flex-shrink-0">3순위</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/10 opacity-70">
+                            <div class="w-7 h-7 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-xs font-bold text-white/50">4</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-bold text-white/70">전문 플랫폼 (강남언니 등)</p>
+                                <p class="text-xs text-white/40">리뷰 20건+ 축적 후 입점 검토</p>
+                            </div>
+                            <span
+                                class="text-xs px-2 py-0.5 bg-white/10 text-white/40 rounded-full flex-shrink-0">중장기</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/10 opacity-70">
+                            <div class="w-7 h-7 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-xs font-bold text-white/50">5</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-bold text-white/70">유튜브</p>
+                                <p class="text-xs text-white/40">전문가 브랜딩 영상 — 7개월차+</p>
+                            </div>
+                            <span
+                                class="text-xs px-2 py-0.5 bg-white/10 text-white/40 rounded-full flex-shrink-0">중장기</span>
                         </div>
                     </div>
                 </div>
@@ -949,6 +1104,88 @@
                 </div>
                 <!-- //SNS 마케팅 전략 -->
 
+                <!-- 상담 마케팅 전략 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-emerald-500/20 rounded-lg">
+                            <span class="material-icons-round text-emerald-400">chat</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">상담 마케팅 전략</h2>
+                            <p class="text-white/40 text-xs">온라인 상담 채널 운영</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div
+                            class="bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 p-5 rounded-xl border border-yellow-500/20">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center">
+                                    <span class="material-icons-round text-yellow-400 text-2xl">chat_bubble</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">카카오톡 케어챗</h3>
+                                    <p class="text-xs text-white/40">고객 상담 및 CRM</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs text-white/70">
+                                <p>• 24시간 실시간 상담 대응</p>
+                                <p>• 예약·문의 자동 연결</p>
+                                <p>• 상담 이력 관리 및 추적</p>
+                                <p>• 맞춤형 안내 메시지 발송</p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-white/10">
+                                <p class="text-xs text-yellow-400 font-semibold">✓ 본원 운영 중인 시스템 활용</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-gradient-to-br from-pink-500/10 to-purple-600/5 p-5 rounded-xl border border-pink-500/20">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center">
+                                    <span class="material-icons-round text-pink-400 text-2xl">forum</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm">SNS 직접 상담창구</h3>
+                                    <p class="text-xs text-white/40">인스타그램 DM 운영</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs text-white/70">
+                                <p>• DM 문의 전담 응대 체계</p>
+                                <p>• 릴스·게시물 댓글 관리</p>
+                                <p>• 시술 후기 및 상담 연결</p>
+                                <p>• 빠른 응답으로 신뢰 구축</p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-white/10">
+                                <p class="text-xs text-pink-400 font-semibold">✓ 전용 계정 전담 운영</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 bg-white/5 p-4 rounded-xl">
+                        <div class="flex items-start gap-3">
+                            <span class="material-icons-round text-accent text-xl">info</span>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-bold mb-2">통합 상담 운영 원칙</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-white/70">
+                                    <div>
+                                        <p class="font-semibold text-white/90 mb-1">신속 응답</p>
+                                        <p>30분 이내 1차 응답 목표</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-white/90 mb-1">정확한 안내</p>
+                                        <p>과장 없는 현실적 정보 제공</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-white/90 mb-1">예약 전환</p>
+                                        <p>상담→내원 자연스러운 유도</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <!-- 오픈 이벤트 & 브랜드 조사 -->
                 <div id="event" class="glass-panel p-6 rounded-xl">
                     <div class="flex items-center gap-3 mb-6">
@@ -990,7 +1227,8 @@
                             </div>
 
                             <!-- 60주년 연계 -->
-                            <div class="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 p-4 rounded-xl border border-emerald-500/20">
+                            <div
+                                class="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 p-4 rounded-xl border border-emerald-500/20">
                                 <p class="text-xs font-bold text-teal-400 mb-2">유성선병원 60주년 기념 연계</p>
                                 <div class="space-y-2 text-xs text-white/70">
                                     <div class="flex items-start gap-2">
@@ -1059,7 +1297,8 @@
                             </div>
 
                             <!-- 활용 방향 -->
-                            <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 p-3 rounded-xl border border-blue-500/20">
+                            <div
+                                class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 p-3 rounded-xl border border-blue-500/20">
                                 <p class="text-xs font-bold text-purple-400 mb-1">조사 결과 활용</p>
                                 <p class="text-xs text-white/60">수집된 데이터 → 콘텐츠 메시지 고도화 · 광고 타겟 조정 · 실질 마케팅 전략 재반영</p>
                             </div>
@@ -1139,7 +1378,9 @@
                                     </div>
                                     <div class="text-right">
                                         <span class="text-primary font-bold text-sm">800~1,000만</span>
-                                        <span class="ml-2 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">초안 완료</span>
+                                        <span
+                                            class="ml-2 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">초안
+                                            완료</span>
                                     </div>
                                 </div>
                                 <div class="w-full bg-white/5 h-1.5 rounded-full mt-3">
@@ -1160,7 +1401,8 @@
                                     </div>
                                     <div class="text-right">
                                         <span class="text-green-400 font-bold text-sm">300~500만/월</span>
-                                        <span class="ml-2 text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full">예정</span>
+                                        <span
+                                            class="ml-2 text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full">예정</span>
                                     </div>
                                 </div>
                                 <div class="w-full bg-white/5 h-1.5 rounded-full mt-3">
@@ -1181,7 +1423,8 @@
                                     </div>
                                     <div class="text-right">
                                         <span class="text-orange-400 font-bold text-sm">770만/월</span>
-                                        <span class="ml-2 text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full">예정</span>
+                                        <span
+                                            class="ml-2 text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full">예정</span>
                                     </div>
                                 </div>
                                 <div class="w-full bg-white/5 h-1.5 rounded-full mt-3">
@@ -1207,7 +1450,9 @@
                                         </div>
                                         <div class="text-right">
                                             <span class="text-accent font-bold text-sm">500만</span>
-                                            <span class="ml-2 text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full">준비 중</span>
+                                            <span
+                                                class="ml-2 text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full">준비
+                                                중</span>
                                         </div>
                                     </div>
                                     <div class="w-full bg-white/5 h-1.5 rounded-full mt-3">
@@ -1228,7 +1473,9 @@
                                         </div>
                                         <div class="text-right">
                                             <span class="text-blue-400 font-bold text-sm">100만 이내</span>
-                                            <span class="ml-2 text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full">준비 중</span>
+                                            <span
+                                                class="ml-2 text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full">준비
+                                                중</span>
                                         </div>
                                     </div>
                                     <div class="w-full bg-white/5 h-1.5 rounded-full mt-3">
@@ -1240,7 +1487,8 @@
                         </div>
 
                         <!-- 총합계 -->
-                        <div class="mt-4 bg-gradient-to-r from-primary/20 to-orange-500/10 rounded-xl p-4 border border-primary/30">
+                        <div
+                            class="mt-4 bg-gradient-to-r from-primary/20 to-orange-500/10 rounded-xl p-4 border border-primary/30">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-xs text-white/50 mb-1">초기 투자 합계 (제작비)</p>
@@ -1256,10 +1504,12 @@
                         <!-- 전략 메모 -->
                         <div class="mt-3 bg-white/5 rounded-xl p-4 border border-white/10">
                             <div class="flex items-start gap-2">
-                                <span class="material-icons-round text-yellow-400 text-base flex-shrink-0 mt-0.5">tips_and_updates</span>
+                                <span
+                                    class="material-icons-round text-yellow-400 text-base flex-shrink-0 mt-0.5">tips_and_updates</span>
                                 <div>
                                     <p class="text-xs font-semibold text-yellow-400 mb-1">광고 예산 전략 메모</p>
-                                    <p class="text-xs text-white/60 leading-relaxed">초기 8주: 300~500만 소규모 테스트 운영 → 채널별 CPC·CVR 데이터 수집 → 효율 채널 집중 증액 결정. (참고: 월 2,000만 메모 있으나 데이터 없는 초기 과다 지출 방지 권장)</p>
+                                    <p class="text-xs text-white/60 leading-relaxed">초기 8주: 300~500만 소규모 테스트 운영 → 채널별
+                                        CPC·CVR 데이터 수집 → 효율 채널 집중 증액 결정. (참고: 월 2,000만 메모 있으나 데이터 없는 초기 과다 지출 방지 권장)</p>
                                 </div>
                             </div>
                         </div>
@@ -1288,6 +1538,88 @@
                                     <p class="text-sm font-bold text-emerald-400">증액·최적화</p>
                                     <p class="text-xs text-white/60 mt-1">데이터 확인 후 결정</p>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- 12개월 마케팅 로드맵 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-emerald-500/20 rounded-lg">
+                            <span class="material-icons-round text-emerald-400">map</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">12개월 마케팅 로드맵</h2>
+                            <p class="text-white/40 text-xs">개설 후 단계별 실행 계획</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-primary/10 border border-primary/20 p-4 rounded-xl">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div
+                                    class="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-xs font-bold">
+                                    1</div>
+                                <span class="text-xs font-bold text-primary">Phase 1 · 1~3개월</span>
+                            </div>
+                            <p class="text-sm font-bold mb-3">인지도 구축</p>
+                            <div class="space-y-1.5 text-xs text-white/60">
+                                <p>☑ 네이버 플레이스 등록/최적화</p>
+                                <p>☑ 카카오톡 채널 개설</p>
+                                <p>☑ 블로그 주 2~3회 포스팅</p>
+                                <p>☑ 내부 타과 연계 시스템</p>
+                                <p>☑ 홈페이지 SEO 설정</p>
+                            </div>
+                        </div>
+                        <div class="bg-accent/10 border border-accent/20 p-4 rounded-xl">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div
+                                    class="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-xs font-bold text-black">
+                                    2</div>
+                                <span class="text-xs font-bold text-accent">Phase 2 · 4~6개월</span>
+                            </div>
+                            <p class="text-sm font-bold mb-3">환자 유입 확대</p>
+                            <div class="space-y-1.5 text-xs text-white/60">
+                                <p>□ 블로그/SNS 콘텐츠 50건+</p>
+                                <p>□ 네이버 키워드 광고 시작</p>
+                                <p>□ 카카오톡 상담 프로세스 정립</p>
+                                <p>□ 네이버 플레이스 리뷰 20건+</p>
+                                <p>□ 브랜드 인지도 조사 실시</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div
+                                    class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-xs font-bold">
+                                    3</div>
+                                <span class="text-xs font-bold text-blue-400">Phase 3 · 7~12개월</span>
+                            </div>
+                            <p class="text-sm font-bold mb-3">브랜드 확립</p>
+                            <div class="space-y-1.5 text-xs text-white/60">
+                                <p>□ 유튜브 채널 개설 + 영상</p>
+                                <p>□ 전문 플랫폼 입점 검토</p>
+                                <p>□ 지역 건강 세미나 참여</p>
+                                <p>□ 인스타그램 본격 운영</p>
+                                <p>□ 시즌별 캠페인 기획</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-500/10 border border-purple-500/20 p-4 rounded-xl">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div
+                                    class="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-xs font-bold">
+                                    4</div>
+                                <span class="text-xs font-bold text-purple-400">Phase 4 · 12개월+</span>
+                            </div>
+                            <p class="text-sm font-bold mb-3">시장 선도</p>
+                            <div class="space-y-1.5 text-xs text-white/60">
+                                <p>□ 유성구 대표 성형외과 확립</p>
+                                <p>□ 대전 외상/재건 1위 목표</p>
+                                <p>□ 의료진 추가 영입 검토</p>
+                                <p>□ 충청권 광역 마케팅 확대</p>
+                                <p>□ 브랜드 인지도 조사 재실시</p>
                             </div>
                         </div>
                     </div>
@@ -1475,6 +1807,390 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 경쟁분석 Tab Pane -->
+            <div id="pane-competitor"
+                class="hidden flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar pr-1 md:pr-2 space-y-4 md:space-y-6">
+
+                <!-- 시장 개요 카드 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="glass-panel p-5 rounded-xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-2 bg-primary/20 rounded-lg text-primary"><span
+                                    class="material-icons-round">business</span></div>
+                            <span class="text-xs font-medium text-white/40">대전 전역</span>
+                        </div>
+                        <h3 class="text-white/50 text-sm font-medium">주요 경쟁사</h3>
+                        <p class="text-2xl font-bold mt-1">12곳</p>
+                    </div>
+                    <div class="glass-panel p-5 rounded-xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-2 bg-red-500/20 rounded-lg text-red-400"><span
+                                    class="material-icons-round">store</span></div>
+                            <span class="text-xs font-medium text-white/40">서구 둔산동</span>
+                        </div>
+                        <h3 class="text-white/50 text-sm font-medium">개원의원 밀집</h3>
+                        <p class="text-2xl font-bold mt-1">9곳</p>
+                    </div>
+                    <div class="glass-panel p-5 rounded-xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-2 bg-blue-500/20 rounded-lg text-blue-400"><span
+                                    class="material-icons-round">account_balance</span></div>
+                            <span class="text-xs font-medium text-white/40">충남대·을지·건양</span>
+                        </div>
+                        <h3 class="text-white/50 text-sm font-medium">대학병원</h3>
+                        <p class="text-2xl font-bold mt-1">3곳</p>
+                    </div>
+                    <div class="glass-panel p-5 rounded-xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-400"><span
+                                    class="material-icons-round">flag</span></div>
+                            <span class="text-xs font-medium text-emerald-400">기회!</span>
+                        </div>
+                        <h3 class="text-white/50 text-sm font-medium">유성구 경쟁</h3>
+                        <p class="text-2xl font-bold mt-1">1곳</p>
+                        <p class="text-xs text-white/40 mt-1">소규모 복합의원</p>
+                    </div>
+                </div>
+
+                <!-- 시장 특성 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="p-2 bg-accent/20 rounded-lg"><span
+                                class="material-icons-round text-accent">insights</span></div>
+                        <div>
+                            <h2 class="text-lg font-bold">대전 성형외과 시장 특성</h2>
+                            <p class="text-white/40 text-xs">2026년 기준</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div class="flex items-center gap-2 mb-2"><span class="material-icons-round text-red-400"
+                                    style="font-size:18px">place</span>
+                                <p class="text-sm font-bold">둔산동 집중</p>
+                            </div>
+                            <p class="text-xs text-white/60">대부분의 개원 성형외과가 서구 둔산동~탄방동에 밀집. 도보 10분 이내 9개 의원 경쟁</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div class="flex items-center gap-2 mb-2"><span class="material-icons-round text-yellow-400"
+                                    style="font-size:18px">payments</span>
+                                <p class="text-sm font-bold">가격 민감도 높음</p>
+                            </div>
+                            <p class="text-xs text-white/60">서울 대비 시술 가격 기대치 낮음. 이벤트·할인 마케팅 활발. 가성비 소구 유효</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div class="flex items-center gap-2 mb-2"><span class="material-icons-round text-blue-400"
+                                    style="font-size:18px">train</span>
+                                <p class="text-sm font-bold">서울 KTX 유출</p>
+                            </div>
+                            <p class="text-xs text-white/60">서울 강남까지 1시간대 접근. 고가 수술 환자 유출 존재. 중저가 수술 수요 잡기 중요</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div class="flex items-center gap-2 mb-2"><span
+                                    class="material-icons-round text-emerald-400" style="font-size:18px">search</span>
+                                <p class="text-sm font-bold">네이버 의존도 높음</p>
+                            </div>
+                            <p class="text-xs text-white/60">환자 유입 70%+ 네이버 검색·블로그·플레이스 경유 추정. 네이버 최우선 전략 필수</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div class="flex items-center gap-2 mb-2"><span class="material-icons-round text-purple-400"
+                                    style="font-size:18px">groups</span>
+                                <p class="text-sm font-bold">중소규모 의원 중심</p>
+                            </div>
+                            <p class="text-xs text-white/60">1~3인 전문의 의원급이 주류. 규모·안전 인프라로 차별화 가능한 공간 존재</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div class="flex items-center gap-2 mb-2"><span class="material-icons-round text-pink-400"
+                                    style="font-size:18px">star_rate</span>
+                                <p class="text-sm font-bold">리뷰 탐색 행동</p>
+                            </div>
+                            <p class="text-xs text-white/60">환자 3~4개 병원 리뷰 비교 후 선택. 초기 리뷰 축적 + 신뢰 콘텐츠가 전환 핵심</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 경쟁사 현황표 -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="p-2 bg-primary/20 rounded-lg"><span
+                                class="material-icons-round text-primary">table_chart</span></div>
+                        <div>
+                            <h2 class="text-lg font-bold">경쟁사 현황</h2>
+                            <p class="text-white/40 text-xs">대전 성형외과 12곳 분석</p>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto custom-scrollbar pb-2">
+                        <table class="w-full text-xs" style="min-width: 720px;">
+                            <thead>
+                                <tr class="border-b border-white/10">
+                                    <th class="text-left py-2 pr-4 text-white/40 font-medium" style="width:130px">병원명
+                                    </th>
+                                    <th class="text-left py-2 pr-4 text-white/40 font-medium" style="width:110px">위치
+                                    </th>
+                                    <th class="text-left py-2 pr-4 text-white/40 font-medium">주력 분야</th>
+                                    <th class="text-left py-2 pr-4 text-white/40 font-medium" style="width:100px">디지털
+                                    </th>
+                                    <th class="text-center py-2 text-white/40 font-medium" style="width:80px">위협도</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">닥터스미</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">안면윤곽, 가슴, 눈, 코, 쁘띠 (3인 전문의)</td>
+                                    <td class="py-2.5 pr-4 text-white/60">인스타+플랫폼</td>
+                                    <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">페이스</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">안면윤곽, 양악, 눈, 코, 리프팅</td>
+                                    <td class="py-2.5 pr-4 text-white/60">유튜브+인스타</td>
+                                    <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">미래</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 탄방동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">눈, 코, 쁘띠, 리프팅, 피부</td>
+                                    <td class="py-2.5 pr-4 text-white/60">블로그</td>
+                                    <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">숨은그림</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">눈 전문 (쌍꺼풀, 눈매교정, 트임)</td>
+                                    <td class="py-2.5 pr-4 text-white/60">블로그</td>
+                                    <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">희소</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">눈, 코, 리프팅, 줄기세포 <span class="text-amber-400">⚠
+                                            메시지 유사</span></td>
+                                    <td class="py-2.5 pr-4 text-white/60">인스타+유튜브</td>
+                                    <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">비포애프</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">눈, 코, 지방성형, 리프팅</td>
+                                    <td class="py-2.5 pr-4 text-white/60">인스타+플랫폼</td>
+                                    <td class="py-2.5 text-center text-blue-400 font-bold text-[11px]">★★☆☆☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">오체안 대전</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">양성종양, 흉터, 상처봉합, 재건 (치료특화)</td>
+                                    <td class="py-2.5 pr-4 text-white/60">유튜브(본사)</td>
+                                    <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">갤러리</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">성형외과 일반</td>
+                                    <td class="py-2.5 pr-4 text-white/60">최소</td>
+                                    <td class="py-2.5 text-center text-white/40 font-bold text-[11px]">★☆☆☆☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">뉴진</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">코, 눈, 리프팅, 지방이식</td>
+                                    <td class="py-2.5 pr-4 text-white/60">인스타 활발</td>
+                                    <td class="py-2.5 text-center text-blue-400 font-bold text-[11px]">★★☆☆☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors bg-amber-500/5">
+                                    <td class="py-2.5 pr-4 font-bold text-amber-300">올웨이즈윤대영 ①</td>
+                                    <td class="py-2.5 pr-4 text-amber-300/80">유성구 봉명동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">성형+피부+외과 복합의원</td>
+                                    <td class="py-2.5 pr-4 text-white/60">미약</td>
+                                    <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors bg-red-500/5">
+                                    <td class="py-2.5 pr-4 font-bold text-red-300">을지대병원 ②</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">미용+재건 양축 (대학병원 인프라)</td>
+                                    <td class="py-2.5 pr-4 text-white/60">소극적</td>
+                                    <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★★</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">건양대병원</td>
+                                    <td class="py-2.5 pr-4 text-white/60">서구 관저동</td>
+                                    <td class="py-2.5 pr-4 text-white/60">눈, 코, 외상, 수부재건, 화상 (상급종합)</td>
+                                    <td class="py-2.5 pr-4 text-white/60">소극적</td>
+                                    <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
+                                </tr>
+                                <tr class="hover:bg-white/3 transition-colors">
+                                    <td class="py-2.5 pr-4 font-bold">충남대병원</td>
+                                    <td class="py-2.5 pr-4 text-white/60">중구</td>
+                                    <td class="py-2.5 pr-4 text-white/60">재건, 수부, 안면외상, 유방재건 (6교수)</td>
+                                    <td class="py-2.5 pr-4 text-white/60">소극적</td>
+                                    <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 flex flex-wrap gap-4 text-xs text-white/40">
+                        <span>① 유성구 상권 직접 경쟁</span>
+                        <span>② 동일 포지셔닝 주의 (가장 강력한 경쟁자)</span>
+                        <span>⚠ 메시지 유사 → 차별화 재검토 필요</span>
+                    </div>
+                </div>
+
+                <!-- 마케팅 유형 + SEO + 시사점 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- 디지털 마케팅 유형 -->
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="p-2 bg-pink-500/20 rounded-lg"><span
+                                    class="material-icons-round text-pink-400">wifi</span></div>
+                            <div>
+                                <h2 class="text-lg font-bold">디지털 마케팅 유형 분류</h2>
+                                <p class="text-white/40 text-xs">경쟁사 4가지 전략 유형</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-round text-blue-400"
+                                        style="font-size:16px">school</span>
+                                    <p class="text-sm font-bold text-blue-400">A. 콘텐츠 마케팅형</p>
+                                </div>
+                                <p class="text-xs text-white/60 mb-1">교육형 유튜브·블로그로 신뢰 구축</p>
+                                <p class="text-xs text-white/40">오체안(유튜브 의학 콘텐츠), 미래(블로그), 페이스(숏츠 시리즈)</p>
+                            </div>
+                            <div class="bg-primary/10 border border-primary/20 p-4 rounded-xl">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-round text-primary" style="font-size:16px">apps</span>
+                                    <p class="text-sm font-bold text-primary">B. 플랫폼 입점형</p>
+                                </div>
+                                <p class="text-xs text-white/60 mb-1">강남언니·바비톡 등 전문 앱 다중 입점</p>
+                                <p class="text-xs text-white/40">닥터스미, 비포애프</p>
+                            </div>
+                            <div class="bg-pink-500/10 border border-pink-500/20 p-4 rounded-xl">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-round text-pink-400"
+                                        style="font-size:16px">photo_camera</span>
+                                    <p class="text-sm font-bold text-pink-400">C. SNS 감성형</p>
+                                </div>
+                                <p class="text-xs text-white/60 mb-1">인스타그램 비포/애프터, 감성 브랜딩 중심</p>
+                                <p class="text-xs text-white/40">희소, 닥터스미, 뉴진</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-4 rounded-xl opacity-70">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-round text-white/40"
+                                        style="font-size:16px">do_not_disturb</span>
+                                    <p class="text-sm font-bold text-white/50">D. 소극적/미활용</p>
+                                </div>
+                                <p class="text-xs text-white/50 mb-1">홈페이지 수준, SNS 거의 없음</p>
+                                <p class="text-xs text-white/30">대학병원 3곳, 갤러리, 숨은그림</p>
+                            </div>
+                            <div
+                                class="bg-gradient-to-r from-accent/10 to-emerald-500/10 border border-accent/20 p-4 rounded-xl">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-round text-accent" style="font-size:16px">star</span>
+                                    <p class="text-sm font-bold text-accent">유성선병원 적용: A + C 혼합</p>
+                                </div>
+                                <p class="text-xs text-white/70">네이버 블로그(교육형) + 인스타 릴스(감성형) 투트랙. 가격 경쟁 불참, 신뢰 기반 프리미엄
+                                    포지셔닝</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEO 키워드 + 핵심 시사점 -->
+                    <div class="space-y-4">
+                        <div class="glass-panel p-6 rounded-xl">
+                            <div class="flex items-center gap-3 mb-5">
+                                <div class="p-2 bg-emerald-500/20 rounded-lg"><span
+                                        class="material-icons-round text-emerald-400">search</span></div>
+                                <div>
+                                    <h2 class="text-lg font-bold">SEO 틈새 키워드</h2>
+                                    <p class="text-white/40 text-xs">경쟁 없는 선점 기회</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div
+                                    class="flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 px-3 py-2.5 rounded-lg">
+                                    <span class="text-xs font-bold text-emerald-400">"유성구 성형외과"</span><span
+                                        class="text-xs text-emerald-400 font-semibold">경쟁 없음 ★</span>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 px-3 py-2.5 rounded-lg">
+                                    <span class="text-xs font-bold text-emerald-400">"대전 안전한 성형"</span><span
+                                        class="text-xs text-emerald-400 font-semibold">경쟁 낮음 ★</span>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 px-3 py-2.5 rounded-lg">
+                                    <span class="text-xs font-bold text-emerald-400">"대전 종괴 제거"</span><span
+                                        class="text-xs text-emerald-400 font-semibold">경쟁 낮음</span>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 px-3 py-2.5 rounded-lg">
+                                    <span class="text-xs font-bold text-emerald-400">"대전 외상 성형"</span><span
+                                        class="text-xs text-emerald-400 font-semibold">경쟁 낮음</span>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 px-3 py-2.5 rounded-lg">
+                                    <span class="text-xs font-bold text-emerald-400">"대전 눈 재수술"</span><span
+                                        class="text-xs text-emerald-400 font-semibold">틈새 기회</span>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between bg-white/5 border border-white/10 px-3 py-2.5 rounded-lg opacity-60">
+                                    <span class="text-xs text-white/50">"대전 성형외과"</span><span
+                                        class="text-xs text-red-400">경쟁 높음 ✗</span>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between bg-white/5 border border-white/10 px-3 py-2.5 rounded-lg opacity-60">
+                                    <span class="text-xs text-white/50">"대전 쌍꺼풀"</span><span
+                                        class="text-xs text-red-400">경쟁 중간 ✗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-5 rounded-xl">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-primary/20 rounded-lg"><span
+                                        class="material-icons-round text-primary">lightbulb</span></div>
+                                <h2 class="text-base font-bold">핵심 전략 시사점</h2>
+                            </div>
+                            <div class="space-y-2.5">
+                                <div class="flex items-start gap-2">
+                                    <span class="material-icons-round text-primary flex-shrink-0"
+                                        style="font-size:15px">check_circle</span>
+                                    <p class="text-xs text-white/70">가격 경쟁 <strong class="text-white">불참</strong> — "안전의
+                                        가치"로 프리미엄 정당화</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span class="material-icons-round text-primary flex-shrink-0"
+                                        style="font-size:15px">check_circle</span>
+                                    <p class="text-xs text-white/70">을지대병원 동일 포지션 — <strong class="text-white">유성구 입지 +
+                                            빠른 접근성</strong>으로 차별화</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span class="material-icons-round text-primary flex-shrink-0"
+                                        style="font-size:15px">check_circle</span>
+                                    <p class="text-xs text-white/70">오체안 재건 선점 대응 — <strong class="text-white">종합병원
+                                            입원·마취·응급 안전 우위</strong> 강조</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span class="material-icons-round text-amber-400 flex-shrink-0"
+                                        style="font-size:15px">warning</span>
+                                    <p class="text-xs text-white/70">희소 "섬세한" 메시지 유사 — <strong
+                                            class="text-amber-400">브랜드 메시지 차별화 재검토</strong> 필요</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span class="material-icons-round text-primary flex-shrink-0"
+                                        style="font-size:15px">check_circle</span>
+                                    <p class="text-xs text-white/70">초기 6개월: 블로그 콘텐츠 집중 → <strong class="text-white">점진적
+                                            리뷰 축적</strong> 후 플랫폼 입점</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- //경쟁분석 Tab Pane -->
+
         </main>
 
         <!-- Right Panel -->
@@ -1621,8 +2337,7 @@
                             <span>버스 교통광고 계획 확정</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="material-icons-round text-yellow-400"
-                                style="font-size: 16px;">schedule</span>
+                            <span class="material-icons-round text-yellow-400" style="font-size: 16px;">schedule</span>
                             <span>오픈 이벤트 / 브랜드 조사 (예정)</span>
                         </div>
                     </div>
@@ -1639,6 +2354,32 @@
         function closeMobileMenu() {
             document.getElementById('mobile-sidebar').classList.remove('open');
             document.getElementById('mobile-overlay').classList.remove('open');
+        }
+
+        function switchTab(tab) {
+            const planPane = document.getElementById('pane-plan');
+            const competitorPane = document.getElementById('pane-competitor');
+            const tabPlan = document.getElementById('tab-plan');
+            const tabCompetitor = document.getElementById('tab-competitor');
+
+            const activeClass = ['bg-primary/20', 'text-primary', 'border-primary/20'];
+            const inactiveClass = ['text-white/50', 'hover:text-white', 'hover:bg-white/5', 'border-transparent'];
+
+            if (tab === 'plan') {
+                planPane.classList.remove('hidden');
+                competitorPane.classList.add('hidden');
+                tabPlan.classList.add(...activeClass);
+                tabPlan.classList.remove(...inactiveClass);
+                tabCompetitor.classList.remove(...activeClass);
+                tabCompetitor.classList.add(...inactiveClass);
+            } else {
+                competitorPane.classList.remove('hidden');
+                planPane.classList.add('hidden');
+                tabCompetitor.classList.add(...activeClass);
+                tabCompetitor.classList.remove(...inactiveClass);
+                tabPlan.classList.remove(...activeClass);
+                tabPlan.classList.add(...inactiveClass);
+            }
         }
     </script>
 </body>
