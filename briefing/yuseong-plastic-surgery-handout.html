@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유성선병원 성형외과 — 마케팅 기획안 핵심 요약</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>if(typeof Chart !== 'undefined') Chart.defaults.animation = false;</script>
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; }
+
+    html.theme-dark {
+      --bg: #1a1a2e; --surface: #16213e; --surface-hover: #1e2a45;
+      --border: rgba(255,255,255,0.08);
+      --text: #e8eef4; --text-secondary: #8a9bb0;
+      --accent: #3a8ca8; --accent-secondary: #2b6e86;
+      --accent-light: rgba(58,140,168,0.12); --accent-mid: rgba(58,140,168,0.28);
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+      --page-bg: #12192a; --page-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+    html.theme-light {
+      --bg: #dce3ea; --surface: #FFFFFF; --surface-hover: #EDF2F7;
+      --border: rgba(0,0,0,0.08);
+      --text: #0d1f2d; --text-secondary: #5a6e80;
+      --accent: #1a5f7a; --accent-secondary: #124a60;
+      --accent-light: rgba(26,95,122,0.07); --accent-mid: rgba(26,95,122,0.18);
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+      --page-bg: var(--bg); --page-shadow: 0 4px 28px rgba(0,0,0,0.14);
+    }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+      background: var(--page-bg); color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
+      /* Screen: center pages vertically */
+      display: flex; flex-direction: column; align-items: center;
+      padding: 28px 16px 48px; gap: 24px;
+    }
+
+    /* ===== A4 PAGE CONTAINER ===== */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      overflow: hidden;
+      background: var(--surface);
+      padding: 11mm 13mm 10mm;
+      box-shadow: var(--page-shadow);
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+
+    /* Page number badge */
+    .page-num {
+      position: absolute; bottom: 7mm; right: 13mm;
+      font-size: 8px; color: var(--text-secondary); letter-spacing: 0.05em;
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white !important; padding: 0; gap: 0; display: block; }
+      .page { box-shadow: none; page-break-after: always; break-after: page; min-height: 0; width: 100%; padding: 12mm 14mm; }
+      .page:last-of-type { page-break-after: auto; break-after: auto; }
+      .viz-menu { display: none !important; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+    @page { size: A4; margin: 0; }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 50px; right: 0; min-width: 180px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 7px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 9px 13px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 13px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 9px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    /* Animations (screen only) */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .animate { animation: fadeInUp 0.5s ease-out both; }
+    .animate.d1 { animation-delay: 0.06s; }
+    .animate.d2 { animation-delay: 0.12s; }
+    .animate.d3 { animation-delay: 0.18s; }
+    .animate.d4 { animation-delay: 0.24s; }
+    .animate.d5 { animation-delay: 0.30s; }
+    @media (prefers-reduced-motion: reduce) {
+      .animate { animation: none !important; }
+    }
+
+    /* ===== SHARED COMPONENTS ===== */
+    .accent-bar { width: 100%; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 9px; }
+
+    .section-header {
+      display: flex; align-items: center; gap: 7px;
+      margin-bottom: 8px; padding-bottom: 6px;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .sdot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+    .stitle { font-size: 10.5px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+    .smb { margin-bottom: 10px; }
+
+    /* ===== PAGE 1 STYLES ===== */
+
+    /* Header */
+    .p1-header { margin-bottom: 8px; }
+    .report-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: white;
+      font-size: 8.5px; font-weight: 700; letter-spacing: 0.07em;
+      padding: 3px 9px; border-radius: 3px; margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+    .p1-header h1 { font-size: 20px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 4px; }
+    .p1-subtitle { font-size: 9px; color: var(--text-secondary); margin-bottom: 5px; }
+    .p1-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .p1-meta span { font-size: 8.5px; color: var(--text-secondary); display: flex; align-items: center; gap: 4px; }
+
+    /* Insight */
+    .insight-box {
+      background: var(--accent-light); border: 1px solid var(--accent-mid);
+      border-radius: 7px; padding: 9px 12px; margin: 9px 0;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .insight-icon {
+      width: 22px; height: 22px; flex-shrink: 0;
+      background: var(--accent); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .insight-text { font-size: 8.5px; color: var(--text); line-height: 1.65; }
+    .insight-text strong { color: var(--accent); font-weight: 700; }
+
+    /* KPI */
+    .kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin-bottom: 10px; }
+    .kpi-card {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: 7px; padding: 9px 10px; text-align: center;
+    }
+    .kpi-v { font-size: 17px; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 3px; }
+    .kpi-l { font-size: 8px; color: var(--text-secondary); font-weight: 500; line-height: 1.4; }
+
+    /* 5대 진료축 */
+    .track-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 7px; margin-bottom: 10px; }
+    .track-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 7px; padding: 9px 8px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      transition: box-shadow 0.2s;
+    }
+    .track-item:hover { box-shadow: 0 3px 12px rgba(26,95,122,0.1); border-color: var(--accent-mid); }
+    .track-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--accent); color: white;
+      font-size: 10px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 5px;
+    }
+    .track-name { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .track-kw { font-size: 8.5px; color: var(--accent); font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .track-role { font-size: 8px; color: var(--text-secondary); line-height: 1.5; }
+    .track-badge { margin-top: 5px; font-size: 7.5px; font-weight: 700; padding: 2px 6px; border-radius: 20px; letter-spacing: 0.03em; }
+    .b-entry { background: var(--accent-light); color: var(--accent); }
+    .b-core { background: rgba(26,95,122,0.18); color: var(--accent-secondary); }
+    .b-diff { background: rgba(220,38,38,0.08); color: #c0392b; }
+    .b-trust { background: rgba(5,150,105,0.08); color: #059669; }
+
+    /* 2트랙 + SNS */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 0; align-items: start; }
+    .box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 7px; padding: 10px 11px;
+      display: flex; flex-direction: column;
+    }
+    .box-title { font-size: 9.5px; font-weight: 700; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .mini-tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; flex-shrink: 0; }
+    .mini-track {
+      border-radius: 6px; padding: 7px 9px;
+    }
+    .mt-a { background: var(--accent-light); border: 1px solid var(--accent-mid); }
+    .mt-b { background: var(--surface-hover); border: 1px solid var(--border); }
+    .mt-label { font-size: 8px; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 3px; }
+    .mt-desc { font-size: 8px; color: var(--text-secondary); line-height: 1.55; }
+    .mt-desc strong { color: var(--text); }
+    .dot-list { list-style: none; padding: 0; }
+    .dot-list li {
+      font-size: 8px; color: var(--text-secondary); padding: 4px 0;
+      border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 6px; line-height: 1.55;
+    }
+    .dot-list li:last-child { border-bottom: none; }
+    .dot-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
+
+    /* SNS 4 pillars */
+    .sns-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 8px; flex-shrink: 0; }
+    .sns-pill {
+      border-radius: 6px; padding: 6px 8px;
+    }
+    .sp-a { background: var(--accent-light); border: 1px solid var(--accent-mid); }
+    .sp-b { background: var(--surface-hover); border: 1px solid var(--border); }
+    .sp-label { font-size: 7.5px; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+    .sp-desc { font-size: 7.5px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ===== PAGE 2 STYLES ===== */
+
+    /* 12주 캘린더 */
+    .cal-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-bottom: 10px; }
+    .cal-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: 8px 9px;
+      transition: box-shadow 0.2s;
+    }
+    .cal-item:hover { box-shadow: 0 2px 8px rgba(26,95,122,0.1); }
+    .cal-item.hi { border-color: var(--accent-mid); background: var(--accent-light); }
+    .cal-wk { font-size: 8px; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 3px; }
+    .cal-theme { font-size: 9.5px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .cal-title { font-size: 8px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* 예산 + 타임테이블 */
+    .p2-mid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 9px; margin-bottom: 10px; }
+    .chart-wrap { height: 188px; border-radius: 7px; background: var(--surface); border: 1px solid var(--border); padding: 10px 12px 8px; }
+
+    /* 예산 리스트 (아래) */
+    .budget-note {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 7px; padding: 8px 10px; margin-top: 6px;
+    }
+
+    /* Phase 타임테이블 */
+    .phase-col { display: flex; flex-direction: column; }
+    .phase-col .section-header { flex-shrink: 0; }
+    .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; flex: 1; }
+    .phase-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: 9px 10px; position: relative;
+      display: flex; flex-direction: column;
+    }
+    .phase-item.hi { background: var(--accent-light); border-color: var(--accent-mid); }
+    .ph-num { font-size: 7.5px; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2px; }
+    .ph-name { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .ph-period { font-size: 8px; color: var(--accent); font-weight: 600; margin-bottom: 5px; }
+    .ph-items { font-size: 7.5px; color: var(--text-secondary); line-height: 1.65; }
+
+    /* 체크리스트 */
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 0; }
+    .check-card { background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 9px 11px; display: flex; flex-direction: column; }
+    .check-hd { font-size: 9px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .hd-done { color: #059669; }
+    .hd-pending { color: #d97706; }
+    .cl { list-style: none; padding: 0; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .cl li {
+      font-size: 7.5px; color: var(--text-secondary); padding: 4px 0;
+      border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 5px; line-height: 1.55; flex: 1;
+    }
+    .cl li:last-child { border-bottom: none; }
+    .ci { flex-shrink: 0; margin-top: 1px; }
+
+    /* Footer */
+    .p2-footer {
+      margin-top: auto; padding-top: 8px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-src { font-size: 7.5px; color: var(--text-secondary); line-height: 1.6; }
+    .footer-logo { font-size: 9px; font-weight: 800; color: var(--accent); letter-spacing: 0.06em; }
+
+    /* Spacer */
+    .gap8 { margin-bottom: 8px; }
+    .gap10 { margin-bottom: 10px; }
+
+    /* ===== MOBILE FALLBACK ===== */
+    @media (max-width: 640px) {
+      .page { width: 100%; padding: 16px; }
+      .kpi-row { grid-template-columns: repeat(2,1fr); }
+      .track-grid { grid-template-columns: repeat(3,1fr); }
+      .cal-grid { grid-template-columns: repeat(2,1fr); }
+      .p2-mid { grid-template-columns: 1fr; }
+      .phase-grid { grid-template-columns: 1fr; }
+      .check-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SKIP LINK -->
+<a href="#page1" style="position:absolute;left:-9999px;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:10000;padding:7px 14px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;'">본문 바로가기</a>
+
+<!-- MENU -->
+<div class="viz-menu">
+  <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="메뉴">
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+    </svg>
+  </button>
+  <div class="viz-menu-dropdown" id="vizMenuDropdown">
+    <button onclick="cycleTheme()"><span id="themeIcon">☀️</span><span id="themeLabel">라이트 모드</span></button>
+    <button onclick="downloadImage()"><span>📥</span><span>PNG 저장</span></button>
+    <button onclick="window.print()"><span>🖨️</span><span>인쇄 / PDF</span></button>
+  </div>
+</div>
+
+<main role="main">
+
+<!-- ======================== PAGE 1 ======================== -->
+<section class="page animate" id="page1" aria-label="1페이지 — 개요 및 전략">
+
+  <!-- 상단 컬러 바 -->
+  <div class="accent-bar"></div>
+
+  <!-- HEADER -->
+  <header class="p1-header animate d1">
+    <div class="report-badge">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      마케팅 기획안 · 2026.03 · 실행 준비 완료
+    </div>
+    <h1>유성선병원 성형외과 신설 — 홍보·마케팅 기획안</h1>
+    <p class="p1-subtitle">2분기 오픈 예정 | 종합병원 내 신규 진료과 신설 | 2트랙 채널 운영 체계</p>
+    <div class="p1-meta">
+      <span>
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        신정환 과장 — 가톨릭중앙의료원 출신 · 보건복지부 장관 표창 2023·2024 · 36~37대 대한공중보건의사협의회 회장
+      </span>
+      <span>
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        준비 기간 11주 · 유성선병원 60주년 연계
+      </span>
+    </div>
+  </header>
+
+  <!-- INSIGHT -->
+  <div class="insight-box animate d2">
+    <div class="insight-icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+    <p class="insight-text">
+      <strong>핵심 차별화: 가격·기술이 아닌 안전 인프라</strong> —
+      "종합병원급 안전성(24시간 응급·마취과 상주·다과 협진) + 성형외과의 섬세함"을 한 문장으로 묶어 <strong>신뢰 기반 전환</strong>을 만든다.
+      <strong>Track A</strong>(본원 채널)가 신뢰를 구축하고, <strong>Track B</strong>(전용 채널)가 전환을 실행하는 2트랙 구조.
+    </p>
+  </div>
+
+  <!-- KPI -->
+  <section class="kpi-row animate d2" aria-label="핵심 지표">
+    <div class="kpi-card">
+      <div class="kpi-v" data-count="5" data-suffix="대">5대</div>
+      <div class="kpi-l">진료축<br>쁘띠·리프팅·눈·외상·재건</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-v" data-count="36" data-suffix="편">36편</div>
+      <div class="kpi-l">콘텐츠 확정<br>12주 캘린더</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-v">2트랙</div>
+      <div class="kpi-l">채널 운영 구조<br>본원 + 성형외과 전용</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-v">20<span style="font-size:11px;font-weight:600;">%</span></div>
+      <div class="kpi-l">온라인 상담→예약<br>전환율 목표</div>
+    </div>
+  </section>
+
+  <!-- 5대 진료축 -->
+  <section aria-label="5대 진료축" class="gap8">
+    <div class="section-header smb animate d3">
+      <div class="sdot"></div>
+      <h2 class="stitle">5대 진료축 — 전략적 역할 분담</h2>
+    </div>
+    <div class="track-grid animate d3">
+      <div class="track-item">
+        <div class="track-num">1</div>
+        <div class="track-name">쁘띠 / 스킨</div>
+        <div class="track-kw">보톡스 · 레이저 · 필러</div>
+        <div class="track-role">반복 내원 · 첫 내원 유도</div>
+        <div class="track-badge b-entry">입구 역할</div>
+      </div>
+      <div class="track-item">
+        <div class="track-num">2</div>
+        <div class="track-name">리프팅</div>
+        <div class="track-kw">울쎄라 · 써마지</div>
+        <div class="track-role">고수익 · 프리미엄 신뢰</div>
+        <div class="track-badge b-core">프리미엄</div>
+      </div>
+      <div class="track-item">
+        <div class="track-num">3</div>
+        <div class="track-name">눈</div>
+        <div class="track-kw">쌍꺼풀 · 눈밑지방</div>
+        <div class="track-role">핵심 상담 유도 · 전환축</div>
+        <div class="track-badge b-core">핵심 전환</div>
+      </div>
+      <div class="track-item">
+        <div class="track-num">4</div>
+        <div class="track-name">외상</div>
+        <div class="track-kw">안면봉합 · 안면골절</div>
+        <div class="track-role">종합병원만의 독보 차별화</div>
+        <div class="track-badge b-diff">독보 차별화</div>
+      </div>
+      <div class="track-item">
+        <div class="track-num">5</div>
+        <div class="track-name">재건 / 종괴</div>
+        <div class="track-kw">몽우리 · 종괴 제거</div>
+        <div class="track-role">의료 신뢰의 정점 · 불안 해소</div>
+        <div class="track-badge b-trust">신뢰 정점</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12주 캘린더 -->
+  <section aria-label="12주 콘텐츠 캘린더" class="gap8">
+    <div class="section-header smb animate d3">
+      <div class="sdot"></div>
+      <h2 class="stitle">12주 콘텐츠 캘린더 — 흐름 설계 (총 36편, 주 3편 릴스)</h2>
+    </div>
+    <div class="cal-grid animate d3">
+      <div class="cal-item hi">
+        <div class="cal-wk">WEEK 1</div>
+        <div class="cal-theme">오픈 인지</div>
+        <div class="cal-title">"성형외과 신설, 뭐가 달라지나요?"</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-wk">WEEK 2~3</div>
+        <div class="cal-theme">눈 + 리프팅</div>
+        <div class="cal-title">"눈이 피곤해 보이는 진짜 이유" / "울쎄라 vs 써마지"</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-wk">WEEK 4~5</div>
+        <div class="cal-theme">쁘띠 + 스킨</div>
+        <div class="cal-title">"보톡스 안 듣는 이유" / "레이저, 횟수보다 간격"</div>
+      </div>
+      <div class="cal-item hi">
+        <div class="cal-wk">WEEK 6</div>
+        <div class="cal-theme">외상 (차별화)</div>
+        <div class="cal-title">"미세봉합, '빨리'보다 중요한 한 가지"</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-wk">WEEK 7~8</div>
+        <div class="cal-theme">눈 + 리프팅 심화</div>
+        <div class="cal-title">"눈 수술 후 붓기 현실" / "30대 리프팅 타이밍"</div>
+      </div>
+      <div class="cal-item hi">
+        <div class="cal-wk">WEEK 9</div>
+        <div class="cal-theme">재건 / 종괴</div>
+        <div class="cal-title">"얼굴 몽우리, 제일 먼저 할 것"</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-wk">WEEK 10~11</div>
+        <div class="cal-theme">쁘띠 + 신뢰 강화</div>
+        <div class="cal-title">"행사 전 시술 타이밍" / "저희가 안 한다고 말하는 경우"</div>
+      </div>
+      <div class="cal-item hi">
+        <div class="cal-wk">WEEK 12</div>
+        <div class="cal-theme">전환 유도</div>
+        <div class="cal-title">"처음 오시는 분 예약 가이드"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2트랙 채널 + SNS 전략 -->
+  <section class="two-col animate d4" aria-label="채널 및 SNS 전략" style="flex:1;">
+    <!-- 2트랙 채널 -->
+    <div class="box">
+      <div class="box-title">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        2트랙 채널 운영 구조
+      </div>
+      <div class="mini-tracks">
+        <div class="mini-track mt-a">
+          <div class="mt-label">TRACK A · 본원 채널</div>
+          <div class="mt-desc">홈페이지 · 대표 SNS<br><strong>신뢰 · 공식성 구축</strong></div>
+        </div>
+        <div class="mini-track mt-b">
+          <div class="mt-label">TRACK B · 전용 채널</div>
+          <div class="mt-desc">마이크로사이트 · 인스타<br>네이버 플레이스<br><strong>정보 · 상담 전환</strong></div>
+        </div>
+      </div>
+      <ul class="dot-list">
+        <li>CTA 3종: 상담 예약 / 전화 문의 / 카카오톡 문의</li>
+        <li>홈페이지 6페이지 초안 완료 (미용·성형 / 치료·재건 스플릿)</li>
+        <li>카카오 케어챗 + 인스타 DM 통합 상담 체계</li>
+        <li>카카오톡 30분 이내 · 인스타 DM 2시간 이내 응답</li>
+        <li>유성선병원 60주년 연계 — 기관 공신력 활용</li>
+      </ul>
+    </div>
+
+    <!-- SNS 전략 -->
+    <div class="box">
+      <div class="box-title">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        SNS 전략 — 4기둥 콘텐츠 (주 3편 릴스)
+      </div>
+      <div class="sns-grid">
+        <div class="sns-pill sp-a">
+          <div class="sp-label">① 교육형 (월)</div>
+          <div class="sp-desc">원리·기준·증상 설명 / 저장률↑</div>
+        </div>
+        <div class="sns-pill sp-b">
+          <div class="sp-label">② 공감형 (수)</div>
+          <div class="sp-desc">자주 묻는 질문 / 댓글·DM 유도</div>
+        </div>
+        <div class="sns-pill sp-b">
+          <div class="sp-label">③ 신뢰형 (금)</div>
+          <div class="sp-desc">종합병원 안전 시스템 강조</div>
+        </div>
+        <div class="sns-pill sp-b">
+          <div class="sp-label">④ 일상 (매일 스토리)</div>
+          <div class="sp-desc">의사 하루·회복 루틴 / 친근함</div>
+        </div>
+      </div>
+      <ul class="dot-list">
+        <li>릴스 15~45초 / @days_harada 스타일 (의사 직접 출연)</li>
+        <li>해시태그 20~30개 — 대형:중형:브랜드 = 7:10:3 혼합</li>
+        <li>치료·재건 콘텐츠 — 타 성형 계정에 없는 독보 차별화 소재</li>
+        <li>전후 사진 없이 "교육/과정/공감" 중심 설계</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="page-num">1 / 2</div>
+</section>
+
+<!-- ======================== PAGE 2 ======================== -->
+<section class="page animate d1" id="page2" aria-label="2페이지 — 캘린더, 예산, 실행">
+
+  <div class="accent-bar"></div>
+
+  <!-- 예산 + 타임테이블 -->
+  <section class="p2-mid animate d3" aria-label="예산 및 타임테이블">
+    <!-- 예산 차트 -->
+    <div>
+      <div class="section-header smb">
+        <div class="sdot"></div>
+        <h2 class="stitle">예산 요약</h2>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="budgetChart" role="img" aria-label="단계별 예산 배분 차트"></canvas>
+      </div>
+      <div class="budget-note">
+        <ul class="dot-list">
+          <li>홈페이지 마이크로사이트 6페이지 — <strong>800~1,000만</strong></li>
+          <li>콘텐츠 제작 영상+스틸컷 — <strong>500만</strong></li>
+          <li>교통광고 시내버스 10대 (3개월) — <strong>770만/월</strong></li>
+          <li>디지털 광고 초기 8주 테스트 — <strong>300~500만/월</strong></li>
+          <li>홍보 인쇄물 X배너·리플렛 — <strong>100만 이내</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4단계 타임테이블 -->
+    <div class="phase-col">
+      <div class="section-header smb">
+        <div class="sdot"></div>
+        <h2 class="stitle">4단계 실행 타임테이블 (11주)</h2>
+      </div>
+      <div class="phase-grid">
+        <div class="phase-item">
+          <div class="ph-num">Phase 1</div>
+          <div class="ph-name">기반 세팅</div>
+          <div class="ph-period">D-11W ~ D-8W</div>
+          <div class="ph-items">채널 개설·스킨 통일<br>인스타·플레이스·카카오 동선 확정</div>
+        </div>
+        <div class="phase-item">
+          <div class="ph-num">Phase 2</div>
+          <div class="ph-name">콘텐츠 제작</div>
+          <div class="ph-period">D-7W ~ D-4W</div>
+          <div class="ph-items">영상+스틸컷 촬영 (500만)<br>홈페이지 최종 확정·배포<br>릴스 12편 선제작</div>
+        </div>
+        <div class="phase-item">
+          <div class="ph-num">Phase 3</div>
+          <div class="ph-name">오픈 준비</div>
+          <div class="ph-period">D-3W ~ 오픈</div>
+          <div class="ph-items">원내 X배너 핵심 동선 설치<br>네이버 플레이스 완성<br>콘텐츠 루틴 즉시 가동</div>
+        </div>
+        <div class="phase-item hi">
+          <div class="ph-num">Phase 4</div>
+          <div class="ph-name">광고 운영</div>
+          <div class="ph-period">오픈 후 지속</div>
+          <div class="ph-items">초기 8주 300~500만 테스트<br>채널별 CPC·CVR 측정<br>효율 채널 집중 증액</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 완료 / 잔여 체크리스트 -->
+  <section class="check-grid animate d4" aria-label="완료 현황">
+    <div class="check-card">
+      <div class="check-hd hd-done">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        완료 항목 (8건)
+      </div>
+      <ul class="cl">
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>5대 진료축 전략 역할 정립</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>전용 홈페이지 6페이지 초안 (시안 2종)</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>미용·성형 / 치료·재건 2카테고리 구조 전환</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>12주 콘텐츠 캘린더 36개 제목 확정</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>환자 언어 전환 원칙 (의료용어 → 친숙 표현)</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>FAQ 20문 20답 확정</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>카카오+인스타 통합 상담 운영 설계</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>시내버스 10대 교통광고 계획 확정 (770만/월)</li>
+      </ul>
+    </div>
+    <div class="check-card">
+      <div class="check-hd hd-pending">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        진행 중 / 잔여 항목 (7건)
+      </div>
+      <ul class="cl">
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>홈페이지 최종 카피 확정 (의료진 사진 수급 후)</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>공식 채널 개설 (전용 인스타 · 네이버 플레이스)</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>릴스 선제작 12편 (촬영 일정 조율)</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>원내 X배너 디자인·출력</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>광고 소재 제작 (콘텐츠 완성 후 진행)</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>오픈 이벤트 첫 내원 혜택 세부 내용 확정</li>
+        <li><span class="ci"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>브랜드 인식 조사 설계 및 실행 (오픈 후)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="p2-footer animate d5">
+    <div class="footer-src">
+      유성선병원 성형외과 신설 홍보·마케팅 기획안 · 2026년 3월 기준 · 실행 준비 완료<br>
+      본 핸드아웃은 전체 기획안의 핵심 사항을 요약한 자료입니다.
+    </div>
+    <div class="footer-logo">선병원 대외협력실 홍보팀</div>
+  </footer>
+
+  <div class="page-num">2 / 2</div>
+</section>
+
+</main>
+
+<script>
+  // === Menu ===
+  function toggleMenu() {
+    var dd = document.getElementById('vizMenuDropdown');
+    if (dd) dd.classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.viz-menu')) {
+      var dd = document.getElementById('vizMenuDropdown');
+      if (dd) dd.classList.remove('open');
+    }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var dd = document.getElementById('vizMenuDropdown');
+      if (dd) dd.classList.remove('open');
+    }
+  });
+
+  // === Theme ===
+  var savedTheme = localStorage.getItem('viz-theme');
+  var currentTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  function applyTheme(t) {
+    document.documentElement.className = 'theme-' + t;
+    var icon = document.getElementById('themeIcon');
+    var label = document.getElementById('themeLabel');
+    if (icon) icon.textContent = t === 'dark' ? '🌙' : '☀️';
+    if (label) label.textContent = t === 'dark' ? '다크 모드' : '라이트 모드';
+    localStorage.setItem('viz-theme', t);
+    currentTheme = t;
+    if (typeof onThemeChange === 'function') onThemeChange();
+  }
+  function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+  applyTheme(currentTheme);
+
+  // === Counter ===
+  function animateCounters() {
+    document.querySelectorAll('[data-count]').forEach(function(el) {
+      if (el.dataset.counted) return;
+      el.dataset.counted = '1';
+      var target = parseFloat(el.dataset.count);
+      var suffix = el.dataset.suffix || '';
+      var start = performance.now(), duration = 800;
+      (function tick(now) {
+        var p = Math.min((now - start) / duration, 1), eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      })(start);
+    });
+  }
+  var cEl = document.querySelector('[data-count]');
+  if (cEl) {
+    var cObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { animateCounters(); cObs.disconnect(); } });
+    }, { threshold: 0.3 });
+    cObs.observe(cEl);
+  }
+
+  // === Budget Chart ===
+  var chartsBuilt = false;
+
+  function buildCharts() {
+    if (chartsBuilt || typeof Chart === 'undefined') return;
+    var isDark = document.documentElement.classList.contains('theme-dark');
+    var accent = isDark ? '#3a8ca8' : '#1a5f7a';
+    var textSec = isDark ? '#8a9bb0' : '#5a6e80';
+    var gridC = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)';
+
+    function resetCanvas(id) {
+      var old = document.getElementById(id);
+      if (!old) return null;
+      var par = old.parentNode;
+      var c = document.createElement('canvas');
+      c.id = id;
+      c.setAttribute('role', 'img');
+      c.setAttribute('aria-label', '예산 배분 차트');
+      par.replaceChild(c, old);
+      return c;
+    }
+
+    var ctx = resetCanvas('budgetChart');
+    if (!ctx) return;
+
+    try {
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['홈페이지', '콘텐츠 제작', '교통광고/월', '디지털광고/월', '인쇄물'],
+          datasets: [{
+            data: [900, 500, 770, 400, 100],
+            backgroundColor: [
+              isDark ? 'rgba(58,140,168,0.85)' : 'rgba(26,95,122,0.85)',
+              isDark ? 'rgba(58,140,168,0.68)' : 'rgba(26,95,122,0.68)',
+              isDark ? 'rgba(58,140,168,0.52)' : 'rgba(26,95,122,0.52)',
+              isDark ? 'rgba(58,140,168,0.40)' : 'rgba(26,95,122,0.40)',
+              isDark ? 'rgba(58,140,168,0.25)' : 'rgba(26,95,122,0.25)',
+            ],
+            borderRadius: 4,
+            borderSkipped: false,
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              enabled: true, padding: 8, cornerRadius: 6,
+              callbacks: { label: function(c) { return ' ' + c.parsed.x.toLocaleString() + '만원'; } }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: textSec, font: { family: 'Noto Sans KR', size: 8 } },
+              grid: { color: gridC }, border: { display: false }
+            },
+            y: {
+              ticks: { color: textSec, font: { family: 'Noto Sans KR', size: 9 } },
+              grid: { display: false }, border: { display: false }
+            }
+          },
+          layout: { padding: { top: 2, bottom: 2, right: 8 } }
+        }
+      });
+      chartsBuilt = true;
+    } catch(e) { console.error('Chart failed:', e); }
+  }
+
+  function onThemeChange() {
+    if (chartsBuilt) { chartsBuilt = false; setTimeout(buildCharts, 80); }
+  }
+
+  window.addEventListener('load', buildCharts);
+  document.addEventListener('DOMContentLoaded', buildCharts);
+
+  // === Download PNG (both pages) ===
+  async function downloadImage() {
+    var menu = document.querySelector('.viz-menu');
+    if (menu) menu.style.display = 'none';
+    try {
+      // Download each page
+      var pages = document.querySelectorAll('.page');
+      for (var i = 0; i < pages.length; i++) {
+        var url = await htmlToImage.toPng(pages[i], { quality: 1, pixelRatio: 2, backgroundColor: '#ffffff' });
+        var a = document.createElement('a'); a.href = url;
+        a.download = 'yuseong-handout-p' + (i+1) + '.png'; a.click();
+        await new Promise(function(r) { setTimeout(r, 300); });
+      }
+    } catch(e) { console.error('Download failed:', e); }
+    if (menu) menu.style.display = '';
+  }
+</script>
+</body>
+</html>
