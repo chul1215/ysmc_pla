@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유성선병원 성형외과 — 마케팅 기획안</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #cd4631;
+      --text: #1a1a1a;
+      --text-mid: #444;
+      --text-light: #888;
+      --border: #e0e0e0;
+      --bg: #ffffff;
+      --row-bg: #fafafa;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #fff;
+      color: var(--text);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== 페이지 래퍼 ===== */
+    .doc {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 48px 96px;
+    }
+
+    /* ===== 헤더 ===== */
+    .doc-header {
+      margin-bottom: 56px;
+    }
+    .doc-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    .doc-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+    .doc-title span {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+    .doc-meta {
+      text-align: right;
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.9;
+    }
+    .doc-intro {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.8;
+      padding-bottom: 28px;
+      border-bottom: 2px solid var(--text);
+    }
+
+    /* ===== 섹션 행 (2컬럼) ===== */
+    .sec {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0 40px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .sec-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      padding-top: 2px;
+      letter-spacing: 0.01em;
+      line-height: 1.5;
+    }
+    .sec-label small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-top: 2px;
+      letter-spacing: 0;
+    }
+    .sec-body { min-width: 0; }
+
+    /* ===== 텍스트 유틸 ===== */
+    h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    h4 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    p { font-size: 14px; color: var(--text-mid); }
+    .sub { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+    .mt8 { margin-top: 8px; }
+    .mt16 { margin-top: 16px; }
+    .mt24 { margin-top: 24px; }
+    .mb8 { margin-bottom: 8px; }
+    .mb16 { margin-bottom: 16px; }
+
+    /* ===== KPI 행 ===== */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .kpi-cell {
+      background: #fff;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .kpi-val { font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1.1; }
+    .kpi-lbl { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+    /* ===== 포지셔닝 4축 그리드 ===== */
+    .pos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .pos-cell {
+      background: #fff;
+      padding: 18px 20px;
+    }
+    .pos-cell-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .pos-cell h4 { margin-bottom: 4px; }
+    .pos-cell p { font-size: 13px; color: var(--text-mid); }
+
+    /* ===== 5대 진료축 ===== */
+    .pillar-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .pillar-cell {
+      background: #fff;
+      padding: 16px 14px;
+    }
+    .pillar-cell:first-child { border-top: 2px solid var(--accent); }
+    .pillar-cell:not(:first-child) { border-top: 2px solid var(--border); }
+    .p-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .p-sub { font-size: 11px; color: var(--text-light); margin-bottom: 8px; }
+    .p-role {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 6px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text-light);
+    }
+
+    /* ===== SWOT ===== */
+    .swot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--text);
+      border: 1px solid var(--text);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .swot-cell { padding: 20px 22px; }
+    .swot-cell h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .swot-cell ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .swot-cell li { font-size: 12px; line-height: 1.55; padding-left: 12px; position: relative; }
+    .swot-cell li::before { content: '—'; position: absolute; left: 0; }
+    /* S */
+    .swot-s { background: #fff; }
+    .swot-s h4 { color: var(--accent); }
+    .swot-s li { color: var(--text-mid); }
+    .swot-s li::before { color: var(--border); }
+    /* W */
+    .swot-w { background: #fafafa; }
+    .swot-w h4 { color: var(--accent); }
+    .swot-w li { color: var(--text-mid); }
+    .swot-w li::before { color: var(--border); }
+    /* O */
+    .swot-o { background: #fff; }
+    .swot-o h4 { color: var(--accent); }
+    .swot-o li { color: var(--text-mid); }
+    .swot-o li::before { color: var(--border); }
+    /* T */
+    .swot-t { background: #fafafa; }
+    .swot-t h4 { color: var(--accent); }
+    .swot-t li { color: var(--text-mid); }
+    .swot-t li::before { color: var(--border); }
+
+    /* ===== 테이블 ===== */
+    .tw { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .tw thead th {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .tw tbody tr { border-bottom: 1px solid var(--border); }
+    .tw tbody tr:last-child { border-bottom: none; }
+    .tw tbody td { padding: 9px 12px; vertical-align: top; color: var(--text-mid); }
+    .tw tbody tr:nth-child(even) td { background: var(--row-bg); }
+    .tw td strong { color: var(--text); font-weight: 600; }
+    .tw-accent td:first-child { color: var(--accent); font-weight: 600; }
+
+    /* ===== 타임라인 ===== */
+    .tl { display: flex; flex-direction: column; gap: 0; }
+    .tl-item { display: flex; gap: 16px; padding-bottom: 20px; position: relative; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 12px; top: 26px;
+      width: 1px; height: calc(100% - 14px);
+      background: var(--border);
+    }
+    .tl-item:last-child::before { display: none; }
+    .tl-dot {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--text); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; flex-shrink: 0; z-index: 1;
+    }
+    .tl-phase { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+    .tl-title { font-size: 13px; font-weight: 700; color: var(--text); margin: 2px 0 3px; }
+    .tl-desc { font-size: 12px; color: var(--text-light); line-height: 1.65; }
+
+    /* ===== 경쟁자 3개 카드 ===== */
+    .rival-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .rival-cell {
+      background: #fff;
+      padding: 16px 18px;
+      border-top: 2px solid var(--border);
+    }
+    .rival-cell:first-child { border-top-color: #dc2626; }
+    .rival-cell:nth-child(2) { border-top-color: var(--text-light); }
+    .rival-cell:nth-child(3) { border-top-color: var(--border); }
+    .rival-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .rival-tag { font-size: 11px; color: var(--text-light); margin-bottom: 10px; }
+    .rival-body { font-size: 12px; color: var(--text-mid); line-height: 1.65; }
+    .rival-resp { font-size: 12px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); color: var(--text); }
+    .rival-resp strong { color: var(--accent); }
+
+    /* ===== 포지셔닝 맵 ===== */
+    .pmap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2/1;
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .pmap-axis-h { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--border); }
+    .pmap-axis-v { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--border); }
+    .pmap-lbl { position: absolute; font-size: 10px; color: var(--text-light); white-space: nowrap; font-weight: 500; }
+    .dot {
+      position: absolute; width: 7px; height: 7px;
+      border-radius: 50%; background: #ccc;
+      transform: translate(-50%, -50%);
+    }
+    .dot-lbl { position: absolute; font-size: 10px; white-space: nowrap; transform: translateX(-50%); top: 10px; color: var(--text-mid); }
+    .dot.hl { width: 12px; height: 12px; background: var(--accent) !important; z-index: 2; }
+    .dot.hl .dot-lbl { font-weight: 700; color: var(--accent); }
+
+    /* ===== 배지 ===== */
+    .badge {
+      display: inline-block; padding: 2px 7px;
+      border-radius: 3px; font-size: 11px; font-weight: 600;
+    }
+    .b-red { background: rgba(205,70,49,0.1); color: var(--accent); }
+    .b-gray { background: var(--row-bg); color: var(--text-light); border: 1px solid var(--border); }
+    .b-green { background: rgba(21,128,61,0.1); color: #166534; }
+
+    /* ===== 전략 채널 행 ===== */
+    .channel-row {
+      display: grid;
+      grid-template-columns: 24px 100px 1fr;
+      gap: 0 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .channel-row:last-child { border-bottom: none; }
+    .ch-num { font-size: 11px; font-weight: 700; color: var(--accent); padding-top: 1px; }
+    .ch-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .ch-desc { font-size: 13px; color: var(--text-mid); }
+
+    /* ===== 체크리스트 ===== */
+    .cl { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .cl li { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--text-mid); }
+    .ci {
+      flex-shrink: 0; width: 16px; height: 16px;
+      border-radius: 3px; display: flex; align-items: center;
+      justify-content: center; font-size: 10px; margin-top: 2px;
+    }
+    .done { background: #166534; color: white; }
+    .todo { border: 1.5px solid var(--border); }
+
+    /* ===== 별점 ===== */
+    .stars { font-size: 11px; letter-spacing: 1px; color: var(--text); }
+    .se { color: var(--border); }
+
+    /* ===== 구분선 ===== */
+    .divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+    /* ===== 인쇄 ===== */
+    @media print {
+      body { background: white !important; }
+      .doc { padding: 48px 40px; }
+      .swot-s, .swot-w, .swot-o, .swot-t { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .kpi-val, .doc-title, .sec-label, .tl-phase, .rival-resp strong { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { margin: 0.7in; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+    @media (max-width: 640px) {
+      .doc { padding: 32px 20px; }
+      .sec { grid-template-columns: 1fr; gap: 12px 0; }
+      .kpi-row, .pillar-row { grid-template-columns: 1fr 1fr; }
+      .pos-grid, .rival-grid, .swot-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 375px) { body { overflow-x: hidden; } }
+  </style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- ===== 헤더 ===== -->
+  <div class="doc-header">
+    <div class="doc-header-top">
+      <div class="doc-title">
+        유성선병원 성형외과
+        <span>신설 홍보 마케팅 기획안 · 경쟁분석 포함</span>
+      </div>
+      <div class="doc-meta">
+        2026년 2분기 진료 개시
+      </div>
+    </div>
+    <p class="doc-intro">
+      종합병원 내 신설 성형외과의 브랜드 포지셔닝, 5대 진료축 전략, 경쟁분석 및 채널별 실행 계획을 담은 종합 마케팅 기획안입니다.
+      핵심 메시지 — <strong>"종합병원의 안전함에 섬세함을 더하다"</strong>
+    </p>
+  </div>
+
+  <!-- ===== 01 핵심 지표 ===== -->
+  <div class="sec">
+    <div class="sec-label">핵심 지표<small>Key Metrics</small></div>
+    <div class="sec-body">
+      <div class="kpi-row">
+        <div class="kpi-cell"><div class="kpi-val">5</div><div class="kpi-lbl">5대 진료축</div></div>
+        <div class="kpi-cell"><div class="kpi-val">6</div><div class="kpi-lbl">홈페이지 페이지</div></div>
+        <div class="kpi-cell"><div class="kpi-val">36</div><div class="kpi-lbl">12주 콘텐츠</div></div>
+        <div class="kpi-cell"><div class="kpi-val">11W</div><div class="kpi-lbl">오픈 전 준비 기간</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 02 브랜드 포지셔닝 ===== -->
+  <div class="sec">
+    <div class="sec-label">브랜드 포지셔닝<small>Brand Positioning</small></div>
+    <div class="sec-body">
+      <p style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">"종합병원급 안전성과 성형외과의 섬세함을 함께 제공한다"</p>
+      <p class="sub mb16">유성구 유일 — 종합병원 안전 인프라 위에서, 성형외과 전문의가 직접 집도하는 미용과 재건</p>
+
+      <div class="pos-grid">
+        <div class="pos-cell">
+          <div class="pos-cell-label">입지 독점</div>
+          <h4>유성구 입지 독점</h4>
+          <p>유성구 내 미용 성형외과 개원의원 부재. 반경 내 직접 경쟁 없음</p>
+        </div>
+        <div class="pos-cell">
+          <div class="pos-cell-label">안전 인프라</div>
+          <h4>종합병원 인프라</h4>
+          <p>마취과 전문의 상주 · 중환자실 · 응급체계 — 개원의원 대비 안전 우위</p>
+        </div>
+        <div class="pos-cell">
+          <div class="pos-cell-label">진료 범위</div>
+          <h4>미용·재건 양축</h4>
+          <p>눈/리프팅/쁘띠(미용) + 외상/재건/종괴(치료) 단일 전문의 풀커버</p>
+        </div>
+        <div class="pos-cell">
+          <div class="pos-cell-label">의료진 신뢰</div>
+          <h4>의료진 신뢰</h4>
+          <p>가톨릭중앙의료원 수련 경력 · 학술 배경 우위</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 03 5대 진료축 ===== -->
+  <div class="sec">
+    <div class="sec-label">5대 진료축<small>Treatment Strategy</small></div>
+    <div class="sec-body">
+      <div class="pillar-row">
+        <div class="pillar-cell">
+          <div class="p-name">쁘띠/스킨</div>
+          <div class="p-sub">보톡스 · 레이저 · 필러</div>
+          <span class="p-role">Entry — 반복 내원</span>
+        </div>
+        <div class="pillar-cell">
+          <div class="p-name">리프팅</div>
+          <div class="p-sub">울쎄라 · 써마지</div>
+          <span class="p-role">고수익 · 프리미엄</span>
+        </div>
+        <div class="pillar-cell">
+          <div class="p-name">눈</div>
+          <div class="p-sub">쌍꺼풀 · 하안검</div>
+          <span class="p-role">시그니처 전환</span>
+        </div>
+        <div class="pillar-cell">
+          <div class="p-name">외상</div>
+          <div class="p-sub">미세봉합 · 골절수술</div>
+          <span class="p-role">독보적 차별화</span>
+        </div>
+        <div class="pillar-cell">
+          <div class="p-name">재건/종괴</div>
+          <div class="p-sub">몽우리 · 종괴</div>
+          <span class="p-role">의료 신뢰 정점</span>
+        </div>
+      </div>
+      <p class="sub mt8">쁘띠/스킨 → 반복 접점 → 눈/리프팅 고가 전환 → 외상/재건 종합병원 신뢰 독점</p>
+    </div>
+  </div>
+
+  <!-- ===== 04 SWOT ===== -->
+  <div class="sec">
+    <div class="sec-label">SWOT 분석<small>Analysis</small></div>
+    <div class="sec-body">
+      <div class="swot-grid">
+        <div class="swot-cell swot-s">
+          <h4>S — 강점</h4>
+          <ul>
+            <li>종합병원 안전 인프라 완비 (마취과·ICU·응급)</li>
+            <li>미용부터 치료·재건까지 단일 전문의 풀커버</li>
+            <li>유성구 내 성형외과 의원 부재 → 지역 독점</li>
+            <li>기존 유성선병원 환자 베이스 활용 가능</li>
+          </ul>
+        </div>
+        <div class="swot-cell swot-w">
+          <h4>W — 약점</h4>
+          <ul>
+            <li>신설 부서 인지도 제로</li>
+            <li>"미용 성형은 전문 의원에서" 소비자 인식</li>
+            <li>성형 수요 집중 상권(둔산동)과 물리적 거리</li>
+            <li>1인 전문의 — 수술 볼륨·대기시간 한계</li>
+          </ul>
+        </div>
+        <div class="swot-cell swot-o">
+          <h4>O — 기회</h4>
+          <ul>
+            <li>유성구 수요 공백 → 둔산동 이동 환자 흡수</li>
+            <li>성형 부작용 이슈 → "안전한 수술 환경" 수요↑</li>
+            <li>"유성구 성형외과", "대전 외상 성형" SEO 공백 선점</li>
+            <li>타과 협진 (안과·이비인후과·피부과) 가능</li>
+          </ul>
+        </div>
+        <div class="swot-cell swot-t">
+          <h4>T — 위협</h4>
+          <ul>
+            <li>둔산동 성형외과 8개+ 밀집, 가격 경쟁 압박</li>
+            <li>을지대병원 — 동일 포지션 기존 점유</li>
+            <li>오체안 10,000건+ 외상/재건 실적</li>
+            <li>서울 강남 KTX 1시간대 — 고가 수술 환자 유출</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 05 실행 일정 & 예산 ===== -->
+  <div class="sec">
+    <div class="sec-label">실행 일정 및 예산<small>Roadmap &amp; Budget</small></div>
+    <div class="sec-body">
+      <h3 class="mb8">4단계 실행 로드맵</h3>
+      <div class="tl mb16">
+        <div class="tl-item">
+          <div class="tl-dot">P1</div>
+          <div>
+            <div class="tl-phase">D-11W ~ D-8W · 인프라 구축</div>
+            <div class="tl-title">채널 세팅 · 홍보 물품 제작</div>
+            <div class="tl-desc">인스타/네이버/카카오 계정 개설 · X배너·리플렛 100만원 이하</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">P2</div>
+          <div>
+            <div class="tl-phase">D-7W ~ D-4W · 콘텐츠 제작</div>
+            <div class="tl-title">영상+스틸 제작 · 웹사이트 최종 완성</div>
+            <div class="tl-desc">자체 콘텐츠 500만원 · 웹사이트 800~1,000만원</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">P3</div>
+          <div>
+            <div class="tl-phase">D-3W ~ 오픈 · 최종 준비</div>
+            <div class="tl-title">사이니지 · 네이버 플레이스 · 릴스 12편 사전 제작</div>
+            <div class="tl-desc">네이버 플레이스 사진 10장 + FAQ 20건 완성</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">P4</div>
+          <div>
+            <div class="tl-phase">오픈 후 · 광고 집행</div>
+            <div class="tl-title">디지털 광고 + 버스 광고 집행</div>
+            <div class="tl-desc">디지털 300~500만원/월 · 버스 10대 × 770만원/월 (4~7월)</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="mb8">예산 요약</h3>
+      <table class="tw mb16">
+        <thead><tr><th>항목</th><th>금액</th></tr></thead>
+        <tbody>
+          <tr><td>웹사이트 (6페이지 마이크로사이트)</td><td>800~1,000만원</td></tr>
+          <tr><td>콘텐츠 제작 (영상+스틸)</td><td>500만원</td></tr>
+          <tr><td>홍보 물품 (X배너, 리플렛)</td><td>100만원 이하</td></tr>
+          <tr><td>디지털 광고 (키워드/SNS)</td><td>300~500만원/월</td></tr>
+          <tr><td>버스 광고 (10대)</td><td>770만원/월</td></tr>
+          <tr><td><strong>초기 총 투자</strong></td><td><strong>1,700~2,100만원</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 06 경쟁분석 ===== -->
+  <div class="sec">
+    <div class="sec-label">경쟁분석<small>Competitor Analysis</small></div>
+    <div class="sec-body">
+
+      <h3 class="mb8">경쟁 병원 현황</h3>
+      <table class="tw mb16">
+        <thead><tr><th>병원명</th><th>위치</th><th>주력 분야</th><th>위협도</th></tr></thead>
+        <tbody>
+          <tr><td><strong>을지대학교병원</strong></td><td>서구 둔산동</td><td>미용+재건 양축</td><td><span class="stars">★★★★★</span></td></tr>
+          <tr><td><strong>닥터스미성형외과</strong></td><td>서구 둔산동</td><td>눈·코·안면윤곽·쁘띠</td><td><span class="stars">★★★★<span class="se">★</span></span></td></tr>
+          <tr><td><strong>오체안성형외과 대전점</strong></td><td>서구 둔산동</td><td>양성종양·흉터·봉합·재건</td><td><span class="stars">★★★★<span class="se">★</span></span></td></tr>
+          <tr><td>페이스성형외과</td><td>서구 둔산동</td><td>안면윤곽·양악·눈·리프팅</td><td><span class="stars">★★★★<span class="se">★</span></span></td></tr>
+          <tr><td>건양대학교병원</td><td>서구 관저동</td><td>눈·코·외상·수부재건·화상</td><td><span class="stars">★★★★<span class="se">★</span></span></td></tr>
+          <tr><td>미래·숨은그림·희소 등</td><td>서구 둔산동</td><td>눈·코·리프팅 중심 의원</td><td><span class="stars">★★★<span class="se">★★</span></span></td></tr>
+          <tr><td>올웨이즈윤대영성형외과</td><td>유성구 봉명동</td><td>성형+피부+외과 복합</td><td><span class="stars">★★★<span class="se">★★</span></span></td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="mb8">SEO 즉시 선점 키워드</h3>
+      <table class="tw mb16">
+        <thead><tr><th>키워드</th><th>현 상위 노출</th><th>전략</th></tr></thead>
+        <tbody>
+          <tr class="tw-accent"><td>"유성구 성형외과"</td><td style="color:#166534;">없음</td><td><span class="badge b-red">즉시 선점 ★★★</span></td></tr>
+          <tr class="tw-accent"><td>"대전 외상 성형"</td><td style="color:#166534;">없음</td><td><span class="badge b-red">즉시 선점 ★★★</span></td></tr>
+          <tr class="tw-accent"><td>"대전 안전한 성형"</td><td style="color:#166534;">없음</td><td><span class="badge b-red">즉시 선점 ★★★</span></td></tr>
+          <tr><td>"대전 보톡스 필러"</td><td>미래, 희소</td><td><span class="badge b-green">초기 공략 ★</span></td></tr>
+          <tr><td>"대전 리프팅"</td><td>희소, 페이스, 미래</td><td><span class="badge b-gray">중기 공략</span></td></tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <!-- ===== 07 전략 요약 ===== -->
+  <div class="sec">
+    <div class="sec-label">전략 요약<small>Strategic Priority</small></div>
+    <div class="sec-body">
+      <p style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">가격 경쟁 회피 — 종합병원 인프라 기반 프리미엄 포지셔닝</p>
+      <p class="sub mb16">개원의원과의 가격 경쟁 불참. "안전의 가치"로 프리미엄 정당화.</p>
+
+      <h3 class="mb8">채널별 우선순위</h3>
+      <div class="mb16">
+        <div class="channel-row">
+          <span class="ch-num">1</span>
+          <span class="ch-name">네이버</span>
+          <span class="ch-desc">플레이스 등록 · 블로그 주 2~3회 · 비경쟁 키워드 즉시 선점</span>
+        </div>
+        <div class="channel-row">
+          <span class="ch-num">2</span>
+          <span class="ch-name">카카오톡</span>
+          <span class="ch-desc">채널 개설 · "1:1 전문의 직접 상담" 메시지 · 30분 내 응대 목표</span>
+        </div>
+        <div class="channel-row">
+          <span class="ch-num">3</span>
+          <span class="ch-name">웹사이트</span>
+          <span class="ch-desc">진료축별 5개 상세 페이지 · CTA 3종 (예약/전화/카카오) 일관 배치</span>
+        </div>
+        <div class="channel-row">
+          <span class="ch-num">4</span>
+          <span class="ch-name">인스타그램</span>
+          <span class="ch-desc">교육형·Q&A·신뢰 구축 릴스 주 3회 · 매일 스토리 · 팔로업 DM</span>
+        </div>
+        <div class="channel-row">
+          <span class="ch-num">5</span>
+          <span class="ch-name">전문 플랫폼</span>
+          <span class="ch-desc">강남언니·바비톡 입점 검토 (미용 시술 활성화 후 단계적 진입)</span>
+        </div>
+      </div>
+
+      <h3 class="mb8">단계별 실행 계획</h3>
+      <table class="tw">
+        <thead><tr><th>단계</th><th>시기</th><th>핵심 액션</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Phase 1</strong></td><td>1~3개월</td><td>네이버 플레이스 · 카카오 채널 · 블로그 주 2~3회 · 타과 연계 진료</td></tr>
+          <tr><td><strong>Phase 2</strong></td><td>4~6개월</td><td>블로그/SNS 50건↑ · 키워드 광고 시작 · 리뷰 20건 목표</td></tr>
+          <tr><td><strong>Phase 3</strong></td><td>7~12개월</td><td>유튜브 · 전문 플랫폼 · 시즌 캠페인</td></tr>
+          <tr><td><strong>Phase 4</strong></td><td>12개월↑</td><td>유성구 대표 성형외과 포지션 확립 · 대전 외상/재건 1위 인지도</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 08 현황 ===== -->
+  <div class="sec" style="border-bottom:none;">
+    <div class="sec-label">현황 및 잔여 과제<small>Progress</small></div>
+    <div class="sec-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        <div>
+          <h3 style="color:#166534;margin-bottom:12px;">완료</h3>
+          <ul class="cl">
+            <li><span class="ci done">✓</span><span>5대 진료축 체계화 및 홈페이지 시안 (2안)</span></li>
+            <li><span class="ci done">✓</span><span>12주 콘텐츠 캘린더 36개 제목 확정</span></li>
+            <li><span class="ci done">✓</span><span>FAQ 20문 20답 · 환자 친화 용어 가이드</span></li>
+            <li><span class="ci done">✓</span><span>SNS 전략 (4기둥 · 주간 스케줄 · 해시태그)</span></li>
+            <li><span class="ci done">✓</span><span>상담 마케팅 전략 (카카오톡 + 인스타 DM)</span></li>
+            <li><span class="ci done">✓</span><span>버스 광고 계획 (10대 · 770만원/월)</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="color:var(--text-light);margin-bottom:12px;">잔여 과제</h3>
+          <ul class="cl">
+            <li><span class="ci todo"></span><span>웹사이트 최종 카피 확정</span></li>
+            <li><span class="ci todo"></span><span>채널 계정 생성 (인스타 · 카카오 · 네이버)</span></li>
+            <li><span class="ci todo"></span><span>콘텐츠 사전 제작 (릴스 12편)</span></li>
+            <li><span class="ci todo"></span><span>병원 내부 사이니지 · 홍보 물품 제작</span></li>
+            <li><span class="ci todo"></span><span>디지털 광고 크리에이티브 제작</span></li>
+            <li><span class="ci todo"></span><span>브랜드 인지도 조사 설계/실행</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);">
+        <p style="font-size:12px;color:var(--text-light);">유성선병원 성형외과 신설 홍보 마케팅 기획안 · 2026년 3월 기준</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
