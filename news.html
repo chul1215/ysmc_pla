@@ -183,7 +183,16 @@
       .footer-top { flex-direction: column; gap: 36px; padding: 44px 20px 28px; }
       .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding: 18px 20px; }
       .cta-buttons { flex-direction: column; align-items: center; }
+      .mobile-cta { display: block; }
+      .footer { padding-bottom: 76px; }
     }
+
+    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 990; background: #0a0a0f; box-shadow: 0 -2px 20px rgba(0,0,0,0.4); padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+    .mobile-cta-inner { display: flex; gap: 10px; }
+    .mobile-cta-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.25s; }
+    .mobile-cta-btn:active { opacity: 0.8; }
+    .cta-phone { background: #cd4631; color: #fff; }
+    .cta-kakao { background: #FEE500; color: #3C1E1E; }
   </style>
 </head>
 
@@ -429,6 +438,14 @@
       <span class="footer-copy">개인정보처리방침&nbsp;&nbsp;|&nbsp;&nbsp;이용약관</span>
     </div>
   </footer>
+
+  <!-- ===== MOBILE STICKY CTA ===== -->
+  <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
+    <div class="mobile-cta-inner">
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+    </div>
+  </div>
 
 </body>
 </html>

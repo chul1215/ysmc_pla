@@ -30,7 +30,8 @@
       "Bash(python3 -c \"\nwith open\\('/Users/chul/Documents/ysmc_pla/dashboard.html'\\) as f:\n    content = f.read\\(\\)\nidx = content.find\\('.glass-panel {'\\)\nprint\\(repr\\(content[idx:idx+300]\\)\\)\n\")",
       "Bash(open /Users/chul/Documents/ysmc_pla/briefing/handout.html)",
       "Bash(python3 -c \"\nwith open\\('/Users/chul/Documents/ysmc_pla/dashboard.html'\\) as f:\n    content = f.read\\(\\)\nidx = content.find\\('id=\\\\\"pane-competitor\\\\\"'\\)\nprint\\(f'pane-competitor starts at char: {idx}'\\)\nlines = content.split\\('\\\\n'\\)\nfor i, line in enumerate\\(lines, 1\\):\n    if 'pane-competitor' in line or '경쟁' in line or '시장 특성' in line or '포지셔닝 맵' in line:\n        if i > 1700:\n            print\\(f'Line {i}: {line.strip\\(\\)[:100]}'\\)\n\")",
-      "Bash(open /Users/chul/Documents/ysmc_pla/briefing/marketing_plan_visual.html)"
+      "Bash(open /Users/chul/Documents/ysmc_pla/briefing/marketing_plan_visual.html)",
+      "Bash(for f:*)"
     ]
   }
 }
