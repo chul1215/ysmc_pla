@@ -74,6 +74,12 @@ plan/           ← 기획서
 - **FAQ 아코디언**: `onclick="this.parentElement.classList.toggle('active')"` 방식
 - **index.html**: IIFE 패턴 `<script>` 블록 — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up 포함
 
+### 모바일 공통 패턴 (전체 페이지 적용 완료)
+
+- **하단 고정 CTA 바**: `class="mobile-cta"` — `display:none` 기본, `@media (max-width: 768px)`에서 `display:block`. 전화/카카오 버튼 2개. `padding-bottom: calc(10px + env(safe-area-inset-bottom))`으로 아이폰 노치 대응
+- **푸터 퀵링크**: 오시는 길 / 진료 시간 / 카카오톡 상담 — 3개 항목. **네이버 예약 없음**
+- **반응형 브레이크포인트**: `1024px` (태블릿, 3열→2열), `768px` (모바일, 전체 1열)
+
 ### index.html 스플릿 히어로 특이사항
 
 - **스플릿 패널**: `flex` 비율 transition (`flex: 1` → `flex: 1.6`), clip-path 미사용
