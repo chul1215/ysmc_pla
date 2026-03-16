@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>가슴성형 - 유성선병원 성형외과</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; color: #333; line-height: 1.6; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    :root {
+      --primary: #cd4631;
+      --primary-light: #d96858;
+      --primary-dark: #a33828;
+      --accent: #f8f2dc;
+      --accent-light: #faf6e8;
+      --bg-light: #fdf8f0;
+      --bg-warm: #faf5e6;
+      --text-dark: #1A1A1A;
+      --text-mid: #555;
+      --text-light: #888;
+      --white: #FFFFFF;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    }
+
+    .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+    .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 80px; }
+    .logo-text { font-size: 18px; font-weight: 700; color: var(--primary-dark); letter-spacing: -0.5px; }
+    .gnb { display: flex; align-items: center; gap: 0; }
+    .gnb-item { position: relative; }
+    .gnb-item > a { display: block; font-size: 15px; font-weight: 500; color: var(--text-dark); letter-spacing: -0.3px; padding: 28px 16px; transition: color 0.3s; }
+    .gnb-item > a:hover, .gnb-item > a.active { color: var(--primary); }
+    .gnb-item > a::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 2px; background: var(--primary); transform: scaleX(0); transition: transform 0.3s; }
+    .gnb-item > a:hover::after, .gnb-item > a.active::after { transform: scaleX(1); }
+    .dropdown { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: rgba(8,8,14,0.97); border-radius: 10px; padding: 20px; min-width: 480px; opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s; pointer-events: none; box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
+    .gnb-item:hover .dropdown { opacity: 1; visibility: visible; pointer-events: auto; }
+    .dropdown-cols { display: flex; gap: 32px; }
+    .dropdown-col h4 { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .dropdown-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.75); padding: 7px 0; transition: color 0.2s; white-space: nowrap; }
+    .dropdown-col a:hover { color: var(--accent); }
+    .dropdown-col a.active { color: var(--primary-light); font-weight: 600; }
+    .dropdown-single { min-width: 200px; }
+    .dropdown-single a { display: block; font-size: 14px; color: rgba(255,255,255,0.75); padding: 7px 0; transition: color 0.2s; }
+    .dropdown-single a:hover { color: var(--accent); }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .header-btn { padding: 8px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; transition: all 0.3s; cursor: pointer; border: none; }
+    .btn-consult { background: var(--primary); color: var(--white); }
+    .btn-consult:hover { background: var(--primary-light); }
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+    .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-dark); }
+    .mobile-nav { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8,8,14,0.97); z-index: 2000; flex-direction: column; padding: 80px 32px 32px; overflow-y: auto; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; color: white; font-size: 28px; }
+    .mobile-nav a { display: block; font-size: 16px; color: rgba(255,255,255,0.8); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .mobile-nav a:hover { color: var(--accent); }
+    .mobile-nav-section { margin-bottom: 24px; }
+    .mobile-nav-section h4 { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.35); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+
+    .page-hero {
+      margin-top: 80px; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #1a0a15 0%, #3d1535 50%, #7d2d5f 100%);
+      padding: 100px 40px 80px;
+    }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 65% 40%, rgba(180,60,120,0.3) 0%, transparent 60%); }
+    .page-hero-inner { max-width: 1280px; margin: 0 auto; text-align: center; color: var(--white); position: relative; }
+    .page-hero-badge { display: inline-block; background: rgba(248,242,220,0.2); border: 1px solid rgba(248,242,220,0.4); color: var(--accent-light); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px; }
+    .page-hero-title { font-size: 44px; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
+    .page-hero-desc { font-size: 18px; opacity: 0.85; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+    .section { padding: 100px 40px; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-label { display: inline-block; font-size: 13px; font-weight: 700; color: var(--primary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: 36px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.5px; margin-bottom: 16px; }
+    .section-desc { font-size: 16px; color: var(--text-mid); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+    .principle { background: var(--white); }
+    .principle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .principle-visual { height: 380px; border-radius: 16px; box-shadow: var(--shadow-lg); background: linear-gradient(135deg, #1a0a15 0%, #7d2d5f 100%); display: flex; align-items: center; justify-content: center; font-size: 80px; }
+    .principle-content h3 { font-size: 28px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; }
+    .principle-content p { font-size: 16px; line-height: 1.8; color: var(--text-mid); margin-bottom: 16px; }
+    .principle-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .principle-tag { padding: 8px 16px; background: var(--bg-light); border-radius: 6px; font-size: 14px; font-weight: 600; color: var(--primary); }
+
+    /* Safety Banner */
+    .safety-banner { background: linear-gradient(135deg, #1a2744 0%, #2d3f6b 100%); color: white; border-radius: 16px; padding: 40px; margin-top: 40px; display: flex; align-items: flex-start; gap: 24px; }
+    .safety-banner-icon { font-size: 48px; flex-shrink: 0; }
+    .safety-banner h4 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .safety-banner p { font-size: 15px; opacity: 0.85; line-height: 1.7; }
+
+    .special-points { background: var(--bg-light); }
+    .points-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .point-card { background: var(--white); border-radius: 16px; padding: 40px 32px; text-align: center; box-shadow: var(--shadow); transition: transform 0.3s, box-shadow 0.3s; }
+    .point-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
+    .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+    .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
+
+    .surgery-types { background: var(--bg-warm); }
+    .types-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .type-card { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s; }
+    .type-card:hover { transform: translateY(-6px); }
+    .type-card-visual { height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .type-card-body { padding: 32px 28px; }
+    .type-card-title { font-size: 22px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
+    .type-card-desc { font-size: 15px; line-height: 1.7; color: var(--text-mid); margin-bottom: 16px; }
+    .type-card-features { display: flex; flex-direction: column; gap: 8px; }
+    .type-card-feature { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-mid); }
+    .type-card-feature::before { content: '✓'; color: var(--primary); font-weight: 700; font-size: 15px; }
+
+    .faq { background: var(--white); }
+    .faq-list { max-width: 900px; margin: 0 auto; }
+    .faq-item { background: var(--bg-light); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+    .faq-item:hover { box-shadow: var(--shadow); }
+    .faq-question { padding: 24px 28px; cursor: pointer; display: flex; align-items: center; gap: 16px; transition: background 0.3s; }
+    .faq-question:hover { background: rgba(205,70,49,0.05); }
+    .faq-q-icon { flex-shrink: 0; width: 36px; height: 36px; background: var(--primary); color: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; }
+    .faq-q-text { flex: 1; font-size: 17px; font-weight: 600; color: var(--text-dark); }
+    .faq-toggle { font-size: 24px; color: var(--text-light); transition: transform 0.3s; }
+    .faq-item.active .faq-toggle { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-item.active .faq-answer { max-height: 600px; }
+    .faq-answer-inner { padding: 0 28px 24px 80px; font-size: 15px; line-height: 1.8; color: var(--text-mid); }
+
+    .cta { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: var(--white); text-align: center; }
+    .cta h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+    .cta p { font-size: 17px; opacity: 0.85; margin-bottom: 36px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn { padding: 16px 40px; border-radius: 8px; font-size: 16px; font-weight: 700; transition: all 0.3s; cursor: pointer; border: none; display: inline-block; }
+    .cta-btn-primary { background: var(--accent); color: var(--primary-dark); }
+    .cta-btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .cta-btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4); }
+    .cta-btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+    .cta-btn-kakao { background: #FEE500; color: #3C1E1E; }
+    .cta-btn-kakao:hover { background: #ffd700; transform: translateY(-2px); }
+
+    .footer { background: #1A1A1A; color: rgba(255,255,255,0.7); padding: 40px 40px 24px; text-align: center; }
+    .footer-info { font-size: 14px; margin-bottom: 12px; line-height: 1.8; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+    @media (max-width: 1024px) {
+      .principle-grid { grid-template-columns: 1fr; gap: 40px; }
+      .points-grid { grid-template-columns: 1fr 1fr; }
+      .types-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .header-inner { padding: 0 20px; height: 64px; }
+      .gnb { display: none; }
+      .header-right { display: none; }
+      .menu-toggle { display: flex; }
+      .page-hero { padding: 80px 20px 60px; }
+      .page-hero-title { font-size: 32px; }
+      .section { padding: 60px 20px; }
+      .section-title { font-size: 28px; }
+      .points-grid { grid-template-columns: 1fr; }
+      .types-grid { grid-template-columns: 1fr; }
+      .safety-banner { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-text">유성선병원 성형외과</div>
+      </a>
+      <nav class="gnb">
+        <div class="gnb-item"><a href="about.html">소개</a></div>
+        <div class="gnb-item"><a href="doctor.html">의료진소개</a></div>
+        <div class="gnb-item"><a href="features.html">성형외과특징</a></div>
+        <div class="gnb-item"><a href="tour.html">병원둘러보기</a></div>
+        <div class="gnb-item">
+          <a href="#">진료안내 ▾</a>
+          <div class="dropdown">
+            <div class="dropdown-cols">
+              <div class="dropdown-col">
+                <h4>미용·성형</h4>
+                <a href="eye.html">눈성형</a>
+                <a href="nose.html">코성형</a>
+                <a href="lifting.html">리프팅</a>
+                <a href="male.html">남자성형</a>
+                <a href="fat.html">지방성형</a>
+                <a href="breast.html" class="active">가슴성형</a>
+                <a href="other.html">기타수술</a>
+                <a href="petit.html">쁘띠·시술</a>
+              </div>
+              <div class="dropdown-col">
+                <h4>치료·재건</h4>
+                <a href="trauma.html">상처·외상</a>
+                <a href="burn.html">화상</a>
+                <a href="reconstruction.html">피부종양</a>
+                <a href="pediatric.html">소아진료</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gnb-item"><a href="academic.html">학술활동</a></div>
+        <div class="gnb-item">
+          <a href="#">커뮤니티 ▾</a>
+          <div class="dropdown">
+            <div class="dropdown-single">
+              <a href="consultation.html">온라인상담</a>
+              <a href="#">카카오톡 상담</a>
+              <a href="booking.html">진료예약</a>
+              <a href="news.html">언론보도</a>
+              <a href="notice.html">공지사항</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="header-right">
+        <a href="booking.html" class="header-btn btn-consult">상담예약</a>
+      </div>
+      <button class="menu-toggle" aria-label="메뉴 열기" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+    <div class="mobile-nav-section">
+      <h4>메뉴</h4>
+      <a href="about.html">소개</a><a href="doctor.html">의료진소개</a><a href="features.html">성형외과특징</a><a href="tour.html">병원둘러보기</a><a href="academic.html">학술활동</a>
+    </div>
+    <div class="mobile-nav-section">
+      <h4>미용·성형</h4>
+      <a href="eye.html">눈성형</a><a href="nose.html">코성형</a><a href="lifting.html">리프팅</a><a href="male.html">남자성형</a><a href="fat.html">지방성형</a><a href="breast.html">가슴성형</a><a href="other.html">기타수술</a><a href="petit.html">쁘띠·시술</a>
+    </div>
+    <div class="mobile-nav-section">
+      <h4>치료·재건</h4>
+      <a href="trauma.html">상처·외상</a><a href="burn.html">화상</a><a href="reconstruction.html">피부종양</a><a href="pediatric.html">소아진료</a>
+    </div>
+    <div class="mobile-nav-section">
+      <h4>커뮤니티</h4>
+      <a href="consultation.html">온라인상담</a><a href="#">카카오톡 상담</a><a href="booking.html">진료예약</a><a href="news.html">언론보도</a><a href="notice.html">공지사항</a>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-badge">BREAST SURGERY</div>
+      <h1 class="page-hero-title">체형에 맞는<br>균형 있는 결과</h1>
+      <p class="page-hero-desc">가슴확대, 축소, 함몰유두 교정 등 목적에 따라 접근 방식이 다릅니다.<br>종합병원 마취과 전담 체계 하에 수술 안전성을 최우선으로 합니다.</p>
+    </div>
+  </section>
+
+  <section class="section principle">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Surgery Principle</div>
+        <h2 class="section-title">가슴성형의 원칙</h2>
+        <p class="section-desc">크기보다 전체 체형과의 균형, 그리고 안전이 먼저입니다.</p>
+      </div>
+      <div class="principle-grid">
+        <div class="principle-visual">🏥</div>
+        <div class="principle-content">
+          <h3>안전을 최우선에 두는<br>가슴성형 설계</h3>
+          <p>가슴성형은 인체 내부에 삽입물이 들어가거나 큰 조직을 다루는 수술입니다. 전신마취 하에 진행되며, 마취 관리와 수술 중 혈압·산소 상태 모니터링이 결과와 안전 모두에 영향을 줍니다.</p>
+          <p>유성선병원 성형외과는 전담 마취과 전문의와 종합병원 응급 체계 안에서 수술을 진행합니다. 체형에 맞는 크기와 보형물 종류를 상담에서 충분히 논의하며, "남들이 좋다는 크기"가 아닌 "이 분에게 자연스러운 크기"를 기준으로 설계합니다.</p>
+          <div class="principle-tags">
+            <span class="principle-tag">#가슴확대</span>
+            <span class="principle-tag">#가슴축소</span>
+            <span class="principle-tag">#함몰유두</span>
+            <span class="principle-tag">#유두성형</span>
+            <span class="principle-tag">#안전수술</span>
+          </div>
+        </div>
+      </div>
+      <div class="safety-banner">
+        <div class="safety-banner-icon">🛡️</div>
+        <div>
+          <h4>종합병원 마취 안전 시스템 — 가슴성형의 결정적 차이</h4>
+          <p>전신마취가 필요한 가슴성형은 마취과 전문의의 존재 여부가 수술 안전성의 핵심입니다. 유성선병원은 전담 마취과 전문의 상주, 응급 대응 체계, 입원 병동을 갖춘 종합병원에서 수술이 이루어집니다. 개인 성형외과에서 구조적으로 제공하기 어려운 안전망입니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section special-points">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Why Us</div>
+        <h2 class="section-title">유성선병원 가슴성형의 차별점</h2>
+      </div>
+      <div class="points-grid">
+        <div class="point-card">
+          <div class="point-icon">🛡️</div>
+          <h3>전담 마취과 전문의 상주</h3>
+          <p>가슴성형은 전신마취가 필요한 수술입니다. 전담 마취과 전문의가 마취와 활력징후를 모니터링하며, 수술 중 안전 관리를 책임집니다.</p>
+        </div>
+        <div class="point-card">
+          <div class="point-icon">📐</div>
+          <h3>체형 비율 맞춤 설계</h3>
+          <p>보형물 크기는 "cc 숫자"보다 현재 체형과 가슴 기저부 폭, 피부 늘어남 정도에 따라 결정됩니다. 지나치게 크거나 부자연스러운 결과를 원칙적으로 지양합니다.</p>
+        </div>
+        <div class="point-card">
+          <div class="point-icon">🏥</div>
+          <h3>입원 관리 가능</h3>
+          <p>수술 후 하룻밤 입원이 필요한 경우에도 종합병원 병동에서 안전하게 관리받을 수 있습니다. 귀가 후 응급 상황 발생 시에도 즉시 응급실 대응이 가능합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section surgery-types">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Surgery Types</div>
+        <h2 class="section-title">가슴성형 종류</h2>
+      </div>
+      <div class="types-grid">
+        <div class="type-card">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, #1a0a15, #5a1848); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+            ✨
+          </div>
+          <div class="type-card-body">
+            <h3 class="type-card-title">가슴확대술 (보형물)</h3>
+            <p class="type-card-desc">실리콘 보형물을 사용하여 가슴 크기와 모양을 개선하는 수술입니다. 절개 위치(겨드랑이·유륜·유방하주름), 삽입 위치(근육 아래·근막 위), 보형물 종류를 체형에 맞게 결정합니다.</p>
+            <div class="type-card-features">
+              <div class="type-card-feature">체형·기저부 폭 기준 보형물 선택</div>
+              <div class="type-card-feature">절개 위치 개인 선택 가능</div>
+              <div class="type-card-feature">전담 마취과 전신마취 진행</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, #0d1f2d, #1a3a50); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+            ⬇️
+          </div>
+          <div class="type-card-body">
+            <h3 class="type-card-title">가슴축소술</h3>
+            <p class="type-card-desc">과도하게 큰 가슴으로 인한 어깨·목 통증, 자세 문제를 교정하는 수술입니다. 심미적 목적과 기능적 목적 모두를 고려하여 크기와 모양을 재설계합니다.</p>
+            <div class="type-card-features">
+              <div class="type-card-feature">어깨·목 통증 기능 개선</div>
+              <div class="type-card-feature">체형에 맞는 크기로 재설계</div>
+              <div class="type-card-feature">유두·유륜 위치 동시 교정</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, #1c1010, #4a2020); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+            🔵
+          </div>
+          <div class="type-card-body">
+            <h3 class="type-card-title">함몰유두 교정</h3>
+            <p class="type-card-desc">유두가 안으로 들어가 있는 함몰유두를 교정합니다. 함몰 정도(1~3도)에 따라 방법이 달라지며, 수유 기능 보전 여부를 상담에서 먼저 확인합니다.</p>
+            <div class="type-card-features">
+              <div class="type-card-feature">함몰 정도에 따른 맞춤 교정</div>
+              <div class="type-card-feature">수유 기능 보전 여부 사전 안내</div>
+              <div class="type-card-feature">국소마취 당일 시술 가능(1~2도)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, #101a10, #203a20); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+            🌸
+          </div>
+          <div class="type-card-body">
+            <h3 class="type-card-title">유두·유륜 성형</h3>
+            <p class="type-card-desc">과도하게 크거나 길게 돌출된 유두, 또는 넓은 유륜을 교정합니다. 간단한 국소마취 수술로 진행되며 흉터가 유륜 경계선 안에 숨어들어 잘 보이지 않습니다.</p>
+            <div class="type-card-features">
+              <div class="type-card-feature">유두 크기·길이 축소 교정</div>
+              <div class="type-card-feature">유륜 축소 교정</div>
+              <div class="type-card-feature">흉터가 유륜 경계선에 위치</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">자주 묻는 질문</h2>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+            <div class="faq-q-icon">Q</div>
+            <div class="faq-q-text">가슴 보형물의 수명은 얼마나 되나요?</div>
+            <div class="faq-toggle">∨</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              현재 사용되는 고응집성 실리콘 보형물은 반영구적으로 사용 가능하며, 특정 주기에 의무적으로 교체해야 하는 것은 아닙니다. 다만 파열, 구축, 위치 변형 등의 문제가 생기면 교체가 필요할 수 있습니다. 정기적인 초음파 검사로 보형물 상태를 확인하는 것을 권장합니다.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+            <div class="faq-q-icon">Q</div>
+            <div class="faq-q-text">구축(capsular contracture)이 생길 가능성이 있나요?</div>
+            <div class="faq-toggle">∨</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              구축은 보형물 주위에 섬유 조직이 과도하게 형성되면서 가슴이 딱딱해지는 합병증입니다. 발생률은 수술 방법과 보형물 종류, 수술 후 관리에 따라 다릅니다. 현재 사용되는 텍스처드(표면 거친) 보형물과 올바른 삽입 위치, 수술 후 마사지 관리를 통해 발생 위험을 낮출 수 있습니다. 발생하더라도 교정 수술이 가능합니다.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+            <div class="faq-q-icon">Q</div>
+            <div class="faq-q-text">가슴확대 후 수유가 가능한가요?</div>
+            <div class="faq-toggle">∨</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              대부분의 경우 수유 기능에 영향을 주지 않습니다. 단, 유륜 절개 방식은 유선과 접촉 가능성이 있어 다른 절개 방법(겨드랑이, 유방하주름)보다 수유 영향 가능성이 있습니다. 출산·수유 계획이 있으신 분은 상담 시 미리 말씀해 주시면 절개 위치 선택 시 반영하겠습니다.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+            <div class="faq-q-icon">Q</div>
+            <div class="faq-q-text">가슴축소 수술 후 회복 기간은 얼마나 걸리나요?</div>
+            <div class="faq-toggle">∨</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              가슴축소술은 가슴확대보다 수술 범위가 넓어 회복에 다소 시간이 더 걸립니다. 일반적으로 2~3주면 일상생활이 가능하고, 팔을 완전히 올리거나 격렬한 상체 운동은 4~6주 이후에 가능합니다. 절개 부위 흉터는 시간이 지나면서 옅어지며, 1년 후 최종 흉터 상태를 확인할 수 있습니다.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+            <div class="faq-q-icon">Q</div>
+            <div class="faq-q-text">함몰유두 교정 후 재발할 수 있나요?</div>
+            <div class="faq-toggle">∨</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              함몰유두의 원인인 짧은 유관을 충분히 처리하면 재발 가능성이 낮습니다. 단, 함몰 정도가 심할수록(3도) 재발 위험이 높으며, 수유 기능 보전을 위해 유관을 완전히 절개하지 않는 경우에는 재발 가능성이 더 있습니다. 수술 방법 선택 시 재발 위험과 수유 기능 사이의 트레이드오프를 상담에서 솔직하게 안내드립니다.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+            <div class="faq-q-icon">Q</div>
+            <div class="faq-q-text">가슴수술 전 어떤 검사가 필요한가요?</div>
+            <div class="faq-toggle">∨</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              전신마취를 위한 기본 수술 전 검사(혈액검사, 흉부 X-ray, 심전도)가 필요합니다. 종합병원인 유성선병원에서는 이 검사들을 원내에서 바로 진행할 수 있습니다. 40세 이상이시거나 기저질환이 있으신 경우 추가 검사가 필요할 수 있으며, 내과 협진도 원내에서 가능합니다.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="section-inner">
+      <h2>가슴성형 상담 예약</h2>
+      <p>안전을 최우선으로, 체형에 맞는 자연스러운 결과를 상담합니다.</p>
+      <div class="cta-buttons">
+        <a href="booking.html" class="cta-btn cta-btn-primary">무료 상담 예약하기</a>
+        <a href="tel:042-000-0000" class="cta-btn cta-btn-outline">전화 문의 042-000-0000</a>
+        <a href="#" class="cta-btn cta-btn-kakao">카카오톡 상담</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p class="footer-info">유성선병원 성형외과 | 대전광역시 유성구 | 신정환 과장 (가톨릭중앙의료원 출신)</p>
+    <p class="footer-copy">&copy; 2025 유성선병원 성형외과. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

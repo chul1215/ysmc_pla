@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>성형외과 특징 | 유성선병원 성형외과</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; color: #1a1a1a; line-height: 1.6; background: #fff; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    :root {
+      --primary: #cd4631; --primary-light: #d96858; --primary-dark: #a33828;
+      --accent: #f8f2dc; --accent-light: #faf6e8; --bg-light: #fdf8f0; --bg-warm: #faf5e6;
+      --text-dark: #1A1A1A; --text-mid: #555; --text-light: #888; --white: #FFFFFF;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08); --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    }
+
+    /* ===== Header ===== */
+    .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 0 40px; height: 76px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,8,14,0.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(255,255,255,0.05); }
+    .logo-text { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -0.4px; flex-shrink: 0; white-space: nowrap; }
+    .gnb { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
+    .gnb-item { position: relative; }
+    .gnb-item > a { display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.72); letter-spacing: 0.3px; padding: 0 14px; height: 76px; transition: color 0.22s; white-space: nowrap; }
+    .gnb-item > a:hover, .gnb-item > a.current { color: #fff; }
+    .gnb-item > a.current { border-bottom: 2px solid var(--primary-light); }
+    .gnb-arrow { font-size: 9px; opacity: 0.5; transition: transform 0.22s; }
+    .gnb-item:hover .gnb-arrow { transform: rotate(180deg); opacity: 1; }
+    .gnb-dropdown { position: absolute; top: 76px; left: 50%; transform: translateX(-50%) translateY(-8px); background: rgba(8,8,14,0.97); border: 1px solid rgba(255,255,255,0.08); border-top: 2px solid var(--primary); min-width: 200px; padding: 16px 0; opacity: 0; visibility: hidden; transition: opacity 0.22s, transform 0.22s, visibility 0.22s; border-radius: 0 0 6px 6px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+    .gnb-dropdown.dd-wide { display: flex; min-width: 480px; padding: 24px 0; }
+    .gnb-item:hover .gnb-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dd-col { flex: 1; padding: 0 8px; }
+    .dd-col + .dd-col { border-left: 1px solid rgba(255,255,255,0.07); }
+    .dd-col-label { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 0 16px 10px; margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .gnb-dropdown a { display: block; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.65); padding: 9px 16px; transition: color 0.18s, background 0.18s; white-space: nowrap; }
+    .gnb-dropdown a:hover { color: #fff; background: rgba(205,70,49,0.12); }
+    .header-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .header-cta a { padding: 7px 18px; border-radius: 4px; font-size: 13px; font-weight: 600; transition: all 0.25s; }
+    .btn-outline-w { border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); }
+    .btn-outline-w:hover { border-color: #fff; color: #fff; }
+    .btn-solid-w { background: var(--primary); color: #fff; }
+    .btn-solid-w:hover { background: var(--primary-light); }
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; z-index: 1100; }
+    .menu-toggle span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ===== Mobile Nav ===== */
+    .mobile-nav-overlay { display: none; position: fixed; inset: 0; background: rgba(8,8,14,0.97); z-index: 1050; flex-direction: column; align-items: center; justify-content: flex-start; overflow-y: auto; padding: 80px 32px 40px; opacity: 0; transition: opacity 0.3s; }
+    .mobile-nav-overlay.open { display: flex; opacity: 1; }
+    .mob-nav-section { width: 100%; max-width: 320px; margin-bottom: 8px; }
+    .mob-nav-top-links { display: flex; flex-direction: column; gap: 0; margin-bottom: 8px; }
+    .mob-nav-top-links > a { font-size: 22px; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: -0.5px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s; }
+    .mob-nav-top-links > a:hover, .mob-nav-top-links > a.current { color: var(--primary-light); }
+    .mob-sub-title { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.28); padding: 16px 0 8px; }
+    .mob-sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 8px; }
+    .mob-sub-grid a { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.6); padding: 10px 12px; background: rgba(255,255,255,0.04); border-radius: 4px; transition: color 0.18s, background 0.18s; }
+    .mob-sub-grid a:hover { color: #fff; background: rgba(205,70,49,0.18); }
+    .mobile-nav-divider { width: 100%; max-width: 320px; height: 1px; background: rgba(255,255,255,0.08); margin: 16px 0; }
+    .mobile-nav-cta { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 320px; }
+    .mobile-nav-cta a { font-size: 15px !important; font-weight: 600 !important; padding: 14px 0 !important; text-align: center; border-radius: 4px; }
+    .mobile-nav-cta .nav-phone { background: var(--primary); color: #fff !important; }
+    .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
+
+    /* ===== Hero ===== */
+    .hero-banner { margin-top: 76px; height: 340px; background: var(--primary); display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero-banner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(140deg, rgba(163,56,40,0.95) 0%, rgba(205,70,49,0.6) 100%); z-index: 1; }
+    .hero-banner::after { content: ''; position: absolute; right: -80px; top: -80px; width: 500px; height: 500px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); z-index: 1; }
+    .hero-deco { position: absolute; right: 120px; bottom: -40px; width: 280px; height: 280px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); z-index: 1; }
+    .hero-banner-inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 0 40px; width: 100%; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+    .hero-title { font-size: clamp(36px, 4.5vw, 56px); font-weight: 800; color: #fff; letter-spacing: -2px; line-height: 1.1; margin-bottom: 14px; }
+    .hero-subtitle { font-size: 15px; color: rgba(255,255,255,0.72); line-height: 1.8; }
+
+    /* ===== Common Section ===== */
+    .section { padding: 100px 40px; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+    .section-label { display: inline-block; font-size: 11px; font-weight: 700; color: var(--primary); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: 36px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; line-height: 1.25; margin-bottom: 14px; }
+    .section-desc { font-size: 15px; color: var(--text-mid); line-height: 1.8; }
+
+    /* ===== Feature Cards ===== */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
+
+    .feature-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 16px;
+      padding: 40px 32px;
+      transition: box-shadow 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+
+    .feature-card h3 { font-size: 18px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.4px; margin-bottom: 12px; }
+    .feature-card p { font-size: 14px; color: var(--text-mid); line-height: 1.85; }
+
+    .feature-tag {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      background: rgba(205,70,49,0.07);
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== Comparison Table ===== */
+    .compare-section { background: var(--bg-light); }
+
+    .compare-table-wrap { margin-top: 56px; overflow-x: auto; }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .compare-table thead tr { background: var(--text-dark); }
+    .compare-table thead th { padding: 20px 24px; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.9); text-align: center; letter-spacing: 0.3px; }
+    .compare-table thead th:first-child { text-align: left; font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; }
+    .compare-table thead th.col-us { background: var(--primary); color: #fff; }
+
+    .compare-table tbody tr { border-bottom: 1px solid rgba(0,0,0,0.05); transition: background 0.18s; }
+    .compare-table tbody tr:last-child { border-bottom: none; }
+    .compare-table tbody tr:hover { background: var(--bg-light); }
+
+    .compare-table td { padding: 18px 24px; font-size: 14px; color: var(--text-mid); text-align: center; }
+    .compare-table td:first-child { text-align: left; font-weight: 700; color: var(--text-dark); font-size: 15px; }
+
+    .check-o { color: var(--primary); font-size: 20px; font-weight: 700; }
+    .check-x { color: var(--text-light); font-size: 18px; }
+    .check-tri { color: #f5a623; font-size: 16px; }
+
+    /* ===== CTA Section ===== */
+    .cta-section { background: var(--text-dark); padding: 80px 40px; text-align: center; }
+    .cta-section h2 { font-size: 32px; font-weight: 800; color: #fff; letter-spacing: -0.8px; margin-bottom: 12px; }
+    .cta-section p { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 36px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn-primary { padding: 14px 32px; background: var(--primary); color: #fff; border-radius: 6px; font-size: 15px; font-weight: 700; transition: background 0.25s; }
+    .cta-btn-primary:hover { background: var(--primary-light); }
+    .cta-btn-outline { padding: 14px 32px; border: 1.5px solid rgba(255,255,255,0.35); color: rgba(255,255,255,0.85); border-radius: 6px; font-size: 15px; font-weight: 600; transition: all 0.25s; }
+    .cta-btn-outline:hover { border-color: #fff; color: #fff; }
+    .cta-btn-kakao { padding: 14px 32px; background: #FEE500; color: #3C1E1E; border-radius: 6px; font-size: 15px; font-weight: 700; }
+
+    /* ===== Footer ===== */
+    .footer { background: #111; color: rgba(255,255,255,0.58); }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 60px; padding: 60px 40px 40px; max-width: 1280px; margin: 0 auto; }
+    .footer-logo { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.88); margin-bottom: 16px; }
+    .footer-detail { font-size: 13px; line-height: 2.1; }
+    .footer-quick { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; min-width: 280px; }
+    .footer-quick-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: rgba(255,255,255,0.05); border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+    .footer-quick-item:hover { background: rgba(255,255,255,0.09); }
+    .footer-quick-icon { font-size: 18px; }
+    .footer-quick-label { font-size: 12px; color: rgba(255,255,255,0.65); }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; padding: 20px 40px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.28); }
+
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .header { padding: 0 20px; height: 60px; }
+      .gnb, .header-cta { display: none; }
+      .menu-toggle { display: flex; }
+      .gnb-dropdown { display: none !important; }
+      .hero-banner { height: 280px; }
+      .hero-banner-inner { padding: 0 20px; }
+      .section { padding: 60px 20px; }
+      .section-title { font-size: 26px; }
+      .features-grid { grid-template-columns: 1fr; gap: 20px; }
+      .feature-card { padding: 28px 24px; }
+      .compare-table td, .compare-table thead th { padding: 14px 16px; font-size: 13px; }
+      .footer-top { flex-direction: column; gap: 36px; padding: 44px 20px 28px; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding: 18px 20px; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-label="모바일 메뉴">
+    <div class="mob-nav-section">
+      <div class="mob-nav-top-links">
+        <a href="about.html">소개</a>
+        <a href="doctor.html">의료진소개</a>
+        <a href="features.html" class="current">성형외과특징</a>
+        <a href="tour.html">병원둘러보기</a>
+        <a href="academic.html">학술활동</a>
+      </div>
+      <div class="mob-sub-title">미용·성형</div>
+      <div class="mob-sub-grid">
+        <a href="eye.html">눈성형</a><a href="nose.html">코성형</a>
+        <a href="lifting.html">리프팅</a><a href="male.html">남자성형</a>
+        <a href="fat.html">지방성형</a><a href="breast.html">가슴성형</a>
+        <a href="other.html">기타수술</a><a href="petit.html">쁘띠·시술</a>
+      </div>
+      <div class="mob-sub-title">치료·재건</div>
+      <div class="mob-sub-grid">
+        <a href="trauma.html">상처·외상</a><a href="burn.html">화상</a>
+        <a href="reconstruction.html">피부종양</a><a href="pediatric.html">소아진료</a>
+      </div>
+      <div class="mob-sub-title">커뮤니티</div>
+      <div class="mob-sub-grid">
+        <a href="consultation.html">온라인상담</a><a href="#">카카오상담</a>
+        <a href="booking.html">진료예약</a><a href="news.html">언론보도</a>
+        <a href="notice.html">공지사항</a>
+      </div>
+    </div>
+    <div class="mobile-nav-divider"></div>
+    <div class="mobile-nav-cta">
+      <a href="tel:042-000-0000" class="nav-phone">전화 상담 042-000-0000</a>
+      <a href="#" class="nav-kakao">카카오톡으로 문의하기</a>
+    </div>
+  </nav>
+
+  <header class="header" id="header">
+    <a href="index.html" class="logo-text">유성선병원 성형외과</a>
+    <nav class="gnb" aria-label="주 메뉴">
+      <div class="gnb-item"><a href="about.html">소개</a></div>
+      <div class="gnb-item"><a href="doctor.html">의료진소개</a></div>
+      <div class="gnb-item"><a href="features.html" class="current">성형외과특징</a></div>
+      <div class="gnb-item"><a href="tour.html">병원둘러보기</a></div>
+      <div class="gnb-item">
+        <a href="cosmetic.html">진료안내 <span class="gnb-arrow">▾</span></a>
+        <div class="gnb-dropdown dd-wide">
+          <div class="dd-col">
+            <div class="dd-col-label">미용·성형</div>
+            <a href="eye.html">눈성형</a><a href="nose.html">코성형</a>
+            <a href="lifting.html">리프팅</a><a href="male.html">남자성형</a>
+            <a href="fat.html">지방성형</a><a href="breast.html">가슴성형</a>
+            <a href="other.html">기타수술</a><a href="petit.html">쁘띠·시술</a>
+          </div>
+          <div class="dd-col">
+            <div class="dd-col-label">치료·재건</div>
+            <a href="trauma.html">상처·외상</a><a href="burn.html">화상</a>
+            <a href="reconstruction.html">피부종양</a><a href="pediatric.html">소아진료</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item"><a href="academic.html">학술활동</a></div>
+      <div class="gnb-item">
+        <a href="community.html">커뮤니티 <span class="gnb-arrow">▾</span></a>
+        <div class="gnb-dropdown">
+          <a href="consultation.html">온라인상담</a>
+          <a href="#">카카오톡 상담</a>
+          <a href="booking.html">진료예약</a>
+          <a href="news.html">언론보도</a>
+          <a href="notice.html">공지사항</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-cta">
+      <a href="booking.html" class="btn-outline-w">진료예약</a>
+      <a href="consultation.html" class="btn-solid-w">상담 예약</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav"
+      onclick="var o=document.getElementById('mobileNav'),t=document.getElementById('menuToggle'),isOpen=o.classList.contains('open');if(isOpen){o.classList.remove('open');t.classList.remove('open');document.body.style.overflow='';}else{o.classList.add('open');t.classList.add('open');document.body.style.overflow='hidden';}">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-banner">
+    <div class="hero-deco"></div>
+    <div class="hero-banner-inner">
+      <div class="hero-eyebrow">FEATURES · 성형외과 특징</div>
+      <h1 class="hero-title">유성선병원 성형외과만의 특징</h1>
+      <p class="hero-subtitle">대학병원 수준의 안전 인프라와 섬세한 전문의가 함께합니다</p>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE CARDS ===== -->
+  <section class="section" style="background: #fff;">
+    <div class="section-inner">
+      <div class="section-label">Core Features</div>
+      <h2 class="section-title">왜 유성선병원 성형외과인가요?</h2>
+      <p class="section-desc">일반 의원에서는 갖추기 어려운 종합병원의 안전 인프라 위에서,<br>전문의 수준의 섬세한 미용·재건 진료를 받으실 수 있습니다.</p>
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">🏥</div>
+          <h3>종합병원 안전 인프라</h3>
+          <p>유성선병원의 종합병원 인프라를 그대로 활용합니다. 24시간 가동되는 응급 시스템, 첨단 수술 장비, 감염 관리 체계가 모든 수술에 적용됩니다.</p>
+          <span class="feature-tag">Safe Infrastructure</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">💉</div>
+          <h3>전담 마취과 시스템</h3>
+          <p>모든 수술에 마취과 전문의가 전담 배치됩니다. 마취 중 활력징후를 실시간 모니터링하며, 수술 후 회복실에서도 의료진이 상주합니다.</p>
+          <span class="feature-tag">Dedicated Anesthesiology</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🚨</div>
+          <h3>24시간 응급 대응 체계</h3>
+          <p>수술 후 예상치 못한 상황에도 즉각 대응합니다. 개인의원과 달리 야간·주말에도 응급 처치가 가능한 병원 시스템이 환자를 보호합니다.</p>
+          <span class="feature-tag">24H Emergency Response</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>미용·재건 동일 의료진</h3>
+          <p>미용 수술과 재건·치료 수술을 동일한 전문의가 담당합니다. 외상 후 흉터 개선, 사고 후 미용 복원 등 복합 케이스에서 특히 강점을 발휘합니다.</p>
+          <span class="feature-tag">Integrated Care</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>대학병원 수련 전문의</h3>
+          <p>가톨릭중앙의료원에서 수련한 성형외과 전문의가 진료합니다. 단순 시술부터 복잡한 재건 수술까지 대학병원 수준의 술기로 집도합니다.</p>
+          <span class="feature-tag">University-Level Training</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>충분한 설명과 상담</h3>
+          <p>수술 전 충분한 상담을 통해 기대 결과와 위험성을 솔직하게 설명합니다. 과도한 수술을 권유하지 않으며, 꼭 필요한 치료만 제안합니다.</p>
+          <span class="feature-tag">Transparent Consultation</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPARISON TABLE ===== -->
+  <section class="section compare-section">
+    <div class="section-inner">
+      <div class="section-label">Comparison</div>
+      <h2 class="section-title">개인의원 vs 유성선병원 성형외과</h2>
+      <p class="section-desc">안전하고 만족스러운 수술 결과를 위해 의료 환경을 꼼꼼히 비교해보세요.</p>
+
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>비교 항목</th>
+              <th>개인 성형외과의원</th>
+              <th class="col-us">유성선병원 성형외과</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>마취과 전문의 상주</td>
+              <td><span class="check-x">✕</span> 비상주 (간호사 또는 외래 마취)</td>
+              <td><span class="check-o">✓</span> 마취과 전문의 전담 배치</td>
+            </tr>
+            <tr>
+              <td>24시간 응급 대응</td>
+              <td><span class="check-x">✕</span> 진료시간 내 한정</td>
+              <td><span class="check-o">✓</span> 종합병원 24시간 응급실 연계</td>
+            </tr>
+            <tr>
+              <td>입원 집중치료</td>
+              <td><span class="check-tri">△</span> 1일 입원 또는 당일 귀가</td>
+              <td><span class="check-o">✓</span> 중환자실 포함 입원 시설</td>
+            </tr>
+            <tr>
+              <td>수술 중 모니터링</td>
+              <td><span class="check-tri">△</span> 기본 장비 한정</td>
+              <td><span class="check-o">✓</span> 종합 활력징후 실시간 모니터링</td>
+            </tr>
+            <tr>
+              <td>미용·재건 복합 진료</td>
+              <td><span class="check-x">✕</span> 미용 특화, 재건 진료 제한적</td>
+              <td><span class="check-o">✓</span> 미용 + 재건 동일 전문의</td>
+            </tr>
+            <tr>
+              <td>감염 관리 체계</td>
+              <td><span class="check-tri">△</span> 자체 기준 운영</td>
+              <td><span class="check-o">✓</span> 의료기관 인증 감염 관리 기준</td>
+            </tr>
+            <tr>
+              <td>수혈·혈액 관리</td>
+              <td><span class="check-x">✕</span> 즉시 수혈 불가</td>
+              <td><span class="check-o">✓</span> 혈액은행 상시 운영</td>
+            </tr>
+            <tr>
+              <td>타과 협진 체계</td>
+              <td><span class="check-x">✕</span> 외부 전원 필요</td>
+              <td><span class="check-o">✓</span> 내과·외과·마취과 즉시 협진</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-section">
+    <div>
+      <h2>안전한 수술 환경에서 시작하세요</h2>
+      <p>유성선병원 성형외과의 차별화된 안전 인프라를 직접 경험해보세요.<br>상담을 통해 가장 적합한 치료 방법을 제안해드립니다.</p>
+      <div class="cta-buttons">
+        <a href="consultation.html" class="cta-btn-primary">온라인 상담 신청</a>
+        <a href="booking.html" class="cta-btn-outline">진료 예약하기</a>
+        <a href="#" class="cta-btn-kakao">카카오톡 문의</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">유성선병원 성형외과</div>
+        <div class="footer-detail">
+          대전광역시 유성구 계룡로 105 (봉명동)<br>
+          대표전화: 042-000-0000&nbsp;&nbsp;|&nbsp;&nbsp;팩스: 042-000-0001<br>
+          진료시간: 평일 09:00 – 18:00&nbsp;&nbsp;|&nbsp;&nbsp;토요일 09:00 – 13:00<br>
+          응급: 24시간 응급실 운영
+        </div>
+      </div>
+      <div class="footer-quick">
+        <a href="consultation.html" class="footer-quick-item">
+          <span class="footer-quick-icon">💬</span>
+          <span class="footer-quick-label">온라인 상담</span>
+        </a>
+        <a href="booking.html" class="footer-quick-item">
+          <span class="footer-quick-icon">📅</span>
+          <span class="footer-quick-label">진료 예약</span>
+        </a>
+        <a href="tel:042-000-0000" class="footer-quick-item">
+          <span class="footer-quick-icon">📞</span>
+          <span class="footer-quick-label">전화 문의</span>
+        </a>
+        <a href="#" class="footer-quick-item">
+          <span class="footer-quick-icon">💛</span>
+          <span class="footer-quick-label">카카오톡</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 유성선병원 성형외과. All rights reserved.</span>
+      <span class="footer-copy">개인정보처리방침&nbsp;&nbsp;|&nbsp;&nbsp;이용약관</span>
+    </div>
+  </footer>
+
+</body>
+</html>

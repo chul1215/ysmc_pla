@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미용·성형 — 유성선병원 성형외과</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      color: #1a1a1a;
+      line-height: 1.6;
+      background: #fff;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ===== Color Variables ===== */
+    :root {
+      --primary: #cd4631;
+      --primary-light: #d96858;
+      --primary-dark: #a33828;
+      --wine: #3d0f09;
+      --navy: #0a1828;
+      --navy-mid: #1a3a5c;
+      --accent: #f8f2dc;
+      --accent-light: #faf6e8;
+      --bg-off: #f5f3ef;
+      --text-dark: #1A1A1A;
+      --text-mid: #555;
+      --text-light: #888;
+      --white: #FFFFFF;
+    }
+
+    /* ===== Header / GNB ===== */
+    .header {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 1000;
+      padding: 0 40px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8, 8, 14, 0.97);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .logo-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.4px;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .gnb {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .gnb-item { position: relative; }
+
+    .gnb-item > a {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.72);
+      letter-spacing: 0.3px;
+      padding: 0 14px;
+      height: 76px;
+      transition: color 0.22s;
+      white-space: nowrap;
+    }
+
+    .gnb-item > a:hover,
+    .gnb-item > a.current { color: #fff; }
+
+    .gnb-item > a.current { border-bottom: 2px solid var(--primary-light); }
+
+    .gnb-arrow { font-size: 9px; opacity: 0.5; transition: transform 0.22s; }
+    .gnb-item:hover .gnb-arrow { transform: rotate(180deg); opacity: 1; }
+
+    .gnb-dropdown {
+      position: absolute;
+      top: 76px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: rgba(8,8,14,0.97);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 2px solid var(--primary);
+      min-width: 200px;
+      padding: 16px 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.22s, transform 0.22s, visibility 0.22s;
+      border-radius: 0 0 6px 6px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+
+    .gnb-dropdown.dd-wide {
+      display: flex;
+      min-width: 480px;
+      padding: 24px 0;
+    }
+
+    .gnb-item:hover .gnb-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dd-col { flex: 1; padding: 0 8px; }
+    .dd-col + .dd-col { border-left: 1px solid rgba(255,255,255,0.07); }
+
+    .dd-col-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      padding: 0 16px 10px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .gnb-dropdown a {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      padding: 9px 16px;
+      transition: color 0.18s, background 0.18s;
+      white-space: nowrap;
+    }
+
+    .gnb-dropdown a:hover { color: #fff; background: rgba(205,70,49,0.12); }
+
+    .header-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .header-cta a {
+      padding: 7px 18px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.25s;
+    }
+
+    .btn-outline-w { border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); }
+    .btn-outline-w:hover { border-color: #fff; color: #fff; }
+    .btn-solid-w { background: var(--primary); color: #fff; }
+    .btn-solid-w:hover { background: var(--primary-light); }
+
+    /* ===== Mobile Menu Toggle ===== */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 8px;
+      z-index: 1100;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+      transform-origin: center;
+    }
+
+    .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ===== Mobile Nav Overlay ===== */
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8,8,14,0.97);
+      z-index: 1050;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-y: auto;
+      padding: 80px 32px 40px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .mobile-nav-overlay.open { display: flex; opacity: 1; }
+
+    .mob-nav-section { width: 100%; max-width: 320px; margin-bottom: 8px; }
+
+    .mob-nav-top-links { display: flex; flex-direction: column; gap: 0; margin-bottom: 8px; }
+
+    .mob-nav-top-links > a {
+      font-size: 22px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: -0.5px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.2s;
+    }
+
+    .mob-nav-top-links > a:hover,
+    .mob-nav-top-links > a.current { color: var(--primary-light); }
+
+    .mob-sub-title {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      padding: 16px 0 8px;
+    }
+
+    .mob-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .mob-sub-grid a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      transition: color 0.18s, background 0.18s;
+    }
+
+    .mob-sub-grid a:hover { color: #fff; background: rgba(205,70,49,0.18); }
+
+    .mobile-nav-divider {
+      width: 100%;
+      max-width: 320px;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 16px 0;
+    }
+
+    .mobile-nav-cta {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .mobile-nav-cta a {
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      padding: 14px 0 !important;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .mobile-nav-cta .nav-phone { background: var(--primary); color: #fff !important; }
+    .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
+
+    /* ===== Hero Banner ===== */
+    .hero-banner {
+      height: 400px;
+      background: var(--wine);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 76px;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(61,15,9,0.97) 0%, rgba(163,56,40,0.6) 100%);
+      z-index: 1;
+    }
+
+    /* Decorative geometric element */
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      border: 1px solid rgba(205,70,49,0.15);
+      z-index: 1;
+    }
+
+    .hero-banner-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 28px;
+    }
+
+    .hero-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+    }
+
+    .hero-breadcrumb a {
+      color: rgba(255,255,255,0.38);
+      transition: color 0.2s;
+    }
+    .hero-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+
+    .hero-breadcrumb span { color: rgba(255,255,255,0.55); }
+
+    /* ===== Section Common ===== */
+    .section { padding: 100px 40px; }
+
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.8px;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    /* ===== Category Grid ===== */
+    .categories { background: var(--bg-off); }
+
+    .categories-header { margin-bottom: 56px; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* ===== Service Card ===== */
+    .service-card {
+      background: #fff;
+      border-radius: 3px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.1);
+    }
+
+    .card-thumb {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-num {
+      position: absolute;
+      top: 14px; left: 14px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.3);
+      padding: 3px 9px;
+      border-radius: 2px;
+      z-index: 2;
+    }
+
+    .card-body { padding: 26px 26px 30px; flex: 1; display: flex; flex-direction: column; }
+
+    .card-category {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+
+    .card-title {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      line-height: 1.4;
+      color: var(--text-dark);
+      margin-bottom: 9px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 18px;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      color: var(--text-light);
+      background: #f2f0ed;
+      padding: 4px 9px;
+      border-radius: 2px;
+    }
+
+    .card-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: gap 0.25s;
+      margin-top: auto;
+    }
+
+    .service-card:hover .card-link { gap: 9px; }
+
+    /* Gradient thumbnails (no image) */
+    .thumb-eye      { background: linear-gradient(135deg, #2a0a05 0%, #8b2a1a 50%, #cd4631 100%); }
+    .thumb-nose     { background: linear-gradient(135deg, #3d1a0a 0%, #a34528 50%, #d96858 100%); }
+    .thumb-lifting  { background: linear-gradient(135deg, #1a0505 0%, #7a1f12 50%, #b83a27 100%); }
+    .thumb-male     { background: linear-gradient(135deg, #0d1520 0%, #1e3a5f 50%, #2d5a8a 100%); }
+    .thumb-fat      { background: linear-gradient(135deg, #1a1208 0%, #5a3d18 50%, #8b6030 100%); }
+    .thumb-breast   { background: linear-gradient(135deg, #200a12 0%, #6b1f35 50%, #9e3a55 100%); }
+    .thumb-other    { background: linear-gradient(135deg, #141414 0%, #3a3a3a 50%, #5a5a5a 100%); }
+    .thumb-petit    { background: linear-gradient(135deg, #1a0c06 0%, #7a3a1a 50%, #c06030 100%); }
+
+    /* Decorative circle on thumb */
+    .card-thumb::after {
+      content: '';
+      position: absolute;
+      right: -24px;
+      bottom: -24px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* ===== Doctor Banner (compact) ===== */
+    .doctor-banner {
+      background: var(--navy);
+      padding: 72px 40px;
+    }
+
+    .doctor-banner-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .doctor-img-wrap {
+      flex-shrink: 0;
+      width: 200px;
+      height: 240px;
+      position: relative;
+    }
+
+    .doctor-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 2px;
+      display: block;
+    }
+
+    .doctor-img-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: var(--primary);
+      color: #fff;
+      padding: 8px 13px;
+      border-radius: 2px;
+    }
+
+    .doctor-img-badge strong { display: block; font-size: 13px; font-weight: 700; }
+    .doctor-img-badge span  { font-size: 11px; opacity: 0.85; }
+
+    .doctor-content { flex: 1; }
+
+    .doctor-content .section-label { color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+    .doctor-content .section-title { color: #fff; font-size: 26px; margin-bottom: 6px; }
+
+    .doctor-role {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+
+    .doctor-quote {
+      font-size: 15px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.75);
+      border-left: 3px solid var(--primary);
+      padding-left: 18px;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .credentials { display: flex; flex-direction: column; gap: 8px; }
+
+    .credential-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.5;
+    }
+
+    .credential-item::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ===== CTA Section ===== */
+    .cta-section {
+      background: var(--wine);
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .cta-section-inner { max-width: 640px; margin: 0 auto; }
+
+    .cta-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .cta-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.8px;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .cta-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 32px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .cta-btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); }
+
+    .cta-btn-kakao {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 32px;
+      background: #FEE500;
+      color: #3C1E1E;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .cta-btn-kakao:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* ===== Footer ===== */
+    .footer { background: #111; color: rgba(255,255,255,0.58); }
+
+    .footer-top {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 40px 40px;
+      display: flex;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .footer-detail { font-size: 13px; line-height: 2.1; }
+
+    .footer-quick {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      flex: 1;
+      max-width: 460px;
+    }
+
+    .footer-quick-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+      padding: 22px 10px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 2px;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.25s;
+    }
+
+    .footer-quick-item:hover { background: rgba(255,255,255,0.08); }
+
+    .footer-quick-icon {
+      width: 42px; height: 42px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+    }
+
+    .footer-quick-label { font-size: 12px; color: rgba(255,255,255,0.65); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 22px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.28); }
+
+    /* ===== Mobile Sticky CTA ===== */
+    .mobile-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; width: 100%;
+      z-index: 990;
+      background: #0a0a0f;
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.4);
+      padding: 10px 16px;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+
+    .mobile-cta-inner { display: flex; gap: 10px; }
+
+    .mobile-cta-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 14px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.25s;
+      text-decoration: none;
+    }
+
+    .mobile-cta-btn:active { opacity: 0.8; }
+    .cta-phone { background: var(--primary); color: #fff; }
+    .cta-kakao { background: #FEE500; color: #3C1E1E; }
+
+    /* ===== Trust Section ===== */
+    .trust-section { background: #fff; }
+    .trust-header { margin-bottom: 52px; }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .trust-card {
+      padding: 44px 32px;
+      background: var(--bg-off);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .trust-card:hover {
+      background: var(--wine);
+      transform: translateY(-3px);
+    }
+
+    .trust-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--primary);
+      margin-bottom: 16px;
+      transition: color 0.3s;
+    }
+
+    .trust-card:hover .trust-num { color: rgba(255,255,255,0.45); }
+
+    .trust-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.45;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      transition: color 0.3s;
+    }
+
+    .trust-card-desc {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.75;
+      transition: color 0.3s;
+    }
+
+    .trust-card:hover .trust-card-title,
+    .trust-card:hover .trust-card-desc { color: rgba(255,255,255,0.85); }
+
+    /* CTA outline button */
+    .cta-btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 32px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.85);
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s;
+    }
+    .cta-btn-outline:hover { border-color: #fff; color: #fff; transform: translateY(-2px); }
+
+    /* CTA sub notes */
+    .cta-sub-notes {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .cta-sub-notes span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+    }
+
+    /* ===== Responsive — Tablet (≤ 1024px) ===== */
+    @media (max-width: 1024px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .doctor-banner-inner { gap: 40px; }
+      .trust-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Responsive — Mobile (≤ 768px) ===== */
+    @media (max-width: 768px) {
+      .header { padding: 0 20px; height: 60px; }
+      .gnb, .header-cta { display: none; }
+      .menu-toggle { display: flex; }
+      .gnb-dropdown { display: none !important; }
+
+      .hero-banner { margin-top: 60px; height: 320px; }
+      .hero-banner-inner { padding: 0 20px; }
+      .hero-eyebrow { font-size: 10px; letter-spacing: 2.5px; }
+      .hero-subtitle { font-size: 14px; }
+
+      .section { padding: 60px 20px; }
+      .section-title { font-size: 26px; }
+      .categories-header { margin-bottom: 36px; }
+
+      .cards-grid { grid-template-columns: 1fr; }
+
+      .doctor-banner { padding: 56px 20px; }
+      .doctor-banner-inner { flex-direction: column; gap: 32px; }
+      .doctor-img-wrap { width: 100%; height: 240px; }
+
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-card { padding: 32px 24px; }
+      .cta-section { padding: 60px 20px; }
+      .cta-title { font-size: 24px; }
+      .cta-buttons { flex-direction: column; align-items: stretch; }
+      .cta-btn-primary, .cta-btn-outline, .cta-btn-kakao { justify-content: center; }
+      .cta-sub-notes { flex-direction: column; gap: 8px; align-items: center; }
+
+      .footer-top { flex-direction: column; gap: 36px; padding: 44px 20px 28px; }
+      .footer-quick { max-width: 100%; grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding: 18px 20px; }
+
+      .mobile-cta { display: block; }
+      .footer { padding-bottom: 76px; }
+    }
+
+    @media (max-width: 380px) {
+      .hero-title { font-size: 36px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <nav class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-label="모바일 메뉴">
+    <div class="mob-nav-section">
+      <div class="mob-nav-top-links">
+        <a href="about.html">소개</a>
+        <a href="doctor.html">의료진소개</a>
+        <a href="features.html">성형외과특징</a>
+        <a href="tour.html">병원둘러보기</a>
+        <a href="academic.html">학술활동</a>
+      </div>
+      <div class="mob-sub-title">미용·성형</div>
+      <div class="mob-sub-grid">
+        <a href="eye.html">눈성형</a>
+        <a href="nose.html">코성형</a>
+        <a href="lifting.html">리프팅</a>
+        <a href="male.html">남자성형</a>
+        <a href="fat.html">지방성형</a>
+        <a href="breast.html">가슴성형</a>
+        <a href="other.html">기타수술</a>
+        <a href="petit.html">쁘띠·시술</a>
+      </div>
+      <div class="mob-sub-title">치료·재건</div>
+      <div class="mob-sub-grid">
+        <a href="trauma.html">상처·외상</a>
+        <a href="burn.html">화상</a>
+        <a href="reconstruction.html">피부종양</a>
+        <a href="pediatric.html">소아진료</a>
+      </div>
+      <div class="mob-sub-title">커뮤니티</div>
+      <div class="mob-sub-grid">
+        <a href="consultation.html">온라인상담</a>
+        <a href="#">카카오상담</a>
+        <a href="booking.html">진료예약</a>
+        <a href="news.html">언론보도</a>
+        <a href="notice.html">공지사항</a>
+      </div>
+    </div>
+    <div class="mobile-nav-divider"></div>
+    <div class="mobile-nav-cta">
+      <a href="tel:042-000-0000" class="nav-phone">전화 상담 042-000-0000</a>
+      <a href="#" class="nav-kakao">카카오톡으로 문의하기</a>
+    </div>
+  </nav>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <a href="index.html" class="logo-text">유성선병원 성형외과</a>
+    <nav class="gnb" aria-label="주 메뉴">
+      <div class="gnb-item"><a href="about.html">소개</a></div>
+      <div class="gnb-item"><a href="doctor.html">의료진소개</a></div>
+      <div class="gnb-item"><a href="features.html">성형외과특징</a></div>
+      <div class="gnb-item"><a href="tour.html">병원둘러보기</a></div>
+      <div class="gnb-item">
+        <a href="cosmetic.html" class="current">진료안내 <span class="gnb-arrow">▾</span></a>
+        <div class="gnb-dropdown dd-wide">
+          <div class="dd-col">
+            <div class="dd-col-label">미용·성형</div>
+            <a href="eye.html">눈성형</a>
+            <a href="nose.html">코성형</a>
+            <a href="lifting.html">리프팅</a>
+            <a href="male.html">남자성형</a>
+            <a href="fat.html">지방성형</a>
+            <a href="breast.html">가슴성형</a>
+            <a href="other.html">기타수술</a>
+            <a href="petit.html">쁘띠·시술</a>
+          </div>
+          <div class="dd-col">
+            <div class="dd-col-label">치료·재건</div>
+            <a href="trauma.html">상처·외상</a>
+            <a href="burn.html">화상</a>
+            <a href="reconstruction.html">피부종양</a>
+            <a href="pediatric.html">소아진료</a>
+          </div>
+        </div>
+      </div>
+      <div class="gnb-item"><a href="academic.html">학술활동</a></div>
+      <div class="gnb-item">
+        <a href="community.html">커뮤니티 <span class="gnb-arrow">▾</span></a>
+        <div class="gnb-dropdown">
+          <a href="consultation.html">온라인상담</a>
+          <a href="#">카카오톡 상담</a>
+          <a href="booking.html">진료예약</a>
+          <a href="news.html">언론보도</a>
+          <a href="notice.html">공지사항</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-cta">
+      <a href="booking.html" class="btn-outline-w">진료예약</a>
+      <a href="consultation.html" class="btn-solid-w">상담 예약</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===== HERO BANNER ===== -->
+  <section class="hero-banner" aria-label="미용·성형 소개">
+    <div class="hero-banner-inner">
+      <div class="hero-eyebrow">COSMETIC &amp; AESTHETIC · 유성선병원 성형외과</div>
+      <h1 class="hero-title">아름다움을 섬세하게 설계합니다</h1>
+      <p class="hero-subtitle">대학병원 출신 성형외과 전문의가 얼굴의 균형과 조화를 기준으로, 과하지 않은 자연스러운 변화를 계획합니다.</p>
+      <nav class="hero-breadcrumb" aria-label="현재 위치">
+        <a href="index.html">홈</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">미용·성형</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== CATEGORY GRID ===== -->
+  <section class="section categories" id="categories">
+    <div class="section-inner">
+      <div class="categories-header">
+        <div class="section-label">Cosmetic &amp; Aesthetic</div>
+        <h2 class="section-title">미용·성형 진료 분야</h2>
+        <p class="section-desc">아름다움과 자신감 회복을 위한 전문 진료. 대학병원급 안전 시스템 안에서 섬세하게 설계합니다.</p>
+      </div>
+
+      <div class="cards-grid">
+
+        <!-- 눈성형 -->
+        <a href="eye.html" class="service-card" aria-label="눈성형 자세히 보기">
+          <div class="card-thumb thumb-eye">
+            <div class="card-num">01</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Eye Center</div>
+            <h3 class="card-title">눈이 편안해지는 게 먼저입니다</h3>
+            <p class="card-desc">쌍꺼풀 라인만 보는 것이 아니라, 눈의 처짐과 기능, 인상을 함께 분석합니다. 절개/비절개, 눈매교정, 트임, 눈밑 지방 등 개인별 구조에 맞는 방법을 제안합니다.</p>
+            <div class="card-tags">
+              <span class="card-tag">#비절개쌍꺼풀</span>
+              <span class="card-tag">#눈매교정</span>
+              <span class="card-tag">#눈밑지방</span>
+              <span class="card-tag">#중년눈성형</span>
+              <span class="card-tag">#눈썹하거상</span>
+            </div>
+            <span class="card-link">자세히 보기 →</span>
+          </div>
+        </a>
+
+        <!-- 코성형 -->
+        <a href="#" class="service-card" aria-label="코성형 자세히 보기">
+          <div class="card-thumb thumb-nose">
+            <div class="card-num">02</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Rhinoplasty</div>
+            <h3 class="card-title">얼굴의 중심을 자연스럽게</h3>
+            <p class="card-desc">콧대 높이, 코끝 모양, 콧볼 폭을 얼굴 전체 비율 기준으로 설계합니다. 과하지 않으면서도 또렷한 라인, 기능까지 고려한 코성형을 원칙으로 합니다.</p>
+            <div class="card-tags">
+              <span class="card-tag">#콧대성형</span>
+              <span class="card-tag">#코끝성형</span>
+              <span class="card-tag">#콧볼축소</span>
+              <span class="card-tag">#자연스러운코</span>
+            </div>
+            <span class="card-link">자세히 보기 →</span>
+          </div>
+        </a>
+
+        <!-- 리프팅 -->
+        <a href="lifting.html" class="service-card" aria-label="리프팅 자세히 보기">
+          <div class="card-thumb thumb-lifting">
+            <div class="card-num">03</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Lifting &amp; Anti-Aging</div>
+            <h3 class="card-title">티 나지 않게, 얼굴이 정돈되는 설계</h3>
+            <p class="card-desc">피부 두께와 처짐 방향을 정밀하게 분석하여 단계적으로 계획합니다. SMAS 거상부터 실리프팅, 울쎄라/써마지까지 상태에 맞는 방법을 선택합니다.</p>
+            <div class="card-tags">
+              <span class="card-tag">#안면거상</span>
+              <span class="card-tag">#이마거상</span>
+              <span class="card-tag">#실리프팅</span>
+              <span class="card-tag">#울쎄라</span>
+              <span class="card-tag">#써마지</span>
+            </div>
+            <span class="card-link">자세히 보기 →</span>
+          </div>
+        </a>
+
+        <!-- 남자성형 -->
+        <a href="#" class="service-card" aria-label="남자성형 자세히 보기">
+          <div class="card-thumb thumb-male">
+            <div class="card-num">04</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Male Cosmetic</div>
+            <h3 class="card-title">남성의 인상도 섬세하게 다듬습니다</h3>
+            <p class="card-desc">남성 특유의 피부 두께와 골격 구조를 고려한 수술 설계가 핵심입니다. 자연스럽되 또렷한 변화, 일상 복귀가 빠른 방법을 우선합니다.</p>
+            <div class="card-tags">
+              <span class="card-tag">#남자눈성형</span>
+              <span class="card-tag">#남자코성형</span>
+              <span class="card-tag">#여유증수술</span>
+              <span class="card-tag">#남성성형</span>
+            </div>
+            <span class="card-link">자세히 보기 →</span>
+          </div>
+        </a>
+
+        <!-- 지방성형 -->
+        <a href="#" class="service-card" aria-label="지방성형 자세히 보기">
+          <div class="card-thumb thumb-fat">
+            <div class="card-num">05</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Fat Contouring</div>
+            <h3 class="card-title">빼는 것도, 채우는 것도 균형입니다</h3>
+            <p class="card-desc">안면 지방이식으로 꺼진 볼륨을 회복하고, 지방흡입으로 불필요한 라인을 정리합니다. 이식과 흡입 모두 세밀한 양 조절이 결과를 좌우합니다.</p>
+            <div class="card-tags">
+              <span class="card-tag">#안면지방이식</span>
+              <span class="card-tag">#지방흡입</span>
+              <span class="card-tag">#체형교정</span>
+              <span class="card-tag">#볼륨회복</span>
+            </div>
+            <span class="card-link">자세히 보기 →</span>
+          </div>
+        </a>
+
+        <!-- 가슴성형 -->
+        <a href="#" class="service-card" aria-label="가슴성형 자세히 보기">
+          <div class="card-thumb thumb-breast">
+            <div class="card-num">06</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Breast Surgery</div>
+            <h3 class="card-title">체형에 맞는 균형 있는 결과</h3>
+            <p class="card-desc">가슴확대, 축소, 함몰유두 교정 등 목적에 따라 접근 방식이 다릅니다. 종합병원 마취과 전담 체계하에 수술 안전성을 최우선으로 합니다.</p>
+            <div class="card-tags">
+              <span class="card-tag">#가슴확대</span>
+              <span class="card-tag">#가슴축소</span>
+              <span class="card-tag">#함몰유두</span>
+              <span class="card-tag">#유두성형</span>
+            </div>
+            <span class="card-link">자세히 보기 →</span>
+          </div>
+        </a>
+
+        <!-- 기타수술 -->
+        <a href="#" class="service-card" aria-label="기타수술 자세히 보기">
+          <div class="card-thumb thumb-other">
+            <div class="card-num">07</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Other Surgery</div>
+            <h3 class="card-title">작은 고민도 전문적으로</h3>
+            <p class="card-desc">이수열(귓불 갈라짐), 켈로이드 흉터, 칼귀 교정 등 일상에서 불편을 주는 문제를 성형외과 전문의가 정밀하게 해결합니다.</p>
+            <div class="card-tags">
+              <span class="card-tag">#이수열교정</span>
+              <span class="card-tag">#켈로이드치료</span>
+              <span class="card-tag">#칼귀교정</span>
+              <span class="card-tag">#귓볼성형</span>
+            </div>
+            <span class="card-link">자세히 보기 →</span>
+          </div>
+        </a>
+
+        <!-- 쁘띠·시술 -->
+        <a href="petit.html" class="service-card" aria-label="쁘띠·시술 자세히 보기">
+          <div class="card-thumb thumb-petit">
+            <div class="card-num">08</div>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Petit &amp; Skin</div>
+            <h3 class="card-title">필요한 만큼만, 과하지 않게</h3>
+            <p class="card-desc">보톡스, 필러, 리쥬란, 쥬베룩 등 비수술 시술을 표정과 비대칭, 생활 일정까지 고려하여 안전하게 시행합니다. 부담 없이 시작하는 첫 관리에 적합합니다.</p>
+            <div class="card-tags">
+              <span class="card-tag">#보톡스</span>
+              <span class="card-tag">#필러</span>
+              <span class="card-tag">#리쥬란</span>
+              <span class="card-tag">#쥬베룩</span>
+              <span class="card-tag">#피부시술</span>
+            </div>
+            <span class="card-link">자세히 보기 →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DOCTOR BANNER ===== -->
+  <section class="doctor-banner" id="doctor" aria-label="의료진 소개">
+    <div class="doctor-banner-inner">
+      <div class="doctor-img-wrap">
+        <img src="images/shin_profile.jpg" alt="신정환 전문의 프로필 사진" loading="lazy">
+        <div class="doctor-img-badge">
+          <strong>신정환 전문의</strong>
+          <span>성형외과 전문의</span>
+        </div>
+      </div>
+      <div class="doctor-content">
+        <div class="section-label">About Doctor</div>
+        <h2 class="section-title">의료진 소개</h2>
+        <p class="doctor-role">유성선병원 성형외과 | 가톨릭중앙의료원 출신</p>
+        <blockquote class="doctor-quote">
+          "대학병원에서 쌓은 경험과 안전한 종합병원 환경에서<br>
+          자연스럽고 섬세한 결과를 만들어 드립니다."
+        </blockquote>
+        <div class="credentials">
+          <div class="credential-item">성형외과 전문의 / 의학박사 수료</div>
+          <div class="credential-item">가톨릭중앙의료원 성형외과 전공의 수료</div>
+          <div class="credential-item">대한성형외과학회 / 대한미용성형외과학회 정회원</div>
+          <div class="credential-item">2023·2024년도 보건복지부 장관 표창</div>
+          <div class="credential-item">현) 유성선병원 성형외과 과장</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST SECTION ===== -->
+  <section class="section trust-section" id="trust" aria-label="신뢰 포인트">
+    <div class="section-inner">
+      <div class="trust-header">
+        <div class="section-label">Why Choose Us</div>
+        <h2 class="section-title">선택하는 이유</h2>
+        <p class="section-desc">대학병원의 안전함에 섬세함을 더합니다.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-num">01</div>
+          <h3 class="trust-card-title">대학병원 출신 전문의 직접 상담·수술·케어</h3>
+          <p class="trust-card-desc">가톨릭중앙의료원에서 수련한 신정환 과장이 상담부터 수술, 회복 관리까지 직접 담당합니다.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-num">02</div>
+          <h3 class="trust-card-title">종합병원 안전 시스템 내 수술</h3>
+          <p class="trust-card-desc">전신마취 전담 마취과, 응급 대응 체계, 입원 병동을 갖춘 종합병원에서 수술하므로 만일의 상황에도 즉각 대처할 수 있습니다.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-num">03</div>
+          <h3 class="trust-card-title">과하지 않은 결과, 충분한 설명</h3>
+          <p class="trust-card-desc">가능한 것과 불가능한 것을 먼저 설명하고, 자연스러운 변화를 기준으로 계획합니다. 보건복지부 장관 표창(2023, 2024) 수상 의료진의 원칙입니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="cta-section" id="contact" aria-label="상담 신청">
+    <div class="cta-section-inner">
+      <div class="cta-label">Consultation</div>
+      <h2 class="cta-title">지금 바로 상담을 시작해보세요</h2>
+      <p class="cta-desc">
+        온라인으로 간편하게 예약하거나<br>
+        카카오톡으로 편하게 문의하세요.
+      </p>
+      <div class="cta-buttons">
+        <a href="#" class="cta-btn-primary">무료 상담 예약하기</a>
+        <a href="tel:042-000-0000" class="cta-btn-outline">전화로 바로 문의</a>
+        <a href="#" class="cta-btn-kakao">카카오톡으로 편하게 상담</a>
+      </div>
+      <div class="cta-sub-notes">
+        <span>온라인으로 간편하게 예약하세요</span>
+        <span>042-000-0000 (평일 09:00–17:30)</span>
+        <span>사진 첨부 상담도 가능합니다</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-info">
+        <div class="footer-logo">유성선병원 성형외과</div>
+        <address class="footer-detail" style="font-style:normal">
+          의료법인 영훈의료재단 유성선병원<br>
+          진료과: 성형외과<br>
+          주소: 대전광역시 유성구 북유성대로 93 (지족동)<br>
+          대표전화: <a href="tel:042-000-0000" style="color:inherit">042-000-0000</a><br>
+          진료시간: 평일 09:00 – 17:30 | 토요일 09:00 – 12:30<br>
+          (일요일 및 공휴일 휴진 / 응급환자 24시간 대응)
+        </address>
+      </div>
+      <div class="footer-quick">
+        <div class="footer-quick-item">
+          <div class="footer-quick-icon">📍</div>
+          <div class="footer-quick-label">오시는 길</div>
+        </div>
+        <div class="footer-quick-item">
+          <div class="footer-quick-icon">🕐</div>
+          <div class="footer-quick-label">진료 시간</div>
+        </div>
+        <div class="footer-quick-item">
+          <div class="footer-quick-icon">💬</div>
+          <div class="footer-quick-label">카카오톡 상담</div>
+        </div>
+        <div class="footer-quick-item">
+          <div class="footer-quick-icon">📅</div>
+          <div class="footer-quick-label">네이버 예약</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 유성선병원 성형외과. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== MOBILE STICKY CTA ===== -->
+  <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
+    <div class="mobile-cta-inner">
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── Mobile menu ── */
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileNav  = document.getElementById('mobileNav');
+      let menuOpen = false;
+
+      function openMenu() {
+        menuOpen = true;
+        menuToggle.classList.add('open');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        mobileNav.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        menuOpen = false;
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      menuToggle.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
+
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && menuOpen) closeMenu();
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

@@ -227,14 +227,18 @@
             class="self-end mb-5 p-2 rounded-lg bg-white/10 text-white flex items-center justify-center">
             <span class="material-icons-round text-sm">close</span>
         </button>
-        <nav class="flex-1 space-y-2">
+        <nav class="flex-1 space-y-1">
             <a class="flex items-center gap-3 px-4 py-3 bg-primary/20 text-primary border border-primary/20 rounded-xl transition-all"
                 href="#overview" onclick="closeMobileMenu()">
                 <span class="font-medium text-sm">개요</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                href="#site-pages" onclick="closeMobileMenu()">
+                <span class="font-medium text-sm">사이트 페이지</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
                 href="#website" onclick="closeMobileMenu()">
-                <span class="font-medium text-sm">홈페이지</span>
+                <span class="font-medium text-sm">홈페이지 초안</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
                 href="#content" onclick="closeMobileMenu()">
@@ -273,14 +277,18 @@
         <!-- Sidebar Navigation -->
         <aside class="hidden md:flex w-40 lg:w-64 flex-col items-stretch h-full glass-panel rounded-xl py-8 px-4">
 
-            <nav class="flex-1 space-y-2">
+            <nav class="flex-1 space-y-1 overflow-y-auto custom-scrollbar">
                 <a class="flex items-center gap-3 px-4 py-3 bg-primary/20 text-primary border border-primary/20 rounded-xl transition-all"
                     href="#overview">
                     <span class="font-medium text-sm">개요</span>
                 </a>
                 <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    href="#site-pages">
+                    <span class="font-medium text-sm">사이트 페이지</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
                     href="#website">
-                    <span class="font-medium text-sm">홈페이지</span>
+                    <span class="font-medium text-sm">홈페이지 초안</span>
                 </a>
                 <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
                     href="#content">
@@ -373,7 +381,7 @@
                             <span class="text-xs font-medium text-green-400">신규</span>
                         </div>
                         <h3 class="text-white/50 text-sm font-medium">홈페이지 페이지</h3>
-                        <p class="text-2xl font-bold mt-1">6 pages</p>
+                        <p class="text-2xl font-bold mt-1">26 pages</p>
                     </div>
 
                     <div class="glass-panel p-5 rounded-xl">
@@ -587,7 +595,275 @@
                     </div>
                 </div>
 
-                <!-- 홈페이지 섹션 -->
+                <!-- 사이트 페이지 현황 -->
+                <div id="site-pages" class="glass-panel p-6 rounded-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-accent/20 rounded-lg">
+                            <span class="material-icons-round text-accent">account_tree</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold">사이트 페이지 현황</h2>
+                            <p class="text-white/40 text-xs">전체 26페이지 — 섹션별 구성</p>
+                        </div>
+                        <div class="ml-auto flex items-center gap-2 px-3 py-1.5 bg-primary/20 border border-primary/30 rounded-lg">
+                            <span class="material-icons-round text-primary text-sm">description</span>
+                            <span class="text-sm font-bold text-primary">총 26페이지</span>
+                        </div>
+                    </div>
+
+                    <!-- 빠른 링크 -->
+                    <div class="mb-6 p-4 bg-white/5 rounded-xl border border-white/10">
+                        <p class="text-xs font-bold text-white/50 uppercase tracking-wider mb-3">사이트 바로가기</p>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="index.html" target="_blank"
+                                class="flex items-center gap-1.5 px-3 py-1.5 bg-primary/20 text-primary border border-primary/30 rounded-lg text-xs font-semibold hover:bg-primary/30 transition-all">
+                                <span class="material-icons-round text-sm">home</span>홈 열기
+                            </a>
+                            <a href="cosmetic.html" target="_blank"
+                                class="flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-lg text-xs font-semibold hover:bg-purple-500/30 transition-all">
+                                <span class="material-icons-round text-sm">face</span>미용·성형 허브
+                            </a>
+                            <a href="medical.html" target="_blank"
+                                class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-lg text-xs font-semibold hover:bg-emerald-500/30 transition-all">
+                                <span class="material-icons-round text-sm">healing</span>치료·재건 허브
+                            </a>
+                            <a href="booking.html" target="_blank"
+                                class="flex items-center gap-1.5 px-3 py-1.5 bg-accent/20 text-accent border border-accent/30 rounded-lg text-xs font-semibold hover:bg-accent/30 transition-all">
+                                <span class="material-icons-round text-sm">calendar_today</span>진료예약
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 섹션별 현황 그리드 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                        <!-- 홈 + 허브 -->
+                        <div class="bg-white/5 rounded-xl border border-primary/20 p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-primary"></div>
+                                    <h3 class="font-bold text-sm">홈 + 허브</h3>
+                                </div>
+                                <span class="text-xs px-2 py-0.5 bg-primary/20 text-primary rounded-full font-semibold">3페이지</span>
+                            </div>
+                            <div class="space-y-1.5">
+                                <a href="index.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">메인 랜딩</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">index.html</span>
+                                </a>
+                                <a href="cosmetic.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">미용·성형 허브</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">cosmetic.html</span>
+                                </a>
+                                <a href="medical.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">치료·재건 허브</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">medical.html</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 기관 소개 -->
+                        <div class="bg-white/5 rounded-xl border border-blue-500/20 p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+                                    <h3 class="font-bold text-sm">기관 소개</h3>
+                                </div>
+                                <span class="text-xs px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded-full font-semibold">5페이지</span>
+                            </div>
+                            <div class="space-y-1.5">
+                                <a href="about.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">소개</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">about.html</span>
+                                </a>
+                                <a href="doctor.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">의료진소개</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">doctor.html</span>
+                                </a>
+                                <a href="features.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">성형외과 특징</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">features.html</span>
+                                </a>
+                                <a href="tour.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">병원 둘러보기</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">tour.html</span>
+                                </a>
+                                <a href="academic.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">학술활동</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">academic.html</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 미용·성형 진료 -->
+                        <div class="bg-white/5 rounded-xl border border-purple-500/20 p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                                    <h3 class="font-bold text-sm">미용·성형 진료</h3>
+                                </div>
+                                <span class="text-xs px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded-full font-semibold">8페이지</span>
+                            </div>
+                            <div class="space-y-1.5">
+                                <a href="eye.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">눈성형</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">eye.html</span>
+                                </a>
+                                <a href="nose.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">코성형</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">nose.html</span>
+                                </a>
+                                <a href="lifting.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">리프팅</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">lifting.html</span>
+                                </a>
+                                <a href="male.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">남자성형</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">male.html</span>
+                                </a>
+                                <a href="fat.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">지방성형</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">fat.html</span>
+                                </a>
+                                <a href="breast.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">가슴성형</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">breast.html</span>
+                                </a>
+                                <a href="other.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">기타수술</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">other.html</span>
+                                </a>
+                                <a href="petit.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">쁘띠·시술</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">petit.html</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 치료·재건 진료 -->
+                        <div class="bg-white/5 rounded-xl border border-emerald-500/20 p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                                    <h3 class="font-bold text-sm">치료·재건 진료</h3>
+                                </div>
+                                <span class="text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full font-semibold">4페이지</span>
+                            </div>
+                            <div class="space-y-1.5">
+                                <a href="trauma.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">상처·외상</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">trauma.html</span>
+                                </a>
+                                <a href="burn.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">화상</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">burn.html</span>
+                                </a>
+                                <a href="reconstruction.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">피부종양</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">reconstruction.html</span>
+                                </a>
+                                <a href="pediatric.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">소아진료</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">pediatric.html</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 커뮤니티 -->
+                        <div class="bg-white/5 rounded-xl border border-amber-500/20 p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+                                    <h3 class="font-bold text-sm">커뮤니티</h3>
+                                </div>
+                                <span class="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded-full font-semibold">5페이지</span>
+                            </div>
+                            <div class="space-y-1.5">
+                                <a href="community.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">커뮤니티</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">community.html</span>
+                                </a>
+                                <a href="consultation.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">온라인상담</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">consultation.html</span>
+                                </a>
+                                <a href="booking.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">진료예약</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">booking.html</span>
+                                </a>
+                                <a href="news.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">언론보도</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">news.html</span>
+                                </a>
+                                <a href="notice.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                    <span class="text-xs text-white/70 group-hover:text-white">공지사항</span>
+                                    <span class="text-xs text-white/30 group-hover:text-white/60">notice.html</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 구성 요약 -->
+                        <div class="bg-gradient-to-b from-primary/10 to-transparent rounded-xl border border-primary/20 p-4">
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="w-2 h-2 rounded-full bg-primary"></div>
+                                <h3 class="font-bold text-sm">구성 요약</h3>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs text-white/60">홈 + 허브</span>
+                                    <div class="flex items-center gap-2">
+                                        <div class="h-1.5 w-16 bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-primary rounded-full" style="width:11.5%"></div>
+                                        </div>
+                                        <span class="text-xs font-bold text-primary w-6 text-right">3</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs text-white/60">기관 소개</span>
+                                    <div class="flex items-center gap-2">
+                                        <div class="h-1.5 w-16 bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-blue-400 rounded-full" style="width:19.2%"></div>
+                                        </div>
+                                        <span class="text-xs font-bold text-blue-400 w-6 text-right">5</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs text-white/60">미용·성형</span>
+                                    <div class="flex items-center gap-2">
+                                        <div class="h-1.5 w-16 bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-purple-400 rounded-full" style="width:30.7%"></div>
+                                        </div>
+                                        <span class="text-xs font-bold text-purple-400 w-6 text-right">8</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs text-white/60">치료·재건</span>
+                                    <div class="flex items-center gap-2">
+                                        <div class="h-1.5 w-16 bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-emerald-400 rounded-full" style="width:15.4%"></div>
+                                        </div>
+                                        <span class="text-xs font-bold text-emerald-400 w-6 text-right">4</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs text-white/60">커뮤니티</span>
+                                    <div class="flex items-center gap-2">
+                                        <div class="h-1.5 w-16 bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-amber-400 rounded-full" style="width:19.2%"></div>
+                                        </div>
+                                        <span class="text-xs font-bold text-amber-400 w-6 text-right">5</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 mt-2 border-t border-white/10 flex items-center justify-between">
+                                    <span class="text-xs font-bold text-white/80">합계</span>
+                                    <span class="text-base font-bold text-primary">26</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 홈페이지 초안 섹션 -->
                 <div id="website" class="glass-panel p-6 rounded-xl">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="p-2 bg-primary/20 rounded-lg">
