@@ -9,46 +9,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **언어**: 한국어 (lang="ko")
 - **스택**: 순수 HTML5 + CSS3 + Vanilla JS (프레임워크/패키지 없음)
 - **배포**: GitHub Pages (`https://chul1215.github.io/ysmc_pla/`) — main 브랜치 푸시 시 자동 배포
-- **로컬 실행**: 파일 더블클릭으로 직접 열기 가능 (Pretendard CDN, 상대경로 모두 정상 작동)
+- **로컬 서버**: `python3 -m http.server 8080`
 
-```bash
-# 선택적 로컬 서버 (필요 시)
-python3 -m http.server 8080
-```
+## 파일 구성
 
-## 전체 파일 구조 (23개 활성 HTML)
-
-```
-index.html              ← 메인 홈 (스플릿 히어로, 최종 확정)
-dashboard.html          ← 관리자 대시보드 (Tailwind CSS, 별도 아키텍처)
-
-# 허브 페이지
-cosmetic.html           ← 미용·성형 전체 허브 (8개 카테고리, 얼굴 이미지+배너 형식)
-medical.html            ← 치료·재건 전체 허브 (4개 카테고리)
-
-# 기관 소개
-about.html / doctor.html / tour.html
-
-# 미용·성형 상세 (8개)
-eye.html / nose.html / lifting.html / male.html
-fat.html / breast.html / other.html / petit.html
-
-# 치료·재건 상세 (4개)
-trauma.html / burn.html / reconstruction.html / pediatric.html
-
-# 커뮤니티 (5개)
-community.html / consultation.html / booking.html / news.html / notice.html
-
-images/         ← 실제 이미지 파일 (아래 목록 참조)
-reference/      ← 마케팅 전략 문서 (content_strategy.md, microsite_cf.md, second_feedback.md)
-briefing/       ← 브리핑 자료
-plan/           ← 기획서
-_archive/       ← 미사용 보관 (index2.html, features.html, academic.html)
-```
+- `index.html` — 메인 홈 (스플릿 히어로)
+- `dashboard.html` — 관리자 대시보드 (Tailwind CSS, **별도 아키텍처**)
+- `cosmetic.html` / `medical.html` — 진료 허브 페이지 (각 카테고리 진입점)
+- 미용·성형 상세 8개: `eye`, `nose`, `lifting`, `male`, `fat`, `breast`, `other`, `petit`
+- 치료·재건 상세 4개: `trauma`, `burn`, `reconstruction`, `pediatric`
+- 기관 소개: `about`, `doctor`, `tour`
+- 커뮤니티: `community`, `consultation`, `booking`, `news`, `notice`
+- `_archive/` — 미사용 보관 (GNB에서 제거된 features.html, academic.html 등)
 
 ### 사용 가능한 이미지 (`images/` 폴더)
-`eye-correction.png`, `lifting.jpg`, `petit-skin.png`, `surgery-room.jpg`, `shin_profile.jpg`
-및 눈성형 관련 시술 이미지 다수 (매몰법, 절개법, 앞트임 등). **이 목록에 없는 이미지 경로는 사용 금지** — 없는 이미지는 CSS 그라디언트로 처리.
+`eye-correction.png`, `lifting.jpg`, `petit-skin.png`, `surgery-room.jpg`, `shin_profile.jpg` 및 눈성형 관련 시술 이미지 다수. **이 목록에 없는 이미지 경로는 사용 금지** — 없는 이미지는 CSS 그라디언트로 처리.
 
 ## 코드 아키텍처: 파일 완전 자급자족 구조
 
@@ -62,42 +37,38 @@ _archive/       ← 미사용 보관 (index2.html, features.html, academic.html)
 [로고] | 소개 | 의료진소개 | 병원둘러보기 | 진료안내▼ | 커뮤니티▼ | [상담예약]
 ```
 
-- **진료안내 드롭다운**: 2컬럼 메가메뉴 (미용·성형 8개 / 치료·재건 4개)
-- **커뮤니티 드롭다운**: 1컬럼 (온라인상담, 카카오톡상담, 진료예약, **수술후기(#)**, 언론보도, 공지사항)
-- **제거된 탭**: "성형외과특징", "학술활동" — GNB에서 삭제됨 (파일은 `_archive/` 보관)
-- **드롭다운 방식**: CSS hover로만 구현 (JS 없음)
-- **모바일**: 햄버거 → 풀스크린 오버레이, 계층 구조 유지
+- **드롭다운**: CSS hover로만 구현 (JS 없음)
+- **모바일**: 햄버거 → 풀스크린 오버레이
 - **현재 페이지 표시**: 해당 항목에 `.current` 클래스
 
-### 상세 페이지 JS 규칙
+### JS 패턴
 
-- **상세 페이지 (eye, lifting 등 진료 페이지)**: inline `onclick` 방식만 사용
-- **FAQ 아코디언**: `onclick="this.parentElement.classList.toggle('active')"` 방식
-- **index.html**: IIFE 패턴 `<script>` 블록 — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up, 스플릿 히어로 터치 포함
-- **cosmetic.html, medical.html, about.html**: IIFE 스크립트 — 카드 stagger 애니메이션
-- **tour.html**: 터치 스와이프 슬라이더 스크립트 (화살표 + dot 인디케이터)
+- **진료 상세 페이지**: `<script>` 블록 없음. FAQ 아코디언은 `onclick="this.parentElement.classList.toggle('active')"` 방식
+- **index.html**: IIFE — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up, 스플릿 히어로 터치
+- **cosmetic.html, medical.html, about.html**: IIFE — 카드 stagger 애니메이션
+- **tour.html**: 터치 스와이프 슬라이더 (화살표 + dot 인디케이터)
 
-### 모바일 CTA CSS 주의사항
+### 모바일 주의사항
 
-`.mobile-cta { display: none }` 기본 정의는 반드시 `@media (max-width: 768px) { .mobile-cta { display: block } }` 오버라이드보다 **앞에** 선언해야 한다. 순서가 뒤바뀌면 모바일에서도 CTA가 표시되지 않음.
+**CSS 캐스케이드 순서**: `.mobile-cta { display: none }` 기본 정의는 반드시 `@media (max-width: 768px) { .mobile-cta { display: block } }` 오버라이드보다 **앞에** 선언해야 한다. 순서가 뒤바뀌면 모바일에서도 CTA가 표시되지 않음.
 
-### 모바일 공통 패턴 (전체 페이지 적용 완료)
+- **하단 고정 CTA 바** (`class="mobile-cta"`): 전화/카카오 버튼 2개. `padding-bottom: calc(10px + env(safe-area-inset-bottom))`으로 아이폰 노치 대응
+- **푸터 퀵링크**: 오시는 길 / 진료 시간 / 카카오톡 상담 3개. **네이버 예약 없음**
+- **브레이크포인트**: `1024px` (태블릿), `768px` (모바일)
 
-- **하단 고정 CTA 바**: `class="mobile-cta"` — `display:none` 기본, `@media (max-width: 768px)`에서 `display:block`. 전화/카카오 버튼 2개. `padding-bottom: calc(10px + env(safe-area-inset-bottom))`으로 아이폰 노치 대응
-- **푸터 퀵링크**: 오시는 길 / 진료 시간 / 카카오톡 상담 — 3개 항목. **네이버 예약 없음**
-- **반응형 브레이크포인트**: `1024px` (태블릿, 3열→2열), `768px` (모바일, 전체 1열)
+### index.html 스플릿 히어로
 
-### index.html 스플릿 히어로 특이사항
-
-- **스플릿 패널**: `flex` 비율 transition (`flex: 1` → `flex: 1.6`), clip-path 미사용
-- **대각선 심(seam)**: 0-width flex item + `::before { skewX(-6deg) }`
-- **iOS Safari 대응**: `height: 100svh`
-- **패널 클릭**: 좌측 → `cosmetic.html`, 우측 → `medical.html` 이동
 - **모바일 터치**: 1차 탭 → 패널 확장, 2차 탭 → 링크 이동, 2.2초 자동 축소
+- **iOS Safari**: `height: 100svh`
+- **패널 링크**: 좌측 → `cosmetic.html`, 우측 → `medical.html`
+
+### cosmetic.html 히어로 레이아웃 주의
+
+`.hero-banner-inner`에 `width: 100%` 필수 — 없으면 flex child가 content 너비로 수축해 텍스트가 좌측에 고정되지 않음. `font-size: clamp(36px, 4.2vw, 54px)` — 더 큰 값은 컨테이너 내에서 3줄 깨짐 발생.
 
 ## CSS 색상 시스템
 
-모든 페이지(dashboard.html 제외)는 동일한 CSS 변수 블록을 사용한다:
+모든 페이지(dashboard.html 제외)에서 동일한 CSS 변수:
 
 ```css
 :root {
@@ -105,8 +76,8 @@ _archive/       ← 미사용 보관 (index2.html, features.html, academic.html)
   --primary-light: #d96858;
   --primary-dark: #a33828;
   --wine: #3d0f09;          /* 딥 와인 (미용성형 히어로 배경) */
-  --navy: #0a1828;          /* 다크 네이비 (치료재건 배경, doctor 섹션) */
-  --navy-mid: #1a3a5c;      /* 미드 네이비 */
+  --navy: #0a1828;          /* 다크 네이비 (치료재건 배경) */
+  --navy-mid: #1a3a5c;
   --accent: #f8f2dc;        /* 서브 컬러 (웜 크림) */
   --accent-light: #faf6e8;
   --bg-off: #f5f3ef;        /* 섹션 배경 (오프화이트) */
@@ -116,38 +87,28 @@ _archive/       ← 미사용 보관 (index2.html, features.html, academic.html)
 }
 ```
 
-- `--primary` (`#cd4631`) → rgba: `205, 70, 49`
-- `--accent` (`#f8f2dc`) → rgba: `248, 242, 220`
-- 색상 변경 시 CSS 변수 외에 파일 내 하드코딩된 `rgba(...)` 값도 grep으로 확인 필요
+색상 변경 시 CSS 변수 외에 파일 내 하드코딩된 `rgba(...)` 값도 grep으로 확인 필요.
 
 ## dashboard.html 특이사항
 
-다른 페이지와 완전히 별개의 아키텍처:
-
-- **CDN 의존**: Tailwind CSS, Google Fonts (Inter, Noto Sans KR, Material Icons) — 인터넷 필수
-- **테마 토글**: `<html class="dark">` 기본값. `html.light-mode` 클래스 토글, `localStorage('dashboardTheme')` 저장
-- **라이트 모드 CSS**: `html.light-mode ...` 셀렉터. Tailwind 클래스명의 `/`는 CSS 셀렉터에서 백슬래시 이스케이프 필요 (`text-white\/60`)
-- **커스텀 클래스**: `.glass-panel`, `.mesh-gradient` — `<style>` 블록 내 정의
-- **레이아웃**: `overflow-hidden h-screen` 고정 높이. 모바일 햄버거 드로어
+- **CDN 의존**: Tailwind CSS, Google Fonts — 인터넷 필수
+- **테마**: `<html class="dark">` 기본값, `html.light-mode` 토글, `localStorage('dashboardTheme')` 저장
+- Tailwind 클래스명의 `/`는 CSS 셀렉터에서 백슬래시 이스케이프 필요 (`text-white\/60`)
 
 ## 레이아웃 패턴
 
-- 최대 너비: `1280px`
-- 섹션 패딩: 상하 `100px`, 좌우 `40px`
-- 반응형 브레이크포인트: `1024px`, `768px`
-- 폰트: Pretendard (CDN 로드) → `'Apple SD Gothic Neo'` → `'Malgun Gothic'`
+- 최대 너비: `1280px` / 섹션 패딩: 상하 `100px`, 좌우 `40px`
+- 폰트: Pretendard (CDN) → `'Apple SD Gothic Neo'` → `'Malgun Gothic'`
 
 ## 브랜드 & 콘텐츠 규칙
 
 - **핵심 메시지**: "대학병원의 안전함에 섬세함을 더하다"
-- **의료진 호칭**: 반드시 "전문의" 또는 "과장" 사용. **"원장"은 사용 금지** (종합병원 진료과 형태)
+- **의료진 호칭**: "전문의" 또는 "과장" 사용. **"원장" 사용 금지** (종합병원 진료과 형태)
 - **담당의**: 신정환 과장 (성형외과 전문의, 가톨릭중앙의료원 출신)
-- **SNS 섹션 설명**: "유성선병원 성형외과가 직접 전하는 의료 정보와 상담 콘텐츠"
-- **CTA 3종**: 상담 예약(`booking.html`) / 전화 문의(`tel:042-000-0000`) / 카카오톡 문의
-- **미용성형 컬러 포인트**: `--primary` 테라코타 계열
-- **치료재건 컬러 포인트**: `--navy-mid` 네이비 계열
-- **의료법 준수**: "최고", "완벽한", "100% 만족" 등 과장 표현 사용 금지
+- **CTA 3종**: 상담 예약(`booking.html`) / 전화(`tel:042-000-0000`) / 카카오톡
+- **미용성형 컬러**: `--primary` / **치료재건 컬러**: `--navy-mid`
+- **의료법 준수**: "최고", "완벽한", "100% 만족" 등 과장 표현 금지
 
 ## 콘텐츠 전략 참고
 
-`reference/content_strategy.md` — 경쟁사(체리성형외과, 나나성형외과) 벤치마킹 분석, 각 페이지별 카피 브리프, 차별화 포지셔닝 5가지 포함. 카피 수정 시 반드시 참고.
+`reference/content_strategy.md` — 경쟁사 벤치마킹, 페이지별 카피 브리프, 차별화 포지셔닝. 카피 수정 시 반드시 참고.
