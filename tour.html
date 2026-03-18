@@ -78,44 +78,158 @@
     /* ===== Common ===== */
     .section { padding: 100px 40px; }
     .section-inner { max-width: 1280px; margin: 0 auto; }
-    .section-label { display: inline-block; font-size: 11px; font-weight: 700; color: var(--primary); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
-    .section-title { font-size: 36px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; line-height: 1.25; margin-bottom: 14px; }
+    .section-label { display: inline-block; font-size: 10px; font-weight: 600; color: var(--primary); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; line-height: 1.25; margin-bottom: 14px; }
     .section-desc { font-size: 15px; color: var(--text-mid); line-height: 1.8; }
 
-    /* ===== Space Grid ===== */
-    .space-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    /* ===== Slider ===== */
+    .slider-section { background: #fff; padding: 0; }
 
-    .space-card {
-      border-radius: 16px;
+    .slider-wrap {
+      position: relative;
       overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
+      touch-action: pan-y;
     }
 
-    .space-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-
-    .space-thumb {
-      height: 200px;
+    .slider-track {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .slide {
+      min-width: 100%;
+      display: flex;
+      flex-direction: column;
       position: relative;
     }
 
-    .space-thumb-label {
-      position: absolute;
-      bottom: 16px;
-      left: 16px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
+    .slide-visual {
+      height: 56vw;
+      max-height: 560px;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .space-body { padding: 24px; background: #fff; border: 1px solid rgba(0,0,0,0.07); border-top: none; border-radius: 0 0 16px 16px; }
-    .space-body h3 { font-size: 17px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; letter-spacing: -0.3px; }
-    .space-body p { font-size: 14px; color: var(--text-mid); line-height: 1.8; }
+    .slide-visual-emoji {
+      font-size: clamp(64px, 10vw, 100px);
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+    }
+
+    .slide-label-tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+      padding: 5px 12px;
+      border-radius: 2px;
+    }
+
+    .slide-counter {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .slide-counter span { color: #fff; }
+
+    .slide-body {
+      padding: 28px 32px 36px;
+      background: #fff;
+    }
+
+    .slide-body h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .slide-body p {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    /* Arrow buttons */
+    .slider-btn {
+      position: absolute;
+      top: calc(56vw / 2);
+      transform: translateY(-50%);
+      z-index: 20;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: background 0.2s, transform 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .slider-btn:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+    .slider-btn:active { transform: translateY(-50%) scale(0.96); }
+    .slider-btn svg { width: 18px; height: 18px; color: var(--text-dark); }
+
+    .slider-btn-prev { left: 16px; }
+    .slider-btn-next { right: 16px; }
+
+    /* Dots */
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 0 8px;
+      background: #fff;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: background 0.25s, width 0.25s;
+      border: none;
+      padding: 0;
+    }
+
+    .dot.active {
+      background: var(--primary);
+      width: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .slider-btn { width: 36px; height: 36px; }
+      .slider-btn svg { width: 14px; height: 14px; }
+      .slider-btn-prev { left: 10px; }
+      .slider-btn-next { right: 10px; }
+      .slide-body { padding: 24px 20px 28px; }
+      .slide-body h3 { font-size: 20px; }
+    }
+
+    /* Legacy space-grid kept for reference but hidden */
+    .space-grid { display: none; }
 
     /* ===== Amenities ===== */
     .amenity-section { background: var(--bg-light); }
@@ -265,9 +379,7 @@
       <div class="mob-nav-top-links">
         <a href="about.html">소개</a>
         <a href="doctor.html">의료진소개</a>
-        <a href="features.html">성형외과특징</a>
         <a href="tour.html" class="current">병원둘러보기</a>
-        <a href="academic.html">학술활동</a>
       </div>
       <div class="mob-sub-title">미용·성형</div>
       <div class="mob-sub-grid">
@@ -284,8 +396,8 @@
       <div class="mob-sub-title">커뮤니티</div>
       <div class="mob-sub-grid">
         <a href="consultation.html">온라인상담</a><a href="#">카카오상담</a>
-        <a href="booking.html">진료예약</a><a href="news.html">언론보도</a>
-        <a href="notice.html">공지사항</a>
+        <a href="booking.html">진료예약</a><a href="#">수술후기</a>
+        <a href="news.html">언론보도</a><a href="notice.html">공지사항</a>
       </div>
     </div>
     <div class="mobile-nav-divider"></div>
@@ -300,7 +412,6 @@
     <nav class="gnb" aria-label="주 메뉴">
       <div class="gnb-item"><a href="about.html">소개</a></div>
       <div class="gnb-item"><a href="doctor.html">의료진소개</a></div>
-      <div class="gnb-item"><a href="features.html">성형외과특징</a></div>
       <div class="gnb-item"><a href="tour.html" class="current">병원둘러보기</a></div>
       <div class="gnb-item">
         <a href="cosmetic.html">진료안내 <span class="gnb-arrow">▾</span></a>
@@ -319,13 +430,13 @@
           </div>
         </div>
       </div>
-      <div class="gnb-item"><a href="academic.html">학술활동</a></div>
       <div class="gnb-item">
         <a href="community.html">커뮤니티 <span class="gnb-arrow">▾</span></a>
         <div class="gnb-dropdown">
           <a href="consultation.html">온라인상담</a>
           <a href="#">카카오톡 상담</a>
           <a href="booking.html">진료예약</a>
+          <a href="#">수술후기</a>
           <a href="news.html">언론보도</a>
           <a href="notice.html">공지사항</a>
         </div>
@@ -350,84 +461,166 @@
     </div>
   </section>
 
-  <!-- ===== SPACE GRID ===== -->
-  <section class="section" style="background:#fff;">
-    <div class="section-inner">
+  <!-- ===== SPACE SLIDER ===== -->
+  <section class="section slider-section" style="padding-top: 64px; padding-bottom: 0; background:#fff;">
+    <div class="section-inner" style="max-width:1280px; margin:0 auto; padding: 0 40px;">
       <div class="section-label">Our Spaces</div>
       <h2 class="section-title">진료 공간 소개</h2>
-      <p class="section-desc">환자의 안전과 편안함을 최우선으로 설계된 진료 공간을 소개합니다.</p>
-
-      <div class="space-grid">
-
-        <div class="space-card">
-          <div class="space-thumb" style="background: linear-gradient(140deg, #1a2c4a 0%, #0d1f36 100%);">
-            <span style="font-size:48px; position:relative; z-index:1;">🏥</span>
-            <span class="space-thumb-label">Reception</span>
-          </div>
-          <div class="space-body">
-            <h3>접수·원무 데스크</h3>
-            <p>밝고 편안한 분위기의 접수 공간. 숙련된 코디네이터가 수술 전 상담 예약부터 진료 안내까지 돕습니다.</p>
-          </div>
-        </div>
-
-        <div class="space-card">
-          <div class="space-thumb" style="background: linear-gradient(140deg, #2a1a3a 0%, #1a0d2e 100%);">
-            <span style="font-size:48px; position:relative; z-index:1;">💬</span>
-            <span class="space-thumb-label">Consultation</span>
-          </div>
-          <div class="space-body">
-            <h3>1:1 상담실</h3>
-            <p>독립된 개인 상담실에서 전문의와 충분한 상담을 진행합니다. 3D 시뮬레이션 장비를 통해 수술 결과를 미리 확인할 수 있습니다.</p>
-          </div>
-        </div>
-
-        <div class="space-card">
-          <div class="space-thumb" style="background: linear-gradient(140deg, #1a3a2a 0%, #0d2e1a 100%);">
-            <span style="font-size:48px; position:relative; z-index:1;">🔬</span>
-            <span class="space-thumb-label">Operating Room</span>
-          </div>
-          <div class="space-body">
-            <h3>수술실</h3>
-            <p>종합병원 규격의 청정 수술실. 최신 의료 장비와 실시간 생체 모니터링 시스템이 수술 내내 환자의 안전을 지킵니다.</p>
-          </div>
-        </div>
-
-        <div class="space-card">
-          <div class="space-thumb" style="background: linear-gradient(140deg, #3a2a1a 0%, #2e1a0d 100%);">
-            <span style="font-size:48px; position:relative; z-index:1;">💊</span>
-            <span class="space-thumb-label">Recovery Room</span>
-          </div>
-          <div class="space-body">
-            <h3>회복실</h3>
-            <p>수술 직후 전담 간호사가 상주하는 회복실. 마취에서 깨어나는 과정을 전문 의료진이 직접 케어합니다.</p>
-          </div>
-        </div>
-
-        <div class="space-card">
-          <div class="space-thumb" style="background: linear-gradient(140deg, #2a3a1a 0%, #1a2e0d 100%);">
-            <span style="font-size:48px; position:relative; z-index:1;">🛏️</span>
-            <span class="space-thumb-label">Inpatient Ward</span>
-          </div>
-          <div class="space-body">
-            <h3>입원 병동</h3>
-            <p>1인실·다인실 입원 병동 완비. 수술 후 충분한 회복을 위해 필요 시 입원 치료를 진행합니다. 보호자 대기 공간 별도 운영.</p>
-          </div>
-        </div>
-
-        <div class="space-card">
-          <div class="space-thumb" style="background: linear-gradient(140deg, #1a1a3a 0%, #0d0d2e 100%);">
-            <span style="font-size:48px; position:relative; z-index:1;">✨</span>
-            <span class="space-thumb-label">Laser Room</span>
-          </div>
-          <div class="space-body">
-            <h3>레이저·시술실</h3>
-            <p>최신 레이저 장비를 갖춘 전용 시술실. 보톡스, 필러, 레이저 치료 등 비절개 시술이 이루어집니다.</p>
-          </div>
-        </div>
-
-      </div>
+      <p class="section-desc" style="margin-bottom:36px;">환자의 안전과 편안함을 최우선으로 설계된 진료 공간을 소개합니다.</p>
     </div>
   </section>
+
+  <div class="slider-wrap" id="spaceSlider" style="max-width:860px; margin:0 auto 64px; position:relative;">
+
+    <div class="slider-track" id="sliderTrack">
+
+      <div class="slide">
+        <div class="slide-visual" style="background: linear-gradient(140deg, #1a2c4a 0%, #0d1f36 100%);">
+          <span class="slide-visual-emoji">🏥</span>
+          <span class="slide-label-tag">Reception</span>
+          <span class="slide-counter"><span id="slideCurrentNum">1</span> / 6</span>
+        </div>
+        <div class="slide-body">
+          <h3>접수·원무 데스크</h3>
+          <p>밝고 편안한 분위기의 접수 공간. 숙련된 코디네이터가 수술 전 상담 예약부터 진료 안내까지 도움을 드립니다.</p>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-visual" style="background: linear-gradient(140deg, #2a1a3a 0%, #1a0d2e 100%);">
+          <span class="slide-visual-emoji">💬</span>
+          <span class="slide-label-tag">Consultation</span>
+        </div>
+        <div class="slide-body">
+          <h3>1:1 프라이빗 상담실</h3>
+          <p>독립된 개인 상담실에서 전문의와 충분한 상담을 진행합니다. 3D 시뮬레이션 장비를 통해 수술 결과를 미리 확인할 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-visual" style="background: linear-gradient(140deg, #1a3a2a 0%, #0d2e1a 100%);">
+          <span class="slide-visual-emoji">🔬</span>
+          <span class="slide-label-tag">Operating Room</span>
+        </div>
+        <div class="slide-body">
+          <h3>수술실</h3>
+          <p>종합병원 규격의 청정 수술실. 최신 의료 장비와 실시간 생체 모니터링 시스템이 수술 내내 환자의 안전을 지킵니다.</p>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-visual" style="background: linear-gradient(140deg, #3a2a1a 0%, #2e1a0d 100%);">
+          <span class="slide-visual-emoji">💊</span>
+          <span class="slide-label-tag">Recovery Room</span>
+        </div>
+        <div class="slide-body">
+          <h3>회복실</h3>
+          <p>수술 직후 전담 간호사가 상주하는 회복실. 마취에서 깨어나는 과정을 전문 의료진이 직접 케어합니다.</p>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-visual" style="background: linear-gradient(140deg, #2a3a1a 0%, #1a2e0d 100%);">
+          <span class="slide-visual-emoji">🛏️</span>
+          <span class="slide-label-tag">Inpatient Ward</span>
+        </div>
+        <div class="slide-body">
+          <h3>입원 병동</h3>
+          <p>1인실·다인실 입원 병동 완비. 수술 후 충분한 회복을 위해 필요 시 입원 치료를 진행합니다. 보호자 대기 공간 별도 운영.</p>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-visual" style="background: linear-gradient(140deg, #1a1a3a 0%, #0d0d2e 100%);">
+          <span class="slide-visual-emoji">✨</span>
+          <span class="slide-label-tag">Laser Room</span>
+        </div>
+        <div class="slide-body">
+          <h3>레이저·시술실</h3>
+          <p>최신 레이저 장비를 갖춘 전용 시술실. 보톡스, 필러, 레이저 치료 등 비절개 시술이 이루어지는 공간입니다.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Arrow buttons -->
+    <button class="slider-btn slider-btn-prev" id="sliderPrev" aria-label="이전 슬라이드">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="slider-btn slider-btn-next" id="sliderNext" aria-label="다음 슬라이드">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+
+    <!-- Dot indicators -->
+    <div class="slider-dots" id="sliderDots"></div>
+
+  </div>
+
+  <script>
+    (function() {
+      var track = document.getElementById('sliderTrack');
+      var slider = document.getElementById('spaceSlider');
+      var prevBtn = document.getElementById('sliderPrev');
+      var nextBtn = document.getElementById('sliderNext');
+      var dotsWrap = document.getElementById('sliderDots');
+      var numEl = document.getElementById('slideCurrentNum');
+      var slides = track.querySelectorAll('.slide');
+      var total = slides.length;
+      var current = 0;
+      var startX = 0;
+      var isDragging = false;
+
+      /* Build dots */
+      for (var i = 0; i < total; i++) {
+        var d = document.createElement('button');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', (i + 1) + '번 슬라이드');
+        d.setAttribute('data-idx', i);
+        d.onclick = (function(idx) { return function() { goTo(idx); }; })(i);
+        dotsWrap.appendChild(d);
+      }
+
+      function updateDots() {
+        var dots = dotsWrap.querySelectorAll('.dot');
+        dots.forEach(function(d, idx) {
+          d.classList.toggle('active', idx === current);
+        });
+        if (numEl) numEl.textContent = current + 1;
+      }
+
+      function goTo(idx) {
+        current = (idx + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        updateDots();
+      }
+
+      prevBtn.onclick = function() { goTo(current - 1); };
+      nextBtn.onclick = function() { goTo(current + 1); };
+
+      /* Touch / drag */
+      slider.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+
+      slider.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+          goTo(diff > 0 ? current + 1 : current - 1);
+        }
+        isDragging = false;
+      });
+
+      /* Keyboard */
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+      });
+
+      updateDots();
+    })();
+  </script>
 
   <!-- ===== AMENITIES ===== -->
   <section class="section amenity-section">

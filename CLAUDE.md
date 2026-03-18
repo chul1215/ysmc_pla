@@ -16,19 +16,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 python3 -m http.server 8080
 ```
 
-## 전체 파일 구조 (26개 HTML)
+## 전체 파일 구조 (23개 활성 HTML)
 
 ```
 index.html              ← 메인 홈 (스플릿 히어로, 최종 확정)
-index2.html             ← 구 시안2 보관용 (현재 미사용)
 dashboard.html          ← 관리자 대시보드 (Tailwind CSS, 별도 아키텍처)
 
 # 허브 페이지
-cosmetic.html           ← 미용·성형 전체 허브 (8개 카테고리)
+cosmetic.html           ← 미용·성형 전체 허브 (8개 카테고리, 얼굴 이미지+배너 형식)
 medical.html            ← 치료·재건 전체 허브 (4개 카테고리)
 
 # 기관 소개
-about.html / doctor.html / features.html / tour.html / academic.html
+about.html / doctor.html / tour.html
 
 # 미용·성형 상세 (8개)
 eye.html / nose.html / lifting.html / male.html
@@ -41,9 +40,10 @@ trauma.html / burn.html / reconstruction.html / pediatric.html
 community.html / consultation.html / booking.html / news.html / notice.html
 
 images/         ← 실제 이미지 파일 (아래 목록 참조)
-reference/      ← 마케팅 전략 문서 (content_strategy.md, microsite_cf.md)
+reference/      ← 마케팅 전략 문서 (content_strategy.md, microsite_cf.md, second_feedback.md)
 briefing/       ← 브리핑 자료
 plan/           ← 기획서
+_archive/       ← 미사용 보관 (index2.html, features.html, academic.html)
 ```
 
 ### 사용 가능한 이미지 (`images/` 폴더)
@@ -59,20 +59,27 @@ plan/           ← 기획서
 ### GNB 구조 (모든 페이지 공통)
 
 ```
-[로고] | 소개 | 의료진소개 | 성형외과특징 | 병원둘러보기 | 진료안내▼ | 학술활동 | 커뮤니티▼ | [상담예약]
+[로고] | 소개 | 의료진소개 | 병원둘러보기 | 진료안내▼ | 커뮤니티▼ | [상담예약]
 ```
 
 - **진료안내 드롭다운**: 2컬럼 메가메뉴 (미용·성형 8개 / 치료·재건 4개)
-- **커뮤니티 드롭다운**: 1컬럼 (온라인상담, 카카오톡상담, 진료예약, 언론보도, 공지사항)
+- **커뮤니티 드롭다운**: 1컬럼 (온라인상담, 카카오톡상담, 진료예약, **수술후기(#)**, 언론보도, 공지사항)
+- **제거된 탭**: "성형외과특징", "학술활동" — GNB에서 삭제됨 (파일은 `_archive/` 보관)
 - **드롭다운 방식**: CSS hover로만 구현 (JS 없음)
 - **모바일**: 햄버거 → 풀스크린 오버레이, 계층 구조 유지
 - **현재 페이지 표시**: 해당 항목에 `.current` 클래스
 
 ### 상세 페이지 JS 규칙
 
-- **상세 페이지 (eye, lifting 등 진료 페이지)**: `<script>` 블록 없음 — 모든 인터랙션은 CSS + inline `onclick`
+- **상세 페이지 (eye, lifting 등 진료 페이지)**: inline `onclick` 방식만 사용
 - **FAQ 아코디언**: `onclick="this.parentElement.classList.toggle('active')"` 방식
-- **index.html**: IIFE 패턴 `<script>` 블록 — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up 포함
+- **index.html**: IIFE 패턴 `<script>` 블록 — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up, 스플릿 히어로 터치 포함
+- **cosmetic.html, medical.html, about.html**: IIFE 스크립트 — 카드 stagger 애니메이션
+- **tour.html**: 터치 스와이프 슬라이더 스크립트 (화살표 + dot 인디케이터)
+
+### 모바일 CTA CSS 주의사항
+
+`.mobile-cta { display: none }` 기본 정의는 반드시 `@media (max-width: 768px) { .mobile-cta { display: block } }` 오버라이드보다 **앞에** 선언해야 한다. 순서가 뒤바뀌면 모바일에서도 CTA가 표시되지 않음.
 
 ### 모바일 공통 패턴 (전체 페이지 적용 완료)
 

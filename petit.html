@@ -363,16 +363,16 @@
 
     .section-label {
       display: inline-block;
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 10px;
+      font-weight: 600;
       color: var(--primary);
-      letter-spacing: 2px;
+      letter-spacing: 4px;
       text-transform: uppercase;
       margin-bottom: 12px;
     }
 
     .section-title {
-      font-size: 36px;
+      font-size: clamp(28px, 4vw, 42px);
       font-weight: 700;
       color: var(--text-dark);
       letter-spacing: -0.5px;
@@ -441,7 +441,7 @@
 
     /* ===== Special Points Section ===== */
     .special-points {
-      background: var(--bg-light);
+      background: var(--bg-off);
     }
 
     .points-grid {
@@ -452,16 +452,17 @@
 
     .point-card {
       background: var(--white);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 40px 32px;
       text-align: center;
-      box-shadow: var(--shadow);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.04);
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .point-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
     }
 
     .point-icon {
@@ -492,7 +493,7 @@
 
     /* ===== Procedure Types Section ===== */
     .procedure-types {
-      background: var(--bg-warm);
+      background: var(--accent-light);
     }
 
     .types-grid {
@@ -503,14 +504,15 @@
 
     .type-card {
       background: var(--white);
-      border-radius: 14px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .type-card:hover {
       transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
     }
 
     .type-card-visual {
@@ -576,15 +578,15 @@
     }
 
     .faq-item {
-      background: var(--bg-light);
-      border-radius: 12px;
+      background: var(--bg-off);
+      border-radius: 16px;
       margin-bottom: 16px;
       overflow: hidden;
       transition: box-shadow 0.3s;
     }
 
     .faq-item:hover {
-      box-shadow: var(--shadow);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     }
 
     .faq-question {
@@ -755,7 +757,40 @@
       .section-title {
         font-size: 28px;
       }
+      .footer { padding-bottom: 76px; }
+      .cta-buttons { flex-direction: column; align-items: stretch; }
+      .cta-btn { width: 100%; text-align: center; }
     }
+
+    /* ===== Mobile Sticky CTA ===== */
+    .mobile-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; width: 100%;
+      z-index: 990;
+      background: #0a0a0f;
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.4);
+      padding: 10px 16px;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+    .mobile-cta-inner { display: flex; gap: 10px; }
+    .mobile-cta-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 14px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.25s;
+    }
+    .mobile-cta-btn:active { opacity: 0.8; }
+    .cta-phone { background: #cd4631; color: #fff; }
+    .cta-kakao { background: #FEE500; color: #3C1E1E; }
+    @media (max-width: 768px) { .mobile-cta { display: block; } }
   </style>
 </head>
 
@@ -767,9 +802,7 @@
       <div class="mob-nav-top-links">
         <a href="about.html">소개</a>
         <a href="doctor.html">의료진소개</a>
-        <a href="features.html">성형외과특징</a>
         <a href="tour.html">병원둘러보기</a>
-        <a href="academic.html">학술활동</a>
       </div>
       <div class="mob-sub-title">미용·성형</div>
       <div class="mob-sub-grid">
@@ -794,6 +827,7 @@
         <a href="consultation.html">온라인상담</a>
         <a href="#">카카오상담</a>
         <a href="booking.html">진료예약</a>
+        <a href="#">수술후기</a>
         <a href="news.html">언론보도</a>
         <a href="notice.html">공지사항</a>
       </div>
@@ -811,7 +845,6 @@
     <nav class="gnb" aria-label="주 메뉴">
       <div class="gnb-item"><a href="about.html">소개</a></div>
       <div class="gnb-item"><a href="doctor.html">의료진소개</a></div>
-      <div class="gnb-item"><a href="features.html">성형외과특징</a></div>
       <div class="gnb-item"><a href="tour.html">병원둘러보기</a></div>
       <div class="gnb-item">
         <a href="cosmetic.html" class="current">진료안내 <span class="gnb-arrow">▾</span></a>
@@ -836,13 +869,13 @@
           </div>
         </div>
       </div>
-      <div class="gnb-item"><a href="academic.html">학술활동</a></div>
       <div class="gnb-item">
         <a href="community.html">커뮤니티 <span class="gnb-arrow">▾</span></a>
         <div class="gnb-dropdown">
           <a href="consultation.html">온라인상담</a>
           <a href="#">카카오톡 상담</a>
           <a href="booking.html">진료예약</a>
+          <a href="#">수술후기</a>
           <a href="news.html">언론보도</a>
           <a href="notice.html">공지사항</a>
         </div>
@@ -1085,9 +1118,28 @@
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <p class="footer-copy">&copy; 2025 유성선병원 성형외과. All rights reserved.</p>
+  <footer class="footer" style="background:#111;color:rgba(255,255,255,0.58);padding:40px 20px 24px;text-align:center;">
+    <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:12px;">유성선병원 성형외과</div>
+    <address style="font-size:12px;line-height:2;font-style:normal;color:rgba(255,255,255,0.5);margin-bottom:20px;">
+      대전광역시 유성구 북유성대로 93 (지족동)<br>
+      대표전화: <a href="tel:042-000-0000" style="color:inherit;">042-000-0000</a><br>
+      진료시간: 평일 09:00–17:30 | 토요일 09:00–12:30
+    </address>
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
+      <a href="tel:042-000-0000" style="padding:10px 20px;background:rgba(255,255,255,0.06);border-radius:8px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;">전화 문의</a>
+      <a href="#" style="padding:10px 20px;background:#FEE500;border-radius:8px;font-size:13px;color:#3C1E1E;font-weight:700;text-decoration:none;">카카오톡</a>
+      <a href="booking.html" style="padding:10px 20px;background:rgba(255,255,255,0.06);border-radius:8px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;">진료예약</a>
+    </div>
+    <p style="font-size:12px;color:rgba(255,255,255,0.28);">&copy; 2025 유성선병원 성형외과. All rights reserved.</p>
   </footer>
+
+  <!-- ===== MOBILE STICKY CTA ===== -->
+  <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
+    <div class="mobile-cta-inner">
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao">카카오톡</a>
+    </div>
+  </div>
 
 </body>
 
