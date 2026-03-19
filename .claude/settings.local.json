@@ -40,7 +40,11 @@
       "mcp__playwright__browser_take_screenshot",
       "Bash(do)",
       "Read(//Users/chul/Documents/ysmc_pla/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_fill_form",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_tabs"
     ]
   }
 }
