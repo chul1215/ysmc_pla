@@ -96,7 +96,7 @@
       aspect-ratio: 3/4;
       border-radius: 12px;
       overflow: hidden;
-      background: linear-gradient(160deg, #1a3a5c 0%, #0a1828 100%);
+      background: linear-gradient(160deg, var(--accent) 0%, var(--bg-off) 100%);
       display: flex;
       align-items: flex-end;
       position: relative;
@@ -110,7 +110,7 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      color: rgba(255,255,255,0.4);
+      color: rgba(106,190,167,0.6);
       font-size: 14px;
     }
 
@@ -202,14 +202,14 @@
     .timeline-content p { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
 
     /* ===== CTA ===== */
-    .cta-section { background: var(--text-dark); padding: 80px 40px; text-align: center; }
-    .cta-section h2 { font-size: 32px; font-weight: 800; color: #fff; letter-spacing: -0.8px; margin-bottom: 12px; }
-    .cta-section p { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 36px; }
+    .cta-section { background: var(--accent-light); padding: 80px 40px; text-align: center; }
+    .cta-section h2 { font-size: 32px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; margin-bottom: 12px; }
+    .cta-section p { font-size: 15px; color: var(--text-mid); margin-bottom: 36px; }
     .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     .cta-btn-primary { padding: 14px 32px; background: var(--primary); color: #0d2e29; border-radius: 6px; font-size: 15px; font-weight: 700; transition: background 0.25s; }
     .cta-btn-primary:hover { background: var(--primary-light); }
-    .cta-btn-outline { padding: 14px 32px; border: 1.5px solid rgba(255,255,255,0.35); color: rgba(255,255,255,0.85); border-radius: 6px; font-size: 15px; font-weight: 600; transition: all 0.25s; }
-    .cta-btn-outline:hover { border-color: #fff; color: #fff; }
+    .cta-btn-outline { padding: 14px 32px; border: 1.5px solid rgba(106,190,167,0.4); color: var(--primary-dark); border-radius: 6px; font-size: 15px; font-weight: 600; transition: all 0.25s; }
+    .cta-btn-outline:hover { border-color: var(--primary); color: var(--primary); }
     .cta-btn-kakao { padding: 14px 32px; background: #FEE500; color: #3C1E1E; border-radius: 6px; font-size: 15px; font-weight: 700; }
 
     /* ===== Footer ===== */

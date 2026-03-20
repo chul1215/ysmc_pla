@@ -94,7 +94,7 @@
 
     .principle { background: var(--white); }
     .principle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .principle-visual { height: 380px; border-radius: 16px; box-shadow: var(--shadow-lg); background: linear-gradient(135deg, #0d1f2d 0%, #2a5070 100%); display: flex; align-items: center; justify-content: center; font-size: 80px; }
+    .principle-visual { height: 380px; border-radius: 16px; box-shadow: var(--shadow-lg); background: linear-gradient(135deg, var(--accent) 0%, var(--bg-off) 100%); display: flex; align-items: center; justify-content: center; font-size: 80px; }
     .principle-content h3 { font-size: 28px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; }
     .principle-content p { font-size: 16px; line-height: 1.8; color: var(--text-mid); margin-bottom: 16px; }
     .principle-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
@@ -102,7 +102,7 @@
 
     /* Consent / Notice Box */
     .consent-box { background: #f0f4ff; border: 1px solid #c0d0f0; border-radius: 12px; padding: 32px; margin-top: 40px; }
-    .consent-box h4 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .consent-box h4 { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
     .consent-items { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .consent-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid); line-height: 1.6; }
     .consent-item::before { content: '📋'; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
@@ -112,7 +112,7 @@
     .point-card { background: var(--white); border-radius: 20px; padding: 40px 32px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
       border: 1px solid rgba(0,0,0,0.04); transition: transform 0.3s, box-shadow 0.3s; }
     .point-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
-    .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, #3a5a9a, var(--navy)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
+    .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
     .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
     .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
 
@@ -126,7 +126,7 @@
     .type-card-desc { font-size: 14px; line-height: 1.7; color: var(--text-mid); margin-bottom: 16px; }
     .type-card-features { display: flex; flex-direction: column; gap: 8px; }
     .type-card-feature { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-mid); }
-    .type-card-feature::before { content: '✓'; color: var(--navy-mid); font-weight: 700; font-size: 14px; }
+    .type-card-feature::before { content: '✓'; color: var(--primary); font-weight: 700; font-size: 14px; }
 
     .faq { background: var(--white); }
     .faq-list { max-width: 900px; margin: 0 auto; }
@@ -134,7 +134,7 @@
     .faq-item:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     .faq-question { padding: 24px 28px; cursor: pointer; display: flex; align-items: center; gap: 16px; transition: background 0.3s; }
     .faq-question:hover { background: rgba(26,39,68,0.05); }
-    .faq-q-icon { flex-shrink: 0; width: 36px; height: 36px; background: var(--navy); color: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; }
+    .faq-q-icon { flex-shrink: 0; width: 36px; height: 36px; background: var(--primary); color: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; }
     .faq-q-text { flex: 1; font-size: 17px; font-weight: 600; color: var(--text-dark); }
     .faq-toggle { font-size: 24px; color: var(--text-light); transition: transform 0.3s; }
     .faq-item.active .faq-toggle { transform: rotate(180deg); }
@@ -142,15 +142,15 @@
     .faq-item.active .faq-answer { max-height: 600px; }
     .faq-answer-inner { padding: 0 28px 24px 80px; font-size: 15px; line-height: 1.8; color: var(--text-mid); }
 
-    .cta { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); color: var(--white); text-align: center; }
-    .cta h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
-    .cta p { font-size: 17px; opacity: 0.85; margin-bottom: 36px; }
+    .cta { background: var(--accent-light); color: var(--text-dark); text-align: center; }
+    .cta h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark); }
+    .cta p { font-size: 17px; color: var(--text-mid); margin-bottom: 36px; }
     .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     .cta-btn { padding: 16px 40px; border-radius: 8px; font-size: 16px; font-weight: 700; transition: all 0.3s; cursor: pointer; border: none; display: inline-block; }
-    .cta-btn-primary { background: var(--accent); color: var(--navy); }
-    .cta-btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
-    .cta-btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4); }
-    .cta-btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+    .cta-btn-primary { background: var(--primary); color: #0d2e29; }
+    .cta-btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); }
+    .cta-btn-outline { background: transparent; color: var(--primary-dark); border: 2px solid rgba(106,190,167,0.4); }
+    .cta-btn-outline:hover { border-color: var(--primary); color: var(--primary); }
     .cta-btn-kakao { background: #FEE500; color: #3C1E1E; }
     .cta-btn-kakao:hover { background: #ffd700; transform: translateY(-2px); }
 
@@ -356,7 +356,7 @@
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #0d1f2d, #2a5070); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent), var(--bg-off)); display:flex; align-items:center; justify-content:center; font-size:64px;">
             🩹
           </div>
           <div class="type-card-body">
@@ -371,7 +371,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #1a1020, #3a2050); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent-light), var(--accent)); display:flex; align-items:center; justify-content:center; font-size:64px;">
             ⚫
           </div>
           <div class="type-card-body">
@@ -386,7 +386,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #1a1008, #3a2818); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--bg-off), var(--accent-light)); display:flex; align-items:center; justify-content:center; font-size:64px;">
             🔥
           </div>
           <div class="type-card-body">
@@ -401,7 +401,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #0a1820, #1a3040); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent), var(--accent-light)); display:flex; align-items:center; justify-content:center; font-size:64px;">
             🔴
           </div>
           <div class="type-card-body">
@@ -416,7 +416,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #0f0f1a, #2d2d5a); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--bg-off), var(--accent)); display:flex; align-items:center; justify-content:center; font-size:64px;">
             👂
           </div>
           <div class="type-card-body">
@@ -431,7 +431,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #0f1a0f, #1a3020); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(255,255,255,0.4);">
+          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent-light), var(--bg-off)); display:flex; align-items:center; justify-content:center; font-size:64px;">
             💊
           </div>
           <div class="type-card-body">
