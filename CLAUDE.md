@@ -23,7 +23,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `_archive/` — 미사용 보관 (GNB에서 제거된 features.html, academic.html 등)
 
 ### 사용 가능한 이미지 (`images/` 폴더)
-`eye-correction.png`, `lifting.jpg`, `petit-skin.png`, `surgery-room.jpg`, `shin_profile.jpg` 및 눈성형 관련 시술 이미지 다수. **이 목록에 없는 이미지 경로는 사용 금지** — 없는 이미지는 CSS 그라디언트로 처리.
+
+루트: `eye-correction.png`, `lifting.jpg`, `petit-skin.png`, `surgery-room.jpg`, `shin_profile.jpg` 및 눈성형 시술 이미지 다수 (`매몰법_den.png`, `절개법_dei.png`, `앞트임_epi.png` 등).
+
+`images/mc-image/미용성형/` — 카테고리 카드용 실사진 8종 + 메인/세컨페이지 이미지:
+- `미용성형 메인.jpg`, `미용성형 세컨페이지.jpg`
+- `1. 아이 센터.png`, `2. 라이노플래스티.jpg`, `3. 리프팅 안티에이징.jpg`, `4. 메일 코스매틱.png`, `5. 팻 컨투어링.jpg`, `6. 브레스트 써저리.jpg`, `7. 아더 써저리.jpg`, `8. 쁘띠스킨.jpg`
+
+`images/mc-image/치료재건/` — 카테고리 카드용 실사진 4종 + 메인/세컨페이지 이미지:
+- `치료재건 메인.png`, `치료재건 세컨페이지.png`
+- `1. 트라우마.png`, `2. 번 트리트먼트.png`, `3. 스킨 튜머.png`, `4. 피디애트릭.jpg`
+
+**이 목록에 없는 이미지 경로는 사용 금지** — 없는 이미지는 CSS 그라디언트로 처리.
 
 ## 코드 아키텍처: 파일 완전 자급자족 구조
 
@@ -72,18 +83,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```css
 :root {
-  --primary: #cd4631;       /* 메인 컬러 (테라코타 레드) */
-  --primary-light: #d96858;
-  --primary-dark: #a33828;
-  --wine: #3d0f09;          /* 딥 와인 (미용성형 히어로 배경) */
+  --primary: #6abea7;       /* 메인 컬러 (민트/틸) */
+  --primary-light: #7cffc4;
+  --primary-dark: #4d9e8a;
+  --wine: #1a3d38;          /* 딥 틸 (미용성형 히어로 배경) */
   --navy: #0a1828;          /* 다크 네이비 (치료재건 배경) */
   --navy-mid: #1a3a5c;
-  --accent: #f8f2dc;        /* 서브 컬러 (웜 크림) */
-  --accent-light: #faf6e8;
-  --bg-off: #f5f3ef;        /* 섹션 배경 (오프화이트) */
+  --accent: #c0e8e4;        /* 서브 컬러 (라이트 민트) */
+  --accent-light: #daf2f0;
+  --bg-off: #f0f8f7;        /* 섹션 배경 (민트 오프화이트) */
   --text-dark: #1A1A1A;
   --text-mid: #555;
   --text-light: #888;
+  --white: #FFFFFF;
 }
 ```
 
