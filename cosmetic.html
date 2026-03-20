@@ -336,9 +336,13 @@
     .hero-face-bg {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 70% 100% at 70% 0%, rgba(205,70,49,0.35) 0%, transparent 60%),
-        linear-gradient(160deg, #3d0f09 0%, #1a0505 40%, #2a0808 100%);
+      background-color: #1a0808;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.32) 52%, transparent 75%),
+        url('images/mc-image/미용성형/미용성형 메인.jpg');
+      background-size: auto, auto 100%;
+      background-position: center, right center;
+      background-repeat: no-repeat, no-repeat;
     }
 
     /* Decorative circles */
@@ -366,42 +370,6 @@
       max-height: 380px;
       border-radius: 50%;
       border: 1px solid rgba(205,70,49,0.08);
-    }
-
-    /* Silhouette/face placeholder */
-    .hero-face-silhouette {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 52%;
-      max-width: 480px;
-      height: 95%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero-face-silhouette::before {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 100%;
-      background:
-        radial-gradient(ellipse 60% 90% at 50% 80%, rgba(205,70,49,0.2) 0%, transparent 70%),
-        linear-gradient(to bottom, transparent 0%, rgba(61,15,9,0.6) 100%);
-      position: absolute;
-      inset: 0;
-    }
-
-    .hero-face-emoji {
-      font-size: clamp(120px, 22vw, 220px);
-      line-height: 1;
-      opacity: 0.5;
-      position: relative;
-      z-index: 1;
-      filter: grayscale(0.2) brightness(1.2);
-      margin-bottom: -8px;
     }
 
     /* Text overlay — left edge mirrors .section-inner centering */
@@ -499,8 +467,11 @@
       .hero-top-banner { padding: 8px 20px; }
       .hero-top-title { display: none; }
       .hero-visual { height: clamp(360px, 90vw, 480px); }
-      .hero-face-silhouette { width: 65%; }
-      .hero-face-emoji { font-size: clamp(100px, 30vw, 160px); }
+      .hero-face-bg {
+        background:
+          linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 100%),
+          url('images/mc-image/미용성형/미용성형 메인.jpg') center top / cover no-repeat;
+      }
       .hero-banner-inner { padding: 0 20px 36px; }
       .hero-title { font-size: clamp(30px, 9vw, 48px); }
       .hero-cta-row { flex-direction: column; }
@@ -645,15 +616,24 @@
 
     .service-card:hover .card-link { gap: 9px; }
 
-    /* Gradient thumbnails (no image) */
-    .thumb-eye      { background: linear-gradient(135deg, #2a0a05 0%, #8b2a1a 50%, #cd4631 100%); }
-    .thumb-nose     { background: linear-gradient(135deg, #3d1a0a 0%, #a34528 50%, #d96858 100%); }
-    .thumb-lifting  { background: linear-gradient(135deg, #1a0505 0%, #7a1f12 50%, #b83a27 100%); }
-    .thumb-male     { background: linear-gradient(135deg, #0d1520 0%, #1e3a5f 50%, #2d5a8a 100%); }
-    .thumb-fat      { background: linear-gradient(135deg, #1a1208 0%, #5a3d18 50%, #8b6030 100%); }
-    .thumb-breast   { background: linear-gradient(135deg, #200a12 0%, #6b1f35 50%, #9e3a55 100%); }
-    .thumb-other    { background: linear-gradient(135deg, #141414 0%, #3a3a3a 50%, #5a5a5a 100%); }
-    .thumb-petit    { background: linear-gradient(135deg, #1a0c06 0%, #7a3a1a 50%, #c06030 100%); }
+    /* Card thumbnails */
+    .thumb-eye      { background: url('images/mc-image/미용성형/1. 아이 센터.png') center/cover no-repeat; }
+    .thumb-nose     { background: url('images/mc-image/미용성형/2. 라이노플래스티.jpg') center/cover no-repeat; }
+    .thumb-lifting  { background: url('images/mc-image/미용성형/3. 리프팅 안티에이징.jpg') center/cover no-repeat; }
+    .thumb-male     { background: url('images/mc-image/미용성형/4. 메일 코스매틱.png') center/cover no-repeat; }
+    .thumb-fat      { background: url('images/mc-image/미용성형/5. 팻 컨투어링.jpg') center/cover no-repeat; }
+    .thumb-breast   { background: url('images/mc-image/미용성형/6. 브레스트 써저리.jpg') center/cover no-repeat; }
+    .thumb-other    { background: url('images/mc-image/미용성형/7. 아더 써저리.jpg') center/cover no-repeat; }
+    .thumb-petit    { background: url('images/mc-image/미용성형/8. 쁘띠스킨.jpg') center/cover no-repeat; }
+
+    /* Image overlay for card thumbnail readability */
+    .card-thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.45) 100%);
+      z-index: 1;
+    }
 
     /* Decorative circle on thumb */
     .card-thumb::after {
@@ -664,7 +644,8 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      z-index: 3;
     }
 
     /* ===== Doctor Banner (compact) ===== */
@@ -1170,10 +1151,6 @@
     <!-- Main visual -->
     <div class="hero-visual">
       <div class="hero-face-bg" aria-hidden="true"></div>
-      <div class="hero-face-silhouette" aria-hidden="true">
-        <span class="hero-face-emoji">👩</span>
-      </div>
-
       <div class="hero-banner-inner">
         <div class="hero-eyebrow">Cosmetic &amp; Aesthetic · 미용·성형</div>
         <h1 class="hero-title">아름다움을<br><em>섬세하게</em> 설계합니다</h1>

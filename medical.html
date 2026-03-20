@@ -286,7 +286,11 @@
     /* ===== Hero Banner ===== */
     .hero-banner {
       height: 400px;
-      background: var(--navy);
+      background-color: #0a1828;
+      background-image: url('images/mc-image/치료재건/치료재건 메인.png');
+      background-size: auto 100%;
+      background-position: right center;
+      background-repeat: no-repeat;
       display: flex;
       align-items: center;
       position: relative;
@@ -298,7 +302,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(140deg, rgba(10,24,40,0.97) 0%, rgba(26,58,92,0.65) 100%);
+      background: linear-gradient(140deg, rgba(10,24,40,0.75) 0%, rgba(26,58,92,0.45) 100%);
       z-index: 1;
     }
 
@@ -503,11 +507,20 @@
 
     .service-card:hover .card-link { gap: 9px; }
 
-    /* Gradient thumbnails */
-    .thumb-trauma       { background: linear-gradient(135deg, #0a1828 0%, #1a3a5c 50%, #245a8a 100%); }
-    .thumb-burn         { background: linear-gradient(135deg, #1a0a02 0%, #5a2a08 50%, #8a4a18 100%); }
-    .thumb-tumor        { background: linear-gradient(135deg, #0d1520 0%, #1e3850 50%, #2e5070 100%); }
-    .thumb-pediatric    { background: linear-gradient(135deg, #0a1428 0%, #152a4a 50%, #1e3d6a 100%); }
+    /* Card thumbnails */
+    .thumb-trauma       { background: url('images/mc-image/치료재건/1. 트라우마.png') center/cover no-repeat; }
+    .thumb-burn         { background: url('images/mc-image/치료재건/2. 번 트리트먼트.png') center/cover no-repeat; }
+    .thumb-tumor        { background: url('images/mc-image/치료재건/3. 스킨 튜머.png') center/cover no-repeat; }
+    .thumb-pediatric    { background: url('images/mc-image/치료재건/4. 피디애트릭.jpg') center/cover no-repeat; }
+
+    /* Image overlay for card thumbnail readability */
+    .card-thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.45) 100%);
+      z-index: 1;
+    }
 
     .card-thumb::after {
       content: '';
@@ -517,11 +530,25 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      z-index: 3;
     }
 
     /* ===== Safety Section ===== */
-    .safety { background: var(--bg-off); }
+    .safety {
+      background-image: url('images/mc-image/치료재건/치료재건 세컨페이지.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .safety::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(245,243,239,0.93);
+      z-index: 0;
+    }
+    .safety .section-inner { position: relative; z-index: 1; }
 
     .safety-header { margin-bottom: 56px; }
 
