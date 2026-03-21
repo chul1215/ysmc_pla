@@ -46,7 +46,15 @@
       "mcp__playwright__browser_snapshot",
       "mcp__playwright__browser_tabs",
       "Bash(do echo:*)",
-      "Bash(__NEW_LINE_56f936085064fea9__ echo:*)"
+      "Bash(__NEW_LINE_56f936085064fea9__ echo:*)",
+      "mcp__playwright__playwright_navigate",
+      "mcp__playwright__playwright_screenshot",
+      "mcp__playwright__playwright_get_visible_html",
+      "mcp__playwright__playwright_evaluate",
+      "mcp__playwright__playwright_resize",
+      "Bash(xargs -I {} basename {})",
+      "Bash(head -5 echo \"---\" grep -n \"6abea7\\\\|7cffc4\\\\|4d9e8a\\\\|1a3d38\\\\|0a1828\\\\|1a3a5c\\\\|c0e8e4\\\\|daf2f0\\\\|f0f8f7\\\\|rgba\\(106,190\" booking.html)",
+      "Bash(head -5 echo \"---\" grep -n \"6abea7\\\\|7cffc4\\\\|4d9e8a\\\\|1a3d38\\\\|0a1828\\\\|1a3a5c\\\\|c0e8e4\\\\|daf2f0\\\\|f0f8f7\\\\|rgba\\(106,190\" fat.html)"
     ]
   }
 }
