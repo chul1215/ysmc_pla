@@ -15,13 +15,13 @@
     img { max-width: 100%; height: auto; display: block; }
 
     :root {
-      --primary: #6abea7;
-      --primary-light: #7cffc4;
-      --primary-dark: #4d9e8a;
-      --accent: #c0e8e4;
-      --accent-light: #daf2f0;
-      --bg-light: #f0f8f7;
-      --bg-warm: #daf2f0;
+      --primary: #42c0bf;
+      --primary-light: #63c3c2;
+      --primary-dark: #2da8a7;
+      --accent: #b2e4e4;
+      --accent-light: #d2f0f0;
+      --bg-light: #f0fafa;
+      --bg-warm: #d2f0f0;
       --text-dark: #1A1A1A;
       --text-mid: #555;
       --text-light: #888;
@@ -103,12 +103,12 @@
     /* ===== Page Hero ===== */
     .page-hero {
       margin-top: 80px; position: relative; overflow: hidden;
-      background: linear-gradient(135deg, #2d1810 0%, #4a2218 50%, #6abea7 100%);
+      background: linear-gradient(135deg, #2d1810 0%, #4a2218 50%, #42c0bf 100%);
       padding: 100px 40px 80px;
     }
     .page-hero::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(106,190,167,0.3) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 70% 50%, rgba(66,192,191,0.3) 0%, transparent 60%);
     }
     .page-hero-inner { max-width: 1280px; margin: 0 auto; text-align: center; color: var(--white); position: relative; }
     .page-hero-badge {
@@ -132,7 +132,7 @@
     .principle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     .principle-visual {
       height: 380px; border-radius: 16px; box-shadow: var(--shadow-lg);
-      background: linear-gradient(135deg, #2d1810 0%, #7a3020 60%, #6abea7 100%);
+      background: linear-gradient(135deg, #2d1810 0%, #7a3020 60%, #42c0bf 100%);
       display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); font-size: 80px;
     }
     .principle-content h3 { font-size: 28px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; }
@@ -168,7 +168,7 @@
     .faq-item { background: var(--bg-off); border-radius: 16px; margin-bottom: 16px; overflow: hidden; transition: box-shadow 0.3s; }
     .faq-item:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     .faq-question { padding: 24px 28px; cursor: pointer; display: flex; align-items: center; gap: 16px; transition: background 0.3s; }
-    .faq-question:hover { background: rgba(106,190,167,0.05); }
+    .faq-question:hover { background: rgba(66,192,191,0.05); }
     .faq-q-icon { flex-shrink: 0; width: 36px; height: 36px; background: var(--primary); color: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; }
     .faq-q-text { flex: 1; font-size: 17px; font-weight: 600; color: var(--text-dark); }
     .faq-toggle { font-size: 24px; color: var(--text-light); transition: transform 0.3s; }
@@ -212,7 +212,7 @@
       .section-title { font-size: 28px; }
       .points-grid { grid-template-columns: 1fr; }
       .types-grid { grid-template-columns: 1fr; }
-      .mobile-cta { display: block; }
+      .mobile-cta { display: block !important; }
       .footer, .footer { padding-bottom: 76px; }
     }
 
@@ -243,7 +243,7 @@
       transition: opacity 0.25s;
     }
     .mobile-cta-btn:active { opacity: 0.8; }
-    .cta-phone { background: #6abea7; color: #0d2e29; }
+    .cta-phone { background: #42c0bf; color: #0d2e29; }
     .cta-kakao { background: #FEE500; color: #3C1E1E; }
   </style>
 </head>

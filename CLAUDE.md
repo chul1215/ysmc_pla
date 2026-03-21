@@ -40,7 +40,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **공유 CSS/JS 파일이 없다.** 모든 스타일, GNB, 스크립트는 각 HTML 파일 내 `<style>`, `<script>` 블록에 인라인으로 존재한다.
 
-공통 요소(GNB, 색상 변수, 푸터 등)를 수정할 때는 **영향받는 모든 파일을 각각 수정**해야 한다.
+공통 요소(GNB, 색상 변수, 푸터 등)를 수정할 때는 **영향받는 모든 파일을 각각 수정**해야 한다. 다수 파일을 한 번에 고칠 때는 `sed -i ''` 루프를 사용한다:
+
+```bash
+for f in about.html booking.html breast.html burn.html community.html consultation.html \
+  cosmetic.html doctor.html eye.html fat.html index.html lifting.html male.html \
+  medical.html news.html nose.html notice.html other.html pediatric.html petit.html \
+  reconstruction.html tour.html trauma.html; do
+  sed -i '' 's/OLD/NEW/g' "$f"
+done
+```
 
 ### GNB 구조 (모든 페이지 공통)
 
@@ -61,17 +70,28 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### 모바일 주의사항
 
-**CSS 캐스케이드 순서**: `.mobile-cta { display: none }` 기본 정의는 반드시 `@media (max-width: 768px) { .mobile-cta { display: block } }` 오버라이드보다 **앞에** 선언해야 한다. 순서가 뒤바뀌면 모바일에서도 CTA가 표시되지 않음.
+**하단 고정 CTA 바 (`class="mobile-cta"`)**: 전화/카카오 버튼 2개. `padding-bottom: calc(10px + env(safe-area-inset-bottom))`으로 아이폰 노치 대응.
 
-- **하단 고정 CTA 바** (`class="mobile-cta"`): 전화/카카오 버튼 2개. `padding-bottom: calc(10px + env(safe-area-inset-bottom))`으로 아이폰 노치 대응
+대부분의 페이지에서 `.mobile-cta { display: none }` 기본 정의가 `@media` 블록보다 뒤에 선언되어 있다. 이 때문에 `@media` 안의 override에 반드시 `!important`가 붙어 있어야 한다:
+
+```css
+@media (max-width: 768px) {
+  .mobile-cta { display: block !important; }
+}
+```
+
+새 페이지를 만들 때는 `.mobile-cta { display: none }` 기본 정의를 `@media` 블록보다 **앞에** 선언하면 `!important` 없이도 동작한다 (index.html 참고).
+
 - **푸터 퀵링크**: 오시는 길 / 진료 시간 / 카카오톡 상담 3개. **네이버 예약 없음**
 - **브레이크포인트**: `1024px` (태블릿), `768px` (모바일)
 
 ### index.html 스플릿 히어로
 
-- **모바일 터치**: 1차 탭 → 패널 확장, 2차 탭 → 링크 이동, 2.2초 자동 축소
+- **PC**: 마우스 hover 시 패널 1.6:0.4 비율로 확장, mouseleave 시 원위치
+- **모바일 터치**: `touchstart`로 Y좌표 기록 → `touchend`에서 이동 거리 체크. dy/dx > 12px이면 스크롤로 판단해 패널 활성화 무시. 탭으로 판정되면 1차 탭 → 패널 확장, 2.2초 자동 축소. 2차 탭(이미 active) → 링크 이동.
 - **iOS Safari**: `height: 100svh`
-- **패널 링크**: 좌측 → `cosmetic.html`, 우측 → `medical.html`
+- **패널 링크**: 좌측(spLeft) → `cosmetic.html`, 우측(spRight) → `medical.html`
+- **PC 구분선**: `.sp-seam::before { background: transparent }` — 보이지 않음
 
 ### cosmetic.html 히어로 레이아웃 주의
 
@@ -79,19 +99,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## CSS 색상 시스템
 
-모든 페이지(dashboard.html 제외)에서 동일한 CSS 변수:
+모든 페이지(dashboard.html 제외)에서 동일한 CSS 변수 (nanaprs.com 팔레트 기준):
 
 ```css
 :root {
-  --primary: #6abea7;       /* 메인 컬러 (민트/틸) */
-  --primary-light: #7cffc4;
-  --primary-dark: #4d9e8a;
-  --wine: #1a3d38;          /* 딥 틸 (미용성형 히어로 배경) */
-  --navy: #0a1828;          /* 다크 네이비 (치료재건 배경) */
-  --navy-mid: #1a3a5c;
-  --accent: #c0e8e4;        /* 서브 컬러 (라이트 민트) */
-  --accent-light: #daf2f0;
-  --bg-off: #f0f8f7;        /* 섹션 배경 (민트 오프화이트) */
+  --primary: #42c0bf;       /* 메인 컬러 (teal/cyan) */
+  --primary-light: #63c3c2;
+  --primary-dark: #2da8a7;
+  --wine: #232942;          /* 딥 다크네이비 (미용성형 히어로 배경) */
+  --navy: #0d1f2e;          /* 다크 네이비 (치료재건 배경) */
+  --navy-mid: #303947;
+  --accent: #b2e4e4;        /* 서브 컬러 (라이트 teal) */
+  --accent-light: #d2f0f0;
+  --bg-off: #f0fafa;        /* 섹션 배경 (teal 오프화이트) */
   --text-dark: #1A1A1A;
   --text-mid: #555;
   --text-light: #888;
@@ -99,7 +119,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 }
 ```
 
-색상 변경 시 CSS 변수 외에 파일 내 하드코딩된 `rgba(...)` 값도 grep으로 확인 필요.
+일부 페이지는 위 변수 외에 `--bg-light: #f0fafa`, `--bg-warm: #d2f0f0` 같은 로컬 변수를 추가로 정의한다.
+
+색상 변경 시 CSS 변수 외에 파일 내 하드코딩된 `rgba(...)`, 인라인 `style=""` 값도 grep으로 확인 필요:
+
+```bash
+grep -rn "OLD_HEX\|rgba(OLD_R,OLD_G,OLD_B" *.html
+```
 
 ## dashboard.html 특이사항
 
