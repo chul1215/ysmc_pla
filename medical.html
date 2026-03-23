@@ -23,16 +23,16 @@
 
     /* ===== Color Variables ===== */
     :root {
-      --primary: #42c0bf;
-      --primary-light: #63c3c2;
-      --primary-dark: #2da8a7;
-      --wine: #232942;
-      --navy: #0d1f2e;
-      --navy-mid: #303947;
+      --primary: #6abea7;
+      --primary-light: #7cffc4;
+      --primary-dark: #4d9e8a;
+      --wine: #1a3d38;
+      --navy: #0a1828;
+      --navy-mid: #1a3a5c;
       --navy-light: #245a8a;
-      --accent: #b2e4e4;
-      --accent-light: #d2f0f0;
-      --bg-off: #f0fafa;
+      --accent: #c0e8e4;
+      --accent-light: #daf2f0;
+      --bg-off: #f0f8f7;
       --text-dark: #1A1A1A;
       --text-mid: #555;
       --text-light: #888;
@@ -145,7 +145,7 @@
       white-space: nowrap;
     }
 
-    .gnb-dropdown a:hover { color: var(--text-dark); background: rgba(66,192,191,0.12); }
+    .gnb-dropdown a:hover { color: var(--text-dark); background: rgba(106,190,167,0.12); }
 
     .header-cta {
       display: flex;
@@ -253,7 +253,7 @@
       transition: color 0.18s, background 0.18s;
     }
 
-    .mob-sub-grid a:hover { color: var(--text-dark); background: rgba(66,192,191,0.18); }
+    .mob-sub-grid a:hover { color: var(--text-dark); background: rgba(106,190,167,0.18); }
 
     .mobile-nav-divider {
       width: 100%;
@@ -283,91 +283,283 @@
     .mobile-nav-cta .nav-phone { background: var(--primary); color: #0d2e29; }
     .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
 
-    /* ===== Hero Banner ===== */
-    .hero-banner {
-      height: 400px;
-      background-color: #0d1f2e;
-      background-image: url('images/mc-image/치료재건/치료재건 메인.png');
-      background-size: auto 100%;
-      background-position: right center;
-      background-repeat: no-repeat;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
+    /* ===== Promotion Banner Strip ===== */
+    .promo-strip {
       margin-top: 76px;
+      background: var(--navy);
+      overflow: hidden;
+      position: relative;
     }
 
-    .hero-banner::before {
+    .promo-strip-inner {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .promo-strip-inner::-webkit-scrollbar { display: none; }
+
+    .promo-card {
+      flex-shrink: 0;
+      width: 100%;
+      scroll-snap-align: start;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* On wider screens show 3 side-by-side */
+    @media (min-width: 900px) {
+      .promo-card { width: 33.333%; }
+    }
+
+    .promo-card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .promo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .promo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .promo-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .promo-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.2px;
+      line-height: 1.35;
+    }
+
+    .promo-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .promo-link:hover { color: #fff; }
+
+    .promo-strip-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 0 12px;
+    }
+
+    .promo-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      cursor: pointer;
+      border: none;
+      transition: background 0.25s;
+    }
+
+    .promo-dot.active { background: var(--primary); }
+
+    /* Hide dots on wide screens where all 3 are visible */
+    @media (min-width: 900px) {
+      .promo-strip-dots { display: none; }
+    }
+
+    /* ===== Hero Slideshow ===== */
+    .hero-slideshow {
+      position: relative;
+      height: clamp(480px, 68vh, 680px);
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .slide-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .slide-bg::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(140deg, rgba(10,24,40,0.75) 0%, rgba(26,58,92,0.45) 100%);
-      z-index: 1;
+      background: linear-gradient(140deg, rgba(10,24,40,0.80) 0%, rgba(26,58,92,0.50) 55%, rgba(10,24,40,0.20) 100%);
     }
 
-    /* Decorative geometric element */
-    .hero-banner::after {
-      content: '';
+    .slide-content {
       position: absolute;
-      right: -80px;
-      top: -80px;
-      width: 480px;
-      height: 480px;
-      border-radius: 50%;
-      border: 1px solid rgba(26,58,92,0.3);
-      z-index: 1;
-    }
-
-    .hero-banner-inner {
-      position: relative;
+      bottom: 80px;
+      left: max(40px, calc((100% - 1280px) / 2 + 40px));
       z-index: 2;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 40px;
-      width: 100%;
+      max-width: 520px;
     }
 
-    .hero-eyebrow {
+    .slide-eyebrow {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 3.5px;
+      letter-spacing: 4px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 18px;
+      color: rgba(255,255,255,0.50);
+      margin-bottom: 14px;
     }
 
-    .hero-title {
-      font-size: clamp(40px, 5vw, 68px);
+    .slide-title {
+      font-size: clamp(40px, 5.5vw, 72px);
       font-weight: 800;
       color: #fff;
-      letter-spacing: -2px;
-      line-height: 1.05;
-      margin-bottom: 18px;
+      letter-spacing: -2.5px;
+      line-height: 1.0;
+      margin-bottom: 14px;
     }
 
-    .hero-subtitle {
+    .slide-desc {
       font-size: 15px;
-      color: rgba(255,255,255,0.58);
-      line-height: 1.8;
-      max-width: 480px;
-      margin-bottom: 28px;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      max-width: 380px;
     }
 
-    .hero-breadcrumb {
-      display: flex;
+    .slide-btn {
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.35);
+      padding: 12px 24px;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 0.2s, border-color 0.2s;
     }
 
-    .hero-breadcrumb a {
-      color: rgba(255,255,255,0.35);
-      transition: color 0.2s;
+    .slide-btn:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.6); }
+
+    /* Emergency badge on slide */
+    .slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: rgba(255,80,60,0.85);
+      border-radius: 2px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
     }
-    .hero-breadcrumb a:hover { color: rgba(0,0,0,0.65); }
-    .hero-breadcrumb span { color: rgba(255,255,255,0.5); }
+
+    /* Slide controls */
+    .slide-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .slide-arrow:hover { background: rgba(255,255,255,0.25); }
+    .slide-arrow-prev { left: 24px; }
+    .slide-arrow-next { right: 24px; }
+
+    .slide-dots {
+      position: absolute;
+      bottom: 28px;
+      right: max(40px, calc((100% - 1280px) / 2 + 40px));
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .slide-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.30);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none;
+    }
+
+    .slide-dot.active {
+      background: var(--primary);
+      transform: scale(1.35);
+    }
+
+    /* Slide backgrounds */
+    .slide-bg-trauma    { background-image: url('images/mc-image/치료재건/1. 트라우마.png'); }
+    .slide-bg-burn      { background-image: url('images/mc-image/치료재건/2. 번 트리트먼트.png'); }
+    .slide-bg-tumor     { background-image: url('images/mc-image/치료재건/3. 스킨 튜머.png'); }
+    .slide-bg-pediatric { background-image: url('images/mc-image/치료재건/4. 피디애트릭.jpg'); }
 
     /* ===== Section Common ===== */
     .section { padding: 100px 40px; }
@@ -402,137 +594,140 @@
       line-height: 1.8;
     }
 
-    /* ===== Category Grid ===== */
-    .categories { background: var(--accent-light); }
-
-    .categories-header { margin-bottom: 56px; }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+    /* ===== Category Horizontal Scroll ===== */
+    .categories-scroll-section {
+      background: var(--accent-light);
+      padding: 80px 0;
     }
 
-    /* ===== Service Card ===== */
-    .service-card {
-      background: #fff;
-      border-radius: 20px;
-      overflow: hidden;
+    .categories-scroll-header {
+      padding: 0 40px;
+      max-width: 1360px;
+      margin: 0 auto 40px;
+    }
+
+    .categories-scroll-wrapper {
+      position: relative;
+    }
+
+    .categories-scroll-track {
       display: flex;
-      flex-direction: column;
+      gap: 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 8px 40px 16px 0;
+      cursor: grab;
+    }
+    .categories-scroll-track::before {
+      content: '';
+      flex-shrink: 0;
+      width: max(12px, calc((100vw - 1360px) / 2 + 12px));
+    }
+
+    .categories-scroll-track::-webkit-scrollbar { display: none; }
+    .categories-scroll-track.dragging { cursor: grabbing; }
+
+    .cat-card {
+      flex-shrink: 0;
+      width: 240px;
+      height: 320px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      scroll-snap-align: start;
       cursor: pointer;
       transition: transform 0.3s, box-shadow 0.3s;
       text-decoration: none;
       color: inherit;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     }
 
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-    }
+    .cat-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.20); }
 
-    .card-thumb {
-      height: 220px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-num {
+    .cat-card-bg {
       position: absolute;
-      top: 14px; left: 14px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: rgba(255,255,255,0.7);
-      background: rgba(0,0,0,0.3);
-      padding: 3px 9px;
-      border-radius: 2px;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform 0.4s;
+    }
+
+    .cat-card:hover .cat-card-bg { transform: scale(1.06); }
+
+    .cat-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,24,40,0.10) 0%, rgba(10,24,40,0.65) 65%, rgba(10,24,40,0.88) 100%);
+    }
+
+    .cat-card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 22px 20px;
       z-index: 2;
     }
 
-    .card-body { padding: 30px 30px 34px; flex: 1; display: flex; flex-direction: column; }
-
-    .card-category {
-      font-size: 10px;
+    .cat-card-en {
+      font-size: 9px;
       font-weight: 700;
       letter-spacing: 2px;
-      color: var(--primary);
       text-transform: uppercase;
-      margin-bottom: 9px;
+      color: rgba(255,255,255,0.50);
+      margin-bottom: 6px;
     }
 
-    .card-title {
+    .cat-card-name {
       font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.4px;
-      line-height: 1.4;
-      color: var(--text-dark);
-      margin-bottom: 11px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
     }
 
-    .card-desc {
-      font-size: 14px;
-      color: var(--text-mid);
-      line-height: 1.75;
-      margin-bottom: 18px;
-      flex: 1;
+    .cat-card-arrow {
+      font-size: 16px;
+      color: var(--primary-light);
+      margin-top: 8px;
+      display: block;
+      transition: transform 0.25s;
     }
 
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 20px;
-    }
+    .cat-card:hover .cat-card-arrow { transform: translateX(4px); }
 
-    .card-tag {
-      font-size: 11px;
-      color: var(--text-light);
-      background: #f2f0ed;
-      padding: 4px 9px;
-      border-radius: 2px;
-    }
+    /* Cat card backgrounds */
+    .cat-bg-trauma    { background-image: url('images/mc-image/치료재건/1. 트라우마.png'); }
+    .cat-bg-burn      { background-image: url('images/mc-image/치료재건/2. 번 트리트먼트.png'); }
+    .cat-bg-tumor     { background-image: url('images/mc-image/치료재건/3. 스킨 튜머.png'); }
+    .cat-bg-pediatric { background-image: url('images/mc-image/치료재건/4. 피디애트릭.jpg'); }
 
-    .card-link {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: gap 0.25s;
-      margin-top: auto;
-    }
-
-    .service-card:hover .card-link { gap: 9px; }
-
-    /* Card thumbnails */
-    .thumb-trauma       { background: url('images/mc-image/치료재건/1. 트라우마.png') center/cover no-repeat; }
-    .thumb-burn         { background: url('images/mc-image/치료재건/2. 번 트리트먼트.png') center/cover no-repeat; }
-    .thumb-tumor        { background: url('images/mc-image/치료재건/3. 스킨 튜머.png') center/cover no-repeat; }
-    .thumb-pediatric    { background: url('images/mc-image/치료재건/4. 피디애트릭.jpg') center/cover no-repeat; }
-
-    /* Image overlay for card thumbnail readability */
-    .card-thumb::before {
-      content: '';
+    /* Scroll arrows */
+    .scroll-nav {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.45) 100%);
-      z-index: 1;
-    }
-
-    .card-thumb::after {
-      content: '';
-      position: absolute;
-      right: -24px;
-      bottom: -24px;
-      width: 100px;
-      height: 100px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.1);
-      z-index: 3;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      color: var(--text-dark);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
+
+    .scroll-nav:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.18); transform: translateY(-50%) scale(1.08); }
+    .scroll-prev { left: 8px; }
+    .scroll-next { right: 8px; }
 
     /* ===== Safety Section ===== */
     .safety {
@@ -573,7 +768,7 @@
     .safety-card:hover {
       background: var(--accent);
       transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(66,192,191,0.2);
+      box-shadow: 0 20px 60px rgba(106,190,167,0.2);
     }
 
     .safety-icon {
@@ -601,7 +796,7 @@
     .safety-card:hover h3,
     .safety-card:hover p { color: var(--text-dark); }
 
-    /* ===== Doctor Banner (compact) ===== */
+    /* ===== Doctor Banner ===== */
     .doctor-banner {
       background: var(--bg-off);
       padding: 72px 40px;
@@ -693,7 +888,7 @@
       text-align: center;
     }
 
-    .cta-section-inner { max-width: 640px; margin: 0 auto; }
+    .cta-section-inner { max-width: 960px; margin: 0 auto; }
 
     .cta-label {
       font-size: 11px;
@@ -724,17 +919,19 @@
       display: flex;
       gap: 12px;
       justify-content: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
 
     .cta-btn-primary {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 15px 32px;
+      flex: 1;
+      padding: 16px 24px;
       background: var(--primary);
       color: #0d2e29;
-      border-radius: 4px;
+      border-radius: 6px;
       font-size: 15px;
       font-weight: 700;
       transition: background 0.25s, transform 0.25s;
@@ -744,33 +941,51 @@
     .cta-btn-kakao {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 15px 32px;
+      flex: 1;
+      padding: 16px 24px;
       background: #FEE500;
       color: #3C1E1E;
-      border-radius: 4px;
+      border-radius: 6px;
       font-size: 15px;
       font-weight: 700;
       transition: opacity 0.25s, transform 0.25s;
     }
     .cta-btn-kakao:hover { opacity: 0.88; transform: translateY(-2px); }
 
-    /* CTA outline button */
+    .cta-btn-naver {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+      padding: 16px 24px;
+      background: #03C75A;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .cta-btn-naver:hover { opacity: 0.88; transform: translateY(-2px); }
+
     .cta-btn-outline {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 15px 32px;
-      border: 1.5px solid rgba(66,192,191,0.4);
+      flex: 1;
+      padding: 16px 24px;
+      border: 1.5px solid rgba(106,190,167,0.4);
       color: var(--primary-dark);
-      border-radius: 4px;
+      border-radius: 6px;
       font-size: 15px;
       font-weight: 700;
       transition: border-color 0.25s, color 0.25s, transform 0.25s;
     }
     .cta-btn-outline:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
 
-    /* CTA sub notes */
     .cta-sub-notes {
       display: flex;
       gap: 24px;
@@ -807,10 +1022,10 @@
 
     .footer-quick {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       flex: 1;
-      max-width: 460px;
+      max-width: 360px;
     }
 
     .footer-quick-item {
@@ -864,17 +1079,17 @@
       padding-bottom: calc(10px + env(safe-area-inset-bottom));
     }
 
-    .mobile-cta-inner { display: flex; gap: 10px; }
+    .mobile-cta-inner { display: flex; gap: 8px; }
 
     .mobile-cta-btn {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      padding: 14px;
+      gap: 6px;
+      padding: 13px 8px;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       border: none;
@@ -885,6 +1100,7 @@
     .mobile-cta-btn:active { opacity: 0.8; }
     .cta-phone { background: var(--primary); color: #0d2e29; }
     .cta-kakao { background: #FEE500; color: #3C1E1E; }
+    .cta-naver { background: #03C75A; color: #fff; }
 
     /* ===== Responsive — Tablet (≤ 1024px) ===== */
     @media (max-width: 1024px) {
@@ -899,17 +1115,30 @@
       .menu-toggle { display: flex; }
       .gnb-dropdown { display: none !important; }
 
-      .hero-banner { margin-top: 60px; height: 320px; }
-      .hero-banner-inner { padding: 0 20px; }
-      .hero-eyebrow { font-size: 10px; letter-spacing: 2.5px; }
-      .hero-subtitle { font-size: 14px; }
+      .promo-strip { margin-top: 60px; }
+      .promo-card { padding: 14px 20px; }
+      .promo-title { font-size: 13px; }
+
+      .hero-slideshow { height: clamp(400px, 80vw, 540px); }
+      .slide-content { bottom: 56px; left: 20px; right: 60px; max-width: none; }
+      .slide-title { font-size: clamp(34px, 9vw, 54px); }
+      .slide-desc { font-size: 13px; }
+      .slide-arrow { width: 38px; height: 38px; font-size: 16px; }
+      .slide-arrow-prev { left: 12px; }
+      .slide-arrow-next { right: 12px; }
+      .slide-dots { right: 20px; bottom: 18px; }
+
+      .categories-scroll-section { padding: 60px 0; }
+      .categories-scroll-header { padding: 0 20px; margin-bottom: 28px; }
+      .categories-scroll-track { padding: 8px 20px 12px 0; gap: 14px; }
+      .categories-scroll-track::before { width: 20px; }
+      .cat-card { width: 200px; height: 260px; }
+      .cat-card-name { font-size: 20px; }
 
       .section { padding: 60px 20px; }
       .section-title { font-size: 26px; }
-      .categories-header { margin-bottom: 36px; }
       .safety-header { margin-bottom: 36px; }
 
-      .cards-grid { grid-template-columns: 1fr; }
       .safety-grid { grid-template-columns: 1fr; }
       .safety-card { padding: 32px 24px; }
 
@@ -920,11 +1149,11 @@
       .cta-section { padding: 60px 20px; }
       .cta-title { font-size: 24px; }
       .cta-buttons { flex-direction: column; align-items: stretch; }
-      .cta-btn-primary, .cta-btn-outline, .cta-btn-kakao { justify-content: center; }
+      .cta-btn-primary, .cta-btn-outline, .cta-btn-kakao, .cta-btn-naver { justify-content: center; }
       .cta-sub-notes { flex-direction: column; gap: 8px; align-items: center; }
 
       .footer-top { flex-direction: column; gap: 36px; padding: 44px 20px 28px; }
-      .footer-quick { max-width: 100%; grid-template-columns: repeat(2, 1fr); }
+      .footer-quick { max-width: 100%; grid-template-columns: repeat(3, 1fr); }
       .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding: 18px 20px; }
 
       .mobile-cta { display: block; }
@@ -932,7 +1161,7 @@
     }
 
     @media (max-width: 380px) {
-      .hero-title { font-size: 36px; }
+      .slide-title { font-size: 32px; }
     }
   </style>
 </head>
@@ -1033,112 +1262,174 @@
     </button>
   </header>
 
-  <!-- ===== HERO BANNER ===== -->
-  <section class="hero-banner" aria-label="치료·재건 소개">
-    <div class="hero-banner-inner">
-      <div class="hero-eyebrow">TREATMENT &amp; RECONSTRUCTION · 유성선병원 성형외과</div>
-      <h1 class="hero-title">종합병원의 안전함으로 치료합니다</h1>
-      <p class="hero-subtitle">외상 봉합부터 화상 치료, 피부종양 진단, 소아 진료까지 — 성형외과 전문의가 종합병원 인프라 안에서 체계적으로 치료합니다.</p>
-      <nav class="hero-breadcrumb" aria-label="현재 위치">
-        <a href="index.html">홈</a>
-        <span aria-hidden="true">›</span>
-        <span aria-current="page">치료·재건</span>
-      </nav>
+  <!-- ===== PROMOTION BANNER STRIP ===== -->
+  <div class="promo-strip" aria-label="공지 및 이벤트">
+    <div class="promo-strip-inner" id="promoTrack">
+
+      <div class="promo-card">
+        <div class="promo-card-left">
+          <div class="promo-icon">🚑</div>
+          <div class="promo-text">
+            <div class="promo-tag">Emergency</div>
+            <div class="promo-title">외상·화상 응급진료 24시간 대응 가능</div>
+          </div>
+        </div>
+        <a href="trauma.html" class="promo-link">자세히 보기 →</a>
+      </div>
+
+      <div class="promo-card">
+        <div class="promo-card-left">
+          <div class="promo-icon">🔬</div>
+          <div class="promo-text">
+            <div class="promo-tag">Quick Diagnosis</div>
+            <div class="promo-title">피부 몽우리? 조직검사 당일 가능</div>
+          </div>
+        </div>
+        <a href="reconstruction.html" class="promo-link">자세히 보기 →</a>
+      </div>
+
+      <div class="promo-card">
+        <div class="promo-card-left">
+          <div class="promo-icon">👶</div>
+          <div class="promo-text">
+            <div class="promo-tag">Pediatric</div>
+            <div class="promo-title">소아 성형외과 전문 진료 — 아이가 안심하는 환경</div>
+          </div>
+        </div>
+        <a href="#" class="promo-link">자세히 보기 →</a>
+      </div>
+
     </div>
+    <div class="promo-strip-dots" id="promoDots">
+      <button class="promo-dot active" data-dot="0" aria-label="배너 1"></button>
+      <button class="promo-dot" data-dot="1" aria-label="배너 2"></button>
+      <button class="promo-dot" data-dot="2" aria-label="배너 3"></button>
+    </div>
+  </div>
+
+  <!-- ===== HERO SLIDESHOW ===== -->
+  <section class="hero-slideshow" id="heroSlideshow" aria-label="치료·재건 진료 슬라이드">
+
+    <!-- Slide 1: 상처·외상 -->
+    <div class="slide active" data-index="0">
+      <a href="trauma.html" class="slide-link" aria-label="상처·외상 페이지로 이동">
+        <div class="slide-bg slide-bg-trauma"></div>
+        <div class="slide-content">
+          <div class="slide-badge">🚑 응급 대응 가능</div>
+          <div class="slide-eyebrow">Trauma &amp; Wound · 상처·외상</div>
+          <h1 class="slide-title">상처·외상</h1>
+          <p class="slide-desc">다친 직후부터 흉터 관리까지 이어지는 체계.<br>종합병원 응급실 연계 신속 대응.</p>
+          <span class="slide-btn">자세히 보기 →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Slide 2: 화상 -->
+    <div class="slide" data-index="1">
+      <a href="#" class="slide-link" aria-label="화상 페이지로 이동">
+        <div class="slide-bg slide-bg-burn"></div>
+        <div class="slide-content">
+          <div class="slide-eyebrow">Burn Treatment · 화상</div>
+          <h1 class="slide-title">화상</h1>
+          <p class="slide-desc">화상의 깊이에 따라 치료 계획이 달라집니다.<br>입원 치료와 장기 재건까지 한 곳에서.</p>
+          <span class="slide-btn">자세히 보기 →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Slide 3: 피부종양 -->
+    <div class="slide" data-index="2">
+      <a href="reconstruction.html" class="slide-link" aria-label="피부종양 페이지로 이동">
+        <div class="slide-bg slide-bg-tumor"></div>
+        <div class="slide-content">
+          <div class="slide-eyebrow">Skin Tumor · 피부종양</div>
+          <h1 class="slide-title">피부종양</h1>
+          <p class="slide-desc">불안할 땐, 정확히 확인하는 게 먼저입니다.<br>조직검사 당일 진행 가능.</p>
+          <span class="slide-btn">자세히 보기 →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Slide 4: 소아진료 -->
+    <div class="slide" data-index="3">
+      <a href="#" class="slide-link" aria-label="소아진료 페이지로 이동">
+        <div class="slide-bg slide-bg-pediatric"></div>
+        <div class="slide-content">
+          <div class="slide-eyebrow">Pediatric · 소아진료</div>
+          <h1 class="slide-title">소아진료</h1>
+          <p class="slide-desc">아이의 상처, 더 세심하게 다룹니다.<br>아이가 안심하는 환경, 부모님이 신뢰하는 시스템.</p>
+          <span class="slide-btn">자세히 보기 →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Prev / Next arrows -->
+    <button class="slide-arrow slide-arrow-prev" id="slidePrev" aria-label="이전 슬라이드">‹</button>
+    <button class="slide-arrow slide-arrow-next" id="slideNext" aria-label="다음 슬라이드">›</button>
+
+    <!-- Dot indicators -->
+    <div class="slide-dots" role="tablist" aria-label="슬라이드 선택">
+      <button class="slide-dot active" data-dot="0" aria-label="슬라이드 1" role="tab"></button>
+      <button class="slide-dot" data-dot="1" aria-label="슬라이드 2" role="tab"></button>
+      <button class="slide-dot" data-dot="2" aria-label="슬라이드 3" role="tab"></button>
+      <button class="slide-dot" data-dot="3" aria-label="슬라이드 4" role="tab"></button>
+    </div>
+
   </section>
 
-  <!-- ===== CATEGORY GRID ===== -->
-  <section class="section categories" id="categories">
-    <div class="section-inner">
-      <div class="categories-header">
-        <div class="section-label">Treatment &amp; Reconstruction</div>
-        <h2 class="section-title">치료·재건 진료 분야</h2>
-        <p class="section-desc">기능 회복과 안전한 치료를 위한 전문 진료. 종합병원의 인프라와 성형외과 전문의의 섬세함이 함께합니다.</p>
-      </div>
+  <!-- ===== CATEGORY HORIZONTAL SCROLL ===== -->
+  <section class="categories-scroll-section" aria-label="치료·재건 진료 분야">
+    <div class="categories-scroll-header">
+      <div class="section-label">Treatment &amp; Reconstruction</div>
+      <h2 class="section-title">치료·재건 진료 분야</h2>
+      <p class="section-desc">기능 회복과 안전한 치료를 위한 전문 진료.</p>
+    </div>
+    <div class="categories-scroll-wrapper">
+      <button class="scroll-nav scroll-prev" id="catScrollPrev" aria-label="이전">‹</button>
+      <div class="categories-scroll-track" id="catScrollTrack">
 
-      <div class="cards-grid">
-
-        <!-- 상처/외상 -->
-        <a href="trauma.html" class="service-card" aria-label="상처·외상 자세히 보기">
-          <div class="card-thumb thumb-trauma">
-            <div class="card-num">01</div>
-          </div>
-          <div class="card-body">
-            <div class="card-category">Trauma &amp; Wound</div>
-            <h3 class="card-title">다친 직후부터 흉터 관리까지 이어지는 체계</h3>
-            <p class="card-desc">안면 열상, 안와골절, 관골골절, 하악골골절 등 외상 치료는 초기 대응이 결과를 결정합니다. 종합병원 응급실과 연계하여 신속하게 대응하고, 봉합 단계에서부터 흉터 최소화를 설계합니다.</p>
-            <div class="card-tags">
-              <span class="card-tag">#안면외상</span>
-              <span class="card-tag">#안면골절</span>
-              <span class="card-tag">#열상봉합</span>
-              <span class="card-tag">#흉터최소화</span>
-              <span class="card-tag">#응급수술</span>
-            </div>
-            <span class="card-link">자세히 보기 →</span>
+        <a href="trauma.html" class="cat-card" aria-label="상처·외상">
+          <div class="cat-card-bg cat-bg-trauma"></div>
+          <div class="cat-card-overlay"></div>
+          <div class="cat-card-body">
+            <div class="cat-card-en">Trauma &amp; Wound</div>
+            <div class="cat-card-name">상처·외상</div>
+            <span class="cat-card-arrow">→</span>
           </div>
         </a>
 
-        <!-- 화상 -->
-        <a href="#" class="service-card" aria-label="화상 자세히 보기">
-          <div class="card-thumb thumb-burn">
-            <div class="card-num">02</div>
-          </div>
-          <div class="card-body">
-            <div class="card-category">Burn Treatment</div>
-            <h3 class="card-title">화상의 깊이에 따라 치료 계획이 달라집니다</h3>
-            <p class="card-desc">급성기 화상 치료부터 화상 후 흉터 재건, 구축 교정까지 단계별로 관리합니다. 종합병원 내 입원 치료와 외래 경과 관찰을 병행할 수 있어 중등도 이상의 화상에도 체계적으로 대응합니다.</p>
-            <div class="card-tags">
-              <span class="card-tag">#화상치료</span>
-              <span class="card-tag">#화상재건</span>
-              <span class="card-tag">#흉터성형</span>
-              <span class="card-tag">#화상흉터</span>
-              <span class="card-tag">#입원치료</span>
-            </div>
-            <span class="card-link">자세히 보기 →</span>
+        <a href="#" class="cat-card" aria-label="화상">
+          <div class="cat-card-bg cat-bg-burn"></div>
+          <div class="cat-card-overlay"></div>
+          <div class="cat-card-body">
+            <div class="cat-card-en">Burn Treatment</div>
+            <div class="cat-card-name">화상</div>
+            <span class="cat-card-arrow">→</span>
           </div>
         </a>
 
-        <!-- 피부종양 -->
-        <a href="reconstruction.html" class="service-card" aria-label="피부종양·재건 자세히 보기">
-          <div class="card-thumb thumb-tumor">
-            <div class="card-num">03</div>
-          </div>
-          <div class="card-body">
-            <div class="card-category">Skin Tumor &amp; Reconstruction</div>
-            <h3 class="card-title">불안할 땐, 정확히 확인하는 게 먼저입니다</h3>
-            <p class="card-desc">피지낭종, 지방종, 황색종, 모반 등 피부 아래 만져지는 몽우리를 정확히 진단하고, 필요한 경우 최소 흉터로 제거합니다. 조직검사가 필요한 경우에도 원내에서 바로 진행할 수 있습니다.</p>
-            <div class="card-tags">
-              <span class="card-tag">#피부종양</span>
-              <span class="card-tag">#피지낭종</span>
-              <span class="card-tag">#지방종</span>
-              <span class="card-tag">#몽우리제거</span>
-              <span class="card-tag">#조직검사</span>
-            </div>
-            <span class="card-link">자세히 보기 →</span>
+        <a href="reconstruction.html" class="cat-card" aria-label="피부종양">
+          <div class="cat-card-bg cat-bg-tumor"></div>
+          <div class="cat-card-overlay"></div>
+          <div class="cat-card-body">
+            <div class="cat-card-en">Skin Tumor</div>
+            <div class="cat-card-name">피부종양</div>
+            <span class="cat-card-arrow">→</span>
           </div>
         </a>
 
-        <!-- 소아진료 -->
-        <a href="#" class="service-card" aria-label="소아진료 자세히 보기">
-          <div class="card-thumb thumb-pediatric">
-            <div class="card-num">04</div>
-          </div>
-          <div class="card-body">
-            <div class="card-category">Pediatric</div>
-            <h3 class="card-title">아이의 상처, 더 세심하게 다룹니다</h3>
-            <p class="card-desc">소아 열상, 소아 화상, 소아 모반 등 어린이 환자에게는 성장을 고려한 치료 계획이 필요합니다. 아이가 덜 무서워하는 환경에서, 부모님이 안심할 수 있는 종합병원 시스템으로 진료합니다.</p>
-            <div class="card-tags">
-              <span class="card-tag">#소아열상</span>
-              <span class="card-tag">#소아화상</span>
-              <span class="card-tag">#소아모반</span>
-              <span class="card-tag">#어린이성형외과</span>
-              <span class="card-tag">#소아흉터</span>
-            </div>
-            <span class="card-link">자세히 보기 →</span>
+        <a href="#" class="cat-card" aria-label="소아진료">
+          <div class="cat-card-bg cat-bg-pediatric"></div>
+          <div class="cat-card-overlay"></div>
+          <div class="cat-card-body">
+            <div class="cat-card-en">Pediatric</div>
+            <div class="cat-card-name">소아진료</div>
+            <span class="cat-card-arrow">→</span>
           </div>
         </a>
 
       </div>
+      <button class="scroll-nav scroll-next" id="catScrollNext" aria-label="다음">›</button>
     </div>
   </section>
 
@@ -1176,7 +1467,7 @@
       <div class="doctor-img-wrap">
         <img src="images/shin_profile.jpg" alt="신정환 전문의 프로필 사진" loading="lazy">
         <div class="doctor-img-badge">
-          <strong>신정환 전문의</strong>
+          <strong>신정환 과장</strong>
           <span>성형외과 전문의</span>
         </div>
       </div>
@@ -1209,9 +1500,10 @@
         신정환 과장이 직접 상담하고 정확히 안내해 드립니다.
       </p>
       <div class="cta-buttons">
-        <a href="#" class="cta-btn-primary">진료 예약하기</a>
-        <a href="tel:042-000-0000" class="cta-btn-outline">지금 바로 전화하기</a>
-        <a href="#" class="cta-btn-kakao">카카오톡 상담</a>
+        <a href="tel:042-000-0000" class="cta-btn-outline">전화 상담</a>
+        <a href="booking.html" class="cta-btn-primary">진료 예약</a>
+        <a href="#" class="cta-btn-kakao">카카오 상담</a>
+        <a href="#naver-booking" class="cta-btn-naver">N 네이버 예약</a>
       </div>
       <div class="cta-sub-notes">
         <span>외상, 화상, 종양 진료 예약</span>
@@ -1258,8 +1550,9 @@
   <!-- ===== MOBILE STICKY CTA ===== -->
   <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
     <div class="mobile-cta-inner">
-      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
-      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡상담</a>
+      <a href="#naver-booking" class="mobile-cta-btn cta-naver">N 네이버예약</a>
     </div>
   </div>
 
@@ -1269,9 +1562,9 @@
       'use strict';
 
       /* ── Mobile menu ── */
-      const menuToggle = document.getElementById('menuToggle');
-      const mobileNav  = document.getElementById('mobileNav');
-      let menuOpen = false;
+      var menuToggle = document.getElementById('menuToggle');
+      var mobileNav  = document.getElementById('mobileNav');
+      var menuOpen = false;
 
       function openMenu() {
         menuOpen = true;
@@ -1289,15 +1582,97 @@
         document.body.style.overflow = '';
       }
 
-      menuToggle.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
+      menuToggle.addEventListener('click', function() { menuOpen ? closeMenu() : openMenu(); });
 
-      mobileNav.querySelectorAll('a').forEach(link => {
+      mobileNav.querySelectorAll('a').forEach(function(link) {
         link.addEventListener('click', closeMenu);
       });
 
-      document.addEventListener('keydown', e => {
+      document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && menuOpen) closeMenu();
       });
+
+      /* ── Hero Slideshow ── */
+      var slides = document.querySelectorAll('.slide');
+      var dots   = document.querySelectorAll('.slide-dot');
+      var current = 0;
+      var timer;
+
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (idx + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(function() { goTo(current + 1); }, 3000);
+      }
+
+      document.getElementById('slidePrev').addEventListener('click', function() {
+        goTo(current - 1); startTimer();
+      });
+
+      document.getElementById('slideNext').addEventListener('click', function() {
+        goTo(current + 1); startTimer();
+      });
+
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          goTo(parseInt(dot.dataset.dot)); startTimer();
+        });
+      });
+
+      startTimer();
+
+      /* ── Promotion Banner Strip scroll dots (mobile) ── */
+      var promoTrack = document.getElementById('promoTrack');
+      var promoDots  = document.querySelectorAll('.promo-dot');
+
+      promoTrack.addEventListener('scroll', function() {
+        var idx = Math.round(promoTrack.scrollLeft / promoTrack.clientWidth);
+        promoDots.forEach(function(d, i) {
+          d.classList.toggle('active', i === idx);
+        });
+      });
+
+      promoDots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          var idx = parseInt(dot.dataset.dot);
+          promoTrack.scrollTo({ left: idx * promoTrack.clientWidth, behavior: 'smooth' });
+        });
+      });
+
+      /* ── Category Horizontal Scroll ── */
+      var catTrack = document.getElementById('catScrollTrack');
+
+      document.getElementById('catScrollPrev').addEventListener('click', function() {
+        catTrack.scrollBy({ left: -260, behavior: 'smooth' });
+      });
+      document.getElementById('catScrollNext').addEventListener('click', function() {
+        catTrack.scrollBy({ left: 260, behavior: 'smooth' });
+      });
+
+      /* Drag-to-scroll */
+      (function setupDrag(track) {
+        var isDown = false, startX, scrollLeft;
+        track.addEventListener('mousedown', function(e) {
+          isDown = true;
+          track.classList.add('dragging');
+          startX = e.clientX;
+          scrollLeft = track.scrollLeft;
+          e.preventDefault();
+        });
+        document.addEventListener('mouseup', function() { isDown = false; track.classList.remove('dragging'); });
+        document.addEventListener('mousemove', function(e) {
+          if (!isDown) return;
+          e.preventDefault();
+          var walk = (e.clientX - startX) * 1.5;
+          track.scrollLeft = scrollLeft - walk;
+        });
+      })(catTrack);
 
       /* ── Staggered card animations ── */
       var cardObserver = new IntersectionObserver(function(entries) {
@@ -1310,10 +1685,10 @@
         });
       }, { threshold: 0.08 });
 
-      document.querySelectorAll('.service-card, .safety-card').forEach(function(el, i) {
+      document.querySelectorAll('.safety-card').forEach(function(el, i) {
         el.style.opacity = '0';
         el.style.transform = 'translateY(28px)';
-        el.style.transition = 'opacity 0.55s ease ' + (i % 4 * 0.09) + 's, transform 0.55s ease ' + (i % 4 * 0.09) + 's, box-shadow 0.3s';
+        el.style.transition = 'opacity 0.55s ease ' + (i * 0.1) + 's, transform 0.55s ease ' + (i * 0.1) + 's, background 0.3s, box-shadow 0.3s';
         cardObserver.observe(el);
       });
 

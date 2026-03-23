@@ -65,24 +65,57 @@ done
 
 - **진료 상세 페이지**: `<script>` 블록 없음. FAQ 아코디언은 `onclick="this.parentElement.classList.toggle('active')"` 방식
 - **index.html**: IIFE — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up, 스플릿 히어로 터치
-- **cosmetic.html, medical.html, about.html**: IIFE — 카드 stagger 애니메이션
+- **cosmetic.html / medical.html**: IIFE — 자동 슬라이드쇼(3초 전환), 카테고리 스크롤 drag-to-scroll, 전후변화 스크롤, 플로팅 CTA 토글
+- **about.html**: IIFE — 카드 stagger 애니메이션
 - **tour.html**: 터치 스와이프 슬라이더 (화살표 + dot 인디케이터)
 
-### 모바일 주의사항
+### 허브 페이지 섹션 구성 (cosmetic.html / medical.html)
 
-**하단 고정 CTA 바 (`class="mobile-cta"`)**: 전화/카카오 버튼 2개. `padding-bottom: calc(10px + env(safe-area-inset-bottom))`으로 아이폰 노치 대응.
+**cosmetic.html 섹션 순서:**
+1. 히어로 슬라이드쇼 — 눈/코/리프팅/가슴 4슬라이드 자동전환
+2. 카테고리 스크롤 (`.categories-scroll-section`) — 8개 항목 좌우 스크롤
+3. 전후변화 (`.before-after-section`) — 4카드 좌우 스크롤
+4. Why Choose Us (`.trust-section`)
+5. 의료진 소개
+6. CTA 섹션
 
-대부분의 페이지에서 `.mobile-cta { display: none }` 기본 정의가 `@media` 블록보다 뒤에 선언되어 있다. 이 때문에 `@media` 안의 override에 반드시 `!important`가 붙어 있어야 한다:
+**medical.html 섹션 순서:**
+1. 프로모션 배너 스트립 (응급/조직검사/소아진료 3개)
+2. 히어로 슬라이드쇼 — 상처외상/화상/피부종양/소아진료 4슬라이드
+3. 카테고리 스크롤 — 4개 항목 좌우 스크롤
+4. 안전 시스템 섹션
+5. 의료진 소개
+6. CTA 섹션
+
+### 좌우 스크롤 트랙 정렬 패턴 (중요)
+
+Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를 주면 브라우저가 자동으로 첫 카드에 스냅하여 padding이 무효화되는 버그가 있다. 이를 회피하기 위해 `::before` 가상 요소를 좌측 스페이서로 사용:
 
 ```css
-@media (max-width: 768px) {
-  .mobile-cta { display: block !important; }
+.categories-scroll-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 8px 40px 16px 0;  /* padding-left 없음 */
+}
+.categories-scroll-track::before {
+  content: '';
+  flex-shrink: 0;
+  /* gap(16px)만큼 뺀 값: 다른 섹션 콘텐츠 좌측과 정렬 */
+  width: max(16px, calc((100vw - 1360px) / 2 + 16px));
 }
 ```
 
-새 페이지를 만들 때는 `.mobile-cta { display: none }` 기본 정의를 `@media` 블록보다 **앞에** 선언하면 `!important` 없이도 동작한다 (index.html 참고).
+- `gap` 값이 spacer와 첫 카드 사이에도 적용되므로 `::before` width에서 gap을 차감해야 다른 섹션과 정렬이 맞음
+- `ba-scroll-track`(gap: 20px)의 spacer 상수는 12px: `max(12px, calc((100vw - 1360px) / 2 + 12px))`
+- drag-to-scroll JS는 `e.clientX` + `document` 레벨 이벤트 리스너 사용 (트랙 밖에서 마우스를 놓아도 작동)
 
-- **푸터 퀵링크**: 오시는 길 / 진료 시간 / 카카오톡 상담 3개. **네이버 예약 없음**
+### 모바일 주의사항
+
+**CSS 캐스케이드 순서**: `.mobile-cta { display: none }` 기본 정의는 반드시 `@media` 블록보다 **앞에** 선언해야 한다. 기존 페이지 중 순서가 뒤바뀐 파일은 `@media` 안에 `!important`가 붙어 있다. 새 페이지 작성 시 앞에 선언하면 `!important` 불필요.
+
+- **하단 고정 CTA 바** (`class="mobile-cta"`): 전화/카카오/네이버예약 버튼 3개. `padding-bottom: calc(10px + env(safe-area-inset-bottom))`으로 아이폰 노치 대응
+- **푸터 퀵링크**: 오시는 길 / 진료 시간 / 카카오톡 상담 3개
 - **브레이크포인트**: `1024px` (태블릿), `768px` (모바일)
 
 ### index.html 스플릿 히어로
@@ -91,7 +124,7 @@ done
 - **모바일 터치**: `touchstart`로 Y좌표 기록 → `touchend`에서 이동 거리 체크. dy/dx > 12px이면 스크롤로 판단해 패널 활성화 무시. 탭으로 판정되면 1차 탭 → 패널 확장, 2.2초 자동 축소. 2차 탭(이미 active) → 링크 이동.
 - **iOS Safari**: `height: 100svh`
 - **패널 링크**: 좌측(spLeft) → `cosmetic.html`, 우측(spRight) → `medical.html`
-- **PC 구분선**: `.sp-seam::before { background: transparent }` — 보이지 않음
+- **`.sp-seam::before`**: 패널 구분선 — `display: none` 처리됨 (제거 상태 유지)
 
 ### cosmetic.html 히어로 레이아웃 주의
 
@@ -132,6 +165,7 @@ grep -rn "OLD_HEX\|rgba(OLD_R,OLD_G,OLD_B" *.html
 - **CDN 의존**: Tailwind CSS, Google Fonts — 인터넷 필수
 - **테마**: `<html class="dark">` 기본값, `html.light-mode` 토글, `localStorage('dashboardTheme')` 저장
 - Tailwind 클래스명의 `/`는 CSS 셀렉터에서 백슬래시 이스케이프 필요 (`text-white\/60`)
+- 총 페이지 수는 **23페이지** (홈+허브 3, 기관소개 3, 미용성형 8, 치료재건 4, 커뮤니티 5)
 
 ## 레이아웃 패턴
 
@@ -143,7 +177,8 @@ grep -rn "OLD_HEX\|rgba(OLD_R,OLD_G,OLD_B" *.html
 - **핵심 메시지**: "대학병원의 안전함에 섬세함을 더하다"
 - **의료진 호칭**: "전문의" 또는 "과장" 사용. **"원장" 사용 금지** (종합병원 진료과 형태)
 - **담당의**: 신정환 과장 (성형외과 전문의, 가톨릭중앙의료원 출신)
-- **CTA 3종**: 상담 예약(`booking.html`) / 전화(`tel:042-000-0000`) / 카카오톡
+- **CTA 4종 (순서 고정)**: 전화 상담(`tel:042-000-0000`) → 진료 예약(`booking.html`) → 카카오 상담 → 네이버 예약
+- **플로팅 CTA** (데스크탑 우측): 전화 상담 / 카톡 상담 / 네이버 예약
 - **미용성형 컬러**: `--primary` / **치료재건 컬러**: `--navy-mid`
 - **의료법 준수**: "최고", "완벽한", "100% 만족" 등 과장 표현 금지
 

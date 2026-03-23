@@ -23,15 +23,15 @@
 
     /* ===== Color Variables ===== */
     :root {
-      --primary: #42c0bf;
-      --primary-light: #63c3c2;
-      --primary-dark: #2da8a7;
-      --wine: #232942;
-      --navy: #0d1f2e;
-      --navy-mid: #303947;
-      --accent: #b2e4e4;
-      --accent-light: #d2f0f0;
-      --bg-off: #f0fafa;
+      --primary: #6abea7;
+      --primary-light: #7cffc4;
+      --primary-dark: #4d9e8a;
+      --wine: #1a3d38;
+      --navy: #0a1828;
+      --navy-mid: #1a3a5c;
+      --accent: #c0e8e4;
+      --accent-light: #daf2f0;
+      --bg-off: #f0f8f7;
       --text-dark: #1A1A1A;
       --text-mid: #555;
       --text-light: #888;
@@ -174,7 +174,7 @@
 
     .gnb-dropdown a:hover {
       color: var(--text-dark);
-      background: rgba(66,192,191,0.12);
+      background: rgba(106,190,167,0.12);
     }
 
     /* ── Header CTA ── */
@@ -292,7 +292,7 @@
       transition: color 0.18s, background 0.18s;
     }
 
-    .mob-sub-grid a:hover { color: var(--text-dark); background: rgba(66,192,191,0.18); }
+    .mob-sub-grid a:hover { color: var(--text-dark); background: rgba(106,190,167,0.18); }
 
     .mobile-nav-divider {
       width: 100%;
@@ -364,7 +364,7 @@
 
     .sp-cosmetic .sp-bg {
       background-image: url('images/mc-image/미용성형/미용성형 세컨페이지.jpg');
-      background-color: #232942;
+      background-color: #1a3d38;
       background-position: center top;
     }
 
@@ -377,7 +377,7 @@
 
     .sp-medical .sp-bg {
       background-image: url('images/surgery-room.jpg');
-      background-color: #0d1f2e;
+      background-color: #0a1828;
     }
 
     .sp-medical .sp-bg::after {
@@ -399,14 +399,7 @@
     }
 
     .sp-seam::before {
-      content: '';
-      position: absolute;
-      top: -10%;
-      left: -22px;
-      width: 44px;
-      height: 120%;
-      background: transparent;
-      transform: skewX(-6deg);
+      display: none;
     }
 
     /* ===== Panel Content ===== */
@@ -900,7 +893,7 @@
     .safety-card:hover {
       background: var(--primary);
       transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(66,192,191,0.18);
+      box-shadow: 0 20px 60px rgba(106,190,167,0.18);
     }
 
     .safety-icon {
@@ -1054,7 +1047,7 @@
       align-items: center;
       justify-content: center;
       gap: 9px;
-      padding: 16px 32px;
+      padding: 16px 24px;
       border-radius: 6px;
       font-size: 15px;
       font-weight: 700;
@@ -1068,22 +1061,28 @@
     .qbtn-kakao {
       background: #FEE500;
       color: #3C1E1E;
-      flex: 1 1 200px;
+      flex: 1;
     }
 
     .qbtn-phone {
       background: var(--primary);
       color: #0d2e29;
-      flex: 1 1 200px;
+      flex: 1;
     }
 
     .qbtn-reserve {
       border: 1.5px solid rgba(0,0,0,0.18);
       color: var(--text-dark);
-      flex: 1 1 160px;
+      flex: 1;
     }
 
     .qbtn-reserve:hover { border-color: var(--primary); color: var(--primary); }
+    .qbtn-naver {
+      background: #03C75A;
+      color: #fff;
+      flex: 1;
+    }
+    .qbtn-naver:hover { opacity: 0.88; }
     .qbtn-kakao:hover, .qbtn-phone:hover { opacity: 0.9; }
 
     @media (max-width: 768px) {
@@ -1261,11 +1260,7 @@
       }
 
       .sp-seam::before {
-        top: -14px;
-        left: -5%;
-        width: 110%;
-        height: 28px;
-        transform: skewY(-2deg);
+        display: none;
       }
 
       /* Content: always fully visible on mobile (no hover needed) */
@@ -1623,7 +1618,7 @@
       <div class="drlog-grid">
 
         <div class="drlog-card fade-up">
-          <div class="drlog-thumb" style="background:linear-gradient(135deg,#2a0a05,#2da8a7)">
+          <div class="drlog-thumb" style="background:linear-gradient(135deg,#2a0a05,#4d9e8a)">
             <div class="drlog-thumb-icon" aria-hidden="true">▶</div>
             <span class="drlog-type drlog-type-video">REELS</span>
           </div>
@@ -1634,7 +1629,7 @@
         </div>
 
         <div class="drlog-card fade-up">
-          <div class="drlog-thumb" style="background:linear-gradient(135deg,#1a4a3a,#2da8a7)">
+          <div class="drlog-thumb" style="background:linear-gradient(135deg,#1a4a3a,#4d9e8a)">
             <div class="drlog-thumb-icon" aria-hidden="true">💬</div>
             <span class="drlog-type drlog-type-column">Q&amp;A</span>
           </div>
@@ -1645,7 +1640,7 @@
         </div>
 
         <div class="drlog-card fade-up">
-          <div class="drlog-thumb" style="background:linear-gradient(135deg,#d2f0f0,#b2e4e4)">
+          <div class="drlog-thumb" style="background:linear-gradient(135deg,#daf2f0,#c0e8e4)">
             <div class="drlog-thumb-icon" aria-hidden="true">🏥</div>
             <span class="drlog-type drlog-type-case">TRUST</span>
           </div>
@@ -1674,10 +1669,6 @@
       <h2>지금 바로 상담 연결하세요</h2>
       <p>카카오톡·전화·온라인 예약 모두 가능합니다<br>빠른 답변으로 궁금증을 해결해 드립니다</p>
       <div class="quick-btns">
-        <a href="#" class="qbtn qbtn-kakao">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 5.92 2 10.8c0 3.07 1.74 5.78 4.37 7.43l-1.1 4.1 4.74-2.1C10.65 20.4 11.31 20.5 12 20.5c5.52 0 10-3.92 10-8.8S17.52 2 12 2z"/></svg>
-          카카오톡 상담
-        </a>
         <a href="tel:042-000-0000" class="qbtn qbtn-phone">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
           전화 상담
@@ -1685,6 +1676,14 @@
         <a href="booking.html" class="qbtn qbtn-reserve">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           진료 예약
+        </a>
+        <a href="#" class="qbtn qbtn-kakao">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 5.92 2 10.8c0 3.07 1.74 5.78 4.37 7.43l-1.1 4.1 4.74-2.1C10.65 20.4 11.31 20.5 12 20.5c5.52 0 10-3.92 10-8.8S17.52 2 12 2z"/></svg>
+          카카오 상담
+        </a>
+        <a href="#naver-booking" class="qbtn qbtn-naver">
+          <span style="font-weight:900;font-size:17px;line-height:1;">N</span>
+          네이버 예약
         </a>
       </div>
     </div>
@@ -1836,42 +1835,24 @@
         }
       });
 
-      /* Mobile: touch expand then navigate — tap vs. scroll 구분 */
+      /* Mobile: touch expand then navigate */
       let touchTimer = null;
-      let touchStartX = 0;
-      let touchStartY = 0;
 
-      function handlePanelTap(panel, side) {
+      function handlePanelTouch(panel, side) {
         if (!isMobile()) return;
         const isActive = panel.classList.contains('active');
+
         if (!isActive) {
+          // First tap: expand to show
           activatePanel(side);
           clearTimeout(touchTimer);
           touchTimer = setTimeout(deactivate, 2200);
         }
-        // already active → link navigation proceeds via default
+        // If already active: allow default link navigation
       }
 
-      function onTouchStart(e) {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-      }
-
-      function makeEndHandler(panel, side) {
-        return function(e) {
-          if (!isMobile()) return;
-          const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
-          const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
-          // 스크롤(dy > 12px)이면 패널 활성화 무시
-          if (dy > 12 || dx > 12) return;
-          handlePanelTap(panel, side);
-        };
-      }
-
-      spLeft.addEventListener('touchstart',  onTouchStart, { passive: true });
-      spLeft.addEventListener('touchend',    makeEndHandler(spLeft,  'cosmetic'), { passive: true });
-      spRight.addEventListener('touchstart', onTouchStart, { passive: true });
-      spRight.addEventListener('touchend',   makeEndHandler(spRight, 'medical'),  { passive: true });
+      spLeft.addEventListener('touchstart',  () => handlePanelTouch(spLeft,  'cosmetic'), { passive: true });
+      spRight.addEventListener('touchstart', () => handlePanelTouch(spRight, 'medical'),  { passive: true });
 
       /* ── Scroll fade-up animation ── */
       const observer = new IntersectionObserver(entries => {
