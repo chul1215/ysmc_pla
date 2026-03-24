@@ -59,7 +59,11 @@
       "Bash(sips -g pixelWidth -g pixelHeight -g fileSize 'images/card image/전문의 SNS 채널/얼굴 몽우리.png')",
       "Bash(python3 -c \":*)",
       "Bash(git check-ignore:*)",
-      "Bash(gh run:*)"
+      "Bash(gh run:*)",
+      "mcp__firecrawl__firecrawl_scrape",
+      "mcp__playwright__playwright_get_visible_text",
+      "mcp__playwright__playwright_click",
+      "mcp__firecrawl__firecrawl_search"
     ]
   }
 }
