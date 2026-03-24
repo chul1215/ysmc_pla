@@ -1894,11 +1894,17 @@
 
       /* Mobile: touch expand then navigate */
       let touchTimer = null;
+      let touchStartY = 0;
 
-      function handlePanelTouch(panel, side) {
+      function onHeroTouchStart(e) {
+        touchStartY = e.touches[0].clientY;
+      }
+
+      function onHeroTouchEnd(panel, side, e) {
         if (!isMobile()) return;
+        // 10px 이상 이동 = 스크롤 → 무시
+        if (Math.abs(e.changedTouches[0].clientY - touchStartY) > 10) return;
         const isActive = panel.classList.contains('active');
-
         if (!isActive) {
           // First tap: expand to show
           activatePanel(side);
@@ -1908,8 +1914,10 @@
         // If already active: allow default link navigation
       }
 
-      spLeft.addEventListener('touchstart',  () => handlePanelTouch(spLeft,  'cosmetic'), { passive: true });
-      spRight.addEventListener('touchstart', () => handlePanelTouch(spRight, 'medical'),  { passive: true });
+      spLeft.addEventListener('touchstart',  onHeroTouchStart, { passive: true });
+      spLeft.addEventListener('touchend',    e => onHeroTouchEnd(spLeft,  'cosmetic', e));
+      spRight.addEventListener('touchstart', onHeroTouchStart, { passive: true });
+      spRight.addEventListener('touchend',   e => onHeroTouchEnd(spRight, 'medical',  e));
 
       /* ── Scroll fade-up animation ── */
       const observer = new IntersectionObserver(entries => {
