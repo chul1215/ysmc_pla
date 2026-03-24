@@ -36,15 +36,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `치료재건 메인.png`, `치료재건 세컨페이드.png`
 - `1. 트라우마.png`, `2. 번 트리트먼트.png`, `3. 스킨 튜머.png`, `4. 피디애트릭.jpg`
 
-`images/card image/` — 섹션 카드용 실사진 (서브디렉토리별):
-- `유성선병원 성형외과가 추구하는 세 가지 가치(소개)/` → `안전 우선.jpg`, `섬세한 수술.jpg`, `환자 중심 진료.jpg`
-- `종합병원의 안전 시스템(메인)/` → `24시간 응급 체계.jpg`, `전문 마취 시스템.jpg`, `다과 협진 시스템.jpg`
-- `종합병원의 안전 시스템(치료재건)/` → `24시간 응급 대응 가능한 종합병원 체계.jpg`, `수술 중 안전을 책임지는 전담 마취과.jpg`, `입원부터 경과관찰, 재활까지 한 곳에서.jpg`
-- `전문의 SNS 채널/` → `처진 눈꺼풀 vs 안검하수.png`, `얼굴 몽우리.png`, `종합병원 성형외과.jpg`
+`images/card-image/` — 섹션 카드용 실사진 (URL-safe 경로):
+- `values/` → `safety-first.jpg`, `precise-surgery.jpg`, `patient-care.jpg`
+- `safety-main/` → `emergency-24h.jpg`, `anesthesia.jpg`, `multidisciplinary.jpg`
+- `safety-medical/` → `emergency-system.jpg`, `surgical-anesthesia.jpg`, `rehabilitation.jpg`
+- `sns/` → `blepharoptosis.png`, `face-lump.png`, `hospital-plastic.jpg`
 
 **이 목록에 없는 이미지 경로는 사용 금지** — 없는 이미지는 CSS 그라디언트로 처리.
 
-> `.gitignore`에 `*.png` 전역 무시 규칙이 있고 `!images/**/*.png` 예외가 적용되어 있다. `images/` 밖의 PNG는 git에 추가되지 않는다. `images/card image/`는 아직 git에 추가되지 않았으므로 배포 전 `git add "images/card image/"` 필요.
+> `.gitignore`에 `*.png` 전역 무시 규칙이 있고 `!images/**/*.png` 예외가 적용되어 있다. `images/` 밖의 PNG는 git에 추가되지 않는다. 이미지 경로는 반드시 공백·한글·괄호 없는 URL-safe 형식으로 유지할 것 (GitHub Pages에서 인코딩 오류 발생).
 
 ## 코드 아키텍처: 파일 완전 자급자족 구조
 
@@ -163,7 +163,7 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 ```html
 <div class="safety-card">
   <div class="safety-img">
-    <img src="images/card image/..." alt="..." loading="lazy">
+    <img src="images/card-image/safety-main/emergency-24h.jpg" alt="..." loading="lazy">
   </div>
   <div class="safety-card-body">
     <span class="safety-icon">...</span>

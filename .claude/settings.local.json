@@ -54,7 +54,12 @@
       "mcp__playwright__playwright_resize",
       "Bash(xargs -I {} basename {})",
       "Bash(head -5 echo \"---\" grep -n \"6abea7\\\\|7cffc4\\\\|4d9e8a\\\\|1a3d38\\\\|0a1828\\\\|1a3a5c\\\\|c0e8e4\\\\|daf2f0\\\\|f0f8f7\\\\|rgba\\(106,190\" booking.html)",
-      "Bash(head -5 echo \"---\" grep -n \"6abea7\\\\|7cffc4\\\\|4d9e8a\\\\|1a3d38\\\\|0a1828\\\\|1a3a5c\\\\|c0e8e4\\\\|daf2f0\\\\|f0f8f7\\\\|rgba\\(106,190\" fat.html)"
+      "Bash(head -5 echo \"---\" grep -n \"6abea7\\\\|7cffc4\\\\|4d9e8a\\\\|1a3d38\\\\|0a1828\\\\|1a3a5c\\\\|c0e8e4\\\\|daf2f0\\\\|f0f8f7\\\\|rgba\\(106,190\" fat.html)",
+      "Bash(sips -g pixelWidth -g pixelHeight -g fileSize 'images/card image/유성선병원 성형외과가 추구하는 세 가지 가치\\(소개\\)/섬세한 수술.jpg')",
+      "Bash(sips -g pixelWidth -g pixelHeight -g fileSize 'images/card image/전문의 SNS 채널/얼굴 몽우리.png')",
+      "Bash(python3 -c \":*)",
+      "Bash(git check-ignore:*)",
+      "Bash(gh run:*)"
     ]
   }
 }
