@@ -182,3 +182,17 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 `reference/content_strategy.md` — 경쟁사 벤치마킹, 페이지별 카피 브리프, 차별화 포지셔닝. **카피 수정 시 반드시 참고.**
 
 `reference/3rd_feedback.md`, `reference/second_feedback.md` — 피드백 이력. 이전 수정 맥락 파악 시 참고.
+
+`reference/microsite_cf.md` — 마이크로사이트 콘텐츠 방향 참고.
+
+## 기획·전략 문서
+
+`plan/` — 전체 프로젝트 실행 기획안. 페이지 구조, 오픈 일정, 예산 등 상위 기획 참고 시 우선 열람.
+
+`briefing/` — SNS·마케팅 전략 보고서 모음. 아래 파일이 핵심이다:
+
+- `briefing/sns_strategy_integrated.md` — **SNS 운영 전략 최종안** (harada 벤치마크 + 대전 경쟁 분석 통합). SNS 관련 카피·전략 수정 시 반드시 참고.
+- `briefing/dashboard_briefing.md` — 마케팅 기획 전체 요약 대시보드.
+- `briefing/competitor_analysis_daejeon.md` — 대전 지역 성형외과 경쟁 분석.
+- `briefing/sns_benchmark_harada.md` — @days_harada 일본 계정 심층 분석.
+- `briefing/instagram_benchmark_daejeon.md` — 대전 경쟁사 인스타그램 계정 분석.
