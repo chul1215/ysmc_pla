@@ -881,24 +881,43 @@
     }
 
     .safety-card {
-      padding: 44px 32px;
       background: #fff;
       border-radius: 20px;
+      overflow: hidden;
       border: 1px solid rgba(0,0,0,0.05);
-      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
       cursor: default;
       box-shadow: 0 2px 12px rgba(0,0,0,0.04);
     }
 
     .safety-card:hover {
-      background: var(--primary);
       transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(106,190,167,0.18);
+      box-shadow: 0 20px 60px rgba(106,190,167,0.22);
+    }
+
+    .safety-img {
+      width: 100%;
+      height: 190px;
+      overflow: hidden;
+    }
+
+    .safety-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .safety-card:hover .safety-img img { transform: scale(1.06); }
+
+    .safety-card-body {
+      padding: 28px 28px 32px;
     }
 
     .safety-icon {
-      font-size: 34px;
-      margin-bottom: 18px;
+      font-size: 28px;
+      margin-bottom: 14px;
       display: block;
     }
 
@@ -908,18 +927,13 @@
       letter-spacing: -0.3px;
       margin-bottom: 10px;
       color: var(--text-dark);
-      transition: color 0.3s;
     }
 
     .safety-card p {
       font-size: 14px;
       color: var(--text-mid);
       line-height: 1.7;
-      transition: color 0.3s;
     }
-
-    .safety-card:hover h3,
-    .safety-card:hover p { color: #fff; }
 
     /* ===== SNS / Dr. Log ===== */
     .drlog { background: #fff; }
@@ -946,14 +960,35 @@
     }
 
     .drlog-thumb {
-      height: 154px;
+      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+      overflow: hidden;
     }
 
-    .drlog-thumb-icon { font-size: 38px; color: rgba(255,255,255,0.35); }
+    .drlog-thumb img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .drlog-card:hover .drlog-thumb img { transform: scale(1.06); }
+
+    .drlog-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.08) 60%);
+      z-index: 1;
+    }
+
+    .drlog-thumb-icon { font-size: 38px; color: rgba(255,255,255,0.7); position: relative; z-index: 2; }
 
     .drlog-type {
       position: absolute;
@@ -963,10 +998,12 @@
       letter-spacing: 1.5px;
       padding: 4px 9px;
       border-radius: 2px;
+      z-index: 2;
     }
 
     .drlog-type-video  { background: var(--primary); color: #0d2e29; }
-    .drlog-type-column { background: rgba(255,255,255,0.12); color: rgba(0,0,0,0.75); border: 1px solid rgba(255,255,255,0.18); }
+    .drlog-type-column { background: rgba(255,255,255,0.85); color: #1a1a1a; }
+    .drlog-type-case   { background: var(--primary); color: #0d2e29; }
     .drlog-type-case   { background: var(--primary); color: #0d2e29; }
 
     .drlog-body { padding: 22px; }
@@ -1214,6 +1251,7 @@
       .cards-grid-3 { grid-template-columns: repeat(2, 1fr); }
 
       .safety-grid { grid-template-columns: 1fr; }
+      .safety-img { height: 260px; }
 
       .sp-content { padding: 60px; }
       .sp-cosmetic .sp-content { padding-right: 80px; }
@@ -1337,7 +1375,8 @@
 
       /* Safety */
       .safety-grid { grid-template-columns: 1fr; }
-      .safety-card { padding: 32px 24px; }
+      .safety-img { height: 220px; }
+      .safety-card-body { padding: 24px 24px 28px; }
 
       /* SNS */
       .drlog-grid { grid-template-columns: 1fr; }
@@ -1589,19 +1628,34 @@
       </div>
       <div class="safety-grid">
         <div class="safety-card fade-up">
-          <span class="safety-icon" aria-hidden="true">🚑</span>
-          <h3>24시간 응급 체계</h3>
-          <p>수술 중 어떤 상황에서도 즉시 대응할 수 있는 종합병원 응급의료 시스템을 갖추고 있습니다.</p>
+          <div class="safety-img">
+            <img src="images/card image/종합병원의 안전 시스템(메인)/24시간 응급 체계.jpg" alt="24시간 응급 체계" loading="lazy">
+          </div>
+          <div class="safety-card-body">
+            <span class="safety-icon" aria-hidden="true">🚑</span>
+            <h3>24시간 응급 체계</h3>
+            <p>수술 중 어떤 상황에서도 즉시 대응할 수 있는 종합병원 응급의료 시스템을 갖추고 있습니다.</p>
+          </div>
         </div>
         <div class="safety-card fade-up">
-          <span class="safety-icon" aria-hidden="true">🫀</span>
-          <h3>전문 마취 시스템</h3>
-          <p>마취통증의학과 전문의 상주로 수술 전후 안전한 마취 관리가 이루어집니다.</p>
+          <div class="safety-img">
+            <img src="images/card image/종합병원의 안전 시스템(메인)/전문 마취 시스템.jpg" alt="전문 마취 시스템" loading="lazy">
+          </div>
+          <div class="safety-card-body">
+            <span class="safety-icon" aria-hidden="true">🫀</span>
+            <h3>전문 마취 시스템</h3>
+            <p>마취통증의학과 전문의 상주로 수술 전후 안전한 마취 관리가 이루어집니다.</p>
+          </div>
         </div>
         <div class="safety-card fade-up">
-          <span class="safety-icon" aria-hidden="true">🔬</span>
-          <h3>다과 협진 시스템</h3>
-          <p>내과, 응급의학과 등 타 진료과와 즉시 협진이 가능하여 기저 질환자도 안심하고 수술받을 수 있습니다.</p>
+          <div class="safety-img">
+            <img src="images/card image/종합병원의 안전 시스템(메인)/다과 협진 시스템.jpg" alt="다과 협진 시스템" loading="lazy">
+          </div>
+          <div class="safety-card-body">
+            <span class="safety-icon" aria-hidden="true">🔬</span>
+            <h3>다과 협진 시스템</h3>
+            <p>내과, 응급의학과 등 타 진료과와 즉시 협진이 가능하여 기저 질환자도 안심하고 수술받을 수 있습니다.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1618,7 +1672,8 @@
       <div class="drlog-grid">
 
         <div class="drlog-card fade-up">
-          <div class="drlog-thumb" style="background:linear-gradient(135deg,#2a0a05,#4d9e8a)">
+          <div class="drlog-thumb">
+            <img src="images/card image/전문의 SNS 채널/처진 눈꺼풀 vs 안검하수.png" alt="처진 눈꺼풀 vs 안검하수" loading="lazy">
             <div class="drlog-thumb-icon" aria-hidden="true">▶</div>
             <span class="drlog-type drlog-type-video">REELS</span>
           </div>
@@ -1629,7 +1684,8 @@
         </div>
 
         <div class="drlog-card fade-up">
-          <div class="drlog-thumb" style="background:linear-gradient(135deg,#1a4a3a,#4d9e8a)">
+          <div class="drlog-thumb">
+            <img src="images/card image/전문의 SNS 채널/얼굴 몽우리.png" alt="얼굴 몽우리" loading="lazy">
             <div class="drlog-thumb-icon" aria-hidden="true">💬</div>
             <span class="drlog-type drlog-type-column">Q&amp;A</span>
           </div>
@@ -1640,7 +1696,8 @@
         </div>
 
         <div class="drlog-card fade-up">
-          <div class="drlog-thumb" style="background:linear-gradient(135deg,#daf2f0,#c0e8e4)">
+          <div class="drlog-thumb">
+            <img src="images/card image/전문의 SNS 채널/종합병원 성형외과.jpg" alt="종합병원 성형외과" loading="lazy">
             <div class="drlog-thumb-icon" aria-hidden="true">🏥</div>
             <span class="drlog-type drlog-type-case">TRUST</span>
           </div>

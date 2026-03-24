@@ -33,12 +33,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `1. 아이 센터.png`, `2. 라이노플래스티.jpg`, `3. 리프팅 안티에이징.jpg`, `4. 메일 코스매틱.png`, `5. 팻 컨투어링.jpg`, `6. 브레스트 써저리.jpg`, `7. 아더 써저리.jpg`, `8. 쁘띠스킨.jpg`
 
 `images/mc-image/치료재건/` — 카테고리 카드용 실사진 4종 + 메인/세컨페이지 이미지:
-- `치료재건 메인.png`, `치료재건 세컨페이지.png`
+- `치료재건 메인.png`, `치료재건 세컨페이드.png`
 - `1. 트라우마.png`, `2. 번 트리트먼트.png`, `3. 스킨 튜머.png`, `4. 피디애트릭.jpg`
+
+`images/card image/` — 섹션 카드용 실사진 (서브디렉토리별):
+- `유성선병원 성형외과가 추구하는 세 가지 가치(소개)/` → `안전 우선.jpg`, `섬세한 수술.jpg`, `환자 중심 진료.jpg`
+- `종합병원의 안전 시스템(메인)/` → `24시간 응급 체계.jpg`, `전문 마취 시스템.jpg`, `다과 협진 시스템.jpg`
+- `종합병원의 안전 시스템(치료재건)/` → `24시간 응급 대응 가능한 종합병원 체계.jpg`, `수술 중 안전을 책임지는 전담 마취과.jpg`, `입원부터 경과관찰, 재활까지 한 곳에서.jpg`
+- `전문의 SNS 채널/` → `처진 눈꺼풀 vs 안검하수.png`, `얼굴 몽우리.png`, `종합병원 성형외과.jpg`
 
 **이 목록에 없는 이미지 경로는 사용 금지** — 없는 이미지는 CSS 그라디언트로 처리.
 
-> `.gitignore`에 `*.png` 전역 무시 규칙이 있고 `!images/**/*.png` 예외가 적용되어 있다. `images/` 밖의 PNG는 git에 추가되지 않는다.
+> `.gitignore`에 `*.png` 전역 무시 규칙이 있고 `!images/**/*.png` 예외가 적용되어 있다. `images/` 밖의 PNG는 git에 추가되지 않는다. `images/card image/`는 아직 git에 추가되지 않았으므로 배포 전 `git add "images/card image/"` 필요.
 
 ## 코드 아키텍처: 파일 완전 자급자족 구조
 
@@ -70,7 +76,7 @@ done
 - **진료 상세 페이지**: `<script>` 블록 없음. FAQ 아코디언은 `onclick="this.parentElement.classList.toggle('active')"` 방식
 - **index.html**: IIFE — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up, 스플릿 히어로 터치 (`height: 100svh`, `.sp-seam::before` 구분선은 `display: none` 상태 유지)
 - **cosmetic.html / medical.html**: IIFE — 자동 슬라이드쇼(3초 전환), 카테고리 스크롤 drag-to-scroll, 전후변화 스크롤, 플로팅 CTA 토글
-- **about.html**: IIFE — 카드 stagger 애니메이션
+- **about.html**: IIFE — 카드 stagger 애니메이션. 오시는 길 섹션에 Google Maps iframe 내장 (`https://www.google.com/maps?q=...&output=embed`), API 키 불필요
 - **tour.html**: 터치 스와이프 슬라이더 (화살표 + dot 인디케이터)
 
 ### 허브 페이지 섹션 구성 (cosmetic.html / medical.html)
@@ -150,6 +156,29 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 - **미용성형 컬러**: `--primary` / **치료재건 컬러**: `--navy-mid`
 - **의료법 준수**: "최고", "완벽한", "100% 만족" 등 과장 표현 금지
 
+### 이미지 카드 구조 패턴
+
+`about.html` `.mission-card`, `index.html`/`medical.html` `.safety-card`는 이미지+텍스트 조합 구조를 사용한다:
+
+```html
+<div class="safety-card">
+  <div class="safety-img">
+    <img src="images/card image/..." alt="..." loading="lazy">
+  </div>
+  <div class="safety-card-body">
+    <span class="safety-icon">...</span>
+    <h3>...</h3>
+    <p>...</p>
+  </div>
+</div>
+```
+
+- 이미지 높이: PC `190px` / 태블릿 `260px` / 모바일 `220px`
+- 호버 시 이미지 `scale(1.06)` 줌인 (`transition: transform 0.5s ease`)
+- `index.html` `.drlog-card`의 `.drlog-thumb`도 동일 패턴 — `position: absolute` img + `::after` 어두운 그라디언트 오버레이 + `z-index: 2` 뱃지/아이콘
+
 ## 콘텐츠 전략 참고
 
 `reference/content_strategy.md` — 경쟁사 벤치마킹, 페이지별 카피 브리프, 차별화 포지셔닝. **카피 수정 시 반드시 참고.**
+
+`reference/3rd_feedback.md`, `reference/second_feedback.md` — 피드백 이력. 이전 수정 맥락 파악 시 참고.
