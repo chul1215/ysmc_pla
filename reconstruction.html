@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>재건/종괴 - 유성선병원 성형외과</title>
@@ -21,8 +24,8 @@
     }
 
     body {
-      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-      color: #333;
+      font-family: 'Manrope', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      color: #181C1E;
       line-height: 1.6;
       background: #fff;
     }
@@ -44,19 +47,29 @@
 
     /* ===== Color Variables ===== */
     :root {
-      --primary: #42c0bf;
-      --primary-light: #63c3c2;
-      --primary-dark: #2da8a7;
-      --accent: #b2e4e4;
-      --accent-light: #d2f0f0;
-      --bg-light: #f0fafa;
-      --bg-warm: #d2f0f0;
-      --text-dark: #1A1A1A;
-      --text-mid: #555;
-      --text-light: #888;
+      --primary: #006A63;
+      --primary-light: #4FD1C5;
+      --primary-dark: #005a54;
+      --accent: #81E6D9;
+      --accent-light: #8CF1E4;
+      --bg-off: #F1F4F6;
+      --surface-low: #F1F4F6;
+      --text-dark: #181C1E;
+      --text-mid: #4A5568;
+      --text-light: #718096;
       --white: #FFFFFF;
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
       --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+      --primary-container: #8CF1E4;
+      --secondary: #006A62;
+      --secondary-light: #81E6D9;
+      --tertiary: #9B3D66;
+      --tertiary-light: #F687B3;
+      --surface: #F7FAFC;
+      --surface-low: #F1F4F6;
+      --surface-lowest: #FFFFFF;
+      --on-surface: #181C1E;
+      --outline-variant: rgba(187, 201, 199, 0.20);
     }
 
     /* ===== Header / GNB ===== */
@@ -69,10 +82,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+      background: rgba(247, 250, 252, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 2px 20px rgba(0, 106, 99, 0.07);
     }
 
     .logo-text {
@@ -121,8 +134,8 @@
       top: 76px;
       left: 50%;
       transform: translateX(-50%) translateY(-8px);
-      background: rgba(255,255,255,0.98);
-      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(247, 250, 252, 0.82);
+      border: none;
       border-top: 2px solid var(--primary);
       min-width: 200px;
       padding: 16px 0;
@@ -152,7 +165,7 @@
       color: rgba(0,0,0,0.35);
       padding: 0 16px 10px;
       margin-bottom: 4px;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      border-bottom: none;
     }
 
     .gnb-dropdown a {
@@ -182,10 +195,10 @@
       transition: all 0.25s;
     }
 
-    .btn-outline-w { border: 1px solid rgba(0,0,0,0.25); color: rgba(0,0,0,0.7); }
-    .btn-outline-w:hover { border-color: var(--primary); color: var(--primary-dark); }
-    .btn-solid-w { background: var(--primary); color: #0d2e29; }
-    .btn-solid-w:hover { background: var(--primary-light); }
+    .btn-outline-w { background: var(--surface-low, #F1F4F6); border: none; color: var(--on-surface, #181C1E); border-radius: 9999px; }
+    .btn-outline-w:hover { background: var(--accent, #81E6D9); color: var(--primary-dark); }
+    .btn-solid-w { background: linear-gradient(135deg, #006A63, #4FD1C5); color: #FFFFFF; }
+    .btn-solid-w:hover { background: linear-gradient(135deg, #005a54, #006A63); }
 
     /* ===== Mobile Menu Toggle ===== */
     .menu-toggle {
@@ -218,7 +231,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(255,255,255,0.98);
+      background: rgba(247, 250, 252, 0.82);
       z-index: 1050;
       flex-direction: column;
       align-items: center;
@@ -240,7 +253,7 @@
       color: rgba(0,0,0,0.75);
       letter-spacing: -0.5px;
       padding: 14px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      border-bottom: none;
       transition: color 0.2s;
     }
 
@@ -300,7 +313,7 @@
       border-radius: 4px;
     }
 
-    .mobile-nav-cta .nav-phone { background: var(--primary); color: #0d2e29; }
+    .mobile-nav-cta .nav-phone { background: linear-gradient(135deg, #006A63, #4FD1C5); color: #FFFFFF; }
     .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
 
     /* ===== Page Hero ===== */
@@ -363,10 +376,10 @@
 
     .section-label {
       display: inline-block;
-      font-size: 10px;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--primary);
-      letter-spacing: 4px;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       margin-bottom: 12px;
     }
@@ -432,7 +445,7 @@
 
     .principle-tag {
       padding: 8px 16px;
-      background: var(--bg-light);
+      background: var(--surface, #F7FAFC);
       border-radius: 6px;
       font-size: 14px;
       font-weight: 600;
@@ -441,7 +454,7 @@
 
     /* ===== Special Points Section ===== */
     .special-points {
-      background: var(--bg-off);
+      background: var(--surface, #F7FAFC);
     }
 
     .points-grid {
@@ -493,7 +506,7 @@
 
     /* ===== Treatment Types Section ===== */
     .treatment-types {
-      background: var(--bg-warm);
+      background: var(--surface-low, #F1F4F6);
     }
 
     .types-grid {
@@ -561,7 +574,7 @@
     }
 
     .faq-item {
-      background: var(--bg-off);
+      background: var(--surface, #F7FAFC);
       border-radius: 16px;
       margin-bottom: 16px;
       overflow: hidden;
@@ -569,7 +582,7 @@
     }
 
     .faq-item:hover {
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 40px rgba(0, 106, 99, 0.06);
     }
 
     .faq-question {
@@ -692,7 +705,7 @@
 
     /* ===== Footer ===== */
     .footer {
-      background: #1A1A1A;
+      background: var(--surface-low, #F1F4F6);
       color: rgba(255, 255, 255, 0.7);
       padding: 40px 40px 24px;
       text-align: center;
@@ -751,7 +764,7 @@
       position: fixed;
       bottom: 0; left: 0; width: 100%;
       z-index: 990;
-      background: var(--bg-off);
+      background: var(--surface, #F7FAFC);
       box-shadow: 0 -2px 20px rgba(0,0,0,0.4);
       padding: 10px 16px;
       padding-bottom: calc(10px + env(safe-area-inset-bottom));
@@ -771,7 +784,7 @@
       transition: opacity 0.25s;
     }
     .mobile-cta-btn:active { opacity: 0.8; }
-    .cta-phone { background: #42c0bf; color: #0d2e29; }
+    .cta-phone { background: #006A63; color: #0d2e29; }
     .cta-kakao { background: #FEE500; color: #3C1E1E; }
     @media (max-width: 768px) { .mobile-cta { display: block !important; } }
   </style>
@@ -811,7 +824,7 @@
         <a href="#">카카오상담</a>
         <a href="booking.html">진료예약</a>
         <a href="#">수술후기</a>
-        <a href="news.html">언론보도</a>
+        
         <a href="notice.html">공지사항</a>
       </div>
     </div>
@@ -859,7 +872,7 @@
           <a href="#">카카오톡 상담</a>
           <a href="booking.html">진료예약</a>
           <a href="#">수술후기</a>
-          <a href="news.html">언론보도</a>
+          
           <a href="notice.html">공지사항</a>
         </div>
       </div>

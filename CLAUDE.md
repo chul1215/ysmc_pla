@@ -19,7 +19,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 미용·성형 상세 8개: `eye`, `nose`, `lifting`, `male`, `fat`, `breast`, `other`, `petit`
 - 치료·재건 상세 4개: `trauma`, `burn`, `reconstruction`, `pediatric`
 - 기관 소개: `about`, `doctor`, `tour`
-- 커뮤니티: `community`, `consultation`, `booking`, `news`, `notice`
+- 커뮤니티: `community`, `consultation`, `booking`, `notice`
+  - `news.html` — 파일은 존재하나 **모든 GNB/모바일 nav에서 링크 제거됨** (언론보도 게시판 비활성화)
 - `_archive/` — 미사용 보관
 
 ### 사용 가능한 이미지 (`images/` 폴더)
@@ -49,7 +50,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 for f in about.html booking.html breast.html burn.html community.html consultation.html \
   cosmetic.html doctor.html eye.html fat.html index.html lifting.html male.html \
-  medical.html news.html nose.html notice.html other.html pediatric.html petit.html \
+  medical.html nose.html notice.html other.html pediatric.html petit.html \
   reconstruction.html tour.html trauma.html; do
   sed -i '' 's/OLD/NEW/g' "$f"
 done
@@ -64,18 +65,19 @@ done
 - **드롭다운**: CSS hover로만 구현 (JS 없음)
 - **모바일**: 햄버거 → 풀스크린 오버레이
 - **현재 페이지 표시**: 해당 항목에 `.current` 클래스
+- **커뮤니티 드롭다운 항목**: 온라인상담 / 카카오톡 상담 / 진료예약 / 공지사항 (언론보도 제거됨)
 
 ### JS 패턴
 
 - **진료 상세 페이지**: `<script>` 블록 없음. FAQ 아코디언은 `onclick="this.parentElement.classList.toggle('active')"` 방식
 - **index.html**: IIFE — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up, 스플릿 히어로 터치 (`height: 100svh`, `.sp-seam::before` 구분선은 `display: none` 상태 유지)
-- **cosmetic.html / medical.html**: IIFE — 자동 슬라이드쇼(3초 전환), 카테고리 스크롤 drag-to-scroll, 전후변화 스크롤, 플로팅 CTA 토글
+- **cosmetic.html / medical.html**: IIFE — 자동 슬라이드쇼(3초 전환), 카테고리 스크롤 drag-to-scroll, 플로팅 CTA 토글
 - **about.html**: IIFE — 카드 stagger 애니메이션
 - **tour.html**: 터치 스와이프 슬라이더 (화살표 + dot 인디케이터)
 
 ### 허브 페이지 섹션 구성 (cosmetic.html / medical.html)
 
-**cosmetic.html:** 히어로 슬라이드쇼(눈/코/리프팅/가슴) → 카테고리 스크롤 8종 → 전후변화 4카드 → Why Choose Us → 의료진 소개 → CTA
+**cosmetic.html:** 히어로 슬라이드쇼(눈/코/리프팅/가슴) → 카테고리 스크롤 8종 → Why Choose Us → 의료진 소개 → CTA
 
 **medical.html:** 프로모션 배너(응급/조직검사/소아) → 히어로 슬라이드쇼(외상/화상/피부종양/소아) → 카테고리 스크롤 4종 → 안전 시스템 → 의료진 소개 → CTA
 
@@ -99,8 +101,21 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 ```
 
 - `gap` 값이 spacer와 첫 카드 사이에도 적용되므로 `::before` width에서 gap을 차감해야 정렬이 맞음
-- `ba-scroll-track`(gap: 20px)의 spacer 상수는 12px: `max(12px, calc((100vw - 1360px) / 2 + 12px))`
 - drag-to-scroll JS는 `document` 레벨 이벤트 리스너 사용 (트랙 밖에서 마우스를 놓아도 작동)
+
+> **[롤백 참고] cosmetic.html 전후변화 섹션**: 2026-03-26 삭제. 실제 케이스 사진 확보 시 복원 방법:
+> 1. CSS: `.before-after-section`, `.ba-*` 관련 스타일 블록을 카테고리 스크롤 CSS 뒤에 추가 (gap: 20px, spacer: `max(12px, calc((100vw - 1360px) / 2 + 12px))`)
+> 2. HTML: `<!-- ===== TRUST SECTION -->` 바로 앞에 `<section class="before-after-section">` 블록 삽입 (ba-scroll-wrapper → 4장 ba-card → ba-notice 구조)
+> 3. JS: `catTrack` 드래그 스크롤 블록 뒤에 `baScrollTrack` 변수 선언 + 버튼 이벤트 + 드래그 스크롤 IIFE 추가
+> 4. 모바일 @media: `.before-after-section { padding: 60px 0; }` 외 ba-* 오버라이드 추가
+> 5. 실제 사진은 `images/` 폴더에 넣고 `ba-half` 배경 이미지로 교체 (`background-image: url(...)`, `background-size: cover`)
+
+### booking.html 구조 (현행)
+
+커스텀 예약 폼 없음. 3채널 카드로만 구성:
+- **온라인 예약** → 본원 예약시스템 외부 링크 (`href="#"`, `<!-- TODO -->` 주석으로 URL 교체 위치 표시)
+- **전화 예약** → 성형외과 직통 내선 (`href="tel:042-000-0000"`, 실제 내선번호로 교체 필요)
+- **카카오톡 예약** → 카카오 케어챗 링크 (`href="#"`, `<!-- TODO -->` 주석으로 URL 교체 위치 표시)
 
 ### 모바일 주의사항
 
@@ -149,6 +164,18 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 - **플로팅 CTA** (데스크탑 우측): 전화 상담 / 카톡 상담 / 네이버 예약
 - **미용성형 컬러**: `--primary` / **치료재건 컬러**: `--navy-mid`
 - **의료법 준수**: "최고", "완벽한", "100% 만족" 등 과장 표현 금지
+
+## Stitch MCP (AI UI 디자인)
+
+Google Stitch MCP가 연결되어 있어 대화 중 UI 디자인 생성을 직접 요청할 수 있다.
+
+- **MCP 서버**: `stitch-mcp` (npx stitch-mcp)
+- **Google Cloud 프로젝트**: `gen-lang-client-0995891471` (Default Gemini Project)
+- **인증 방식**: Application Default Credentials (`~/.config/gcloud/application_default_credentials.json`)
+- **MCP 재연결**: `claude mcp restart stitch`
+- **인증 만료 시**: `gcloud auth application-default login` 재실행
+
+Stitch로 생성한 HTML/CSS 결과물을 이 프로젝트에 통합할 때는 인라인 스타일 구조를 유지하고, CSS 변수를 프로젝트 색상 시스템으로 교체해야 한다.
 
 ## 콘텐츠 전략 참고
 

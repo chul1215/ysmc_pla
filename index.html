@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>유성선병원 성형외과 — 시안 2</title>
@@ -11,8 +14,8 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-      color: #1a1a1a;
+      font-family: 'Manrope', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      color: #181C1E;
       line-height: 1.6;
       background: #fff;
       overflow-x: hidden;
@@ -23,19 +26,30 @@
 
     /* ===== Color Variables ===== */
     :root {
-      --primary: #6abea7;
-      --primary-light: #7cffc4;
-      --primary-dark: #4d9e8a;
-      --wine: #1a3d38;
-      --navy: #0a1828;
-      --navy-mid: #1a3a5c;
-      --accent: #c0e8e4;
-      --accent-light: #daf2f0;
-      --bg-off: #f0f8f7;
-      --text-dark: #1A1A1A;
-      --text-mid: #555;
-      --text-light: #888;
+      --primary: #006A63;
+      --primary-light: #4FD1C5;
+      --primary-dark: #005a54;
+      --wine: #1B2A2E;
+      --navy: #0D1F1E;
+      --navy-mid: #1E3A3A;
+      --accent: #81E6D9;
+      --accent-light: #8CF1E4;
+      --bg-off: #F1F4F6;
+      --text-dark: #181C1E;
+      --text-mid: #4A5568;
+      --text-light: #718096;
       --white: #FFFFFF;
+      --primary-container: #8CF1E4;
+      --secondary: #006A62;
+      --secondary-light: #81E6D9;
+      --secondary-container: #8CF1E4;
+      --tertiary: #9B3D66;
+      --tertiary-light: #F687B3;
+      --surface: #F7FAFC;
+      --surface-low: #F1F4F6;
+      --surface-lowest: #FFFFFF;
+      --on-surface: #181C1E;
+      --outline-variant: rgba(187, 201, 199, 0.20);
     }
 
     /* ===== Header / GNB ===== */
@@ -48,16 +62,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+      background: rgba(247, 250, 252, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 2px 20px rgba(0, 106, 99, 0.07);
       transition: background 0.35s, box-shadow 0.35s;
     }
 
     .header.scrolled {
-      background: rgba(255, 255, 255, 0.99);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.10);
+      background: rgba(247, 250, 252, 0.95);
+      box-shadow: 0 4px 24px rgba(0, 106, 99, 0.10);
     }
 
     .logo-text {
@@ -117,8 +131,8 @@
       top: 76px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255,255,255,0.98);
-      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(247, 250, 252, 0.82);
+      border: none;
       border-top: 2px solid var(--primary);
       min-width: 200px;
       padding: 16px 0;
@@ -159,7 +173,7 @@
       color: rgba(0,0,0,0.35);
       padding: 0 16px 10px;
       margin-bottom: 4px;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      border-bottom: none;
     }
 
     .gnb-dropdown a {
@@ -187,20 +201,22 @@
 
     .header-cta a {
       padding: 7px 18px;
-      border-radius: 4px;
+      border-radius: 9999px;
       font-size: 13px;
       font-weight: 600;
       transition: all 0.25s;
     }
 
     .btn-outline-w {
-      border: 1px solid rgba(0,0,0,0.25);
-      color: rgba(0,0,0,0.7);
+      background: var(--surface-low, #F1F4F6);
+      border: none;
+      color: var(--on-surface, #181C1E);
+      border-radius: 9999px;
     }
-    .btn-outline-w:hover { border-color: var(--primary); color: var(--primary-dark); }
+    .btn-outline-w:hover { background: var(--accent, #81E6D9); color: var(--primary-dark); }
 
-    .btn-solid-w { background: var(--primary); color: #0d2e29; }
-    .btn-solid-w:hover { background: var(--primary-light); }
+    .btn-solid-w { background: linear-gradient(135deg, #006A63, #4FD1C5); color: #FFFFFF; border-radius: 9999px; }
+    .btn-solid-w:hover { background: linear-gradient(135deg, #005a54, #006A63); }
 
     /* ===== Mobile Menu Toggle ===== */
     .menu-toggle {
@@ -233,7 +249,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(255,255,255,0.98);
+      background: rgba(247, 250, 252, 0.82);
       z-index: 1050;
       flex-direction: column;
       align-items: center;
@@ -259,7 +275,7 @@
       color: rgba(0,0,0,0.75);
       letter-spacing: -0.5px;
       padding: 14px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      border-bottom: none;
       transition: color 0.2s;
     }
 
@@ -288,7 +304,7 @@
       color: rgba(0,0,0,0.60);
       padding: 10px 12px;
       background: rgba(0,0,0,0.04);
-      border-radius: 4px;
+      border-radius: 9999px;
       transition: color 0.18s, background 0.18s;
     }
 
@@ -315,7 +331,7 @@
       font-weight: 600 !important;
       padding: 14px 0 !important;
       text-align: center;
-      border-radius: 4px;
+      border-radius: 9999px;
     }
 
     .mobile-nav-cta .nav-phone { background: var(--primary); color: #0d2e29; }
@@ -364,7 +380,7 @@
 
     .sp-cosmetic .sp-bg {
       background-image: url('images/mc-image/미용성형/미용성형 세컨페이지.jpg');
-      background-color: #1a3d38;
+      background-color: #1B2A2E;
       background-position: center top;
     }
 
@@ -377,7 +393,7 @@
 
     .sp-medical .sp-bg {
       background-image: url('images/surgery-room.jpg');
-      background-color: #0a1828;
+      background-color: #0D1F1E;
     }
 
     .sp-medical .sp-bg::after {
@@ -421,7 +437,7 @@
     .sp-medical  .sp-content { padding-left: 100px; }
 
     .sp-eyebrow {
-      font-size: 10px;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -641,10 +657,10 @@
 
     .section-label {
       display: inline-block;
-      font-size: 10px;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--primary);
-      letter-spacing: 4px;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       margin-bottom: 12px;
     }
@@ -731,7 +747,7 @@
     .card-num {
       position: absolute;
       top: 14px; left: 14px;
-      font-size: 10px;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 2px;
       color: rgba(0,0,0,0.65);
@@ -743,7 +759,7 @@
     .card-body { padding: 26px 26px 30px; }
 
     .card-category {
-      font-size: 10px;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 2px;
       color: var(--primary);
@@ -871,7 +887,7 @@
     }
 
     /* ===== Safety ===== */
-    .safety { background: var(--bg-off); }
+    .safety { background: var(--surface, #F7FAFC); }
 
     .safety-grid {
       display: grid;
@@ -884,10 +900,10 @@
       padding: 44px 32px;
       background: #fff;
       border-radius: 20px;
-      border: 1px solid rgba(0,0,0,0.05);
+      border: none;
       transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
       cursor: default;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      box-shadow: 0 8px 40px rgba(0, 106, 99, 0.06);
     }
 
     .safety-card:hover {
@@ -1009,7 +1025,7 @@
 
     /* ===== Quick Connect ===== */
     .quick-connect {
-      background: var(--bg-off);
+      background: var(--surface, #F7FAFC);
       padding: 64px 40px;
     }
 
@@ -1166,7 +1182,7 @@
       position: fixed;
       bottom: 0; left: 0; width: 100%;
       z-index: 990;
-      background: var(--bg-off);
+      background: var(--surface, #F7FAFC);
       box-shadow: 0 -2px 20px rgba(0,0,0,0.4);
       padding: 10px 16px;
       padding-bottom: calc(10px + env(safe-area-inset-bottom));
@@ -1181,7 +1197,7 @@
       justify-content: center;
       gap: 7px;
       padding: 14px;
-      border-radius: 4px;
+      border-radius: 9999px;
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
@@ -1411,7 +1427,7 @@
         <a href="#">카카오상담</a>
         <a href="booking.html">진료예약</a>
         <a href="#">수술후기</a>
-        <a href="news.html">언론보도</a>
+        
         <a href="notice.html">공지사항</a>
       </div>
     </div>
@@ -1459,7 +1475,7 @@
           <a href="#">카카오톡 상담</a>
           <a href="booking.html">진료예약</a>
           <a href="#">수술후기</a>
-          <a href="news.html">언론보도</a>
+          
           <a href="notice.html">공지사항</a>
         </div>
       </div>
@@ -1618,7 +1634,7 @@
       <div class="drlog-grid">
 
         <div class="drlog-card fade-up">
-          <div class="drlog-thumb" style="background:linear-gradient(135deg,#2a0a05,#4d9e8a)">
+          <div class="drlog-thumb" style="background:linear-gradient(135deg,#2a0a05,#005a54)">
             <div class="drlog-thumb-icon" aria-hidden="true">▶</div>
             <span class="drlog-type drlog-type-video">REELS</span>
           </div>
@@ -1629,7 +1645,7 @@
         </div>
 
         <div class="drlog-card fade-up">
-          <div class="drlog-thumb" style="background:linear-gradient(135deg,#1a4a3a,#4d9e8a)">
+          <div class="drlog-thumb" style="background:linear-gradient(135deg,#1a4a3a,#005a54)">
             <div class="drlog-thumb-icon" aria-hidden="true">💬</div>
             <span class="drlog-type drlog-type-column">Q&amp;A</span>
           </div>
@@ -1640,7 +1656,7 @@
         </div>
 
         <div class="drlog-card fade-up">
-          <div class="drlog-thumb" style="background:linear-gradient(135deg,#daf2f0,#c0e8e4)">
+          <div class="drlog-thumb" style="background:linear-gradient(135deg,#8CF1E4,#81E6D9)">
             <div class="drlog-thumb-icon" aria-hidden="true">🏥</div>
             <span class="drlog-type drlog-type-case">TRUST</span>
           </div>

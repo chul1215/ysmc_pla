@@ -3,36 +3,49 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>화상 치료 - 유성선병원 성형외과</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; color: #333; line-height: 1.6; background: #fff; }
+    body { font-family: 'Manrope', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; color: #333; line-height: 1.6; background: #fff; }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
     img { max-width: 100%; height: auto; display: block; }
 
     :root {
-      --primary: #42c0bf;
-      --primary-light: #63c3c2;
-      --primary-dark: #2da8a7;
-      --accent: #b2e4e4;
-      --accent-light: #d2f0f0;
-      --bg-light: #f0fafa;
-      --bg-warm: #d2f0f0;
-      --text-dark: #1A1A1A;
-      --text-mid: #555;
-      --text-light: #888;
+      --primary: #006A63;
+      --primary-light: #4FD1C5;
+      --primary-dark: #005a54;
+      --accent: #81E6D9;
+      --accent-light: #8CF1E4;
+      --bg-off: #F1F4F6;
+      --surface-low: #F1F4F6;
+      --text-dark: #181C1E;
+      --text-mid: #4A5568;
+      --text-light: #718096;
       --white: #FFFFFF;
       --navy: #1a2744;
       --navy-mid: #2d3f6b;
       --shadow: 0 4px 24px rgba(0,0,0,0.08);
       --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+      --primary-container: #8CF1E4;
+      --secondary: #006A62;
+      --secondary-light: #81E6D9;
+      --tertiary: #9B3D66;
+      --tertiary-light: #F687B3;
+      --surface: #F7FAFC;
+      --surface-low: #F1F4F6;
+      --surface-lowest: #FFFFFF;
+      --on-surface: #181C1E;
+      --outline-variant: rgba(187, 201, 199, 0.20);
     }
 
-    .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+    .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(247, 250, 252, 0.82); backdrop-filter: blur(10px); box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
     .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 80px; }
     .logo-text { font-size: 18px; font-weight: 700; color: var(--primary-dark); letter-spacing: -0.5px; }
     .gnb { display: flex; align-items: center; gap: 0; }
@@ -41,10 +54,10 @@
     .gnb-item > a:hover, .gnb-item > a.active { color: var(--primary); }
     .gnb-item > a::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 2px; background: var(--primary); transform: scaleX(0); transition: transform 0.3s; }
     .gnb-item > a:hover::after, .gnb-item > a.active::after { transform: scaleX(1); }
-    .dropdown { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.98); border-radius: 10px; padding: 20px; min-width: 480px; opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s; pointer-events: none; box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+    .dropdown { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: rgba(247, 250, 252, 0.82); border-radius: 10px; padding: 20px; min-width: 480px; opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s; pointer-events: none; box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
     .gnb-item:hover .dropdown { opacity: 1; visibility: visible; pointer-events: auto; }
     .dropdown-cols { display: flex; gap: 32px; }
-    .dropdown-col h4 { font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.35); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.1); }
+    .dropdown-col h4 { font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.35); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 8px; border-bottom: none; }
     .dropdown-col a { display: block; font-size: 14px; color: rgba(0,0,0,0.65); padding: 7px 0; transition: color 0.2s; white-space: nowrap; }
     .dropdown-col a:hover { color: var(--accent); }
     .dropdown-col a.active { color: #7eb8ff; font-weight: 600; }
@@ -57,10 +70,10 @@
     .btn-consult:hover { background: var(--primary-light); }
     .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
     .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-dark); }
-    .mobile-nav { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); z-index: 2000; flex-direction: column; padding: 80px 32px 32px; overflow-y: auto; }
+    .mobile-nav { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(247, 250, 252, 0.82); z-index: 2000; flex-direction: column; padding: 80px 32px 32px; overflow-y: auto; }
     .mobile-nav.open { display: flex; }
     .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; color: var(--text-dark); font-size: 28px; }
-    .mobile-nav a { display: block; font-size: 16px; color: rgba(0,0,0,0.75); padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .mobile-nav a { display: block; font-size: 16px; color: rgba(0,0,0,0.75); padding: 12px 0; border-bottom: none; }
     .mobile-nav a:hover { color: var(--accent); }
     .mobile-nav-section { margin-bottom: 24px; }
     .mobile-nav-section h4 { font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.35); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
@@ -68,10 +81,10 @@
     /* Hero - 화상 = 블루 네이비 계열 */
     .page-hero {
       margin-top: 80px; position: relative; overflow: hidden;
-      background: linear-gradient(135deg, #0d1f2e 0%, #1a3050 50%, #2a4a7a 100%);
+      background: linear-gradient(135deg, #0D1F1E 0%, #006A63 100%);
       padding: 100px 40px 80px;
     }
-    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 40% 60%, rgba(60,120,200,0.3) 0%, transparent 60%); }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 40% 60%, rgba(0, 106, 99, 0.3) 0%, transparent 60%); }
     .page-hero-inner { max-width: 1280px; margin: 0 auto; text-align: center; color: var(--white); position: relative; }
     .page-hero-badge { display: inline-block; background: rgba(248,242,220,0.15); border: 1px solid rgba(248,242,220,0.35); color: var(--accent-light); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px; }
     .page-hero-title { font-size: 44px; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
@@ -79,7 +92,7 @@
 
     /* Emergency Alert Banner */
     .emergency-banner {
-      background: linear-gradient(135deg, #8b1a1a, #42c0bf);
+      background: linear-gradient(135deg, #8b1a1a, #006A63);
       color: white; padding: 20px 40px; text-align: center;
     }
     .emergency-banner-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
@@ -99,7 +112,7 @@
     .degree-card { border-radius: 12px; padding: 28px 24px; }
     .degree-card.degree-1 { background: #fff9e6; border-left: 4px solid #f0c040; }
     .degree-card.degree-2 { background: #fff0e0; border-left: 4px solid #e08040; }
-    .degree-card.degree-3 { background: #ffe8e8; border-left: 4px solid #42c0bf; }
+    .degree-card.degree-3 { background: #ffe8e8; border-left: 4px solid #006A63; }
     .degree-card h4 { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
     .degree-card p { font-size: 14px; line-height: 1.7; color: var(--text-mid); }
 
@@ -109,17 +122,17 @@
     .principle-content h3 { font-size: 28px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; }
     .principle-content p { font-size: 16px; line-height: 1.8; color: var(--text-mid); margin-bottom: 16px; }
     .principle-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-    .principle-tag { padding: 8px 16px; background: var(--bg-light); border-radius: 6px; font-size: 14px; font-weight: 600; color: var(--primary); }
+    .principle-tag { padding: 8px 16px; background: var(--surface, #F7FAFC); border-radius: 6px; font-size: 14px; font-weight: 600; color: var(--primary); }
 
     /* Hospital Advantage Banner */
-    .hospital-banner { background: var(--bg-off); border: 1px solid rgba(66,192,191,0.2); border-radius: 16px; padding: 40px; margin-top: 40px; }
+    .hospital-banner { background: var(--surface, #F7FAFC); border: 1px solid rgba(79, 209, 197, 0.2); border-radius: 16px; padding: 40px; margin-top: 40px; }
     .hospital-banner h4 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark); }
     .hospital-banner-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .hospital-banner-item { background: #ffffff; border: 1px solid rgba(66,192,191,0.15); border-radius: 10px; padding: 20px; }
     .hospital-banner-item h5 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
     .hospital-banner-item p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
 
-    .special-points { background: var(--bg-light); }
+    .special-points { background: var(--surface, #F7FAFC); }
     .points-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
     .point-card { background: var(--white); border-radius: 20px; padding: 40px 32px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
       border: 1px solid rgba(0,0,0,0.04); transition: transform 0.3s, box-shadow 0.3s; }
@@ -128,7 +141,7 @@
     .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
     .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
 
-    .surgery-types { background: var(--bg-warm); }
+    .surgery-types { background: var(--surface-low, #F1F4F6); }
     .types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .type-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
     .type-card:hover { transform: translateY(-6px); }
@@ -142,8 +155,8 @@
 
     .faq { background: var(--white); }
     .faq-list { max-width: 900px; margin: 0 auto; }
-    .faq-item { background: var(--bg-off); border-radius: 16px; margin-bottom: 16px; overflow: hidden; }
-    .faq-item:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .faq-item { background: var(--surface, #F7FAFC); border-radius: 16px; margin-bottom: 16px; overflow: hidden; }
+    .faq-item:hover { box-shadow: 0 8px 40px rgba(0, 106, 99, 0.06); }
     .faq-question { padding: 24px 28px; cursor: pointer; display: flex; align-items: center; gap: 16px; transition: background 0.3s; }
     .faq-question:hover { background: rgba(26,39,68,0.05); }
     .faq-q-icon { flex-shrink: 0; width: 36px; height: 36px; background: var(--primary); color: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; }
@@ -158,15 +171,15 @@
     .cta h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark); }
     .cta p { font-size: 17px; color: var(--text-mid); margin-bottom: 36px; }
     .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .cta-btn { padding: 16px 40px; border-radius: 8px; font-size: 16px; font-weight: 700; transition: all 0.3s; cursor: pointer; border: none; display: inline-block; }
-    .cta-btn-primary { background: var(--primary); color: #0d2e29; }
+    .cta-btn { padding: 16px 40px; border-radius: 9999px; font-size: 16px; font-weight: 700; transition: all 0.3s; cursor: pointer; border: none; display: inline-block; }
+    .cta-btn-primary { background: linear-gradient(135deg, #006A63, #4FD1C5); color: #FFFFFF; }
     .cta-btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); }
-    .cta-btn-emergency { background: #42c0bf; color: #0d2e29; }
-    .cta-btn-emergency:hover { background: #63c3c2; transform: translateY(-2px); }
+    .cta-btn-emergency { background: #006A63; color: #0d2e29; }
+    .cta-btn-emergency:hover { background: #4FD1C5; transform: translateY(-2px); }
     .cta-btn-kakao { background: #FEE500; color: #3C1E1E; }
     .cta-btn-kakao:hover { background: #ffd700; transform: translateY(-2px); }
 
-    .footer { background: #1A1A1A; color: rgba(255,255,255,0.7); padding: 40px 40px 24px; text-align: center; }
+    .footer { background: var(--surface-low, #F1F4F6); color: var(--on-surface, #181C1E); padding: 40px 40px 24px; text-align: center; border-top: 1px solid var(--outline-variant, rgba(187,201,199,0.2)); }
     .footer-info { font-size: 14px; margin-bottom: 12px; line-height: 1.8; }
     .footer-copy { font-size: 13px; color: rgba(0,0,0,0.35); }
 
@@ -193,11 +206,11 @@
       .footer { padding-bottom: 76px; }
     }
 
-    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 990; background: var(--bg-off); box-shadow: 0 -2px 20px rgba(0,0,0,0.4); padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 990; background: var(--surface, #F7FAFC); box-shadow: 0 -2px 20px rgba(0,0,0,0.4); padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
     .mobile-cta-inner { display: flex; gap: 10px; }
     .mobile-cta-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.25s; }
     .mobile-cta-btn:active { opacity: 0.8; }
-    .cta-phone { background: #42c0bf; color: #0d2e29; }
+    .cta-phone { background: #006A63; color: #0d2e29; }
     .cta-kakao { background: #FEE500; color: #3C1E1E; }
   </style>
 </head>
@@ -245,7 +258,7 @@
               <a href="consultation.html">온라인상담</a>
               <a href="#">카카오톡 상담</a>
               <a href="booking.html">진료예약</a>
-              <a href="news.html">언론보도</a>
+              
               <a href="notice.html">공지사항</a>
             </div>
           </div>
@@ -277,7 +290,7 @@
     <div class="mobile-nav-section">
       <h4>커뮤니티</h4>
       <a href="consultation.html">온라인상담</a><a href="#">카카오톡 상담</a><a href="booking.html">진료예약</a><a href="#">수술후기</a>
-        <a href="news.html">언론보도</a><a href="notice.html">공지사항</a>
+        <a href="notice.html">공지사항</a>
     </div>
   </nav>
 
