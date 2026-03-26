@@ -34,12 +34,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `1. 아이 센터.png`, `2. 라이노플래스티.jpg`, `3. 리프팅 안티에이징.jpg`, `4. 메일 코스매틱.png`, `5. 팻 컨투어링.jpg`, `6. 브레스트 써저리.jpg`, `7. 아더 써저리.jpg`, `8. 쁘띠스킨.jpg`
 
 `images/mc-image/치료재건/` — 카테고리 카드용 실사진 4종 + 메인/세컨페이지 이미지:
-- `치료재건 메인.png`, `치료재건 세컨페이지.png`
+- `치료재건 메인.png`, `치료재건 세컨페이드.png`
 - `1. 트라우마.png`, `2. 번 트리트먼트.png`, `3. 스킨 튜머.png`, `4. 피디애트릭.jpg`
+
+`images/card-image/` — 섹션 카드용 실사진 (URL-safe 경로):
+- `values/` → `safety-first.jpg`, `precise-surgery.jpg`, `patient-care.jpg`
+- `safety-main/` → `emergency-24h.jpg`, `anesthesia.jpg`, `multidisciplinary.jpg`
+- `safety-medical/` → `emergency-system.jpg`, `surgical-anesthesia.jpg`, `rehabilitation.jpg`
+- `sns/` → `blepharoptosis.png`, `face-lump.png`, `hospital-plastic.jpg`
 
 **이 목록에 없는 이미지 경로는 사용 금지** — 없는 이미지는 CSS 그라디언트로 처리.
 
-> `.gitignore`에 `*.png` 전역 무시 규칙이 있고 `!images/**/*.png` 예외가 적용되어 있다. `images/` 밖의 PNG는 git에 추가되지 않는다.
+> `.gitignore`에 `*.png` 전역 무시 규칙이 있고 `!images/**/*.png` 예외가 적용되어 있다. `images/` 밖의 PNG는 git에 추가되지 않는다. 이미지 경로는 반드시 공백·한글·괄호 없는 URL-safe 형식으로 유지할 것 (GitHub Pages에서 인코딩 오류 발생).
 
 ## 코드 아키텍처: 파일 완전 자급자족 구조
 
@@ -72,7 +78,7 @@ done
 - **진료 상세 페이지**: `<script>` 블록 없음. FAQ 아코디언은 `onclick="this.parentElement.classList.toggle('active')"` 방식
 - **index.html**: IIFE — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up, 스플릿 히어로 터치 (`height: 100svh`, `.sp-seam::before` 구분선은 `display: none` 상태 유지)
 - **cosmetic.html / medical.html**: IIFE — 자동 슬라이드쇼(3초 전환), 카테고리 스크롤 drag-to-scroll, 플로팅 CTA 토글
-- **about.html**: IIFE — 카드 stagger 애니메이션
+- **about.html**: IIFE — 카드 stagger 애니메이션. 오시는 길 섹션에 Google Maps iframe 내장 (`https://www.google.com/maps?q=...&output=embed`), API 키 불필요
 - **tour.html**: 터치 스와이프 슬라이더 (화살표 + dot 인디케이터)
 
 ### 허브 페이지 섹션 구성 (cosmetic.html / medical.html)
@@ -157,13 +163,34 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 
 ## 브랜드 & 콘텐츠 규칙
 
-- **핵심 메시지**: "대학병원의 안전함에 섬세함을 더하다"
+- **핵심 메시지**: "종합병원의 안전함에 섬세함을 더하다"
 - **의료진 호칭**: "전문의" 또는 "과장" 사용. **"원장" 사용 금지** (종합병원 진료과 형태)
 - **담당의**: 신정환 과장 (성형외과 전문의, 가톨릭중앙의료원 출신)
 - **CTA 4종 (순서 고정)**: 전화 상담(`tel:042-000-0000`) → 진료 예약(`booking.html`) → 카카오 상담 → 네이버 예약
 - **플로팅 CTA** (데스크탑 우측): 전화 상담 / 카톡 상담 / 네이버 예약
 - **미용성형 컬러**: `--primary` / **치료재건 컬러**: `--navy-mid`
 - **의료법 준수**: "최고", "완벽한", "100% 만족" 등 과장 표현 금지
+
+### 이미지 카드 구조 패턴
+
+`about.html` `.mission-card`, `index.html`/`medical.html` `.safety-card`는 이미지+텍스트 조합 구조를 사용한다:
+
+```html
+<div class="safety-card">
+  <div class="safety-img">
+    <img src="images/card-image/safety-main/emergency-24h.jpg" alt="..." loading="lazy">
+  </div>
+  <div class="safety-card-body">
+    <span class="safety-icon">...</span>
+    <h3>...</h3>
+    <p>...</p>
+  </div>
+</div>
+```
+
+- 이미지 높이: PC `190px` / 태블릿 `260px` / 모바일 `220px`
+- 호버 시 이미지 `scale(1.06)` 줌인 (`transition: transform 0.5s ease`)
+- `index.html` `.drlog-card`의 `.drlog-thumb`도 동일 패턴 — `position: absolute` img + `::after` 어두운 그라디언트 오버레이 + `z-index: 2` 뱃지/아이콘
 
 ## Stitch MCP (AI UI 디자인)
 
@@ -180,3 +207,19 @@ Stitch로 생성한 HTML/CSS 결과물을 이 프로젝트에 통합할 때는 �
 ## 콘텐츠 전략 참고
 
 `reference/content_strategy.md` — 경쟁사 벤치마킹, 페이지별 카피 브리프, 차별화 포지셔닝. **카피 수정 시 반드시 참고.**
+
+`reference/3rd_feedback.md`, `reference/second_feedback.md` — 피드백 이력. 이전 수정 맥락 파악 시 참고.
+
+`reference/microsite_cf.md` — 마이크로사이트 콘텐츠 방향 참고.
+
+## 기획·전략 문서
+
+`plan/` — 전체 프로젝트 실행 기획안. 페이지 구조, 오픈 일정, 예산 등 상위 기획 참고 시 우선 열람.
+
+`briefing/` — SNS·마케팅 전략 보고서 모음. 아래 파일이 핵심이다:
+
+- `briefing/sns_strategy_integrated.md` — **SNS 운영 전략 최종안** (harada 벤치마크 + 대전 경쟁 분석 통합). SNS 관련 카피·전략 수정 시 반드시 참고.
+- `briefing/dashboard_briefing.md` — 마케팅 기획 전체 요약 대시보드.
+- `briefing/competitor_analysis_daejeon.md` — 대전 지역 성형외과 경쟁 분석.
+- `briefing/sns_benchmark_harada.md` — @days_harada 일본 계정 심층 분석.
+- `briefing/instagram_benchmark_daejeon.md` — 대전 경쟁사 인스타그램 계정 분석.
