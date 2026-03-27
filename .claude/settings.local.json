@@ -84,7 +84,8 @@
       "Bash(DYLD_LIBRARY_PATH=/opt/homebrew/lib /Users/chul/Library/Python/3.9/bin/md2pdf 00_overview.md --output \"pdf/00_overview.pdf\")",
       "Bash(DYLD_LIBRARY_PATH=/opt/homebrew/lib /Users/chul/Library/Python/3.9/bin/md2pdf \"/Users/chul/Documents/WORK/ysmc_pla/briefing/sns_strategy_recommendations.md\" \"/Users/chul/Documents/WORK/ysmc_pla/briefing/성형외과 sns 전략.pdf\" 2>&1)",
       "Bash(do sed:*)",
-      "Bash(pandoc sns_strategy_recommendations.md -o sns_strategy_recommendations.docx)"
+      "Bash(pandoc sns_strategy_recommendations.md -o sns_strategy_recommendations.docx)",
+      "Bash(__NEW_LINE_988285adb6cdee51__ git:*)"
     ]
   }
 }
