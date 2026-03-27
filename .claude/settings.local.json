@@ -68,7 +68,23 @@
       "mcp__firecrawl__firecrawl_scrape",
       "mcp__playwright__playwright_get_visible_text",
       "mcp__playwright__playwright_click",
-      "mcp__firecrawl__firecrawl_search"
+      "mcp__firecrawl__firecrawl_search",
+      "Bash(pandoc --version)",
+      "Bash(npm list:*)",
+      "Bash(npm install:*)",
+      "Bash(sudo npm:*)",
+      "Bash(brew install:*)",
+      "Bash(/opt/homebrew/bin/pandoc --list-output-formats)",
+      "Bash(/opt/homebrew/bin/pandoc --version)",
+      "Bash(pip3 list:*)",
+      "Bash(pip3 install:*)",
+      "Bash(/Users/chul/Library/Python/3.9/bin/md2pdf \"$f\" --output \"pdf/$f%.md.pdf\")",
+      "Read(//opt/homebrew/lib/**)",
+      "Read(//opt/homebrew/Cellar/glib/**)",
+      "Bash(DYLD_LIBRARY_PATH=/opt/homebrew/lib /Users/chul/Library/Python/3.9/bin/md2pdf 00_overview.md --output \"pdf/00_overview.pdf\")",
+      "Bash(DYLD_LIBRARY_PATH=/opt/homebrew/lib /Users/chul/Library/Python/3.9/bin/md2pdf \"/Users/chul/Documents/WORK/ysmc_pla/briefing/sns_strategy_recommendations.md\" \"/Users/chul/Documents/WORK/ysmc_pla/briefing/성형외과 sns 전략.pdf\" 2>&1)",
+      "Bash(do sed:*)",
+      "Bash(pandoc sns_strategy_recommendations.md -o sns_strategy_recommendations.docx)"
     ]
   }
 }
