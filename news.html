@@ -14,10 +14,30 @@
     img { max-width: 100%; height: auto; display: block; }
 
     :root {
-      --primary: #006A63; --primary-light: #4FD1C5; --primary-dark: #005a54;
-      --accent: #b2e4e4; --accent-light: #d2f0f0; --bg-light: #f0fafa; --bg-warm: #d2f0f0;
-      --text-dark: #1A1A1A; --text-mid: #555; --text-light: #888; --white: #FFFFFF;
-      --shadow: 0 4px 24px rgba(0,0,0,0.08); --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+      --primary: #9E6B7B;
+      --primary-light: #D4A5B5;
+      --primary-dark: #8A5568;
+      --wine: #2D1F24;
+      --navy: #2D1F24;
+      --navy-mid: #6B5258;
+      --accent: #D4A5B5;
+      --accent-light: #C09070;
+      --bg-off: #F3E8E4;
+      --text-dark: #2D1F24;
+      --text-mid: #6B5258;
+      --text-light: #9A8B90;
+      --white: #FFFFFF;
+      --primary-container: #F3E8E4;
+      --secondary: #C09070;
+      --secondary-light: #D4A5B5;
+      --secondary-container: #F3E8E4;
+      --tertiary: #8A5568;
+      --tertiary-light: #D4A5B5;
+      --surface: #FBF5F3;
+      --surface-low: #F3E8E4;
+      --surface-lowest: #FBF5F3;
+      --on-surface: #2D1F24;
+      --outline-variant: rgba(107, 82, 88, 0.15);
     }
 
     /* ===== Header ===== */
@@ -37,12 +57,12 @@
     .dd-col + .dd-col { border-left: 1px solid rgba(0,0,0,0.07); }
     .dd-col-label { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(0,0,0,0.35); padding: 0 16px 10px; margin-bottom: 4px; border-bottom: 1px solid rgba(0,0,0,0.06); }
     .gnb-dropdown a { display: block; font-size: 13px; font-weight: 500; color: rgba(0,0,0,0.65); padding: 9px 16px; transition: color 0.18s, background 0.18s; white-space: nowrap; }
-    .gnb-dropdown a:hover { color: var(--text-dark); background: rgba(66,192,191,0.12); }
+    .gnb-dropdown a:hover { color: var(--text-dark); background: rgba(158,107,123,0.10); }
     .header-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .header-cta a { padding: 7px 18px; border-radius: 4px; font-size: 13px; font-weight: 600; transition: all 0.25s; }
     .btn-outline-w { border: 1px solid rgba(0,0,0,0.25); color: rgba(0,0,0,0.7); }
     .btn-outline-w:hover { border-color: var(--primary); color: var(--primary-dark); }
-    .btn-solid-w { background: var(--primary); color: #0d2e29; }
+    .btn-solid-w { background: var(--primary); color: #2D1F24; }
     .btn-solid-w:hover { background: var(--primary-light); }
     .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; z-index: 1100; }
     .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
@@ -60,19 +80,19 @@
     .mob-sub-title { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(0,0,0,0.35); padding: 16px 0 8px; }
     .mob-sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 8px; }
     .mob-sub-grid a { font-size: 14px; font-weight: 500; color: rgba(0,0,0,0.60); padding: 10px 12px; background: rgba(0,0,0,0.04); border-radius: 4px; transition: color 0.18s, background 0.18s; }
-    .mob-sub-grid a:hover { color: var(--text-dark); background: rgba(66,192,191,0.18); }
+    .mob-sub-grid a:hover { color: var(--text-dark); background: rgba(158,107,123,0.15); }
     .mobile-nav-divider { width: 100%; max-width: 320px; height: 1px; background: rgba(0,0,0,0.08); margin: 16px 0; }
     .mobile-nav-cta { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 320px; }
     .mobile-nav-cta a { font-size: 15px !important; font-weight: 600 !important; padding: 14px 0 !important; text-align: center; border-radius: 4px; }
-    .mobile-nav-cta .nav-phone { background: var(--primary); color: #0d2e29; }
+    .mobile-nav-cta .nav-phone { background: var(--primary); color: #2D1F24; }
     .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
 
     /* ===== Hero ===== */
-    .hero-banner { margin-top: 76px; height: 280px; background: #1a1a1a; display: flex; align-items: center; position: relative; overflow: hidden; }
-    .hero-banner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(140deg, rgba(8,8,14,0.98) 0%, rgba(40,30,20,0.55) 100%); z-index: 1; }
+    .hero-banner { margin-top: 76px; height: 280px; background: linear-gradient(140deg, #F3E8E4 0%, #FBF5F3 100%); display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero-banner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(140deg, rgba(212, 165, 181, 0.12) 0%, rgba(243, 232, 228, 0.08) 100%) 100%); z-index: 1; }
     .hero-banner-inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 0 40px; width: 100%; }
-    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: #fff; letter-spacing: -2px; line-height: 1.1; margin-bottom: 14px; }
+    0}
+    .hero-title { font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: #2D1F24; letter-spacing: -2px; line-height: 1.1; margin-bottom: 14px; }
     .hero-subtitle { font-size: 15px; color: rgba(0,0,0,0.60); line-height: 1.8; }
 
     /* ===== News List ===== */
@@ -117,7 +137,7 @@
 
     .news-body { padding: 24px; }
     .news-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
-    .news-category { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); background: rgba(66,192,191,0.08); padding: 3px 10px; border-radius: 20px; }
+    .news-category { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); background: rgba(158,107,123,0.08); padding: 3px 10px; border-radius: 20px; }
     .news-date { font-size: 12px; color: var(--text-light); }
     .news-title { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.5; letter-spacing: -0.3px; margin-bottom: 10px; }
     .news-summary { font-size: 13px; color: var(--text-mid); line-height: 1.75; margin-bottom: 16px; }
@@ -140,32 +160,32 @@
       transition: all 0.18s;
     }
 
-    .pg-btn:hover, .pg-btn.active { background: var(--primary); color: #0d2e29; border-color: var(--primary); }
+    .pg-btn:hover, .pg-btn.active { background: var(--primary); color: #2D1F24; border-color: var(--primary); }
     .pg-btn.arrow { font-size: 12px; }
 
     /* ===== CTA ===== */
-    .cta-section { background: var(--text-dark); padding: 80px 40px; text-align: center; }
-    .cta-section h2 { font-size: 32px; font-weight: 800; color: #fff; letter-spacing: -0.8px; margin-bottom: 12px; }
-    .cta-section p { font-size: 15px; color: rgba(0,0,0,0.60); margin-bottom: 36px; }
+    .cta-section { background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); padding: 80px 40px; text-align: center; border-top: 1px solid rgba(158,107,123,0.15); }
+    .cta-section h2 { font-size: 32px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; margin-bottom: 12px; }
+    .cta-section p { font-size: 15px; color: var(--text-mid); margin-bottom: 36px; }
     .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .cta-btn-primary { padding: 14px 32px; background: var(--primary); color: #0d2e29; border-radius: 6px; font-size: 15px; font-weight: 700; transition: background 0.25s; }
+    .cta-btn-primary { padding: 14px 32px; background: var(--primary); color: #2D1F24; border-radius: 6px; font-size: 15px; font-weight: 700; transition: background 0.25s; }
     .cta-btn-primary:hover { background: var(--primary-light); }
-    .cta-btn-outline { padding: 14px 32px; border: 1.5px solid rgba(255,255,255,0.35); color: rgba(255,255,255,0.85); border-radius: 6px; font-size: 15px; font-weight: 600; transition: all 0.25s; }
-    .cta-btn-outline:hover { border-color: #fff; color: #fff; }
+    .cta-btn-outline { padding: 14px 32px; border: 1.5px solid rgba(158,107,123,0.40); color: var(--primary-dark); border-radius: 6px; font-size: 15px; font-weight: 600; transition: all 0.25s; }
+    .cta-btn-outline:hover { border-color: var(--primary); color: var(--primary); }
     .cta-btn-kakao { padding: 14px 32px; background: #FEE500; color: #3C1E1E; border-radius: 6px; font-size: 15px; font-weight: 700; }
 
     /* ===== Footer ===== */
-    .footer { background: #111; color: rgba(255,255,255,0.58); }
+    .footer { background: #F3E8E4; color: #6B5258; }
     .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 60px; padding: 60px 40px 40px; max-width: 1280px; margin: 0 auto; }
-    .footer-logo { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.88); margin-bottom: 16px; }
+    .footer-logo { font-size: 16px; font-weight: 700; color: #2D1F24; margin-bottom: 16px; }
     .footer-detail { font-size: 13px; line-height: 2.1; }
     .footer-quick { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; min-width: 280px; }
-    .footer-quick-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: rgba(255,255,255,0.05); border-radius: 8px; cursor: pointer; transition: background 0.2s; }
-    .footer-quick-item:hover { background: rgba(255,255,255,0.09); }
+    .footer-quick-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: rgba(107,82,88,0.07); border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+    .footer-quick-item:hover { background: rgba(107,82,88,0.12); }
     .footer-quick-icon { font-size: 18px; }
-    .footer-quick-label { font-size: 12px; color: rgba(0,0,0,0.65); }
-    .footer-bottom { max-width: 1280px; margin: 0 auto; padding: 20px 40px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; }
-    .footer-copy { font-size: 12px; color: rgba(0,0,0,0.35); }
+    .footer-quick-label { font-size: 12px; color: rgba(107,82,88,0.75); }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; padding: 20px 40px; border-top: 1px solid rgba(107,82,88,0.15); display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 12px; color: rgba(107,82,88,0.55); }
 
     @media (max-width: 1024px) {
       .news-grid { grid-template-columns: repeat(2, 1fr); }
@@ -191,7 +211,7 @@
     .mobile-cta-inner { display: flex; gap: 10px; }
     .mobile-cta-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.25s; }
     .mobile-cta-btn:active { opacity: 0.8; }
-    .cta-phone { background: linear-gradient(135deg, #006A63, #4FD1C5); color: #0d2e29; }
+    .cta-phone { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #2D1F24; }
     .cta-kakao { background: #FEE500; color: #3C1E1E; }
   </style>
 </head>
@@ -294,7 +314,7 @@
       <div class="news-grid">
 
         <div class="news-card">
-          <div class="news-thumb" style="background: linear-gradient(140deg, #1a2c4a 0%, #0d1f36 100%);">
+          <div class="news-thumb" style="background: linear-gradient(140deg, #F3E8E4 0%, #FBF5F3 100%);">
             <span>📺</span>
             <span class="news-media-badge">MBC 대전</span>
           </div>
@@ -310,7 +330,7 @@
         </div>
 
         <div class="news-card">
-          <div class="news-thumb" style="background: linear-gradient(140deg, #2a1a3a 0%, #1a0d2e 100%);">
+          <div class="news-thumb" style="background: linear-gradient(140deg, #F3E8E4 0%, #FBF5F3 100%);">
             <span>📰</span>
             <span class="news-media-badge">충청투데이</span>
           </div>
@@ -326,7 +346,7 @@
         </div>
 
         <div class="news-card">
-          <div class="news-thumb" style="background: linear-gradient(140deg, #1a3a2a 0%, #0d2e1a 100%);">
+          <div class="news-thumb" style="background: linear-gradient(140deg, #F3E8E4 0%, #FBF5F3 100%);">
             <span>🌐</span>
             <span class="news-media-badge">메디컬투데이</span>
           </div>
@@ -358,7 +378,7 @@
         </div>
 
         <div class="news-card">
-          <div class="news-thumb" style="background: linear-gradient(140deg, #2a3a1a 0%, #1a2e0d 100%);">
+          <div class="news-thumb" style="background: linear-gradient(140deg, #F3E8E4 0%, #FBF5F3 100%);">
             <span>📱</span>
             <span class="news-media-badge">헬스조선</span>
           </div>
