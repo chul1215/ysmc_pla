@@ -426,7 +426,29 @@
           </div>
         </div>
 
-        <button class="submit-btn" onclick="(function(){var n=document.getElementById('cName').value.trim(),p=document.getElementById('cPhone').value.trim(),cat=document.getElementById('cCategory').value,cont=document.getElementById('cContent').value.trim(),ag=document.getElementById('privacyAgree').checked;if(!n){alert('성함을 입력해주세요.');return;}if(!p){alert('연락처를 입력해주세요.');return;}if(!cat){alert('희망 진료 분야를 선택해주세요.');return;}if(!cont){alert('상담 내용을 입력해주세요.');return;}if(!ag){alert('개인정보 수집 및 이용에 동의해주세요.');return;}alert('상담 신청이 완료되었습니다.\n진료일 기준 24시간 내 연락드리겠습니다.\n감사합니다.');})()">
+        <button class="submit-btn" onclick="(function(){
+          var n=document.getElementById('cName').value.trim(),
+              p=document.getElementById('cPhone').value.trim(),
+              age=document.getElementById('cAge').value.trim(),
+              cat=document.getElementById('cCategory').value,
+              cont=document.getElementById('cContent').value.trim(),
+              ag=document.getElementById('privacyAgree').checked;
+          if(!n){alert('성함을 입력해주세요.');return;}
+          if(!p){alert('연락처를 입력해주세요.');return;}
+          if(!cat){alert('희망 진료 분야를 선택해주세요.');return;}
+          if(!cont){alert('상담 내용을 입력해주세요.');return;}
+          if(!ag){alert('개인정보 수집 및 이용에 동의해주세요.');return;}
+          var list=JSON.parse(localStorage.getItem('ysmc_consultations')||'[]');
+          list.unshift({id:Date.now(),name:n,phone:p,age:age,category:cat,content:cont,submittedAt:new Date().toISOString(),status:'미확인',reply:'',repliedAt:''});
+          localStorage.setItem('ysmc_consultations',JSON.stringify(list));
+          alert('상담 신청이 완료되었습니다.\n진료일 기준 24시간 내 연락드리겠습니다.\n감사합니다.');
+          document.getElementById('cName').value='';
+          document.getElementById('cPhone').value='';
+          document.getElementById('cAge').value='';
+          document.getElementById('cCategory').value='';
+          document.getElementById('cContent').value='';
+          document.getElementById('privacyAgree').checked=false;
+        })()">
           상담 신청하기
         </button>
       </div>

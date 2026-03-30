@@ -14,7 +14,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 파일 구성
 
 - `index.html` — 메인 홈 (스플릿 히어로)
-- `dashboard.html` — 관리자 대시보드 (Tailwind CSS, **별도 아키텍처**)
+- `admin.html` — 운영 관리 페이지 "유성선병원 성형외과 MASTER PAGE" (Tailwind CSS, **별도 아키텍처**, GNB 없음)
+- `dashboard.html` — 마케팅 대시보드 (Tailwind CSS, **별도 아키텍처**)
 - `cosmetic.html` / `medical.html` — 진료 허브 페이지 (각 카테고리 진입점)
 - 미용·성형 상세 8개: `eye`, `nose`, `lifting`, `male`, `fat`, `breast`, `other`, `petit`
 - 치료·재건 상세 4개: `trauma`, `burn`, `reconstruction`, `pediatric`
@@ -150,6 +151,21 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
   --white: #FFFFFF;
 }
 ```
+
+## admin.html 특이사항 (유성선병원 성형외과 MASTER PAGE)
+
+공개 사이트와 완전히 분리된 운영 관리 페이지. GNB 없음, 공개 페이지에서 링크되지 않음.
+
+- **CDN 의존**: Tailwind CSS (커스텀 teal/surface 컬러 확장), Google Fonts (Noto Sans KR) — 인터넷 필수
+- **인증**: `sessionStorage('ysmc_admin')` — 비밀번호는 JS 내 `ADMIN_PW` 상수 (정적 사이트 한계, 실 운영 시 서버 사이드 인증 필요)
+- **테마**: `<html class="dark">` 고정 (라이트 모드 없음)
+- **4개 관리 메뉴**: 팝업 관리 / 수술후기 관리 / 공지사항 관리 / 온라인 상담
+- **localStorage 데이터 계약** — 공개 페이지와 공유하는 키:
+  - `ysmc_popup` → `index.html` 팝업 표시용 (TODO: index.html 연동 미구현)
+  - `ysmc_reviews` → 수술후기 목록
+  - `ysmc_notices` → 공지사항 목록 (TODO: notice.html 연동 미구현)
+  - `ysmc_consultations` → 온라인 상담 접수 (TODO: consultation.html 폼 submit 연동 미구현)
+- **미확인 상담 뱃지**: 사이드바에 `pending` 상태 건수 표시, 상담 클릭 시 `pending→read` 자동 전환
 
 ## dashboard.html 특이사항
 
