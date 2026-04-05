@@ -318,31 +318,13 @@
 
     /* ===== Page Hero ===== */
     .page-hero {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-      padding: 176px 40px 80px;
+      margin-top: 80px; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #FBF5F3 0%, #F3E8E4 100%);
+      padding: 100px 40px 80px;
     }
-
-    .page-hero-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      text-align: center;
-      color: var(--white);
-    }
-
-    .page-hero-badge {
-      display: inline-block;
-      background: rgba(248, 242, 220, 0.25);
-      border: 1px solid rgba(248, 242, 220, 0.5);
-      color: var(--accent-light);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-    }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 40% 60%, rgba(158, 107, 123, 0.25) 0%, transparent 60%); }
+    .page-hero-inner { max-width: 1280px; margin: 0 auto; text-align: center; color: var(--text-dark); position: relative; }
+    .page-hero-badge { display: inline-block; background: rgba(158,107,123,0.10); border: 1px solid rgba(158,107,123,0.25); color: var(--primary-dark); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px; }
 
     .page-hero-title {
       font-size: 44px;
@@ -503,6 +485,10 @@
       line-height: 1.7;
       color: var(--text-mid);
     }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     /* ===== Treatment Types Section ===== */
     .treatment-types {
@@ -511,7 +497,7 @@
 
     .types-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 28px;
     }
 
@@ -940,17 +926,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">🏥</div>
+          <div class="point-card-img"><img src="images/images2/medical/trauma/emergency-consult.jpg" alt="대학병원급 응급 협진" loading="lazy"></div>
           <h3>대학병원급 응급 협진</h3>
           <p>응급의학과, 영상의학과, 신경외과 등 즉시 협진 가능한 종합병원 시스템을 갖추고 있습니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">👨‍⚕️</div>
+          <div class="point-card-img"><img src="images/images2/medical/trauma/specialist-suture.jpg" alt="성형외과 전문의 직접 봉합" loading="lazy"></div>
           <h3>성형외과 전문의 직접 봉합</h3>
           <p>일반외과가 아닌 성형외과 전문의가 직접 미세봉합하여 흉터를 최소화합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">💊</div>
+          <div class="point-card-img"><img src="images/images2/medical/trauma/scar-laser.jpg" alt="수술 후 레이저 흉터 관리 프로그램" loading="lazy"></div>
           <h3>수술 후 레이저 흉터 관리 프로그램</h3>
           <p>봉합 후에도 레이저 치료를 통해 흉터를 지속적으로 관리하여 최상의 결과를 만듭니다.</p>
         </div>
@@ -999,8 +985,6 @@
           </div>
         </div>
 
-        <div class="type-card">
-        </div>
       </div>
     </div>
   </section>

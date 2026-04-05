@@ -128,6 +128,10 @@
     .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
     .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
     .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     .surgery-types { background: var(--surface-low, #F3E8E4); }
     .types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -261,7 +265,7 @@
   </header>
 
   <nav class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')"></button>
     <div class="mobile-nav-section">
       <h4>메뉴</h4>
       <a href="about.html">소개</a><a href="doctor.html">의료진소개</a><a href="tour.html">병원둘러보기</a>
@@ -284,7 +288,7 @@
   <!-- Parent Notice Banner -->
   <div class="parent-banner">
     <div class="parent-banner-inner">
-      <strong>👨‍👩‍👧 보호자 안내</strong>
+      <strong> 보호자 안내</strong>
       <span>소아 수술 시 법정 대리인(보호자)의 동의가 반드시 필요합니다. 진료 시 보호자가 함께 방문해 주세요.</span>
     </div>
   </div>
@@ -305,7 +309,7 @@
         <p class="section-desc">어린이는 작은 어른이 아닙니다. 성장을 고려한 별도의 치료 기준이 있습니다.</p>
       </div>
       <div class="principle-grid">
-        <div class="principle-visual">👶</div>
+        <div class="principle-visual" style="padding:0; overflow:hidden;"><img src="images/images2/medical/pediatric/pediatric-approach.jpg" alt="성장을 함께 고려하는 소아 성형외과 접근" style="width:100%; height:100%; object-fit:cover;" loading="lazy"></div>
         <div class="principle-content">
           <h3>성장을 함께 고려하는<br>소아 성형외과 접근</h3>
           <p>소아 환자의 상처와 흉터는 성인과 다른 방식으로 접근해야 합니다. 아이들은 성장하면서 피부 면적이 넓어지므로, 어릴 때 생긴 흉터가 나이 들면서 더 잡아당겨질 수 있습니다. 이를 예측하여 처음부터 여유 있게 설계하는 것이 소아 성형외과의 원칙입니다.</p>
@@ -322,7 +326,7 @@
 
       <!-- 보호자 안내 박스 -->
       <div class="consent-box">
-        <h4>📋 소아 진료 시 보호자 안내사항</h4>
+        <h4> 소아 진료 시 보호자 안내사항</h4>
         <div class="consent-items">
           <div class="consent-item">수술·처치 시 법정 대리인(부모/후견인)의 서면 동의가 필수입니다.</div>
           <div class="consent-item">보호자 신분증 및 가족관계증명서가 필요할 수 있습니다.</div>
@@ -343,17 +347,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">🛡️</div>
+          <div class="point-card-img"><img src="images/images2/medical/pediatric/pediatric-anesthesia.jpg" alt="소아 전신마취 전담 마취과" loading="lazy"></div>
           <h3>소아 전신마취 전담 마취과</h3>
           <p>소아 수면마취·전신마취는 체중과 발달 상태에 맞는 전문 관리가 필요합니다. 전담 마취과 전문의가 소아 환자의 마취를 전담하며 종합병원 응급 체계가 뒷받침합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">📏</div>
+          <div class="point-card-img"><img src="images/images2/medical/pediatric/growth-plan.jpg" alt="성장 고려 장기 치료 계획" loading="lazy"></div>
           <h3>성장 고려 장기 치료 계획</h3>
           <p>어릴 때 생긴 흉터가 성장하면서 변할 수 있습니다. 현재 상태만 보는 것이 아니라 성인이 될 때를 예측하여 처음부터 치료 계획을 설계합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">👨‍👩‍👧</div>
+          <div class="point-card-img"><img src="images/images2/medical/pediatric/guardian-care.jpg" alt="보호자 중심 설명 원칙" loading="lazy"></div>
           <h3>보호자 중심 설명 원칙</h3>
           <p>보호자가 치료 과정을 완전히 이해하고 결정할 수 있도록 충분히 설명합니다. 치료 후 가정에서의 관리 방법도 구체적으로 안내합니다.</p>
         </div>
@@ -369,9 +373,7 @@
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent), var(--bg-off)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            🩹
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/pediatric/pediatric-suture.jpg" alt="소아 열상 봉합" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">소아 열상 봉합</h3>
             <p class="type-card-desc">뛰다가 넘어지거나 부딪혀서 생긴 찢어진 상처를 성형외과적 방법으로 봉합합니다. 흉터가 최소화되도록 봉합 방법을 선택합니다.</p>
@@ -384,9 +386,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent-light), var(--accent)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            ⚫
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/pediatric/pediatric-mole.jpg" alt="소아 모반 (점·멍울) 제거" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">소아 모반 (점·멍울) 제거</h3>
             <p class="type-card-desc">선천성 모반(점), 색소 모반, 혈관 모반 등을 제거합니다. 크기와 성장 가능성을 평가하여 제거 시기와 방법을 결정합니다. 악성화 위험이 있는 모반은 우선적으로 검토합니다.</p>
@@ -399,9 +399,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--bg-off), var(--accent-light)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            🔥
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/pediatric/pediatric-burn.jpg" alt="소아 화상 치료" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">소아 화상 치료</h3>
             <p class="type-card-desc">뜨거운 물, 냄비, 다리미 등으로 인한 소아 화상을 치료합니다. 소아는 같은 온도에서도 피부가 더 깊이 손상되므로 신속한 평가와 적극적 처치가 필요합니다.</p>
@@ -414,9 +412,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent), var(--accent-light)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            🔴
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/pediatric/pediatric-vascular.jpg" alt="소아 혈관종 / 혈관 기형" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">소아 혈관종 · 혈관 기형</h3>
             <p class="type-card-desc">영아 혈관종(딸기 혈관종)과 혈관 기형을 진단하고 치료합니다. 대부분의 영아 혈관종은 자연 소실되지만, 위치와 크기에 따라 조기 치료가 필요한 경우를 선별합니다.</p>
@@ -429,9 +425,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--bg-off), var(--accent)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            👂
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/pediatric/pediatric-ear.jpg" alt="소아 칼귀 (돌출귀) 교정" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">소아 칼귀 (돌출귀) 교정</h3>
             <p class="type-card-desc">귀가 많이 튀어나와 학교에서 놀림을 받거나 심리적 스트레스가 있는 경우 교정합니다. 귀의 성장이 완료되는 만 6세 이후가 수술 적기입니다.</p>
@@ -444,9 +438,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent-light), var(--bg-off)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            💊
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/pediatric/pediatric-scar.jpg" alt="소아 흉터 관리" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">소아 흉터 관리</h3>
             <p class="type-card-desc">사고나 수술로 생긴 흉터가 성장하면서 당겨지거나 두드러지는 경우를 예방·치료합니다. 레이저, 압박 드레싱, 흉터 연고 처방을 통해 최적의 흉터 결과를 유도합니다.</p>
@@ -582,8 +574,8 @@
   <!-- ===== MOBILE STICKY CTA ===== -->
   <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
     <div class="mobile-cta-inner">
-      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
-      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
     </div>
   </div>
 

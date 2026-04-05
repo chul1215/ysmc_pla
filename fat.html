@@ -111,6 +111,10 @@
     .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
     .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
     .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     .surgery-types { background: var(--surface-low, #F3E8E4); }
     .types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -265,7 +269,7 @@
   </header>
 
   <nav class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')"></button>
     <div class="mobile-nav-section">
       <h4>메뉴</h4>
       <a href="about.html">소개</a><a href="doctor.html">의료진소개</a><a href="tour.html">병원둘러보기</a>
@@ -328,17 +332,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">🎯</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/fat/precise-volume.jpg" alt="정밀한 양 조절" loading="lazy"></div>
           <h3>정밀한 양 조절</h3>
           <p>지방이식은 '얼마나'보다 '어디에, 어떤 깊이로'가 중요합니다. 피부층, 근막층, 골막층을 나누어 섬세하게 이식해 자연스럽고 오래 유지되는 결과를 만듭니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">🏥</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/fat/hospital-anesthesia.jpg" alt="종합병원 마취 안전 시스템" loading="lazy"></div>
           <h3>종합병원 마취 안전 시스템</h3>
           <p>전신마취가 필요한 체형 지방흡입도 전담 마취과 전문의와 종합병원 응급 체계 안에서 안전하게 진행됩니다. 수술 전 혈액검사, 심전도 검사 등 건강 확인이 원내에서 가능합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">📐</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/fat/realistic-goal.jpg" alt="현실적 목표 설계" loading="lazy"></div>
           <h3>현실적 목표 설계</h3>
           <p>지방흡입이 체중 감량 수단이 아님을 솔직하게 안내합니다. 현재 체형과 피부 탄력 상태를 기준으로 기대할 수 있는 변화 범위를 정직하게 설명합니다.</p>
         </div>
@@ -354,8 +358,8 @@
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3);">
-            <img src="images/지방재배치.jpg" alt="안면 지방이식" style="width:100%;height:100%;object-fit:cover;">
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/fat/face-fat-graft.jpg" alt="안면 지방이식" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">안면 지방이식</h3>
@@ -369,9 +373,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            💧
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/fat/face-liposuction.jpg" alt="안면 지방흡입" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">안면 지방흡입 (볼·이중턱)</h3>
             <p class="type-card-desc">과도하게 발달한 볼 지방이나 이중턱 지방을 소량 흡입하여 얼굴 라인을 정돈합니다. 절개 없이 작은 관으로 진행하며 회복이 빠릅니다.</p>
@@ -384,9 +386,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            ⚖️
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/fat/body-liposuction.jpg" alt="체형 지방흡입" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">체형 지방흡입 (복부·허벅지·팔)</h3>
             <p class="type-card-desc">복부, 허벅지, 팔뚝, 옆구리 등 운동으로 빠지지 않는 부위의 지방을 흡입하여 체형 라인을 교정합니다. 피부 탄력 유지를 고려한 흡입량 조절이 핵심입니다.</p>
@@ -399,9 +399,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🌿
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/fat/nano-fat.jpg" alt="나노·마이크로 지방이식" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">나노·마이크로 지방이식</h3>
             <p class="type-card-desc">지방을 매우 미세하게 분리하여 피부 진피층에 이식하는 방법입니다. 눈 아래 잔주름, 입술 주변, 목주름 등 섬세한 부위에 볼륨과 피부 재생 효과를 동시에 줍니다.</p>
@@ -414,9 +412,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🔄
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/fat/fat-relocation.jpg" alt="지방 재배치" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">지방 재배치 (눈밑 지방이동)</h3>
             <p class="type-card-desc">눈밑 불룩한 지방을 제거하지 않고 꺼진 눈 아래 골(눈물고랑)로 이동시키는 방법입니다. 제거보다 재배치가 더 자연스러운 결과를 낼 수 있습니다.</p>
@@ -429,9 +425,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            ✨
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/fat/lipo-combo.jpg" alt="지방흡입+이식 콤비" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">지방흡입+이식 콤비 교정</h3>
             <p class="type-card-desc">얼굴에서 과한 부위(볼 지방)를 흡입하고, 부족한 부위(관자놀이, 눈밑)에 이식하는 동시 교정 방법입니다. 한 번의 수술로 얼굴 전체 비율을 재설계합니다.</p>
@@ -564,12 +558,11 @@
     <p style="font-size:12px;color:rgba(255,255,255,0.28);">&copy; 2025 유성선병원 성형외과. All rights reserved.</p>
   </footer>
 
-
   <!-- ===== MOBILE STICKY CTA ===== -->
   <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
     <div class="mobile-cta-inner">
-      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
-      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
     </div>
   </div>
 

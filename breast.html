@@ -117,6 +117,10 @@
     .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
     .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
     .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     .surgery-types { background: var(--surface-low, #F3E8E4); }
     .types-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
@@ -272,7 +276,7 @@
   </header>
 
   <nav class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')"></button>
     <div class="mobile-nav-section">
       <h4>메뉴</h4>
       <a href="about.html">소개</a><a href="doctor.html">의료진소개</a><a href="tour.html">병원둘러보기</a>
@@ -308,7 +312,9 @@
         <p class="section-desc">크기보다 전체 체형과의 균형, 그리고 안전이 먼저입니다.</p>
       </div>
       <div class="principle-grid">
-        <div class="principle-visual">🏥</div>
+        <div class="principle-visual" style="padding:0; overflow:hidden;">
+          <img src="images/images2/cosmetic/breast/safety-design.jpg" alt="안전을 최우선에 두는 가슴성형 설계" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+        </div>
         <div class="principle-content">
           <h3>안전을 최우선에 두는<br>가슴성형 설계</h3>
           <p>가슴성형은 인체 내부에 삽입물이 들어가거나 큰 조직을 다루는 수술입니다. 전신마취 하에 진행되며, 마취 관리와 수술 중 혈압·산소 상태 모니터링이 결과와 안전 모두에 영향을 줍니다.</p>
@@ -323,7 +329,6 @@
         </div>
       </div>
       <div class="safety-banner">
-        <div class="safety-banner-icon">🛡️</div>
         <div>
           <h4>종합병원 마취 안전 시스템 — 가슴성형의 결정적 차이</h4>
           <p>전신마취가 필요한 가슴성형은 마취과 전문의의 존재 여부가 수술 안전성의 핵심입니다. 유성선병원은 전담 마취과 전문의 상주, 응급 대응 체계, 입원 병동을 갖춘 종합병원에서 수술이 이루어집니다. 개인 성형외과에서 구조적으로 제공하기 어려운 안전망입니다.</p>
@@ -340,17 +345,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">🛡️</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/breast/anesthesia-specialist.jpg" alt="전담 마취과 전문의 상주" loading="lazy"></div>
           <h3>전담 마취과 전문의 상주</h3>
           <p>가슴성형은 전신마취가 필요한 수술입니다. 전담 마취과 전문의가 마취와 활력징후를 모니터링하며, 수술 중 안전 관리를 책임집니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">📐</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/breast/body-ratio.jpg" alt="체형 비율 맞춤 설계" loading="lazy"></div>
           <h3>체형 비율 맞춤 설계</h3>
           <p>보형물 크기는 "cc 숫자"보다 현재 체형과 가슴 기저부 폭, 피부 늘어남 정도에 따라 결정됩니다. 지나치게 크거나 부자연스러운 결과를 원칙적으로 지양합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">🏥</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/breast/hospitalization.jpg" alt="입원 관리 가능" loading="lazy"></div>
           <h3>입원 관리 가능</h3>
           <p>수술 후 하룻밤 입원이 필요한 경우에도 종합병원 병동에서 안전하게 관리받을 수 있습니다. 귀가 후 응급 상황 발생 시에도 즉시 응급실 대응이 가능합니다.</p>
         </div>
@@ -366,8 +371,8 @@
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            ✨
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/breast/breast-augmentation.jpg" alt="가슴확대술" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">가슴확대술 (보형물)</h3>
@@ -381,8 +386,8 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            ⬇️
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/breast/breast-reduction.jpg" alt="가슴축소술" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">가슴축소술</h3>
@@ -396,8 +401,8 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🔵
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/breast/inverted-nipple.jpg" alt="함몰유두 교정" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">함몰유두 교정</h3>
@@ -411,8 +416,8 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🌸
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/breast/nipple-surgery.jpg" alt="유두·유륜 성형" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">유두·유륜 성형</h3>
@@ -549,8 +554,8 @@
   <!-- ===== MOBILE STICKY CTA ===== -->
   <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
     <div class="mobile-cta-inner">
-      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
-      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
     </div>
   </div>
 

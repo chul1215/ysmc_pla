@@ -114,6 +114,10 @@
     .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
     .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
     .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     .surgery-types { background: var(--surface-low, #F3E8E4); }
     .types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -268,7 +272,7 @@
   </header>
 
   <nav class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')"></button>
     <div class="mobile-nav-section">
       <h4>메뉴</h4>
       <a href="about.html">소개</a>
@@ -323,7 +327,7 @@
         <p class="section-desc">남성 성형은 여성 성형과 다른 해부학적 특성과 심미적 기준을 갖습니다.</p>
       </div>
       <div class="principle-grid">
-        <div class="principle-visual">🧑</div>
+        <div class="principle-visual" style="padding:0; overflow:hidden;"><img src="images/images2/cosmetic/male/male-approach.png" alt="남성미를 유지하면서 인상을 정돈하는 접근" style="width:100%; height:100%; object-fit:cover;" loading="lazy"></div>
         <div class="principle-content">
           <h3>남성미를 유지하면서<br>인상을 정돈하는 접근</h3>
           <p>남성 피부는 여성보다 두껍고 피지 분비량이 많아 수술 후 부종이 더 오래 지속될 수 있습니다. 또한 남성에게 어울리는 눈매와 코의 비율은 여성과 근본적으로 다릅니다. "여성스러워 보인다"는 결과는 남성 환자에게 가장 큰 불만족 원인입니다.</p>
@@ -349,17 +353,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">🎯</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/male/male-aesthetic.jpg" alt="남성 전용 심미 기준 적용" loading="lazy"></div>
           <h3>남성 전용 심미 기준 적용</h3>
           <p>여성 성형의 심미 기준을 그대로 적용하지 않습니다. 남성에게 어울리는 눈의 음영, 코의 각도, 얼굴 입체감을 별도 기준으로 설계합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">⚡</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/male/quick-recovery.jpg" alt="빠른 일상 복귀 설계" loading="lazy"></div>
           <h3>빠른 일상 복귀 설계</h3>
           <p>직장·군대 생활을 고려하여 부종 최소화 봉합 기법, 최소 절개 방식을 우선합니다. 수술 흔적 없이 조용히 변화하는 결과를 목표로 합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">🏥</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/male/hospital-anesthesia.jpg" alt="종합병원 마취 안전 시스템" loading="lazy"></div>
           <h3>종합병원 마취 안전 시스템</h3>
           <p>전담 마취과 전문의가 상주하는 종합병원 수술 환경으로 전신마취 수술도 안전하게 진행됩니다. 개인의원에서 받기 어려운 전신 건강 검진도 원내에서 가능합니다.</p>
         </div>
@@ -376,8 +380,8 @@
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3);">
-            <img src="images/눈매교정.png" alt="남자 눈성형" style="width:100%;height:100%;object-fit:contain;padding:20px;">
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/male/male-eye.png" alt="남자 눈성형" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">남자 눈성형</h3>
@@ -391,8 +395,8 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3);">
-            <img src="images/무보형물_비중격.jpg" alt="남자 코성형" style="width:100%;height:100%;object-fit:cover;">
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/male/male-nose.png" alt="남자 코성형" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">남자 코성형</h3>
@@ -406,9 +410,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🫁
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/male/gynecomastia.png" alt="여유증 수술" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">여유증 수술 (남성 유방비대증)</h3>
             <p class="type-card-desc">호르몬 불균형 또는 체질적 원인으로 발달한 남성 유방 조직을 제거하는 수술입니다. 지방과 유선 조직의 비율에 따라 지방흡입 단독 또는 절개 병용 방법을 선택합니다.</p>
@@ -421,9 +423,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            💪
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/male/male-liposuction.jpg" alt="남자 지방흡입·윤곽" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">남자 지방흡입·윤곽</h3>
             <p class="type-card-desc">복부, 허리, 옆구리 등 운동으로 빠지지 않는 부분 지방을 흡입하여 남성적인 체형 라인을 만듭니다. 지방 흡입 후 피부 탄력 유지를 위한 관리 프로토콜을 함께 제공합니다.</p>
@@ -436,9 +436,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🪨
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/male/male-contour.png" alt="안면윤곽" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">안면윤곽 (무턱·사각턱 교정)</h3>
             <p class="type-card-desc">무턱으로 인해 각이 없거나, 사각턱으로 인해 과도하게 각진 얼굴형을 교정합니다. 남성의 경우 지나친 갸름함보다는 자연스러운 입체감을 목표로 합니다.</p>
@@ -451,9 +449,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            ✂️
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/male/male-petit.jpg" alt="남자 쁘띠 시술" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">남자 쁘띠 시술</h3>
             <p class="type-card-desc">수술 없이 인상을 정돈하는 비수술 시술입니다. 이마·미간 보톡스, 팔자·턱 필러, 프로필·턱선 보톡스 등 남성에게 적합한 시술로 자연스러운 인상 변화를 만듭니다.</p>
@@ -588,12 +584,11 @@
     <p style="font-size:12px;color:rgba(255,255,255,0.28);">&copy; 2025 유성선병원 성형외과. All rights reserved.</p>
   </footer>
 
-
   <!-- ===== MOBILE STICKY CTA ===== -->
   <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
     <div class="mobile-cta-inner">
-      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
-      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
     </div>
   </div>
 

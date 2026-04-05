@@ -111,6 +111,10 @@
     .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
     .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
     .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     .surgery-types { background: var(--surface-low, #F3E8E4); }
     .types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -265,7 +269,7 @@
   </header>
 
   <nav class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')"></button>
     <div class="mobile-nav-section">
       <h4>메뉴</h4>
       <a href="about.html">소개</a><a href="doctor.html">의료진소개</a><a href="tour.html">병원둘러보기</a>
@@ -301,7 +305,7 @@
         <p class="section-desc">크지 않은 수술이라도 결과는 오래 눈에 보입니다. 섬세함이 필요합니다.</p>
       </div>
       <div class="principle-grid">
-        <div class="principle-visual">✂️</div>
+        <div class="principle-visual" style="padding:0; overflow:hidden;"><img src="images/images2/cosmetic/other/careful-planning.jpg" alt="작은 수술일수록 더 세밀하게 계획합니다" style="width:100%; height:100%; object-fit:cover;" loading="lazy"></div>
         <div class="principle-content">
           <h3>작은 수술일수록<br>더 세밀하게 계획합니다</h3>
           <p>귓불 갈라짐, 켈로이드, 칼귀 같은 문제는 수술 자체는 작지만, 귀라는 잘 보이는 부위에 결과가 남기 때문에 흉터 관리와 수술 설계가 더욱 중요합니다.</p>
@@ -326,17 +330,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">👨‍⚕️</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/other/specialist-surgeon.jpg" alt="성형외과 전문의 직접 집도" loading="lazy"></div>
           <h3>성형외과 전문의 직접 집도</h3>
           <p>간단한 수술이라도 성형외과 전문의가 직접 집도합니다. 절개 방향, 봉합 방법, 흉터 설계를 처음부터 미용적으로 고려합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">🔄</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/other/keloid-protocol.jpg" alt="켈로이드 재발 방지 프로토콜" loading="lazy"></div>
           <h3>켈로이드 재발 방지 프로토콜</h3>
           <p>켈로이드는 수술만으로는 재발 위험이 높습니다. 수술 후 방사선 치료, 스테로이드 주사, 압박 요법 등을 종합병원 체계 안에서 연계하여 관리합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">🏥</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/other/hospital-test.jpg" alt="종합병원 원내 검사 연계" loading="lazy"></div>
           <h3>종합병원 원내 검사 연계</h3>
           <p>켈로이드 유전 소인, 이전 치료 이력 등을 원내에서 확인하고 수술 계획에 반영합니다. 부분마취부터 수면마취까지 환자 상황에 맞게 선택 가능합니다.</p>
         </div>
@@ -352,9 +356,7 @@
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            👂
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/other/earlobe-repair.jpg" alt="이수열 교정 (귓불 갈라짐)" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">이수열 교정 (귓불 갈라짐)</h3>
             <p class="type-card-desc">귓불이 갈라지거나 찢어진 경우를 교정합니다. 귀걸이로 인한 외상성 이수열, 선천성 이수열 모두 교정 가능합니다. 흉터가 귓불 경계선 안에 위치하도록 설계합니다.</p>
@@ -367,9 +369,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🔴
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/other/keloid-treatment.jpg" alt="켈로이드 / 비후성 흉터 치료" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">켈로이드 / 비후성 흉터 치료</h3>
             <p class="type-card-desc">수술 흉터, 여드름 자국, 피어싱 부위에 생긴 켈로이드(붉고 딱딱하게 튀어오른 흉터)를 치료합니다. 수술적 제거와 비수술 치료(스테로이드 주사, 레이저)를 상태에 따라 선택합니다.</p>
@@ -382,9 +382,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            👂
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/other/ear-correction.jpg" alt="칼귀 교정 (돌출귀)" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">칼귀 교정 (돌출귀)</h3>
             <p class="type-card-desc">귀가 과도하게 측면으로 튀어나온 돌출귀(칼귀)를 교정합니다. 귀 뒤쪽 피부를 최소 절개하고 연골을 재형성하여 자연스럽게 귀를 세웁니다.</p>
@@ -397,9 +395,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🩹
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/other/scar-surgery.jpg" alt="흉터 성형" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">흉터 성형 (수술 흉터 교정)</h3>
             <p class="type-card-desc">기존 수술이나 사고로 생긴 보기 싫은 흉터를 재교정합니다. 흉터 방향 변경, 불규칙한 흉터 정리, 흉터 축소 등 다양한 방법으로 흉터를 최소화합니다.</p>
@@ -412,9 +408,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🔵
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/other/earlobe-augmentation.jpg" alt="귓볼 확대" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">귓볼 확대 (귓볼 지방이식)</h3>
             <p class="type-card-desc">나이가 들면서 얇아지거나 쪼그라든 귓볼에 지방이식 또는 필러를 이용해 볼륨을 회복합니다. 귀걸이가 잘 어울리는 귓볼을 되찾을 수 있습니다.</p>
@@ -427,9 +421,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4, #FBF5F3); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            ⚫
-          </div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/other/piercing-repair.jpg" alt="피어싱 홀 교정" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">피어싱 홀 교정</h3>
             <p class="type-card-desc">피어싱으로 늘어나거나 변형된 귓불 홀을 교정합니다. 장기간 무거운 귀걸이로 늘어진 홀, 여러 개의 홀을 합친 변형, 외상으로 찢어진 홀 모두 교정 가능합니다.</p>
@@ -565,8 +557,8 @@
   <!-- ===== MOBILE STICKY CTA ===== -->
   <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
     <div class="mobile-cta-inner">
-      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
-      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
     </div>
   </div>
 

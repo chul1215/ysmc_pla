@@ -162,6 +162,10 @@
     .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
     .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
     .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     /* ===== Surgery Types ===== */
     .surgery-types { background: var(--surface-low, #F3E8E4); }
@@ -323,7 +327,7 @@
 
   <!-- ===== MOBILE NAV ===== -->
   <nav class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')"></button>
     <div class="mobile-nav-section">
       <h4>메뉴</h4>
       <a href="about.html">소개</a>
@@ -378,7 +382,7 @@
         <p class="section-desc">코는 얼굴의 중심입니다. 높이만 높인다고 자연스러운 코가 되지 않습니다.</p>
       </div>
       <div class="principle-grid">
-        <div class="principle-visual">👃</div>
+        <div class="principle-visual" style="padding:0; overflow:hidden;"><img src="images/images2/cosmetic/nose/nose-design.png" alt="비율과 기능을 함께 고려하는 코성형 설계" style="width:100%; height:100%; object-fit:cover;" loading="lazy"></div>
         <div class="principle-content">
           <h3>비율과 기능을 함께 고려하는<br>코성형 설계</h3>
           <p>콧대의 높이, 코끝의 방향과 돌출 정도, 콧볼의 폭은 모두 얼굴 전체 비율과 조화를 이뤄야 합니다. 단순히 높게, 뾰족하게 만드는 것은 오히려 부자연스러운 결과를 만들 수 있습니다.</p>
@@ -404,17 +408,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">🏥</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/nose/hospital-safety.jpg" alt="종합병원 안전 시스템" loading="lazy"></div>
           <h3>종합병원 안전 시스템</h3>
           <p>전담 마취과 전문의와 응급 대응 체계를 갖춘 종합병원에서 수술하므로 전신마취 수술도 안심하고 받으실 수 있습니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">👨‍⚕️</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/nose/autologous-cartilage.jpg" alt="자가연골 우선 원칙" loading="lazy"></div>
           <h3>자가연골 우선 원칙</h3>
           <p>가톨릭중앙의료원 출신 전문의가 비중격 연골, 귀 연골 등 자신의 조직을 우선 활용하여 보형물 부작용 위험을 최소화합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">📐</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/nose/face-ratio.png" alt="얼굴 비율 맞춤 설계" loading="lazy"></div>
           <h3>얼굴 비율 맞춤 설계</h3>
           <p>코 하나만 보는 것이 아닌 이마, 눈, 입술의 비율과 조화를 기준으로 개인별 맞춤 수술 계획을 수립합니다.</p>
         </div>
@@ -431,8 +435,8 @@
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); display:flex; align-items:center; justify-content:center; font-size:60px;">
-            <img src="images/무보형물_비중격.jpg" alt="콧대성형" style="width:100%;height:100%;object-fit:cover;">
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/nose/nose-bridge.png" alt="콧대성형" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">콧대성형</h3>
@@ -447,7 +451,7 @@
 
         <div class="type-card">
           <div class="type-card-visual">
-            <img src="images/무보형물_귀연골.jpg" alt="코끝성형" style="width:100%;height:100%;object-fit:cover;">
+            <img src="images/images2/cosmetic/nose/nose-tip.png" alt="코끝성형" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">코끝성형</h3>
@@ -462,7 +466,7 @@
 
         <div class="type-card">
           <div class="type-card-visual">
-            <img src="images/콧볼_인중축소.jpg" alt="콧볼축소" style="width:100%;height:100%;object-fit:cover;">
+            <img src="images/images2/cosmetic/nose/nostril-philtrum.png" alt="콧볼축소" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">콧볼축소 / 인중축소</h3>
@@ -476,8 +480,8 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🔄
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/nose/nose-revision.png" alt="코 재수술" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">코 재수술</h3>
@@ -491,8 +495,8 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); display:flex; align-items:center; justify-content:center; font-size:64px; color:rgba(45,31,36,0.4);">
-            🫁
+          <div class="type-card-visual">
+            <img src="images/images2/cosmetic/nose/functional-nose.png" alt="기능성 코성형" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">기능성 코성형 (비중격 교정)</h3>
@@ -507,7 +511,7 @@
 
         <div class="type-card">
           <div class="type-card-visual">
-            <img src="images/기능코.jpg" alt="매부리코교정" style="width:100%;height:100%;object-fit:cover;">
+            <img src="images/images2/cosmetic/nose/hump-nose.png" alt="매부리코 교정" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="type-card-body">
             <h3 class="type-card-title">매부리코 교정</h3>
@@ -644,12 +648,11 @@
     <p style="font-size:12px;color:rgba(255,255,255,0.28);">&copy; 2025 유성선병원 성형외과. All rights reserved.</p>
   </footer>
 
-
   <!-- ===== MOBILE STICKY CTA ===== -->
   <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
     <div class="mobile-cta-inner">
-      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
-      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
     </div>
   </div>
 

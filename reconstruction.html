@@ -503,6 +503,10 @@
       line-height: 1.7;
       color: var(--text-mid);
     }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     /* ===== Treatment Types Section ===== */
     .treatment-types {
@@ -933,17 +937,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">🔬</div>
+          <div class="point-card-img"><img src="images/images2/medical/reconstruction/diagnosis-system.jpg" alt="정밀 진단 시스템" loading="lazy"></div>
           <h3>정밀 진단 시스템</h3>
           <p>초음파 검사와 조직검사를 통해 정확한 원인을 파악하고 적절한 치료 방향을 제시합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">👨‍⚕️</div>
+          <div class="point-card-img"><img src="images/images2/medical/reconstruction/specialist-surgery.png" alt="성형외과 전문의 직접 수술" loading="lazy"></div>
           <h3>성형외과 전문의 직접 수술</h3>
           <p>일반외과가 아닌 성형외과 전문의가 직접 집도하여 기능 회복과 미용적 결과를 동시에 달성합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">✂️</div>
+          <div class="point-card-img"><img src="images/images2/medical/reconstruction/minimal-scar.jpg" alt="흉터 최소화 접근" loading="lazy"></div>
           <h3>흉터 최소화 접근</h3>
           <p>최소 절개와 미세 봉합 기술로 흉터를 최소화하고, 수술 후 레이저 관리까지 제공합니다.</p>
         </div>

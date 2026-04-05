@@ -140,6 +140,10 @@
     .point-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; }
     .point-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
     .point-card p { font-size: 15px; line-height: 1.7; color: var(--text-mid); }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     .surgery-types { background: var(--surface-low, #F3E8E4); }
     .types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -274,7 +278,7 @@
   </header>
 
   <nav class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')"></button>
     <div class="mobile-nav-section">
       <h4>메뉴</h4>
       <a href="about.html">소개</a><a href="doctor.html">의료진소개</a><a href="tour.html">병원둘러보기</a>
@@ -297,7 +301,7 @@
   <!-- Emergency Banner -->
   <div class="emergency-banner">
     <div class="emergency-banner-inner">
-      <strong>🚨 중증 화상·광범위 화상 응급 대응</strong>
+      <strong> 중증 화상·광범위 화상 응급 대응</strong>
       <span>종합병원 응급실과 24시간 연계 가능합니다</span>
       <a href="tel:042-000-0000">042-000-0000 바로 전화</a>
     </div>
@@ -336,7 +340,7 @@
       </div>
 
       <div class="principle-grid">
-        <div class="principle-visual">🔥</div>
+        <div class="principle-visual" style="padding:0; overflow:hidden;"><img src="images/images2/medical/burn/burn-stages.jpg" alt="급성기부터 재건까지 단계별 화상 관리" style="width:100%; height:100%; object-fit:cover;" loading="lazy"></div>
         <div class="principle-content">
           <h3>급성기부터 재건까지<br>단계별 화상 관리</h3>
           <p>화상 치료는 단기 치료로 끝나지 않습니다. 초기 상처 관리가 끝난 후에도 흉터 구축(당기는 흉터), 색소 침착, 기능 제한이 남을 수 있습니다. 처음부터 장기적 관리를 계획하는 것이 결과를 좌우합니다.</p>
@@ -380,17 +384,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">🚨</div>
+          <div class="point-card-img"><img src="images/images2/medical/burn/emergency-system.jpg" alt="응급 대응 체계" loading="lazy"></div>
           <h3>응급 대응 체계</h3>
           <p>종합병원 응급실과 성형외과의 즉각 연계로 화상 발생 직후부터 전문적인 처치가 가능합니다. 초기 처치 수준이 최종 흉터를 결정합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">🏥</div>
+          <div class="point-card-img"><img src="images/images2/medical/burn/inpatient-care.jpg" alt="입원 치료 가능" loading="lazy"></div>
           <h3>입원 치료 가능</h3>
           <p>중등도 이상의 화상은 외래만으로 관리하기 어렵습니다. 입원 병동에서 지속적인 드레싱과 경과 관찰이 가능하며 소아 화상도 안전하게 관리합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">📅</div>
+          <div class="point-card-img"><img src="images/images2/medical/burn/long-term-scar.jpg" alt="장기 흉터 관리 계획" loading="lazy"></div>
           <h3>장기 흉터 관리 계획</h3>
           <p>화상 치유 후에도 흉터 성숙 기간(약 1년)에 맞춰 압박 치료, 레이저, 흉터 수술을 단계적으로 계획합니다. 동일 의료진이 처음부터 끝까지 담당합니다.</p>
         </div>
@@ -406,9 +410,7 @@
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent), var(--bg-off)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            🩺
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/burn/acute-burn.jpg" alt="급성기 화상 치료" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">급성기 화상 치료</h3>
             <p class="type-card-desc">화상 발생 직후부터 상처가 안정될 때까지의 치료입니다. 세척, 괴사 조직 제거, 상처 드레싱을 반복하며 감염을 예방하고 회복을 유도합니다.</p>
@@ -421,9 +423,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent-light), var(--accent)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            🔬
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/burn/skin-graft.jpg" alt="식피술 (피부이식)" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">식피술 (피부이식)</h3>
             <p class="type-card-desc">심재성 2도 또는 3도 화상에서 스스로 피부가 재생되지 않는 경우, 신체 다른 부위의 피부를 이식합니다. 화상 상처를 빠르게 닫아 감염과 흉터를 최소화합니다.</p>
@@ -436,9 +436,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--bg-off), var(--accent-light)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            🔄
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/burn/burn-scar-recon.jpg" alt="화상 흉터 재건" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">화상 흉터 재건</h3>
             <p class="type-card-desc">화상 치유 후 남은 흉터, 관절 부위 구축(당기는 흉터), 피부 색소 이상을 교정합니다. 흉터 성숙(약 1년) 후 수술 시기를 결정합니다.</p>
@@ -451,9 +449,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent), var(--accent-light)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            ⛓️
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/burn/contracture.jpg" alt="구축 교정 (관절·경부)" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">구축 교정 (관절·경부)</h3>
             <p class="type-card-desc">화상 흉터가 당겨서 관절 운동이 제한되거나 목이 당기는 경우를 교정합니다. 기능 회복이 목적이며, 필요 시 물리치료와 연계합니다.</p>
@@ -466,9 +462,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--bg-off), var(--accent)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            💊
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/burn/burn-scar-nonsurgical.jpg" alt="화상 흉터 비수술 치료" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">화상 흉터 비수술 치료</h3>
             <p class="type-card-desc">화상 상처가 치유된 직후부터 레이저, 압박 의류, 스테로이드 주사를 사용하여 흉터가 두껍게 자라는 것을 억제합니다.</p>
@@ -481,9 +475,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual" style="background: linear-gradient(135deg, var(--accent-light), var(--bg-off)); display:flex; align-items:center; justify-content:center; font-size:64px;">
-            👶
-          </div>
+          <div class="type-card-visual"><img src="images/images2/medical/burn/pediatric-burn.jpg" alt="소아 화상 치료" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">소아 화상 치료</h3>
             <p class="type-card-desc">어린이는 성인보다 피부가 얇아 같은 온도에서도 더 깊이 화상을 입을 수 있습니다. 성장을 고려한 치료 계획과 보호자 중심 설명으로 안심하고 치료받을 수 있습니다.</p>
@@ -619,8 +611,8 @@
   <!-- ===== MOBILE STICKY CTA ===== -->
   <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
     <div class="mobile-cta-inner">
-      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone">📞 전화 상담</a>
-      <a href="#" class="mobile-cta-btn cta-kakao">💬 카톡 문의</a>
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
     </div>
   </div>
 

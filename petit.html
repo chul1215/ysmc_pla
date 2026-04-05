@@ -503,6 +503,10 @@
       line-height: 1.7;
       color: var(--text-mid);
     }
+    .point-card { overflow: hidden; }
+    .point-card-img { height: 160px; overflow: hidden; margin: -40px -32px 20px; }
+    .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .point-card:hover .point-card-img img { transform: scale(1.06); }
 
     /* ===== Procedure Types Section ===== */
     .procedure-types {
@@ -949,17 +953,17 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-icon">👨‍⚕️</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/petit/specialist-procedure.jpg" alt="성형외과 전문의 직접 시술" loading="lazy"></div>
           <h3>성형외과 전문의 직접 시술</h3>
           <p>피부과나 일반의가 아닌, 성형외과 전문의가 직접 시술하여 안전하고 정확한 결과를 보장합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">💉</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/petit/genuine-product.jpg" alt="정품 시술 보장" loading="lazy"></div>
           <h3>정품 시술 보장</h3>
           <p>FDA 승인 정품만을 사용하며, 시술 전 제품 확인이 가능합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-icon">🎯</div>
+          <div class="point-card-img"><img src="images/images2/cosmetic/petit/natural-result.jpg" alt="자연스러운 결과" loading="lazy"></div>
           <h3>자연스러운 결과</h3>
           <p>과하지 않고 티 나지 않게, 개인의 얼굴 특성에 맞춘 맞춤 디자인을 적용합니다.</p>
         </div>
@@ -976,7 +980,7 @@
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual">💉</div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/petit/botox.jpg" alt="보톡스" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">보톡스 (Botox)</h3>
             <p class="type-card-desc">근육의 움직임을 조절하여 주름을 개선하고 얼굴 윤곽을 정돈합니다.</p>
@@ -991,7 +995,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual">💧</div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/petit/filler.jpg" alt="필러" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">필러 (Filler)</h3>
             <p class="type-card-desc">히알루론산을 주입하여 볼륨을 채우고 윤곽을 살려 입체적인 얼굴을 만듭니다.</p>
@@ -1006,7 +1010,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual">✨</div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/petit/skin-booster.jpg" alt="스킨부스터" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">스킨부스터</h3>
             <p class="type-card-desc">피부 진피층에 수분과 영양을 공급하여 피부 탄력과 광채를 개선합니다.</p>
@@ -1021,7 +1025,7 @@
         </div>
 
         <div class="type-card">
-          <div class="type-card-visual">🔬</div>
+          <div class="type-card-visual"><img src="images/images2/cosmetic/petit/laser.jpg" alt="레이저 시술" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">
             <h3 class="type-card-title">레이저 시술</h3>
             <p class="type-card-desc">색소, 모공, 혈관, 주름 등 다양한 피부 고민을 개선하는 레이저 치료를 제공합니다.</p>

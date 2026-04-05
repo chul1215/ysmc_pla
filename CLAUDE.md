@@ -10,6 +10,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **스택**: 순수 HTML5 + CSS3 + Vanilla JS (프레임워크/패키지 없음)
 - **배포**: GitHub Pages (`https://chul1215.github.io/ysmc_pla/`) — main 브랜치 푸시 시 자동 배포
 - **로컬 서버**: `python3 -m http.server 8080`
+- **개발 환경**: cmux (tmux 기반 통합 개발환경) — 내장 브라우저 사용
+
+## 테스트 및 확인 절차 (cmux 환경)
+
+마이크로페이지(HTML 파일) 관련 작업 시 **반드시 cmux 내장 브라우저로 직접 확인**한다.
+
+1. 로컬 서버가 실행 중인지 확인: `python3 -m http.server 8080`
+2. cmux 내장 브라우저에서 `http://localhost:8080/<파일명>.html` 접속
+3. 수정 후 브라우저 새로고침으로 변경사항 즉시 검증
+4. 모바일 레이아웃 확인: 브라우저 창 크기를 768px 이하로 조정
+
+> **Playwright MCP**도 사용 가능하나, cmux 내장 브라우저가 이미 열려 있을 경우 그쪽을 우선 활용할 것.
 
 ## 파일 구성
 
@@ -43,6 +55,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `safety-main/` → `emergency-24h.jpg`, `anesthesia.jpg`, `multidisciplinary.jpg`
 - `safety-medical/` → `emergency-system.jpg`, `surgical-anesthesia.jpg`, `rehabilitation.jpg`
 - `sns/` → `blepharoptosis.png`, `face-lump.png`, `hospital-plastic.jpg`
+
+`images/images2/cosmetic/{page}/` — 미용성형 상세 페이지용 시술·특징 카드 이미지 (URL-safe):
+- `breast/` → `safety-design`, `breast-augmentation`, `breast-reduction`, `inverted-nipple`, `nipple-surgery`, `anesthesia-specialist`, `body-ratio`, `hospitalization`
+- `other/` → `careful-planning`, `earlobe-repair`, `keloid-treatment`, `ear-correction`, `scar-surgery`, `earlobe-augmentation`, `piercing-repair`, `specialist-surgeon`, `keloid-protocol`, `hospital-test`
+- `male/` → `male-approach`, `male-eye`, `male-nose`, `gynecomastia`, `male-liposuction`, `male-contour`, `male-petit`, `male-aesthetic`, `quick-recovery`, `hospital-anesthesia`
+- `lifting/` → `safe-lifting`, `ulthera`, `thermage`, `facelift`, `complex-lifting`, `skin-analysis`, `custom-lifting`, `natural-recovery`
+- `petit/` → `honest-consultation`, `botox`, `filler`, `skin-booster`, `laser`, `specialist-procedure`, `genuine-product`, `natural-result`
+- `fat/` → `volume-balance`, `face-fat-graft`, `face-liposuction`, `body-liposuction`, `nano-fat`, `fat-relocation`, `lipo-combo`, `precise-volume`, `hospital-anesthesia`, `realistic-goal`
+- `nose/` → `nose-design`, `nose-bridge`, `nose-tip`, `nostril-philtrum`, `nose-revision`, `functional-nose`, `hump-nose`, `hospital-safety`, `autologous-cartilage`, `face-ratio`
+- `eye/` → `hospital-safety`, `specialist-surgeon`, `custom-design`, `under-eye-fat`
+
+`images/images2/medical/{page}/` — 치료재건 상세 페이지용 시술·특징 카드 이미지 (URL-safe):
+- `trauma/` → `emergency-consult`, `specialist-suture`, `scar-laser`
+- `pediatric/` → `pediatric-approach`, `pediatric-suture`, `pediatric-mole`, `pediatric-burn`, `pediatric-vascular`, `pediatric-ear`, `pediatric-scar`, `pediatric-anesthesia`, `growth-plan`, `guardian-care`
+- `reconstruction/` → `accurate-diagnosis`, `diagnosis-system`, `specialist-surgery`, `minimal-scar`
+- `burn/` → `burn-stages`, `acute-burn`, `skin-graft`, `burn-scar-recon`, `contracture`, `burn-scar-nonsurgical`, `pediatric-burn`, `emergency-system`, `inpatient-care`, `long-term-scar`
 
 **이 목록에 없는 이미지 경로는 사용 금지** — 없는 이미지는 CSS 그라디언트로 처리.
 
