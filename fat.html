@@ -79,7 +79,7 @@
 
     .page-hero {
       margin-top: 80px; position: relative; overflow: hidden;
-      background: linear-gradient(120deg, rgba(251,245,243,0.87) 0%, rgba(243,232,228,0.87) 100%), url(images/surgery-room.jpg) center/cover no-repeat;
+      background: linear-gradient(120deg, rgba(251,245,243,0.30) 0%, rgba(243,232,228,0.30) 100%), url(images/images2/fat-hero.jpg) center/cover no-repeat;
       padding: 100px 40px 80px;
     }
     .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, rgba(158, 107, 123, 0.20) 0%, transparent 60%); }
@@ -168,13 +168,33 @@
       .gnb { display: none; }
       .header-right { display: none; }
       .menu-toggle { display: flex; }
-      .page-hero { padding: 80px 20px 60px; }
-      .page-hero-title { font-size: 32px; }
-      .section { padding: 60px 20px; }
-      .section-title { font-size: 28px; }
+
+      .page-hero { padding: 72px 20px 52px; }
+      .page-hero-title { font-size: 28px; line-height: 1.3; text-shadow: 0 1px 8px rgba(0,0,0,0.18); }
+      .page-hero-desc { font-size: 15px; }
+
+      .section { padding: 56px 20px; }
+      .section-header { margin-bottom: 40px; }
+      .section-title { font-size: 24px; }
+      .section-desc { font-size: 14px; }
+
+      .principle-visual { height: 240px; }
+      .principle-content h3 { font-size: 22px; }
+      .principle-content p { font-size: 15px; }
+
       .points-grid { grid-template-columns: 1fr; }
+      .point-card { padding: 0 0 28px; }
+      .point-card-img { margin: 0 0 20px; height: 180px; border-radius: 20px 20px 0 0; }
+      .point-card h3 { font-size: 17px; padding: 0 20px; }
+      .point-card p { font-size: 14px; padding: 0 20px; }
+
       .types-grid { grid-template-columns: 1fr; }
-      .mobile-cta { display: block !important; }
+      .type-card-body { padding: 24px 20px; }
+      .type-card-title { font-size: 18px; }
+
+      .faq-answer-inner { padding: 0 20px 20px 44px; font-size: 14px; }
+
+      .mobile-cta { display: block; }
       .footer, .footer { padding-bottom: 76px; }
     }
 
