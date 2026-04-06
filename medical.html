@@ -451,7 +451,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(140deg, rgba(251,245,243,0.90) 0%, rgba(26,58,92,0.50) 55%, rgba(10,24,40,0.20) 100%);
+      background: linear-gradient(to right, rgba(45,31,36,0.60) 0%, rgba(0,0,0,0.38) 50%, rgba(0,0,0,0.12) 100%);
     }
 
     .slide-content {
@@ -493,16 +493,15 @@
       align-items: center;
       gap: 8px;
       padding: 12px 24px;
-      background: rgba(255,255,255,0.15);
-      border: 1.5px solid rgba(255,255,255,0.35);
-      color: #fff;
+      background: linear-gradient(135deg, #9E6B7B, #D4A5B5);
+      color: #FFFFFF;
       border-radius: 9999px;
       font-size: 14px;
       font-weight: 700;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s;
     }
 
-    .slide-btn:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.6); }
+    .slide-btn:hover { background: var(--primary-light); }
 
     /* Emergency badge on slide */
     .slide-badge {
@@ -610,7 +609,7 @@
 
     /* ===== Category Horizontal Scroll ===== */
     .categories-scroll-section {
-      background: var(--accent-light);
+      background: var(--bg-off, #FBF5F3);
       padding: 80px 0;
     }
 
@@ -911,7 +910,7 @@
 
     /* ===== CTA Section ===== */
     .cta-section {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      background: var(--accent-light);
       padding: 80px 40px;
       text-align: center;
     }
@@ -923,14 +922,14 @@
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
+      color: var(--primary-dark);
       margin-bottom: 16px;
     }
 
     .cta-title {
       font-size: 32px;
       font-weight: 800;
-      color: var(--white);
+      color: var(--text-dark);
       letter-spacing: -0.8px;
       line-height: 1.3;
       margin-bottom: 16px;
@@ -938,7 +937,7 @@
 
     .cta-desc {
       font-size: 15px;
-      color: rgba(255,255,255,0.85);
+      color: var(--text-mid);
       line-height: 1.8;
       margin-bottom: 36px;
     }
@@ -1024,7 +1023,7 @@
 
     .cta-sub-notes span {
       font-size: 12px;
-      color: rgba(255,255,255,0.6);
+      color: var(--text-light);
     }
 
     /* ===== Footer ===== */
