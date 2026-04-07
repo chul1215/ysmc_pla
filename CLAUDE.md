@@ -4,8 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-유성선병원 성형외과 신설 부서 홍보용 정적 웹사이트. 빌드 시스템이 없으며 순수 HTML/CSS/JS로 구성된다.
+선메디컬센터 유성선병원 성형외과 신설 부서 홍보용 정적 웹사이트. 빌드 시스템이 없으며 순수 HTML/CSS/JS로 구성된다.
 
+- **브랜드명**: 선메디컬센터 유성선병원 성형외과
 - **언어**: 한국어 (lang="ko")
 - **스택**: 순수 HTML5 + CSS3 + Vanilla JS (프레임워크/패키지 없음)
 - **배포**: GitHub Pages (`https://chul1215.github.io/ysmc_pla/`) — main 브랜치 푸시 시 자동 배포
@@ -38,7 +39,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### 사용 가능한 이미지 (`images/` 폴더)
 
-루트: `surgery-room.jpg`, `lifting.jpg`, `shin_profile.jpg`, `eye-correction.png`, `petit-skin.png`
+루트: `surgery-room.jpg`, `lifting.jpg`, `shin_profile.jpg`, `eye-correction.png`, `petit-skin.png`, `doctor_shin.png` (의료진 실제 사진)
 
 눈성형 시술 이미지 (eye.html 전용): `매몰법_den.png`, `절개법_dei.png`, `부분절개법_dep.png`, `앞트임_epi.png`, `눈매교정.png`, `눈_나노지방_nano.png`, `위트임.png`, `듀얼트임.png`, `하안검.jpg`, `지방재배치.jpg`, `눈썹밑거상_SB.png`, `기능코.jpg`, `콧볼_인중축소.jpg`, `무보형물_귀연골.jpg`, `무보형물_비중격.jpg`
 
@@ -80,15 +81,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **공유 CSS/JS 파일이 없다.** 모든 스타일, GNB, 스크립트는 각 HTML 파일 내 `<style>`, `<script>` 블록에 인라인으로 존재한다.
 
-공통 요소(GNB, 색상 변수, 푸터 등)를 수정할 때는 **영향받는 모든 파일을 각각 수정**해야 한다. 다수 파일을 한 번에 고칠 때는 `sed -i ''` 루프를 사용한다:
+공통 요소(GNB, 색상 변수, 푸터 등)를 수정할 때는 **영향받는 모든 파일을 각각 수정**해야 한다. 다수 파일을 한 번에 고칠 때는 `grep -rl | xargs sed` 방식을 사용한다 (멀티라인 for 루프는 이 환경에서 동작하지 않음):
 
 ```bash
-for f in about.html booking.html breast.html burn.html community.html consultation.html \
-  cosmetic.html doctor.html eye.html fat.html index.html lifting.html male.html \
-  medical.html nose.html notice.html other.html pediatric.html petit.html \
-  reconstruction.html tour.html trauma.html; do
-  sed -i '' 's/OLD/NEW/g' "$f"
-done
+# 특정 문자열이 있는 파일만 대상으로 일괄 치환
+grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/OLD/NEW/g'
 ```
 
 ### GNB 구조 (모든 페이지 공통)
@@ -112,7 +109,7 @@ done
 
 ### 허브 페이지 섹션 구성 (cosmetic.html / medical.html)
 
-**cosmetic.html:** 히어로 슬라이드쇼(눈/코/리프팅/가슴) → 카테고리 스크롤 8종 → Why Choose Us → 의료진 소개 → CTA
+**cosmetic.html:** 히어로 슬라이드쇼(눈/코/리프팅/남자/지방/가슴/기타/쁘띠 — 8종) → 카테고리 스크롤 8종 → Why Choose Us → 의료진 소개 → CTA
 
 **medical.html:** 프로모션 배너(응급/조직검사/소아) → 히어로 슬라이드쇼(외상/화상/피부종양/소아) → 카테고리 스크롤 4종 → 안전 시스템 → 의료진 소개 → CTA
 
@@ -160,8 +157,9 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 
 ## CSS 색상 시스템
 
-**허브·인덱스 페이지**(`index.html`, `cosmetic.html`, `medical.html`)는 아래 변수를 전부 정의한다. **상세 페이지**(eye, nose, lifting 등)는 `--wine`, `--navy`, `--navy-mid`, `--bg-off`를 정의하지 않는다.
+페이지 그룹별로 색상 팔레트가 다르다. 수정 전 해당 파일의 `:root`를 반드시 확인할 것.
 
+**허브·인덱스 페이지** (`index.html`, `cosmetic.html`, `medical.html`) — teal 계열:
 ```css
 :root {
   --primary: #42c0bf;       /* 메인 컬러 (teal/cyan) */
@@ -179,6 +177,22 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
   --white: #FFFFFF;
 }
 ```
+
+**기관 소개 페이지** (`about.html`, `doctor.html`, `tour.html`) — 로즈/와인 계열:
+```css
+:root {
+  --primary: #9E6B7B;
+  --primary-light: #D4A5B5;
+  --primary-dark: #8A5568;
+  --accent: #D4A5B5;
+  --bg-off: #F3E8E4;
+  --text-dark: #2D1F24;
+  --text-mid: #6B5258;
+  --surface: #FBF5F3;
+}
+```
+
+**미용·성형 상세 페이지** (eye, nose, lifting 등)는 `--wine`, `--navy`, `--navy-mid`, `--bg-off`를 정의하지 않는다.
 
 ## admin.html 특이사항 (유성선병원 성형외과 MASTER PAGE)
 
@@ -204,6 +218,16 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 
 - 최대 너비: `1280px` / 섹션 패딩: 상하 `100px`, 좌우 `40px`
 - 폰트: Pretendard (CDN) → `'Apple SD Gothic Neo'` → `'Malgun Gothic'`
+
+## OG / SNS 공유 메타태그
+
+`index.html`에 OG 및 Twitter Card 메타태그가 설정되어 있다. 썸네일 이미지는 **절대 URL**이어야 하며, 한글·공백이 포함된 경로는 사용 불가.
+
+```html
+<meta property="og:image" content="https://chul1215.github.io/ysmc_pla/images/lifting.jpg">
+```
+
+- 카카오톡 캐시 초기화: https://developers.kakao.com/tool/clear/og
 
 ## 브랜드 & 콘텐츠 규칙
 
