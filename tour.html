@@ -244,18 +244,27 @@
 
     .amenity-item {
       background: #fff;
-      border-radius: 12px;
-      padding: 28px 20px;
+      border-radius: 16px;
+      overflow: hidden;
       text-align: center;
-      box-shadow: 0 8px 40px rgba(158, 107, 123, 0.06);
-      transition: transform 0.2s;
+      box-shadow: 0 4px 24px rgba(158, 107, 123, 0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .amenity-item:hover { transform: translateY(-3px); }
+    .amenity-item:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(158, 107, 123, 0.15); }
 
-    .amenity-icon { font-size: 32px; margin-bottom: 12px; }
-    .amenity-item h4 { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
-    .amenity-item p { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
+    .amenity-icon-wrap {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    .amenity-body { padding: 0 20px 24px; }
+
+    .amenity-item h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .amenity-item p { font-size: 13px; color: var(--text-mid); line-height: 1.75; }
 
     /* ===== Directions ===== */
     .dir-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 56px; align-items: start; }
@@ -307,15 +316,12 @@
     .dir-info h3 { font-size: 22px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.5px; margin-bottom: 24px; }
 
     .dir-item { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
-    .dir-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
     .dir-text h4 { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
     .dir-text p { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
 
     .parking-note {
-      background: linear-gradient(135deg, #9E6B7B, #D4A5B5);
       border-left: 3px solid var(--primary);
-      border-radius: 0 8px 8px 0;
-      padding: 16px 20px;
+      padding: 14px 20px;
       margin-top: 20px;
       font-size: 14px;
       color: var(--text-mid);
@@ -627,37 +633,60 @@
 
       <div class="amenity-grid">
         <div class="amenity-item">
-          <div class="amenity-icon">🅿</div>
-          <h4>무료 주차</h4>
-          <p>건물 내 전용 주차장 운영. 병원 방문 시 주차권 발급</p>
+          <div class="amenity-icon-wrap" style="background: linear-gradient(135deg, #e8f4fd, #d0eaf8);">🅿️</div>
+          <div class="amenity-body">
+            <h4>무료 주차</h4>
+            <p>건물 내 전용 주차장 운영. 병원 방문 시 주차권 발급</p>
+          </div>
         </div>
         <div class="amenity-item">
-          <h4>장애인 시설</h4>
-          <p>장애인 주차 구역, 경사로, 화장실 완비</p>
+          <div class="amenity-icon-wrap" style="background: linear-gradient(135deg, #e8f8f0, #c8f0da);">♿</div>
+          <div class="amenity-body">
+            <h4>장애인 시설</h4>
+            <p>장애인 주차 구역, 경사로, 화장실 완비</p>
+          </div>
         </div>
         <div class="amenity-item">
-          <h4>보호자 대기실</h4>
-          <p>수술 중 보호자가 편안히 대기할 수 있는 공간 및 음료 제공</p>
+          <div class="amenity-icon-wrap" style="background: linear-gradient(135deg, #fef6e8, #fdecc8);">🛋️</div>
+          <div class="amenity-body">
+            <h4>보호자 대기실</h4>
+            <p>수술 중 보호자가 편안히 대기할 수 있는 공간 및 음료 제공</p>
+          </div>
         </div>
         <div class="amenity-item">
-          <h4>Wi-Fi 제공</h4>
-          <p>병원 전 구역 무료 Wi-Fi 이용 가능</p>
+          <div class="amenity-icon-wrap" style="background: linear-gradient(135deg, #e8f5f5, #c8eaea);">📶</div>
+          <div class="amenity-body">
+            <h4>Wi-Fi 제공</h4>
+            <p>병원 전 구역 무료 Wi-Fi 이용 가능</p>
+          </div>
         </div>
         <div class="amenity-item">
-          <h4>개인정보 보호</h4>
-          <p>독립 상담실 운영으로 진료 내용 철저 보호</p>
+          <div class="amenity-icon-wrap" style="background: linear-gradient(135deg, #f0ecf8, #e0d4f4);">🔒</div>
+          <div class="amenity-body">
+            <h4>개인정보 보호</h4>
+            <p>독립 상담실 운영으로 진료 내용 철저 보호</p>
+          </div>
         </div>
         <div class="amenity-item">
-          <h4>응급 연계</h4>
-          <p>24시간 응급실 즉시 연계. 긴급 상황 신속 대응</p>
+          <div class="amenity-icon-wrap" style="background: linear-gradient(135deg, #fdf0f0, #fad8d8);">🚑</div>
+          <div class="amenity-body">
+            <h4>응급 연계</h4>
+            <p>24시간 응급실 즉시 연계. 긴급 상황 신속 대응</p>
+          </div>
         </div>
         <div class="amenity-item">
-          <h4>다양한 결제</h4>
-          <p>신용카드, 실손보험 청구 서비스, 분할 납부 안내</p>
+          <div class="amenity-icon-wrap" style="background: linear-gradient(135deg, #eef4fe, #d8e8fc);">💳</div>
+          <div class="amenity-body">
+            <h4>다양한 결제</h4>
+            <p>신용카드, 실손보험 청구 서비스, 분할 납부 안내</p>
+          </div>
         </div>
         <div class="amenity-item">
-          <h4>외국어 진료</h4>
-          <p>영어 상담 가능. 중국어 통역 서비스 사전 예약 시 제공</p>
+          <div class="amenity-icon-wrap" style="background: linear-gradient(135deg, #f0f8e8, #daf0c4);">🌏</div>
+          <div class="amenity-body">
+            <h4>외국어 진료</h4>
+            <p>영어 상담 가능. 중국어 통역 서비스 사전 예약 시 제공</p>
+          </div>
         </div>
       </div>
     </div>
@@ -680,7 +709,6 @@
           <h3>선메디컬센터 유성선병원 성형외과</h3>
 
           <div class="dir-item">
-            <div class="dir-icon"></div>
             <div class="dir-text">
               <h4>주소</h4>
               <p>대전광역시 유성구 계룡로 105 (봉명동)<br>유성선병원 본관 3층 성형외과</p>
@@ -688,7 +716,6 @@
           </div>
 
           <div class="dir-item">
-            <div class="dir-icon"></div>
             <div class="dir-text">
               <h4>지하철</h4>
               <p>대전 1호선 유성온천역 2번 출구 도보 5분<br>버스 환승 정류장 바로 인접</p>
@@ -696,7 +723,6 @@
           </div>
 
           <div class="dir-item">
-            <div class="dir-icon"></div>
             <div class="dir-text">
               <h4>버스</h4>
               <p>301, 302, 303, 500번 등 다수 노선<br>유성선병원 정류장 하차 후 도보 1분</p>
@@ -704,18 +730,12 @@
           </div>
 
           <div class="dir-item">
-            <div class="dir-icon"></div>
             <div class="dir-text">
               <h4>자가용</h4>
               <p>유성IC에서 15분 / 대전IC에서 20분<br>네비게이션 '유성선병원' 검색</p>
             </div>
           </div>
 
-          <div class="parking-note">
-            <strong>주차 안내</strong><br>
-            병원 내 무료 주차 가능 (최대 3시간)<br>
-            성형외과 진료 시 주차권 도장 지참 시 추가 1시간 연장 가능
-          </div>
         </div>
       </div>
     </div>
