@@ -125,19 +125,13 @@
       position: relative;
     }
 
-    .doctor-photo-placeholder {
+    .doctor-photo img {
       width: 100%;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      color: rgba(158,107,123,0.45);
-      font-size: 14px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
     }
-
-    .doctor-photo-placeholder .photo-icon { font-size: 64px; }
 
     .doctor-info { padding-top: 8px; }
 
@@ -370,9 +364,7 @@
       <div class="doctor-card">
         <div>
           <div class="doctor-photo">
-            <div class="doctor-photo-placeholder">
-              <p>신정환 과장</p>
-            </div>
+            <img src="images/doctor_shin.png" alt="신정환 과장 - 성형외과 전문의" loading="eager">
           </div>
         </div>
 
