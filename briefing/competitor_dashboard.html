@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>대전 성형외과 경쟁 벤치마킹 대시보드 | 유성선병원</title>
+    <meta name="description" content="유성선병원 신설 성형외과 경쟁 현황 모니터링 및 전략 대시보드" />
+    
+    <!-- 폰트 및 아이콘 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* 핵심 색상 (다크 글래스모피즘 테마) */
+            --bg-main: #0B0F19;
+            --bg-card: rgba(21, 26, 39, 0.7);
+            --bg-card-solid: #151A27;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --border-light: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(59, 130, 246, 0.4);
+            
+            /* 포인트 컬러 */
+            --point-blue: #3B82F6;
+            --point-purple: #8B5CF6;
+            --point-cyan: #06B6D4;
+            --point-gradient: linear-gradient(135deg, var(--point-blue), var(--point-purple));
+            
+            /* 상태 컬러 */
+            --threat-high: #EF4444; /* 위험 - 빨강 */
+            --threat-mid: #F59E0B;  /* 중간 - 노랑 */
+            --threat-low: #10B981;  /* 낮음 - 초록 */
+            
+            /* 그림자 & 블러 */
+            --glass-blur: blur(12px);
+            --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 레이아웃 구조 */
+        .wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 사이드바 */
+        .sidebar {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 2rem;
+            height: calc(100vh - 4rem);
+            position: sticky;
+            top: 2rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 2.5rem;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--point-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.15), transparent);
+            border-left: 3px solid var(--point-blue);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-update {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-update:hover {
+            background: var(--point-blue);
+            border-color: var(--point-blue);
+            box-shadow: 0 0 15px rgba(59,130,246,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* 메인 컨텐츠 영역 */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* 상단 헤더 */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            color: var(--point-cyan);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--point-blue);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        /* KPI 카드 그리드 */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: var(--point-gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .kpi-card:hover::before {
+            opacity: 1;
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .kpi-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--point-blue);
+        }
+
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-sub {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .kpi-sub .highlight {
+            color: var(--threat-high);
+            font-weight: 600;
+        }
+
+        .kpi-sub .highlight-green {
+            color: var(--threat-low);
+            font-weight: 600;
+        }
+
+        /* 차트 영역 */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .chart-grid.equal {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .panel {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 리스트 아이템 UI */
+        .comp-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        /* 스크롤바 디자인 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.02);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        .comp-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .comp-item:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: var(--border-light);
+        }
+
+        .comp-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .comp-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .comp-type {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .threat-badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-align: center;
+            min-width: 65px;
+        }
+
+        .threat-5 { background: rgba(239, 68, 68, 0.15); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .threat-4 { background: rgba(245, 158, 11, 0.15); color: #FCD34D; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .threat-3 { background: rgba(59, 130, 246, 0.15); color: #93C5FD; border: 1px solid rgba(59, 130, 246, 0.3); }
+
+        /* SWOT 섹션 */
+        .swot-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .swot-box {
+            padding: 1.5rem;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-light);
+            transition: transform 0.3s;
+        }
+        
+        .swot-box:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .swot-box.s .swot-header { color: var(--threat-low); }
+        .swot-box.w .swot-header { color: var(--threat-mid); }
+        .swot-box.o .swot-header { color: var(--point-blue); }
+        .swot-box.t .swot-header { color: var(--threat-high); }
+
+        .swot-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .swot-list {
+            margin-left: 1.2rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .swot-list li::marker {
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* 애니메이션 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1200px) {
+            .wrapper { grid-template-columns: 1fr; }
+            .sidebar { height: auto; position: relative; top: 0; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .chart-grid, .chart-grid.equal { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+            .swot-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i data-lucide="activity"></i>
+                </div>
+                <div>
+                    <div class="brand-title">유성선병원</div>
+                    <div class="brand-subtitle">성형외과 전략팀</div>
+                </div>
+            </div>
+
+            <ul class="nav-menu">
+                <a href="#" class="nav-item active"><i data-lucide="layout-dashboard"></i> 대시보드 홈</a>
+                <a href="#competitors" class="nav-item"><i data-lucide="crosshair"></i> 경쟁사 상세분석</a>
+                <a href="#positioning" class="nav-item"><i data-lucide="map"></i> 포지셔닝 맵</a>
+                <a href="#marketing" class="nav-item"><i data-lucide="megaphone"></i> 마케팅 전략</a>
+                <a href="#swot" class="nav-item"><i data-lucide="shield-alert"></i> SWOT 분석</a>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="btn-update">
+                    <i data-lucide="download"></i> 보고서 다운로드
+                </button>
+                <p>기준일: 2026.03.12</p>
+                <p>작성자: 인사이트 분석팀</p>
+            </div>
+        </aside>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 헤더 -->
+            <header class="top-header">
+                <div class="page-title">
+                    <p>대전 성형외과 경쟁 환경 분석</p>
+                    <h1>Benchmarking Dashboard</h1>
+                </div>
+                <div class="date-badge">
+                    <i data-lucide="calendar"></i> 2026년 1분기 리포트
+                </div>
+            </header>
+
+            <!-- KPI 카드 -->
+            <section class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        분석 대상 (의원+대학) <div class="kpi-icon"><i data-lucide="building-2"></i></div>
+                    </div>
+                    <div class="kpi-value">13<span style="font-size:1.2rem;color:var(--text-secondary)">곳</span></div>
+                    <div class="kpi-sub">주요 상권: <span style="color:var(--text-primary)">서구 둔산동 집중 (9곳)</span></div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        직접 경쟁 병원 (위협도 High) <div class="kpi-icon"><i data-lucide="swords"></i></div>
+                    </div>
+                    <div class="kpi-value">4<span style="font-size:1.2rem;color:var(--text-secondary)">곳</span></div>
+                    <div class="kpi-sub highlight">을지대, 컨양대, 닥터스미, 페이스</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        포지셔닝 핵심 키워드 <div class="kpi-icon"><i data-lucide="key"></i></div>
+                    </div>
+                    <div class="kpi-value">안전<span style="font-size:1.2rem;color:var(--text-secondary)">+</span>섬세</div>
+                    <div class="kpi-sub highlight-green">우위: 종합병원 인프라</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        지역 검색 노출 점유율 (예상) <div class="kpi-icon"><i data-lucide="search"></i></div>
+                    </div>
+                    <div class="kpi-value">0<span style="font-size:1.2rem;color:var(--text-secondary)">%</span></div>
+                    <div class="kpi-sub">신설 부서로 <span class="highlight">SEO 작업 즉시 필요</span></div>
+                </div>
+            </section>
+
+            <!-- 차트 영역 1 -->
+            <section class="chart-grid">
+                <!-- 포지셔닝 맵 -->
+                <div class="panel" id="positioning">
+                    <div class="panel-header">
+                        <div class="panel-title"><i data-lucide="map-pin"></i> 경쟁 포지셔닝 맵 (규모별 / 타겟별)</div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="positionMapChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 직접 경쟁사 리스트 -->
+                <div class="panel" id="competitors">
+                    <div class="panel-header">
+                        <div class="panel-title"><i data-lucide="alert-triangle"></i> 주의 대상 경쟁사</div>
+                    </div>
+                    <ul class="comp-list">
+                        <li class="comp-item">
+                            <div class="comp-info">
+                                <span class="comp-name">을지대학교병원</span>
+                                <span class="comp-type">대학병원 · 포지셔닝 충돌</span>
+                            </div>
+                            <span class="threat-badge threat-5">위협 5</span>
+                        </li>
+                        <li class="comp-item">
+                            <div class="comp-info">
+                                <span class="comp-name">건양대학교병원</span>
+                                <span class="comp-type">상급종합병원 · 안전 인프라</span>
+                            </div>
+                            <span class="threat-badge threat-4">위협 4</span>
+                        </li>
+                        <li class="comp-item">
+                            <div class="comp-info">
+                                <span class="comp-name">닥터스미성형외과</span>
+                                <span class="comp-type">의원 · 최대 규모 (전문의 3인)</span>
+                            </div>
+                            <span class="threat-badge threat-4">위협 4</span>
+                        </li>
+                        <li class="comp-item">
+                            <div class="comp-info">
+                                <span class="comp-name">페이스성형외과</span>
+                                <span class="comp-type">의원 · 전분야 커버, 미디어 집중</span>
+                            </div>
+                            <span class="threat-badge threat-4">위협 4</span>
+                        </li>
+                        <li class="comp-item">
+                            <div class="comp-info">
+                                <span class="comp-name">오체안성형외과</span>
+                                <span class="comp-type">의원 · 외상/종괴 직접 경쟁</span>
+                            </div>
+                            <span class="threat-badge threat-4">위협 4</span>
+                        </li>
+                        <li class="comp-item">
+                            <div class="comp-info">
+                                <span class="comp-name">올웨이즈윤대영</span>
+                                <span class="comp-type">의원 · 유성구 동일 상권</span>
+                            </div>
+                            <span class="threat-badge threat-3">위협 3</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 차트 영역 2 -->
+            <section class="chart-grid equal">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title"><i data-lucide="bar-chart-2"></i> 마케팅 채널 활용도 비교</div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="marketingChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="panel" id="swot">
+                    <div class="panel-header">
+                        <div class="panel-title"><i data-lucide="pie-chart"></i> 유성선병원 SWOT 분석</div>
+                    </div>
+                    <div class="swot-container" style="height: 350px;">
+                        <div class="swot-box s">
+                            <div class="swot-header">S</div>
+                            <ul class="swot-list">
+                                <li>종합병원 마취/지원 인프라</li>
+                                <li>가톨릭중앙의료원 출신 전문의</li>
+                                <li>타과 연계 (외상 파이프라인)</li>
+                            </ul>
+                        </div>
+                        <div class="swot-box w">
+                            <div class="swot-header">W</div>
+                            <ul class="swot-list">
+                                <li>신설 부서로 인한 인지도 부족</li>
+                                <li>둔산동 핵심 타겟 접근성 이탈</li>
+                                <li>이벤트 등 기동성/자본 마케팅 한계</li>
+                            </ul>
+                        </div>
+                        <div class="swot-box o">
+                            <div class="swot-header">O</div>
+                            <ul class="swot-list">
+                                <li>유성구 내 성형외과 수요 선점 가능</li>
+                                <li>최근 의료사고로 인한 '안전 최우선' 인식 확산</li>
+                            </ul>
+                        </div>
+                        <div class="swot-box t">
+                            <div class="swot-header">T</div>
+                            <ul class="swot-list">
+                                <li>을지대병원의 동일 포지션 선점</li>
+                                <li>의원급의 공격적인 가격할인 공세</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- 스크립트: 아이콘 로드 및 차트 그리기 -->
+    <script>
+        // Lucide 아이콘 초기화
+        lucide.createIcons();
+
+        // Chart.js 공통 폰트 설정
+        Chart.defaults.color = '#94A3B8';
+        Chart.defaults.font.family = "'Pretendard', sans-serif";
+        Chart.defaults.font.size = 13;
+
+        // 1. 포지셔닝 맵 (Bubble / Scatter)
+        // X축: 미용 중심(+) <--> 치료/재건 중심(-)
+        // Y축: 대규모/종합병원(+) <--> 소규모 의원(-)
+        const ctxPos = document.getElementById('positionMapChart').getContext('2d');
+        new Chart(ctxPos, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: '⭐ 유성선병원',
+                        data: [{ x: 1, y: 7 }],
+                        backgroundColor: '#3B82F6',
+                        borderColor: '#FFFFFF',
+                        borderWidth: 2,
+                        pointRadius: 12,
+                        pointHoverRadius: 15
+                    },
+                    {
+                        label: '을지대병원',
+                        data: [{ x: 0, y: 8 }],
+                        backgroundColor: '#EF4444',
+                        pointRadius: 8
+                    },
+                    {
+                        label: '건양대병원',
+                        data: [{ x: -4, y: 9 }],
+                        backgroundColor: '#F59E0B',
+                        pointRadius: 7
+                    },
+                    {
+                        label: '충남대병원',
+                        data: [{ x: -8, y: 10 }],
+                        backgroundColor: '#10B981',
+                        pointRadius: 7
+                    },
+                    {
+                        label: '닥터스미',
+                        data: [{ x: 7, y: 4 }],
+                        backgroundColor: '#8B5CF6',
+                        pointRadius: 8
+                    },
+                    {
+                        label: '페이스',
+                        data: [{ x: 8, y: 2 }],
+                        backgroundColor: '#EC4899',
+                        pointRadius: 7
+                    },
+                    {
+                        label: '미래',
+                        data: [{ x: 5, y: -2 }],
+                        backgroundColor: 'rgba(255,255,255,0.3)',
+                        pointRadius: 5
+                    },
+                    {
+                        label: '희소',
+                        data: [{ x: 6, y: -2 }],
+                        backgroundColor: 'rgba(255,255,255,0.3)',
+                        pointRadius: 5
+                    },
+                    {
+                        label: '오체안',
+                        data: [{ x: -7, y: -3 }],
+                        backgroundColor: '#06B6D4',
+                        pointRadius: 6
+                    },
+                    {
+                        label: '올웨이즈윤대영',
+                        data: [{ x: 3, y: -4 }],
+                        backgroundColor: 'rgba(255,255,255,0.3)',
+                        pointRadius: 5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { padding: 15, usePointStyle: true }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleFont: { size: 14, family: 'Pretendard' },
+                        bodyFont: { size: 13, family: 'Pretendard' },
+                        padding: 12,
+                        borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(ctx) { return ctx.dataset.label; }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        min: -10, max: 10,
+                        title: { display: true, text: '← 치료/재건 중심 ━━━━ 미용 성형 중심 →', color: '#CBD5E1', font:{weight:'bold'} },
+                        grid: { color: 'rgba(255,255,255,0.05)', zeroLineColor: 'rgba(255,255,255,0.2)' }
+                    },
+                    y: {
+                        min: -10, max: 10,
+                        title: { display: true, text: '의원급 소규모 ━━━━ 병원/인프라 대규모', color: '#CBD5E1', font:{weight:'bold'} },
+                        grid: { color: 'rgba(255,255,255,0.05)', zeroLineColor: 'rgba(255,255,255,0.2)' }
+                    }
+                }
+            }
+        });
+
+        // 2. 마케팅 채널 활용도 (Radar Chart)
+        const ctxRadar = document.getElementById('marketingChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['네이버 블로그', '인스타그램', '유튜브/영상', '카카오톡', '성형 플랫폼', '자사웹 SEO'],
+                datasets: [
+                    {
+                        label: '평균 경쟁사',
+                        data: [4, 3, 2, 4, 3, 3],
+                        backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                        borderColor: 'rgba(148, 163, 184, 0.5)',
+                        borderWidth: 1,
+                        pointBackgroundColor: 'rgba(148, 163, 184, 0.5)'
+                    },
+                    {
+                        label: '선두 그룹 (닥터스미, 페이스)',
+                        data: [5, 5, 4, 5, 5, 4],
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        borderColor: '#EF4444',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#EF4444'
+                    },
+                    {
+                        label: '유성선병원 (목표치)',
+                        data: [5, 4, 3, 5, 2, 5],
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: '#3B82F6',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#3B82F6'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } },
+                scales: {
+                    r: {
+                        min: 0,
+                        max: 5,
+                        ticks: { display: false, stepSize: 1 },
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        angleLines: { color: 'rgba(255,255,255,0.1)' },
+                        pointLabels: { color: '#F8FAFC', font: { size: 12, family: 'Pretendard' } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
