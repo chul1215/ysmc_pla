@@ -88,16 +88,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/OLD/NEW/g'
 ```
 
-### GNB 구조 (모든 페이지 공통)
+### 헤더 구조 (모든 페이지 공통)
+
+단일 토바 (`.header-topbar`, 48px) 1줄 구성:
 
 ```
-[로고] | 소개 | 의료진소개 | 병원둘러보기 | 진료안내▼ | 커뮤니티▼ | [상담예약]
+[선메디컬센터 유성선병원 성형외과]          병원소개 | 미용성형센터 | 외상·재건센터  [≡]
 ```
 
-- **드롭다운**: CSS hover로만 구현 (JS 없음)
-- **모바일**: 햄버거 → 풀스크린 오버레이
-- **현재 페이지 표시**: 해당 항목에 `.current` 클래스
-- **커뮤니티 드롭다운 항목**: 온라인상담 / 카카오톡 상담 / 진료예약 / 공지사항 (언론보도 제거됨)
+- **좌측**: `.logo-text` (index.html 링크)
+- **우측**: `.topbar-nav` 안에 `.topbar-tab` 3개 + `.topbar-divider` 구분선
+- **모바일**: `.topbar-nav { display: none }`, 햄버거(`.menu-toggle`)만 표시 → 풀스크린 오버레이
+- **현재 페이지 표시**: 해당 `.topbar-tab`에 `.active` 클래스
+  - about/doctor/tour → 병원소개 active
+  - 미용성형 상세 + cosmetic + community 계열 → 미용성형센터 active
+  - 치료재건 상세 + medical → 외상·재건센터 active
+  - index → active 없음
+- **헤더 높이**: PC 48px / 모바일 44px → `.page-hero { margin-top: 48px }`
 
 ### JS 패턴
 

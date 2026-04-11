@@ -28,34 +28,13 @@
 
     /* ===== Header ===== */
     .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; display: flex; flex-direction: column; background: rgba(251, 245, 243, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 2px 20px rgba(158, 107, 123, 0.08); }
-    .header-topbar { height: 40px; display: flex; align-items: center; justify-content: center; gap: 0; border-bottom: 1px solid rgba(158, 107, 123, 0.12); background: rgba(243, 232, 228, 0.5); }
-    .topbar-tab { display: flex; align-items: center; height: 40px; padding: 0 28px; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; color: rgba(0,0,0,0.35); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .header-topbar { height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; background: rgba(243, 232, 228, 0.5); }
+    .logo-text { font-size: 14px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.4px; flex-shrink: 0; white-space: nowrap; }
+    .topbar-nav { display: flex; align-items: center; gap: 0; }
+    .topbar-tab { display: flex; align-items: center; height: 48px; padding: 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.3px; color: rgba(0,0,0,0.45); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
     .topbar-tab:hover { color: var(--primary); }
     .topbar-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
-    .topbar-divider { width: 1px; height: 16px; background: rgba(0,0,0,0.15); }
-    .header-gnb-row { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; }
-    .logo-text { font-size: 16px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.4px; flex-shrink: 0; white-space: nowrap; }
-    .gnb { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
-    .gnb-item { position: relative; }
-    .gnb-item > a { display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: rgba(0,0,0,0.60); letter-spacing: 0.3px; padding: 0 14px; height: 64px; transition: color 0.22s; white-space: nowrap; }
-    .gnb-item > a:hover, .gnb-item > a.current { color: var(--text-dark); }
-    .gnb-item > a.current { border-bottom: 2px solid var(--primary-light); }
-    .gnb-arrow { font-size: 9px; opacity: 0.5; transition: transform 0.22s; }
-    .gnb-item:hover .gnb-arrow { transform: rotate(180deg); opacity: 1; }
-    .gnb-dropdown { position: absolute; top: 64px; left: 50%; transform: translateX(-50%) translateY(-8px); background: rgba(251, 245, 243, 0.97); border: none; border-top: 2px solid var(--primary); min-width: 200px; padding: 16px 0; opacity: 0; visibility: hidden; transition: opacity 0.22s, transform 0.22s, visibility 0.22s; border-radius: 0 0 6px 6px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
-    .gnb-dropdown.dd-wide { display: flex; min-width: 520px; padding: 24px 0; }
-    .gnb-item:hover .gnb-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-    .dd-col { flex: 1; padding: 0 8px; }
-    .dd-col + .dd-col { border-left: 1px solid rgba(0,0,0,0.07); }
-    .dd-col-label { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(0,0,0,0.35); padding: 0 16px 10px; margin-bottom: 4px; }
-    .gnb-dropdown a { display: block; font-size: 13px; font-weight: 500; color: rgba(0,0,0,0.65); padding: 9px 16px; transition: color 0.18s, background 0.18s; white-space: nowrap; }
-    .gnb-dropdown a:hover { color: var(--text-dark); background: rgba(158,107,123,0.10); }
-    .header-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .header-cta a { padding: 7px 18px; border-radius: 9999px; font-size: 13px; font-weight: 600; transition: all 0.25s; }
-    .btn-outline-w { background: var(--surface-low, #F3E8E4); border: none; color: var(--on-surface, #181C1E); border-radius: 9999px; }
-    .btn-outline-w:hover { background: var(--accent, #D4A5B5); color: var(--primary-dark); }
-    .btn-solid-w { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; }
-    .btn-solid-w:hover { background: linear-gradient(135deg, #8A5568, #9E6B7B); }
+    .topbar-divider { width: 1px; height: 16px; background: rgba(0,0,0,0.12); }
     .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; z-index: 1100; }
     .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
     .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -63,7 +42,7 @@
     .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ===== Mobile Nav ===== */
-    .mobile-nav-overlay { display: none; position: fixed; inset: 0; background: rgba(251, 245, 243, 0.97); z-index: 1050; flex-direction: column; align-items: center; justify-content: flex-start; overflow-y: auto; padding: 116px 32px 40px; opacity: 0; transition: opacity 0.3s; }
+    .mobile-nav-overlay { display: none; position: fixed; inset: 0; background: rgba(251, 245, 243, 0.97); z-index: 1050; flex-direction: column; align-items: center; justify-content: flex-start; overflow-y: auto; padding: 60px 32px 40px; opacity: 0; transition: opacity 0.3s; }
     .mobile-nav-overlay.open { display: flex; opacity: 1; }
     .mob-nav-section { width: 100%; max-width: 320px; margin-bottom: 8px; }
     .mob-center-switcher { display: flex; gap: 0; border: 1px solid rgba(158,107,123,0.2); border-radius: 9999px; overflow: hidden; margin-bottom: 20px; }
@@ -80,7 +59,7 @@
     .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
 
     /* ===== Hero ===== */
-    .hero-banner { margin-top: 104px; height: 340px; background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); display: flex; align-items: center; position: relative; overflow: hidden; border-bottom: 1px solid rgba(158,107,123,0.15); }
+    .hero-banner { margin-top: 48px; height: 340px; background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); display: flex; align-items: center; position: relative; overflow: hidden; border-bottom: 1px solid rgba(158,107,123,0.15); }
     .hero-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(158,107,123,0.12) 0%, transparent 60%); z-index: 1; }
     .hero-banner-inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 0 40px; width: 100%; }
     .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(107,82,88,0.5); margin-bottom: 16px; }
@@ -360,11 +339,9 @@
     }
 
     @media (max-width: 768px) {
-      .header-topbar { height: 36px; }
-      .header-gnb-row { height: 60px; padding: 0 20px; }
-      .gnb, .header-cta { display: none; }
+      .header-topbar { height: 44px; padding: 0 16px; }
+      .topbar-nav { display: none; }
       .menu-toggle { display: flex; }
-      .gnb-dropdown { display: none !important; }
       .hero-banner { height: 280px; }
       .hero-banner-inner { padding: 0 20px; }
       .section { padding: 60px 20px; }
@@ -428,96 +405,13 @@
 
   <header class="header" id="header">
     <div class="header-topbar">
-      <a href="cosmetic.html" class="topbar-tab active">미용성형센터</a>
-      <span class="topbar-divider"></span>
-      <a href="medical.html" class="topbar-tab">외상·재건센터</a>
-    </div>
-    <div class="header-gnb-row">
       <a href="index.html" class="logo-text">선메디컬센터 유성선병원 성형외과</a>
-      <nav class="gnb" aria-label="주 메뉴">
-        <div class="gnb-item">
-          <a href="about.html" class="current">병원소개 <span class="gnb-arrow">▾</span></a>
-          <div class="gnb-dropdown">
-            <a href="notice.html">공지사항</a>
-            <a href="tour.html">병원둘러보기</a>
-            <a href="doctor.html">의료진소개</a>
-            <a href="about.html">오시는 길</a>
-          </div>
-        </div>
-        <div class="gnb-item">
-          <a href="eye.html">눈성형 <span class="gnb-arrow">▾</span></a>
-          <div class="gnb-dropdown dd-wide">
-            <div class="dd-col">
-              <div class="dd-col-label">눈꺼풀</div>
-              <a href="eye.html">쌍꺼풀 성형술</a>
-              <a href="eye.html">매몰법</a>
-              <a href="eye.html">절개법</a>
-              <a href="eye.html">부분절개법</a>
-            </div>
-            <div class="dd-col">
-              <div class="dd-col-label">눈 교정</div>
-              <a href="eye.html">눈매교정술</a>
-              <a href="eye.html">상안검성형술</a>
-              <a href="eye.html">트임술</a>
-            </div>
-            <div class="dd-col">
-              <div class="dd-col-label">눈 주변</div>
-              <a href="eye.html">눈밑지방재배치</a>
-              <a href="eye.html">눈썹밑거상술</a>
-              <a href="eye.html">나노지방이식</a>
-            </div>
-          </div>
-        </div>
-        <div class="gnb-item">
-          <a href="nose.html">코성형 <span class="gnb-arrow">▾</span></a>
-          <div class="gnb-dropdown">
-            <a href="nose.html">콧대성형</a>
-            <a href="nose.html">코끝성형</a>
-            <a href="nose.html">콧볼·인중축소</a>
-            <a href="nose.html">재수술</a>
-            <a href="nose.html">기능성 코성형</a>
-          </div>
-        </div>
-        <div class="gnb-item">
-          <a href="breast.html">가슴성형 <span class="gnb-arrow">▾</span></a>
-          <div class="gnb-dropdown">
-            <a href="breast.html">가슴확대</a>
-            <a href="breast.html">가슴축소</a>
-            <a href="breast.html">함몰유두</a>
-            <a href="breast.html">유두성형</a>
-          </div>
-        </div>
-        <div class="gnb-item">
-          <a href="lifting.html">동안성형 <span class="gnb-arrow">▾</span></a>
-          <div class="gnb-dropdown">
-            <a href="lifting.html">울쎄라</a>
-            <a href="lifting.html">써마지</a>
-            <a href="lifting.html">안면거상술</a>
-            <a href="lifting.html">복합리프팅</a>
-          </div>
-        </div>
-        <div class="gnb-item">
-          <a href="fat.html">바디성형 <span class="gnb-arrow">▾</span></a>
-          <div class="gnb-dropdown">
-            <a href="fat.html">얼굴지방이식</a>
-            <a href="fat.html">얼굴지방흡입</a>
-            <a href="fat.html">바디지방흡입</a>
-            <a href="male.html">남자성형</a>
-          </div>
-        </div>
-        <div class="gnb-item">
-          <a href="petit.html">쁘띠 <span class="gnb-arrow">▾</span></a>
-          <div class="gnb-dropdown">
-            <a href="petit.html">보톡스</a>
-            <a href="petit.html">필러</a>
-            <a href="petit.html">스킨부스터</a>
-            <a href="petit.html">레이저</a>
-          </div>
-        </div>
-      </nav>
-      <div class="header-cta">
-        <a href="booking.html" class="btn-outline-w">진료예약</a>
-        <a href="consultation.html" class="btn-solid-w">상담 예약</a>
+      <div class="topbar-nav">
+        <a href="about.html" class="topbar-tab active">병원소개</a>
+        <span class="topbar-divider"></span>
+        <a href="cosmetic.html" class="topbar-tab">미용성형센터</a>
+        <span class="topbar-divider"></span>
+        <a href="medical.html" class="topbar-tab">외상·재건센터</a>
       </div>
       <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav"
         onclick="var o=document.getElementById('mobileNav'),t=document.getElementById('menuToggle'),isOpen=o.classList.contains('open');if(isOpen){o.classList.remove('open');t.classList.remove('open');document.body.style.overflow='';}else{o.classList.add('open');t.classList.add('open');document.body.style.overflow='hidden';}">
