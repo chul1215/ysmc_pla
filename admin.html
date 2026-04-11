@@ -158,8 +158,17 @@
                 <textarea id="popupBody" rows="4" placeholder="팝업 본문 내용을 입력하세요..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf] resize-none" oninput="updatePopupPreview()"></textarea>
               </div>
               <div>
-                <label class="block text-xs font-medium text-gray-400 mb-1.5">이미지 URL (선택)</label>
-                <input id="popupImageUrl" type="url" placeholder="https://..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" oninput="updatePopupPreview()" />
+                <label class="block text-xs font-medium text-gray-400 mb-1.5">이미지 (선택)</label>
+                <label class="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-lg border border-dashed border-[#263849] hover:border-[#42c0bf] transition-colors bg-[#16232f]">
+                  <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                  <span id="popupImageFileName" class="text-xs text-gray-500 truncate">파일을 선택하세요</span>
+                  <input id="popupImageFile" type="file" accept="image/*" class="hidden" onchange="handlePopupImageUpload(this)" />
+                </label>
+                <div id="popupImageThumbWrap" class="hidden mt-2 relative">
+                  <img id="popupImageThumb" src="" alt="" class="w-full h-24 object-cover rounded-lg" />
+                  <button type="button" onclick="clearPopupImage()" class="absolute top-1 right-1 w-5 h-5 flex items-center justify-center rounded-full bg-black/70 text-white text-xs leading-none hover:bg-red-500/80 transition-colors">×</button>
+                </div>
+                <input type="hidden" id="popupImageUrl" />
               </div>
               <div class="grid grid-cols-2 gap-3">
                 <div>
@@ -355,8 +364,17 @@
         <textarea id="reviewContent" rows="5" placeholder="후기 본문을 입력하세요..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf] resize-none"></textarea>
       </div>
       <div>
-        <label class="block text-xs font-medium text-gray-400 mb-1.5">이미지 URL (선택)</label>
-        <input id="reviewImageUrl" type="url" placeholder="https://..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" />
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">이미지 (선택)</label>
+        <label class="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-lg border border-dashed border-[#263849] hover:border-[#42c0bf] transition-colors bg-[#16232f]">
+          <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span id="reviewImageFileName" class="text-xs text-gray-500 truncate">파일을 선택하세요</span>
+          <input id="reviewImageFile" type="file" accept="image/*" class="hidden" onchange="handleReviewImageUpload(this)" />
+        </label>
+        <div id="reviewImageThumbWrap" class="hidden mt-2 relative">
+          <img id="reviewImageThumb" src="" alt="" class="w-full h-24 object-cover rounded-lg" />
+          <button type="button" onclick="clearReviewImage()" class="absolute top-1 right-1 w-5 h-5 flex items-center justify-center rounded-full bg-black/70 text-white text-xs leading-none hover:bg-red-500/80 transition-colors">×</button>
+        </div>
+        <input type="hidden" id="reviewImageUrl" />
       </div>
       <div class="flex items-center gap-2">
         <input id="reviewVisible" type="checkbox" checked class="w-4 h-4 rounded accent-[#42c0bf]" />
@@ -547,13 +565,12 @@
   function loadPopupForm() {
     document.getElementById('popupTitle').value = popupData.title || '';
     document.getElementById('popupBody').value = popupData.body || '';
-    document.getElementById('popupImageUrl').value = popupData.imageUrl || '';
     document.getElementById('popupLinkUrl').value = popupData.linkUrl || '';
     document.getElementById('popupLinkText').value = popupData.linkText || '';
     document.getElementById('popupStartDate').value = popupData.startDate || '';
     document.getElementById('popupEndDate').value = popupData.endDate || '';
     setToggleUI(popupData.enabled);
-    updatePopupPreview();
+    setPopupImageUI(popupData.imageUrl || '', popupData.imageUrl ? '이미지 등록됨' : '');
   }
 
   function setToggleUI(on) {
@@ -578,6 +595,68 @@
   window.togglePopup = function() {
     popupData.enabled = !popupData.enabled;
     setToggleUI(popupData.enabled);
+  };
+
+  // ─── IMAGE UPLOAD HELPERS ──────────────────────────────────────────
+  function readFileAsDataUrl(file, cb) {
+    const reader = new FileReader();
+    reader.onload = e => cb(e.target.result);
+    reader.readAsDataURL(file);
+  }
+
+  function setPopupImageUI(dataUrl, fileName) {
+    document.getElementById('popupImageUrl').value = dataUrl || '';
+    const thumb = document.getElementById('popupImageThumb');
+    const wrap = document.getElementById('popupImageThumbWrap');
+    const label = document.getElementById('popupImageFileName');
+    if (dataUrl) {
+      thumb.src = dataUrl;
+      wrap.classList.remove('hidden');
+      label.textContent = fileName || '이미지 등록됨';
+    } else {
+      thumb.src = '';
+      wrap.classList.add('hidden');
+      label.textContent = '파일을 선택하세요';
+    }
+    updatePopupPreview();
+  }
+
+  window.handlePopupImageUpload = function(input) {
+    const file = input.files[0];
+    if (!file) return;
+    readFileAsDataUrl(file, dataUrl => setPopupImageUI(dataUrl, file.name));
+  };
+
+  window.clearPopupImage = function() {
+    document.getElementById('popupImageFile').value = '';
+    setPopupImageUI('', '');
+  };
+
+  function setReviewImageUI(dataUrl, fileName) {
+    document.getElementById('reviewImageUrl').value = dataUrl || '';
+    const thumb = document.getElementById('reviewImageThumb');
+    const wrap = document.getElementById('reviewImageThumbWrap');
+    const label = document.getElementById('reviewImageFileName');
+    if (dataUrl) {
+      thumb.src = dataUrl;
+      wrap.classList.remove('hidden');
+      label.textContent = fileName || '이미지 등록됨';
+    } else {
+      thumb.src = '';
+      wrap.classList.add('hidden');
+      label.textContent = '파일을 선택하세요';
+    }
+  }
+
+  window.handleReviewImageUpload = function(input) {
+    const file = input.files[0];
+    if (!file) return;
+    readFileAsDataUrl(file, dataUrl => setReviewImageUI(dataUrl, file.name));
+  };
+
+  window.clearReviewImage = function() {
+    document.getElementById('reviewImageFile').value = '';
+    setReviewImageUI('', '');
   };
 
   window.updatePopupPreview = function() {
@@ -662,7 +741,7 @@
       document.getElementById('reviewTitle').value = r.title;
       document.getElementById('reviewSummary').value = r.summary || '';
       document.getElementById('reviewContent').value = r.content;
-      document.getElementById('reviewImageUrl').value = r.imageUrl || '';
+      setReviewImageUI(r.imageUrl || '', r.imageUrl ? '이미지 등록됨' : '');
       document.getElementById('reviewVisible').checked = r.visible;
     } else {
       title.textContent = '새 후기 작성';
@@ -672,7 +751,7 @@
       document.getElementById('reviewTitle').value = '';
       document.getElementById('reviewSummary').value = '';
       document.getElementById('reviewContent').value = '';
-      document.getElementById('reviewImageUrl').value = '';
+      setReviewImageUI('', '');
       document.getElementById('reviewVisible').checked = true;
     }
     modal.classList.remove('hidden');
@@ -680,6 +759,7 @@
 
   window.closeReviewModal = function() {
     document.getElementById('reviewModal').classList.add('hidden');
+    document.getElementById('reviewImageFile').value = '';
   };
 
   window.saveReview = function() {
