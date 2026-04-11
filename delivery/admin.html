@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>선메디컬센터 유성선병원 성형외과 MASTER PAGE</title>
+  <!-- SECURITY NOTE: 이 페이지는 localStorage 기반 정적 관리자 페이지입니다.
+       실제 운영 배포 시 서버 사이드 인증(세션/JWT)으로 교체 필요합니다. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            teal: { DEFAULT: '#42c0bf', dark: '#2da8a7', light: '#63c3c2', muted: '#1a4f4f' },
+            surface: { 950: '#0a0f14', 900: '#0f1923', 800: '#16232f', 700: '#1e2f3d', 600: '#263849' }
+          },
+          fontFamily: { sans: ['Noto Sans KR', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans KR', sans-serif; }
+    .sidebar-link { transition: all 0.15s ease; }
+    .sidebar-link.active { background: #42c0bf; color: #fff; }
+    .sidebar-link:not(.active):hover { background: rgba(66,192,191,0.12); color: #42c0bf; }
+    .modal-enter { animation: modalIn 0.2s ease; }
+    @keyframes modalIn { from { opacity:0; transform: scale(0.95) translateY(8px); } to { opacity:1; transform: scale(1) translateY(0); } }
+    .toast { animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards; }
+    @keyframes toastIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+    @keyframes toastOut { from { opacity:1; } to { opacity:0; pointer-events:none; } }
+    .panel-slide { animation: slideIn 0.25s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(20px); } to { opacity:1; transform: translateX(0); } }
+    .toggle-bg { transition: background 0.2s ease; }
+    .toggle-dot { transition: transform 0.2s ease; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f1923; }
+    ::-webkit-scrollbar-thumb { background: #263849; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #42c0bf; }
+    .status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; }
+  </style>
+</head>
+<body class="bg-[#0a0f14] text-gray-100 min-h-screen">
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0f14]">
+  <div class="w-full max-w-sm px-8 py-10 bg-[#0f1923] rounded-2xl border border-[#1e2f3d] shadow-2xl">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#42c0bf]/10 mb-4">
+        <svg class="w-7 h-7 text-[#42c0bf]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </svg>
+      </div>
+      <h1 class="text-xl font-bold text-white">선메디컬센터 유성선병원 성형외과 MASTER PAGE</h1>
+      <p class="text-sm text-gray-500 mt-1">선메디컬센터 유성선병원 성형외과</p>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">비밀번호</label>
+        <input id="loginPw" type="password" placeholder="비밀번호 입력"
+          class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf] focus:ring-1 focus:ring-[#42c0bf]"
+          onkeydown="if(event.key==='Enter') doLogin()" />
+      </div>
+      <p id="loginErr" class="text-red-400 text-xs hidden">비밀번호가 올바르지 않습니다.</p>
+      <button onclick="doLogin()" class="w-full py-2.5 rounded-lg bg-[#42c0bf] hover:bg-[#2da8a7] text-white font-semibold text-sm transition-colors">
+        로그인
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app" class="hidden flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="w-60 flex-shrink-0 bg-[#0f1923] border-r border-[#1e2f3d] flex flex-col">
+    <div class="px-5 py-5 border-b border-[#1e2f3d]">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-[#42c0bf]/10 flex items-center justify-center">
+          <svg class="w-4 h-4 text-[#42c0bf]" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
+            <path d="M3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-white">선메디컬센터 유성선병원 성형외과 MASTER PAGE</p>
+          <p class="text-[10px] text-gray-500">선메디컬센터 유성선병원 성형외과</p>
+        </div>
+      </div>
+    </div>
+
+    <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      <button onclick="switchSection('popup')" id="nav-popup" class="sidebar-link active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-left">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
+        팝업 관리
+      </button>
+      <button onclick="switchSection('reviews')" id="nav-reviews" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-left text-gray-400">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+        수술후기 관리
+      </button>
+      <button onclick="switchSection('notices')" id="nav-notices" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-left text-gray-400">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        공지사항 관리
+      </button>
+      <button onclick="switchSection('consultations')" id="nav-consultations" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-left text-gray-400">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        온라인 상담
+        <span id="consultBadge" class="ml-auto hidden bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full"></span>
+      </button>
+    </nav>
+
+    <div class="px-3 py-4 border-t border-[#1e2f3d]">
+      <button onclick="doLogout()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-500 hover:text-red-400 hover:bg-red-400/10 transition-colors">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        로그아웃
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col overflow-hidden">
+    <!-- Top bar -->
+    <header class="h-14 bg-[#0f1923] border-b border-[#1e2f3d] flex items-center px-6 gap-4 flex-shrink-0">
+      <h2 id="pageTitle" class="text-sm font-semibold text-white">팝업 관리</h2>
+      <span class="text-gray-600 text-xs ml-auto">선메디컬센터 유성선병원 성형외과 MASTER PAGE</span>
+    </header>
+
+    <!-- Sections -->
+    <div class="flex-1 overflow-y-auto">
+
+      <!-- ===== POPUP SECTION ===== -->
+      <section id="sec-popup" class="p-6">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <!-- Form -->
+          <div class="bg-[#0f1923] rounded-xl border border-[#1e2f3d] p-6">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-sm font-semibold text-white">팝업 설정</h3>
+              <!-- Toggle -->
+              <div class="flex items-center gap-3">
+                <span class="text-xs text-gray-400">팝업 활성화</span>
+                <div class="relative cursor-pointer" onclick="togglePopup()" id="popupToggleWrap">
+                  <div id="toggleBg" class="toggle-bg w-11 h-6 rounded-full bg-[#263849]"></div>
+                  <div id="toggleDot" class="toggle-dot absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-gray-400 shadow"></div>
+                </div>
+                <span id="toggleLabel" class="text-xs text-gray-500">OFF</span>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-medium text-gray-400 mb-1.5">제목</label>
+                <input id="popupTitle" type="text" placeholder="팝업 제목" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-gray-400 mb-1.5">본문 (HTML 허용)</label>
+                <textarea id="popupBody" rows="4" placeholder="팝업 본문 내용을 입력하세요..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf] resize-none" oninput="updatePopupPreview()"></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-gray-400 mb-1.5">이미지 URL (선택)</label>
+                <input id="popupImageUrl" type="url" placeholder="https://..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" oninput="updatePopupPreview()" />
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-medium text-gray-400 mb-1.5">CTA 링크 URL</label>
+                  <input id="popupLinkUrl" type="url" placeholder="https://..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-400 mb-1.5">CTA 버튼 텍스트</label>
+                  <input id="popupLinkText" type="text" placeholder="자세히 보기" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" oninput="updatePopupPreview()" />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-medium text-gray-400 mb-1.5">시작일</label>
+                  <input id="popupStartDate" type="date" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#42c0bf]" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-400 mb-1.5">종료일</label>
+                  <input id="popupEndDate" type="date" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#42c0bf]" />
+                </div>
+              </div>
+              <button onclick="savePopup()" class="w-full py-2.5 rounded-lg bg-[#42c0bf] hover:bg-[#2da8a7] text-white font-semibold text-sm transition-colors">
+                저장하기
+              </button>
+            </div>
+          </div>
+          <!-- Preview -->
+          <div class="bg-[#0f1923] rounded-xl border border-[#1e2f3d] p-6">
+            <h3 class="text-sm font-semibold text-white mb-4">팝업 미리보기</h3>
+            <div class="bg-[#16232f] rounded-xl p-4 min-h-64 flex items-center justify-center">
+              <div id="popupPreview" class="w-full max-w-xs bg-white rounded-xl overflow-hidden shadow-2xl text-gray-800">
+                <div id="previewImg" class="hidden">
+                  <img id="previewImgEl" src="" alt="" class="w-full h-36 object-cover" />
+                </div>
+                <div class="p-4">
+                  <h4 id="previewTitle" class="font-bold text-base text-gray-900 mb-2">팝업 제목</h4>
+                  <div id="previewBody" class="text-xs text-gray-600 leading-relaxed mb-3">본문 내용이 여기 표시됩니다.</div>
+                  <div id="previewCta" class="hidden">
+                    <a id="previewCtaBtn" href="#" class="block text-center py-2 rounded-lg text-xs font-semibold text-white" style="background:#42c0bf;">자세히 보기</a>
+                  </div>
+                  <button class="mt-2 w-full text-center text-[10px] text-gray-400 hover:text-gray-600">오늘 하루 보지 않기</button>
+                </div>
+              </div>
+            </div>
+            <p class="text-[11px] text-gray-600 mt-3 text-center">
+              <!-- TODO: index.html 팝업 연동 — ysmc_popup localStorage 키를 읽어 팝업 표시 -->
+              index.html에서 ysmc_popup 데이터를 읽어 자동 표시됩니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== REVIEWS SECTION ===== -->
+      <section id="sec-reviews" class="p-6 hidden">
+        <div class="bg-[#0f1923] rounded-xl border border-[#1e2f3d] overflow-hidden">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-[#1e2f3d]">
+            <h3 class="text-sm font-semibold text-white">수술후기 목록</h3>
+            <button onclick="openReviewModal(null)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#42c0bf] hover:bg-[#2da8a7] text-white text-xs font-semibold transition-colors">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              새 후기 작성
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[#16232f] text-xs text-gray-500 uppercase tracking-wide">
+                <tr>
+                  <th class="px-5 py-3 text-left">카테고리</th>
+                  <th class="px-5 py-3 text-left">제목</th>
+                  <th class="px-5 py-3 text-left">날짜</th>
+                  <th class="px-5 py-3 text-left">공개</th>
+                  <th class="px-5 py-3 text-center">작업</th>
+                </tr>
+              </thead>
+              <tbody id="reviewsTableBody" class="divide-y divide-[#1e2f3d]">
+              </tbody>
+            </table>
+            <div id="reviewsEmpty" class="hidden py-16 text-center text-gray-600 text-sm">
+              등록된 후기가 없습니다. 새 후기를 작성해 주세요.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== NOTICES SECTION ===== -->
+      <section id="sec-notices" class="p-6 hidden">
+        <div class="bg-[#0f1923] rounded-xl border border-[#1e2f3d] overflow-hidden">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-[#1e2f3d]">
+            <h3 class="text-sm font-semibold text-white">공지사항 목록</h3>
+            <button onclick="openNoticeModal(null)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#42c0bf] hover:bg-[#2da8a7] text-white text-xs font-semibold transition-colors">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              새 공지 작성
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[#16232f] text-xs text-gray-500 uppercase tracking-wide">
+                <tr>
+                  <th class="px-5 py-3 text-left">카테고리</th>
+                  <th class="px-5 py-3 text-left">제목</th>
+                  <th class="px-5 py-3 text-left">날짜</th>
+                  <th class="px-5 py-3 text-left">상단고정</th>
+                  <th class="px-5 py-3 text-left">공개</th>
+                  <th class="px-5 py-3 text-center">작업</th>
+                </tr>
+              </thead>
+              <tbody id="noticesTableBody" class="divide-y divide-[#1e2f3d]">
+              </tbody>
+            </table>
+            <div id="noticesEmpty" class="hidden py-16 text-center text-gray-600 text-sm">
+              등록된 공지사항이 없습니다.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CONSULTATIONS SECTION ===== -->
+      <section id="sec-consultations" class="p-6 hidden">
+        <!-- Tabs -->
+        <div class="flex gap-1 mb-5 bg-[#0f1923] rounded-xl p-1 w-fit border border-[#1e2f3d]">
+          <button onclick="setConsultTab('all')" id="ctab-all" class="ctab px-4 py-1.5 rounded-lg text-xs font-semibold bg-[#42c0bf] text-white transition-colors">전체</button>
+          <button onclick="setConsultTab('pending')" id="ctab-pending" class="ctab px-4 py-1.5 rounded-lg text-xs font-semibold text-gray-400 hover:text-white transition-colors">미확인</button>
+          <button onclick="setConsultTab('done')" id="ctab-done" class="ctab px-4 py-1.5 rounded-lg text-xs font-semibold text-gray-400 hover:text-white transition-colors">답변완료</button>
+        </div>
+        <div class="flex gap-5">
+          <!-- List -->
+          <div class="flex-1 bg-[#0f1923] rounded-xl border border-[#1e2f3d] overflow-hidden min-w-0">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead class="bg-[#16232f] text-xs text-gray-500 uppercase tracking-wide">
+                  <tr>
+                    <th class="px-4 py-3 text-left">이름</th>
+                    <th class="px-4 py-3 text-left">연락처</th>
+                    <th class="px-4 py-3 text-left">진료분야</th>
+                    <th class="px-4 py-3 text-left">접수일시</th>
+                    <th class="px-4 py-3 text-left">상태</th>
+                  </tr>
+                </thead>
+                <tbody id="consultTableBody" class="divide-y divide-[#1e2f3d]">
+                </tbody>
+              </table>
+              <div id="consultEmpty" class="hidden py-16 text-center text-gray-600 text-sm">
+                접수된 상담이 없습니다.
+              </div>
+            </div>
+          </div>
+          <!-- Detail Panel -->
+          <div id="consultDetail" class="hidden w-80 flex-shrink-0 bg-[#0f1923] rounded-xl border border-[#1e2f3d] p-5 panel-slide self-start sticky top-6">
+          </div>
+        </div>
+      </section>
+
+    </div><!-- end main overflow -->
+  </main>
+</div>
+
+<!-- ===== REVIEW MODAL ===== -->
+<div id="reviewModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+  <div class="modal-enter bg-[#0f1923] border border-[#1e2f3d] rounded-2xl w-full max-w-lg shadow-2xl">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-[#1e2f3d]">
+      <h3 id="reviewModalTitle" class="text-sm font-semibold text-white">새 후기 작성</h3>
+      <button onclick="closeReviewModal()" class="text-gray-500 hover:text-white transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+      <input type="hidden" id="reviewId" />
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium text-gray-400 mb-1.5">카테고리</label>
+          <select id="reviewCategory" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#42c0bf]">
+            <option value="눈성형">눈성형</option>
+            <option value="코성형">코성형</option>
+            <option value="리프팅">리프팅</option>
+            <option value="쁘띠·시술">쁘띠·시술</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-400 mb-1.5">날짜</label>
+          <input id="reviewDate" type="date" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#42c0bf]" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">제목</label>
+        <input id="reviewTitle" type="text" placeholder="후기 제목" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" />
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">요약 (한 줄)</label>
+        <input id="reviewSummary" type="text" placeholder="목록에 표시될 짧은 요약" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" />
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">본문 내용</label>
+        <textarea id="reviewContent" rows="5" placeholder="후기 본문을 입력하세요..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf] resize-none"></textarea>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">이미지 URL (선택)</label>
+        <input id="reviewImageUrl" type="url" placeholder="https://..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" />
+      </div>
+      <div class="flex items-center gap-2">
+        <input id="reviewVisible" type="checkbox" checked class="w-4 h-4 rounded accent-[#42c0bf]" />
+        <label class="text-sm text-gray-300">공개 여부</label>
+      </div>
+    </div>
+    <div class="px-6 py-4 border-t border-[#1e2f3d] flex gap-3">
+      <button onclick="closeReviewModal()" class="flex-1 py-2 rounded-lg border border-[#263849] text-gray-400 text-sm hover:border-gray-500 hover:text-white transition-colors">취소</button>
+      <button onclick="saveReview()" class="flex-1 py-2 rounded-lg bg-[#42c0bf] hover:bg-[#2da8a7] text-white font-semibold text-sm transition-colors">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NOTICE MODAL ===== -->
+<div id="noticeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+  <div class="modal-enter bg-[#0f1923] border border-[#1e2f3d] rounded-2xl w-full max-w-lg shadow-2xl">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-[#1e2f3d]">
+      <h3 id="noticeModalTitle" class="text-sm font-semibold text-white">새 공지 작성</h3>
+      <button onclick="closeNoticeModal()" class="text-gray-500 hover:text-white transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+      <input type="hidden" id="noticeId" />
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium text-gray-400 mb-1.5">카테고리</label>
+          <select id="noticeCategory" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#42c0bf]">
+            <option value="일반">일반</option>
+            <option value="이벤트">이벤트</option>
+            <option value="휴진안내">휴진안내</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">제목</label>
+        <input id="noticeTitle" type="text" placeholder="공지 제목" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" />
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">내용</label>
+        <textarea id="noticeContent" rows="6" placeholder="공지 내용을 입력하세요..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf] resize-none"></textarea>
+      </div>
+      <div class="flex items-center gap-5">
+        <div class="flex items-center gap-2">
+          <input id="noticePinned" type="checkbox" class="w-4 h-4 rounded accent-[#42c0bf]" />
+          <label class="text-sm text-gray-300">상단 고정</label>
+        </div>
+        <div class="flex items-center gap-2">
+          <input id="noticeVisible" type="checkbox" checked class="w-4 h-4 rounded accent-[#42c0bf]" />
+          <label class="text-sm text-gray-300">공개 여부</label>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-4 border-t border-[#1e2f3d] flex gap-3">
+      <button onclick="closeNoticeModal()" class="flex-1 py-2 rounded-lg border border-[#263849] text-gray-400 text-sm hover:border-gray-500 hover:text-white transition-colors">취소</button>
+      <button onclick="saveNotice()" class="flex-1 py-2 rounded-lg bg-[#42c0bf] hover:bg-[#2da8a7] text-white font-semibold text-sm transition-colors">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONFIRM MODAL ===== -->
+<div id="confirmModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+  <div class="modal-enter bg-[#0f1923] border border-[#1e2f3d] rounded-2xl w-full max-w-sm shadow-2xl p-6 text-center">
+    <div class="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+      <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+    </div>
+    <h3 id="confirmTitle" class="text-sm font-semibold text-white mb-2">삭제 확인</h3>
+    <p id="confirmMsg" class="text-xs text-gray-400 mb-5">정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.</p>
+    <div class="flex gap-3">
+      <button onclick="closeConfirm()" class="flex-1 py-2 rounded-lg border border-[#263849] text-gray-400 text-sm hover:text-white transition-colors">취소</button>
+      <button id="confirmOkBtn" class="flex-1 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-semibold text-sm transition-colors">삭제</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── AUTH ──────────────────────────────────────────────────────────
+  const ADMIN_PW = 'admin1234';
+
+  function checkAuth() {
+    if (sessionStorage.getItem('ysmc_admin') === '1') {
+      showApp();
+    } else {
+      document.getElementById('loginScreen').classList.remove('hidden');
+    }
+  }
+
+  window.doLogin = function() {
+    const pw = document.getElementById('loginPw').value;
+    const err = document.getElementById('loginErr');
+    if (pw === ADMIN_PW) {
+      sessionStorage.setItem('ysmc_admin', '1');
+      document.getElementById('loginScreen').classList.add('hidden');
+      showApp();
+    } else {
+      err.classList.remove('hidden');
+      document.getElementById('loginPw').value = '';
+      setTimeout(() => err.classList.add('hidden'), 3000);
+    }
+  };
+
+  window.doLogout = function() {
+    sessionStorage.removeItem('ysmc_admin');
+    location.reload();
+  };
+
+  function showApp() {
+    const app = document.getElementById('app');
+    app.classList.remove('hidden');
+    app.classList.add('flex');
+    initAll();
+  }
+
+  // ─── SECTION SWITCHING ─────────────────────────────────────────────
+  const sections = ['popup','reviews','notices','consultations'];
+  const titles = { popup:'팝업 관리', reviews:'수술후기 관리', notices:'공지사항 관리', consultations:'온라인 상담' };
+
+  window.switchSection = function(name) {
+    sections.forEach(s => {
+      document.getElementById('sec-' + s).classList.toggle('hidden', s !== name);
+      const nav = document.getElementById('nav-' + s);
+      if (s === name) {
+        nav.classList.add('active');
+        nav.classList.remove('text-gray-400');
+      } else {
+        nav.classList.remove('active');
+        nav.classList.add('text-gray-400');
+      }
+    });
+    document.getElementById('pageTitle').textContent = titles[name];
+  };
+
+  // ─── STORAGE HELPERS ───────────────────────────────────────────────
+  function lsGet(key, def) {
+    try { return JSON.parse(localStorage.getItem(key)) ?? def; } catch { return def; }
+  }
+  function lsSet(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+  function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function today() { return new Date().toISOString().slice(0, 10); }
+  function fmtDate(d) {
+    if (!d) return '-';
+    const dt = new Date(d);
+    return isNaN(dt) ? d : dt.toLocaleDateString('ko-KR', { year:'numeric', month:'2-digit', day:'2-digit' }).replace(/\. /g,'.').replace(/\.$/,'');
+  }
+  function fmtDateTime(d) {
+    if (!d) return '-';
+    const dt = new Date(d);
+    return isNaN(dt) ? d : dt.toLocaleString('ko-KR', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+  }
+
+  // ─── TOAST ─────────────────────────────────────────────────────────
+  window.showToast = function(msg, type = 'success') {
+    const c = document.getElementById('toastContainer');
+    const el = document.createElement('div');
+    const color = type === 'success' ? 'bg-[#42c0bf]' : type === 'error' ? 'bg-red-500' : 'bg-gray-700';
+    el.className = `toast pointer-events-auto ${color} text-white text-xs font-medium px-4 py-2.5 rounded-lg shadow-lg`;
+    el.textContent = msg;
+    c.appendChild(el);
+    setTimeout(() => el.remove(), 3200);
+  };
+
+  // ─── CONFIRM MODAL ─────────────────────────────────────────────────
+  let _confirmCb = null;
+  function showConfirm(title, msg, cb) {
+    document.getElementById('confirmTitle').textContent = title;
+    document.getElementById('confirmMsg').textContent = msg;
+    _confirmCb = cb;
+    document.getElementById('confirmModal').classList.remove('hidden');
+  }
+  window.closeConfirm = function() {
+    _confirmCb = null;
+    document.getElementById('confirmModal').classList.add('hidden');
+  };
+  document.getElementById('confirmOkBtn').addEventListener('click', () => {
+    if (_confirmCb) _confirmCb();
+    closeConfirm();
+  });
+
+  // ─── POPUP ─────────────────────────────────────────────────────────
+  let popupData = lsGet('ysmc_popup', { enabled: false, title:'', body:'', imageUrl:'', linkUrl:'', linkText:'', startDate:'', endDate:'' });
+
+  function loadPopupForm() {
+    document.getElementById('popupTitle').value = popupData.title || '';
+    document.getElementById('popupBody').value = popupData.body || '';
+    document.getElementById('popupImageUrl').value = popupData.imageUrl || '';
+    document.getElementById('popupLinkUrl').value = popupData.linkUrl || '';
+    document.getElementById('popupLinkText').value = popupData.linkText || '';
+    document.getElementById('popupStartDate').value = popupData.startDate || '';
+    document.getElementById('popupEndDate').value = popupData.endDate || '';
+    setToggleUI(popupData.enabled);
+    updatePopupPreview();
+  }
+
+  function setToggleUI(on) {
+    const bg = document.getElementById('toggleBg');
+    const dot = document.getElementById('toggleDot');
+    const label = document.getElementById('toggleLabel');
+    if (on) {
+      bg.style.background = '#42c0bf';
+      dot.style.transform = 'translateX(20px)';
+      dot.style.background = '#fff';
+      label.textContent = 'ON';
+      label.className = 'text-xs text-[#42c0bf] font-semibold';
+    } else {
+      bg.style.background = '';
+      dot.style.transform = '';
+      dot.style.background = '';
+      label.textContent = 'OFF';
+      label.className = 'text-xs text-gray-500';
+    }
+  }
+
+  window.togglePopup = function() {
+    popupData.enabled = !popupData.enabled;
+    setToggleUI(popupData.enabled);
+  };
+
+  window.updatePopupPreview = function() {
+    const title = document.getElementById('popupTitle').value || '팝업 제목';
+    const body = document.getElementById('popupBody').value || '본문 내용이 여기 표시됩니다.';
+    const imgUrl = document.getElementById('popupImageUrl').value;
+    const linkText = document.getElementById('popupLinkText').value;
+
+    document.getElementById('previewTitle').textContent = title;
+    document.getElementById('previewBody').innerHTML = body;
+
+    const imgWrap = document.getElementById('previewImg');
+    const imgEl = document.getElementById('previewImgEl');
+    if (imgUrl) { imgEl.src = imgUrl; imgWrap.classList.remove('hidden'); }
+    else { imgWrap.classList.add('hidden'); }
+
+    const ctaWrap = document.getElementById('previewCta');
+    const ctaBtn = document.getElementById('previewCtaBtn');
+    if (linkText) { ctaBtn.textContent = linkText; ctaWrap.classList.remove('hidden'); }
+    else { ctaWrap.classList.add('hidden'); }
+  };
+
+  window.savePopup = function() {
+    popupData = {
+      enabled: popupData.enabled,
+      title: document.getElementById('popupTitle').value,
+      body: document.getElementById('popupBody').value,
+      imageUrl: document.getElementById('popupImageUrl').value,
+      linkUrl: document.getElementById('popupLinkUrl').value,
+      linkText: document.getElementById('popupLinkText').value,
+      startDate: document.getElementById('popupStartDate').value,
+      endDate: document.getElementById('popupEndDate').value,
+    };
+    lsSet('ysmc_popup', popupData);
+    showToast('팝업 설정이 저장되었습니다.');
+  };
+
+  // ─── REVIEWS ───────────────────────────────────────────────────────
+  function getReviews() { return lsGet('ysmc_reviews', []); }
+  function setReviews(arr) { lsSet('ysmc_reviews', arr); }
+
+  function renderReviews() {
+    const reviews = getReviews();
+    const tbody = document.getElementById('reviewsTableBody');
+    const empty = document.getElementById('reviewsEmpty');
+    tbody.innerHTML = '';
+    if (!reviews.length) { empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+    reviews.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-[#16232f] transition-colors cursor-pointer';
+      tr.innerHTML = `
+        <td class="px-5 py-3 text-xs text-gray-400">${r.category}</td>
+        <td class="px-5 py-3 text-sm text-white font-medium">${escHtml(r.title)}</td>
+        <td class="px-5 py-3 text-xs text-gray-500">${fmtDate(r.date)}</td>
+        <td class="px-5 py-3">
+          <span class="status-badge ${r.visible ? 'bg-[#42c0bf]/10 text-[#42c0bf]' : 'bg-gray-700/50 text-gray-500'}">
+            ${r.visible ? '공개' : '비공개'}
+          </span>
+        </td>
+        <td class="px-5 py-3 text-center">
+          <div class="flex items-center justify-center gap-2">
+            <button onclick="openReviewModal('${r.id}')" class="text-xs text-gray-400 hover:text-[#42c0bf] transition-colors px-2 py-1 rounded hover:bg-[#42c0bf]/10">수정</button>
+            <button onclick="deleteReview('${r.id}')" class="text-xs text-gray-400 hover:text-red-400 transition-colors px-2 py-1 rounded hover:bg-red-400/10">삭제</button>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  window.openReviewModal = function(id) {
+    const modal = document.getElementById('reviewModal');
+    const title = document.getElementById('reviewModalTitle');
+    if (id) {
+      const r = getReviews().find(x => x.id === id);
+      if (!r) return;
+      title.textContent = '후기 수정';
+      document.getElementById('reviewId').value = id;
+      document.getElementById('reviewCategory').value = r.category;
+      document.getElementById('reviewDate').value = r.date;
+      document.getElementById('reviewTitle').value = r.title;
+      document.getElementById('reviewSummary').value = r.summary || '';
+      document.getElementById('reviewContent').value = r.content;
+      document.getElementById('reviewImageUrl').value = r.imageUrl || '';
+      document.getElementById('reviewVisible').checked = r.visible;
+    } else {
+      title.textContent = '새 후기 작성';
+      document.getElementById('reviewId').value = '';
+      document.getElementById('reviewCategory').value = '눈성형';
+      document.getElementById('reviewDate').value = today();
+      document.getElementById('reviewTitle').value = '';
+      document.getElementById('reviewSummary').value = '';
+      document.getElementById('reviewContent').value = '';
+      document.getElementById('reviewImageUrl').value = '';
+      document.getElementById('reviewVisible').checked = true;
+    }
+    modal.classList.remove('hidden');
+  };
+
+  window.closeReviewModal = function() {
+    document.getElementById('reviewModal').classList.add('hidden');
+  };
+
+  window.saveReview = function() {
+    const id = document.getElementById('reviewId').value;
+    const data = {
+      id: id || genId(),
+      category: document.getElementById('reviewCategory').value,
+      date: document.getElementById('reviewDate').value,
+      title: document.getElementById('reviewTitle').value.trim(),
+      summary: document.getElementById('reviewSummary').value.trim(),
+      content: document.getElementById('reviewContent').value.trim(),
+      imageUrl: document.getElementById('reviewImageUrl').value.trim(),
+      visible: document.getElementById('reviewVisible').checked,
+    };
+    if (!data.title) { showToast('제목을 입력해 주세요.', 'error'); return; }
+    let reviews = getReviews();
+    if (id) { reviews = reviews.map(r => r.id === id ? data : r); }
+    else { reviews.unshift(data); }
+    setReviews(reviews);
+    renderReviews();
+    closeReviewModal();
+    showToast(id ? '후기가 수정되었습니다.' : '새 후기가 등록되었습니다.');
+  };
+
+  window.deleteReview = function(id) {
+    showConfirm('후기 삭제', '이 후기를 삭제하시겠습니까?', () => {
+      setReviews(getReviews().filter(r => r.id !== id));
+      renderReviews();
+      showToast('삭제되었습니다.');
+    });
+  };
+
+  // ─── NOTICES ───────────────────────────────────────────────────────
+  function getNotices() { return lsGet('ysmc_notices', []); }
+  function setNotices(arr) { lsSet('ysmc_notices', arr); }
+
+  function renderNotices() {
+    const notices = getNotices();
+    const tbody = document.getElementById('noticesTableBody');
+    const empty = document.getElementById('noticesEmpty');
+    tbody.innerHTML = '';
+    if (!notices.length) { empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+    const sorted = [...notices].sort((a,b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+    sorted.forEach(n => {
+      const catColor = n.category === '이벤트' ? 'bg-amber-400/10 text-amber-400' :
+                       n.category === '휴진안내' ? 'bg-red-400/10 text-red-400' : 'bg-gray-700/50 text-gray-400';
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-[#16232f] transition-colors';
+      tr.innerHTML = `
+        <td class="px-5 py-3">
+          <span class="status-badge ${catColor}">${n.category}</span>
+        </td>
+        <td class="px-5 py-3 text-sm text-white font-medium">
+          ${n.pinned ? '<span class="mr-1 text-[#42c0bf]">📌</span>' : ''}${escHtml(n.title)}
+        </td>
+        <td class="px-5 py-3 text-xs text-gray-500">${fmtDate(n.date)}</td>
+        <td class="px-5 py-3 text-xs">${n.pinned ? '<span class="text-[#42c0bf]">고정</span>' : '<span class="text-gray-600">-</span>'}</td>
+        <td class="px-5 py-3">
+          <span class="status-badge ${n.visible ? 'bg-[#42c0bf]/10 text-[#42c0bf]' : 'bg-gray-700/50 text-gray-500'}">
+            ${n.visible ? '공개' : '비공개'}
+          </span>
+        </td>
+        <td class="px-5 py-3 text-center">
+          <div class="flex items-center justify-center gap-2">
+            <button onclick="openNoticeModal('${n.id}')" class="text-xs text-gray-400 hover:text-[#42c0bf] transition-colors px-2 py-1 rounded hover:bg-[#42c0bf]/10">수정</button>
+            <button onclick="deleteNotice('${n.id}')" class="text-xs text-gray-400 hover:text-red-400 transition-colors px-2 py-1 rounded hover:bg-red-400/10">삭제</button>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  window.openNoticeModal = function(id) {
+    const modal = document.getElementById('noticeModal');
+    const title = document.getElementById('noticeModalTitle');
+    if (id) {
+      const n = getNotices().find(x => x.id === id);
+      if (!n) return;
+      title.textContent = '공지 수정';
+      document.getElementById('noticeId').value = id;
+      document.getElementById('noticeCategory').value = n.category;
+      document.getElementById('noticeTitle').value = n.title;
+      document.getElementById('noticeContent').value = n.content;
+      document.getElementById('noticePinned').checked = n.pinned;
+      document.getElementById('noticeVisible').checked = n.visible;
+    } else {
+      title.textContent = '새 공지 작성';
+      document.getElementById('noticeId').value = '';
+      document.getElementById('noticeCategory').value = '일반';
+      document.getElementById('noticeTitle').value = '';
+      document.getElementById('noticeContent').value = '';
+      document.getElementById('noticePinned').checked = false;
+      document.getElementById('noticeVisible').checked = true;
+    }
+    modal.classList.remove('hidden');
+  };
+
+  window.closeNoticeModal = function() {
+    document.getElementById('noticeModal').classList.add('hidden');
+  };
+
+  window.saveNotice = function() {
+    const id = document.getElementById('noticeId').value;
+    const data = {
+      id: id || genId(),
+      category: document.getElementById('noticeCategory').value,
+      title: document.getElementById('noticeTitle').value.trim(),
+      content: document.getElementById('noticeContent').value.trim(),
+      date: today(),
+      pinned: document.getElementById('noticePinned').checked,
+      visible: document.getElementById('noticeVisible').checked,
+    };
+    if (!data.title) { showToast('제목을 입력해 주세요.', 'error'); return; }
+    let notices = getNotices();
+    if (id) { notices = notices.map(n => n.id === id ? { ...data, date: n.date } : n); }
+    else { notices.unshift(data); }
+    setNotices(notices);
+    renderNotices();
+    closeNoticeModal();
+    // TODO: notice.html 연동 — ysmc_notices localStorage 키를 notice.html에서 읽어 공지 목록 표시
+    showToast(id ? '공지가 수정되었습니다.' : '새 공지가 등록되었습니다.');
+  };
+
+  window.deleteNotice = function(id) {
+    showConfirm('공지 삭제', '이 공지사항을 삭제하시겠습니까?', () => {
+      setNotices(getNotices().filter(n => n.id !== id));
+      renderNotices();
+      showToast('삭제되었습니다.');
+    });
+  };
+
+  // ─── CONSULTATIONS ─────────────────────────────────────────────────
+  // TODO: consultation.html 연동 — 폼 submit 시 ysmc_consultations에 아래 형식으로 저장
+  // { id, name, phone, age, category, content, submittedAt, status:'pending', reply:'', repliedAt:'' }
+
+  let currentConsultTab = 'all';
+  let selectedConsultId = null;
+
+  function getConsults() { return lsGet('ysmc_consultations', []); }
+  function setConsults(arr) { lsSet('ysmc_consultations', arr); }
+
+  function getFilteredConsults() {
+    const all = getConsults();
+    if (currentConsultTab === 'pending') return all.filter(c => c.status === 'pending' || c.status === 'read');
+    if (currentConsultTab === 'done') return all.filter(c => c.status === 'done');
+    return all;
+  }
+
+  function getStatusLabel(s) {
+    if (s === 'pending') return '<span class="status-badge bg-red-500/15 text-red-400">미확인</span>';
+    if (s === 'read') return '<span class="status-badge bg-amber-400/15 text-amber-400">확인</span>';
+    if (s === 'done') return '<span class="status-badge bg-emerald-500/15 text-emerald-400">답변완료</span>';
+    return '';
+  }
+
+  function updateConsultBadge() {
+    const pending = getConsults().filter(c => c.status === 'pending').length;
+    const badge = document.getElementById('consultBadge');
+    if (pending > 0) { badge.textContent = pending; badge.classList.remove('hidden'); }
+    else { badge.classList.add('hidden'); }
+  }
+
+  function renderConsultations() {
+    const list = getFilteredConsults();
+    const tbody = document.getElementById('consultTableBody');
+    const empty = document.getElementById('consultEmpty');
+    tbody.innerHTML = '';
+    if (!list.length) { empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+    list.forEach(c => {
+      const tr = document.createElement('tr');
+      tr.className = `hover:bg-[#16232f] transition-colors cursor-pointer ${selectedConsultId === c.id ? 'bg-[#16232f]' : ''}`;
+      tr.onclick = () => openConsultDetail(c.id);
+      tr.innerHTML = `
+        <td class="px-4 py-3 text-sm text-white font-medium">${escHtml(c.name || '-')}</td>
+        <td class="px-4 py-3 text-xs text-gray-400">${escHtml(c.phone || '-')}</td>
+        <td class="px-4 py-3 text-xs text-gray-400">${escHtml(c.category || '-')}</td>
+        <td class="px-4 py-3 text-xs text-gray-500">${fmtDateTime(c.submittedAt)}</td>
+        <td class="px-4 py-3">${getStatusLabel(c.status)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    updateConsultBadge();
+  }
+
+  function openConsultDetail(id) {
+    selectedConsultId = id;
+    const c = getConsults().find(x => x.id === id);
+    if (!c) return;
+    // Mark as read
+    if (c.status === 'pending') {
+      const all = getConsults();
+      const updated = all.map(x => x.id === id ? { ...x, status: 'read' } : x);
+      setConsults(updated);
+      updateConsultBadge();
+      renderConsultations();
+    }
+    const panel = document.getElementById('consultDetail');
+    panel.classList.remove('hidden');
+    panel.classList.add('panel-slide');
+    panel.innerHTML = `
+      <div class="flex items-center justify-between mb-4">
+        <h4 class="text-sm font-semibold text-white">상담 상세</h4>
+        <button onclick="closeConsultDetail()" class="text-gray-500 hover:text-white transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="space-y-3 mb-4">
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div><span class="text-gray-500">이름</span><p class="text-white mt-0.5 font-medium">${escHtml(c.name || '-')}</p></div>
+          <div><span class="text-gray-500">나이</span><p class="text-white mt-0.5">${escHtml(c.age ? c.age + '세' : '-')}</p></div>
+          <div><span class="text-gray-500">연락처</span><p class="text-white mt-0.5">${escHtml(c.phone || '-')}</p></div>
+          <div><span class="text-gray-500">진료분야</span><p class="text-white mt-0.5">${escHtml(c.category || '-')}</p></div>
+        </div>
+        <div class="text-xs">
+          <span class="text-gray-500">접수일시</span>
+          <p class="text-gray-400 mt-0.5">${fmtDateTime(c.submittedAt)}</p>
+        </div>
+        <div class="text-xs">
+          <span class="text-gray-500">상담 내용</span>
+          <div class="mt-1.5 bg-[#16232f] rounded-lg p-3 text-gray-300 leading-relaxed whitespace-pre-wrap">${escHtml(c.content || '-')}</div>
+        </div>
+      </div>
+      <div class="border-t border-[#1e2f3d] pt-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-gray-400">답변</span>
+          <div class="flex gap-1">
+            ${c.status !== 'done' ? `<button onclick="setConsultStatus('${c.id}','done')" class="text-[10px] bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 px-2 py-0.5 rounded transition-colors">답변완료 처리</button>` : ''}
+            <button onclick="deleteConsult('${c.id}')" class="text-[10px] bg-red-500/10 text-red-400 hover:bg-red-500/20 px-2 py-0.5 rounded transition-colors">삭제</button>
+          </div>
+        </div>
+        <textarea id="consultReplyText" rows="4" placeholder="답변을 입력하세요..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf] resize-none">${escHtml(c.reply || '')}</textarea>
+        <button onclick="saveConsultReply('${c.id}')" class="w-full py-2 rounded-lg bg-[#42c0bf] hover:bg-[#2da8a7] text-white font-semibold text-xs transition-colors">답변 저장</button>
+        ${c.repliedAt ? `<p class="text-[10px] text-gray-600 text-right">마지막 답변: ${fmtDateTime(c.repliedAt)}</p>` : ''}
+      </div>
+    `;
+  }
+
+  window.closeConsultDetail = function() {
+    selectedConsultId = null;
+    document.getElementById('consultDetail').classList.add('hidden');
+  };
+
+  window.saveConsultReply = function(id) {
+    const reply = document.getElementById('consultReplyText').value.trim();
+    const all = getConsults();
+    const updated = all.map(c => c.id === id ? { ...c, reply, repliedAt: new Date().toISOString(), status: reply ? 'done' : c.status } : c);
+    setConsults(updated);
+    renderConsultations();
+    openConsultDetail(id);
+    showToast('답변이 저장되었습니다.');
+  };
+
+  window.setConsultStatus = function(id, status) {
+    const all = getConsults();
+    setConsults(all.map(c => c.id === id ? { ...c, status } : c));
+    renderConsultations();
+    openConsultDetail(id);
+    updateConsultBadge();
+  };
+
+  window.deleteConsult = function(id) {
+    showConfirm('상담 삭제', '이 상담을 삭제하시겠습니까?', () => {
+      setConsults(getConsults().filter(c => c.id !== id));
+      closeConsultDetail();
+      renderConsultations();
+      showToast('삭제되었습니다.');
+    });
+  };
+
+  window.setConsultTab = function(tab) {
+    currentConsultTab = tab;
+    ['all','pending','done'].forEach(t => {
+      const btn = document.getElementById('ctab-' + t);
+      if (t === tab) { btn.classList.add('bg-[#42c0bf]','text-white'); btn.classList.remove('text-gray-400'); }
+      else { btn.classList.remove('bg-[#42c0bf]','text-white'); btn.classList.add('text-gray-400'); }
+    });
+    closeConsultDetail();
+    renderConsultations();
+  };
+
+  // ─── SAMPLE DATA ───────────────────────────────────────────────────
+  function injectSampleData() {
+    if (!getConsults().length) {
+      setConsults([
+        { id: genId(), name: '김민지', phone: '010-1234-5678', age: '29', category: '눈성형', content: '쌍꺼풀 수술 문의드립니다. 매몰법과 절개법 중 어떤 방법이 적합한지 상담 받고 싶습니다. 눈꺼풀이 두꺼운 편이어서 절개법이 맞다고 들었는데 회복 기간이 걱정됩니다.', submittedAt: new Date(Date.now() - 3600000).toISOString(), status: 'pending', reply: '', repliedAt: '' },
+        { id: genId(), name: '이수연', phone: '010-9876-5432', age: '34', category: '리프팅', content: '눈가와 팔자 주름 개선을 위해 리프팅 시술을 고려 중입니다. 어떤 시술이 적합한지 상담 요청드립니다.', submittedAt: new Date(Date.now() - 86400000).toISOString(), status: 'read', reply: '', repliedAt: '' },
+        { id: genId(), name: '박준혁', phone: '010-5555-7777', age: '42', category: '코성형', content: '비중격 만곡증으로 기능적 코성형을 원합니다. 건강보험 적용이 가능한지 문의드립니다.', submittedAt: new Date(Date.now() - 172800000).toISOString(), status: 'done', reply: '안녕하세요. 기능적 코성형(비중격교정술)은 의료적 필요가 인정될 경우 건강보험 적용이 가능합니다. 자세한 사항은 진료 예약 후 상담 시 확인해 드리겠습니다.', repliedAt: new Date(Date.now() - 100000000).toISOString() },
+      ]);
+    }
+  }
+
+  // ─── ESCAPE HTML ───────────────────────────────────────────────────
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ─── INIT ──────────────────────────────────────────────────────────
+  function initAll() {
+    injectSampleData();
+    loadPopupForm();
+    renderReviews();
+    renderNotices();
+    renderConsultations();
+    updateConsultBadge();
+  }
+
+  // Pop-up real-time title listener
+  document.getElementById('popupTitle').addEventListener('input', function() {
+    document.getElementById('previewTitle').textContent = this.value || '팝업 제목';
+  });
+
+  checkAuth();
+})();
+</script>
+</body>
+</html>

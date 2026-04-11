@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>온라인 상담 | 선메디컬센터 유성선병원 성형외과</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Manrope', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; color: #181C1E; line-height: 1.6; background: #fff; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    :root {
+      --primary: #9E6B7B;
+      --primary-light: #D4A5B5;
+      --primary-dark: #8A5568;
+      --wine: #2D1F24;
+      --navy: #2D1F24;
+      --navy-mid: #6B5258;
+      --accent: #D4A5B5;
+      --accent-light: #C09070;
+      --bg-off: #F3E8E4;
+      --text-dark: #2D1F24;
+      --text-mid: #6B5258;
+      --text-light: #9A8B90;
+      --white: #FFFFFF;
+      --primary-container: #F3E8E4;
+      --secondary: #C09070;
+      --secondary-light: #D4A5B5;
+      --secondary-container: #F3E8E4;
+      --tertiary: #8A5568;
+      --tertiary-light: #D4A5B5;
+      --surface: #FBF5F3;
+      --surface-low: #F3E8E4;
+      --surface-lowest: #FBF5F3;
+      --on-surface: #2D1F24;
+      --outline-variant: rgba(107, 82, 88, 0.15);
+    }
+
+    /* ===== Header ===== */
+    .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; display: flex; flex-direction: column; background: rgba(251, 245, 243, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 2px 20px rgba(158, 107, 123, 0.08); }
+    .header-topbar { height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; background: rgba(243, 232, 228, 0.5); }
+    .logo-text { font-size: 14px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.4px; flex-shrink: 0; white-space: nowrap; }
+    .topbar-nav { display: flex; align-items: center; gap: 0; }
+    .topbar-tab { display: flex; align-items: center; height: 48px; padding: 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.3px; color: rgba(0,0,0,0.45); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .topbar-tab:hover { color: var(--primary); }
+    .topbar-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .topbar-divider { width: 1px; height: 16px; background: rgba(0,0,0,0.12); }
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; z-index: 1100; }
+    .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav-overlay { display: none; position: fixed; inset: 0; background: rgba(251, 245, 243, 0.97); z-index: 1050; flex-direction: column; align-items: center; justify-content: flex-start; overflow-y: auto; padding: 60px 32px 40px; opacity: 0; transition: opacity 0.3s; }
+    .mobile-nav-overlay.open { display: flex; opacity: 1; }
+    .mob-nav-section { width: 100%; max-width: 320px; margin-bottom: 8px; }
+    .mob-center-switcher { display: flex; gap: 0; border: 1px solid rgba(158,107,123,0.2); border-radius: 9999px; overflow: hidden; margin-bottom: 20px; }
+    .mob-switch-tab { flex: 1; text-align: center; padding: 10px 16px; font-size: 13px; font-weight: 700; color: rgba(0,0,0,0.45); background: transparent; transition: all 0.2s; }
+    .mob-switch-tab.active { background: var(--primary); color: #fff; }
+    .mob-sub-title { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(0,0,0,0.35); padding: 16px 0 8px; }
+    .mob-sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 8px; }
+    .mob-sub-grid a { font-size: 14px; font-weight: 500; color: rgba(0,0,0,0.60); padding: 10px 12px; background: rgba(0,0,0,0.04); border-radius: 9999px; transition: color 0.18s, background 0.18s; }
+    .mob-sub-grid a:hover { color: var(--text-dark); background: rgba(158,107,123,0.15); }
+    .mobile-nav-divider { width: 100%; max-width: 320px; height: 1px; background: rgba(0,0,0,0.08); margin: 16px 0; }
+    .mobile-nav-cta { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 320px; }
+    .mobile-nav-cta a { font-size: 15px !important; font-weight: 600 !important; padding: 14px 0 !important; text-align: center; border-radius: 9999px; }
+    .mobile-nav-cta .nav-phone { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; }
+    .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
+
+
+    /* ===== Hero ===== */
+    .hero-banner { margin-top: 48px; height: 280px; background: linear-gradient(140deg, #F3E8E4 0%, #FBF5F3 100%); display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero-banner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(140deg, rgba(212, 165, 181, 0.12) 0%, rgba(243, 232, 228, 0.08) 100%) 100%); z-index: 1; }
+    .hero-banner-inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 0 40px; width: 100%; }
+    0}
+    .hero-title { font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: #2D1F24; letter-spacing: -2px; line-height: 1.1; margin-bottom: 14px; }
+    .hero-subtitle { font-size: 15px; color: rgba(0,0,0,0.60); line-height: 1.8; }
+
+    /* ===== Main Layout ===== */
+    .form-section { background: var(--surface, #FBF5F3); padding: 80px 40px; }
+    .form-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: 60px; align-items: start; }
+
+    /* ===== Form Card ===== */
+    .form-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 48px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .form-card h2 { font-size: 24px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.6px; margin-bottom: 8px; }
+    .form-card .form-sub { font-size: 14px; color: var(--text-mid); margin-bottom: 36px; line-height: 1.7; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 7px; letter-spacing: 0.3px; }
+    .form-group label .req { color: var(--primary); margin-left: 2px; }
+
+    .form-control {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid rgba(0,0,0,0.12);
+      border-radius: 9999px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text-dark);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(158,107,123,0.10); }
+    .form-control::placeholder { color: var(--text-light); }
+
+    textarea.form-control { resize: vertical; min-height: 120px; line-height: 1.7; border-radius: 10px; }
+    select.form-control { cursor: pointer; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .privacy-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .privacy-check input[type="checkbox"] { width: 18px; height: 18px; border: 1.5px solid rgba(0,0,0,0.2); border-radius: 4px; flex-shrink: 0; margin-top: 1px; accent-color: var(--primary); cursor: pointer; }
+    .privacy-check-text { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+    .privacy-check-text a { color: var(--primary); text-decoration: underline; }
+
+    .privacy-box {
+      background: var(--surface, #FBF5F3);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.8;
+      max-height: 120px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--primary);
+      color: #2D1F24;
+      border: none;
+      border-radius: 9999px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .submit-btn:hover { background: var(--primary-light); transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+
+    /* ===== Sidebar ===== */
+    .form-sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+    .sidebar-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 8px 40px rgba(158, 107, 123, 0.06);
+    }
+
+    .sidebar-card-title { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-card-title span { font-size: 18px; }
+
+    .sidebar-info-item { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+    .sidebar-info-item:last-child { margin-bottom: 0; }
+    .sii-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .sii-text { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+    .sii-text strong { color: var(--text-dark); }
+
+    .sidebar-kakao-btn {
+      display: block;
+      background: #FEE500;
+      color: #3C1E1E;
+      text-align: center;
+      padding: 14px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .sidebar-kakao-btn:hover { background: #C09070; }
+
+    .caution-list { list-style: none; padding: 0; }
+    .caution-list li { display: flex; gap: 8px; font-size: 13px; color: var(--text-mid); line-height: 1.7; margin-bottom: 8px; }
+    .caution-list li::before { content: '·'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
+
+    /* ===== CTA ===== */
+    .cta-section { background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); padding: 80px 40px; text-align: center; border-top: 1px solid rgba(158,107,123,0.15); }
+    .cta-section h2 { font-size: 32px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; margin-bottom: 12px; }
+    .cta-section p { font-size: 15px; color: var(--text-mid); margin-bottom: 36px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn-primary { padding: 14px 32px; background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; border-radius: 6px; font-size: 15px; font-weight: 700; transition: background 0.25s; }
+    .cta-btn-primary:hover { background: var(--primary-light); }
+    .cta-btn-outline { padding: 14px 32px; border: 1.5px solid rgba(158,107,123,0.40); color: var(--primary-dark); border-radius: 6px; font-size: 15px; font-weight: 600; transition: all 0.25s; }
+    .cta-btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .cta-btn-kakao { padding: 14px 32px; background: #FEE500; color: #3C1E1E; border-radius: 6px; font-size: 15px; font-weight: 700; }
+
+    /* ===== Footer ===== */
+    .footer { background: #F3E8E4; color: #6B5258; }
+    .footer-top { display: flex; justify-content: center; text-align: center; }
+    .footer-logo { font-size: 16px; font-weight: 700; color: #2D1F24; margin-bottom: 16px; }
+    .footer-detail { font-size: 13px; line-height: 2.1; }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; padding: 20px 40px; border-top: 1px solid rgba(107,82,88,0.15); display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 12px; color: rgba(107,82,88,0.55); }
+
+    @media (max-width: 1024px) {
+      .form-inner { grid-template-columns: 1fr; }
+      .form-sidebar { max-width: 600px; }
+    }
+
+    @media (max-width: 768px) {
+      .header-topbar { height: 44px; padding: 0 16px; }
+      .topbar-nav { display: none; }
+      .menu-toggle { display: flex; }
+      .hero-banner { height: 240px; }
+      .hero-banner-inner { padding: 0 20px; }
+      .form-section { padding: 60px 20px; }
+      .form-card { padding: 28px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; gap: 36px; padding: 44px 20px 28px; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding: 18px 20px; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .mobile-cta { display: block !important; }
+      .footer { padding-bottom: 76px; }
+    }
+
+    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 990; background: var(--surface, #FBF5F3); box-shadow: 0 -2px 20px rgba(0,0,0,0.4); padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+    .mobile-cta-inner { display: flex; gap: 10px; }
+    .mobile-cta-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.25s; }
+    .mobile-cta-btn:active { opacity: 0.8; }
+    .cta-phone { background: #9E6B7B; color: #2D1F24; }
+    .cta-kakao { background: #FEE500; color: #3C1E1E; }
+  </style>
+</head>
+
+<body>
+
+  <nav class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-label="모바일 메뉴">
+    <div class="mob-nav-section">
+      <div class="mob-center-switcher">
+        <a href="cosmetic.html" class="mob-switch-tab active">미용성형센터</a>
+        <a href="medical.html" class="mob-switch-tab">외상·재건센터</a>
+      </div>
+      <div class="mob-sub-title">병원소개</div>
+      <div class="mob-sub-grid">
+        <a href="notice.html">공지사항</a>
+        <a href="tour.html">병원둘러보기</a>
+        <a href="doctor.html">의료진소개</a>
+        <a href="about.html">오시는 길</a>
+      </div>
+      <div class="mob-sub-title">눈성형</div>
+      <div class="mob-sub-grid">
+        <a href="eye.html">쌍꺼풀 성형술</a>
+        <a href="eye.html">상안검성형술</a>
+        <a href="eye.html">트임술</a>
+        <a href="eye.html">눈밑지방재배치</a>
+      </div>
+      <div class="mob-sub-title">코·가슴·기타</div>
+      <div class="mob-sub-grid">
+        <a href="nose.html">코성형</a>
+        <a href="breast.html">가슴성형</a>
+        <a href="lifting.html">동안성형</a>
+        <a href="fat.html">바디성형</a>
+        <a href="petit.html">쁘띠</a>
+        <a href="male.html">남자성형</a>
+      </div>
+    </div>
+    <div class="mobile-nav-divider"></div>
+    <div class="mobile-nav-cta">
+      <a href="tel:042-000-0000" class="nav-phone">전화 상담 042-000-0000</a>
+      <a href="#" class="nav-kakao">카카오톡으로 문의하기</a>
+    </div>
+  </nav>
+
+  <header class="header" id="header">
+    <div class="header-topbar">
+      <a href="index.html" class="logo-text">선메디컬센터 유성선병원 성형외과</a>
+      <div class="topbar-nav">
+        <a href="about.html" class="topbar-tab">병원소개</a>
+        <span class="topbar-divider"></span>
+        <a href="cosmetic.html" class="topbar-tab">미용성형센터</a>
+        <span class="topbar-divider"></span>
+        <a href="medical.html" class="topbar-tab">외상·재건센터</a>
+        <span class="topbar-divider"></span>
+        <a href="community.html" class="topbar-tab active">커뮤니티</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav"
+        onclick="var o=document.getElementById('mobileNav'),t=document.getElementById('menuToggle'),isOpen=o.classList.contains('open');if(isOpen){o.classList.remove('open');t.classList.remove('open');document.body.style.overflow='';}else{o.classList.add('open');t.classList.add('open');document.body.style.overflow='hidden';}">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-banner">
+    <div class="hero-banner-inner">
+      <div class="hero-eyebrow">CONSULTATION · 온라인 상담</div>
+      <h1 class="hero-title">온라인 상담 신청</h1>
+      <p class="hero-subtitle">궁금한 점을 남겨주시면 진료일 기준 24시간 내 답변드립니다</p>
+    </div>
+  </section>
+
+  <!-- ===== FORM ===== -->
+  <section class="form-section">
+    <div class="form-inner">
+
+      <!-- Form -->
+      <div class="form-card">
+        <h2>상담 문의 작성</h2>
+        <p class="form-sub">모든 상담 내용은 엄격히 비밀이 보장되며, 전문의가 직접 확인 후 답변드립니다.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>성함 <span class="req">*</span></label>
+            <input type="text" class="form-control" placeholder="이름을 입력해주세요" id="cName">
+          </div>
+          <div class="form-group">
+            <label>연락처 <span class="req">*</span></label>
+            <input type="tel" class="form-control" placeholder="010-0000-0000" id="cPhone">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>나이 / 성별</label>
+            <input type="text" class="form-control" placeholder="예) 35세 여성" id="cAge">
+          </div>
+          <div class="form-group">
+            <label>희망 진료 분야 <span class="req">*</span></label>
+            <select class="form-control" id="cCategory">
+              <option value="">-- 선택해주세요 --</option>
+              <optgroup label="미용·성형">
+                <option>눈성형 (쌍꺼풀, 눈매교정)</option>
+                <option>리프팅 (안면거상, 실리프팅)</option>
+                <option>쁘띠·시술 (보톡스, 필러)</option>
+                <option>코성형</option>
+                <option>기타 미용 수술</option>
+              </optgroup>
+              <optgroup label="치료·재건">
+                <option>상처·외상 (열상, 안면골절)</option>
+                <option>화상 치료 및 재건</option>
+                <option>피부종양·종괴 제거</option>
+                <option>흉터 성형</option>
+                <option>소아 진료</option>
+              </optgroup>
+              <option>기타 / 모르겠음</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>상담 내용 <span class="req">*</span></label>
+          <textarea class="form-control" placeholder="현재 상태, 고민하시는 점, 원하시는 결과 등을 자유롭게 작성해주세요. 사진 첨부가 필요하신 경우 카카오톡 상담을 이용해주세요." id="cContent" style="min-height:160px;"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>개인정보 수집 및 이용 동의 <span class="req">*</span></label>
+          <div class="privacy-box">
+            선메디컬센터 유성선병원 성형외과(이하 '병원')는 온라인 상담 서비스 제공을 위해 아래와 같이 개인정보를 수집·이용합니다.<br><br>
+            1. 수집 항목: 성명, 연락처, 나이·성별(선택), 상담 내용<br>
+            2. 수집 목적: 의료 상담 답변 및 예약 안내<br>
+            3. 보유 기간: 상담 완료 후 1년 (의료법 기준 적용)<br>
+            4. 동의를 거부할 권리가 있으며, 거부 시 온라인 상담 서비스 이용이 제한될 수 있습니다.
+          </div>
+          <div class="privacy-check">
+            <input type="checkbox" id="privacyAgree">
+            <span class="privacy-check-text">위의 개인정보 수집 및 이용에 동의합니다. <span class="req">(필수)</span></span>
+          </div>
+        </div>
+
+        <button class="submit-btn" onclick="(function(){
+          var n=document.getElementById('cName').value.trim(),
+              p=document.getElementById('cPhone').value.trim(),
+              age=document.getElementById('cAge').value.trim(),
+              cat=document.getElementById('cCategory').value,
+              cont=document.getElementById('cContent').value.trim(),
+              ag=document.getElementById('privacyAgree').checked;
+          if(!n){alert('성함을 입력해주세요.');return;}
+          if(!p){alert('연락처를 입력해주세요.');return;}
+          if(!cat){alert('희망 진료 분야를 선택해주세요.');return;}
+          if(!cont){alert('상담 내용을 입력해주세요.');return;}
+          if(!ag){alert('개인정보 수집 및 이용에 동의해주세요.');return;}
+          var list=JSON.parse(localStorage.getItem('ysmc_consultations')||'[]');
+          list.unshift({id:Date.now(),name:n,phone:p,age:age,category:cat,content:cont,submittedAt:new Date().toISOString(),status:'pending',reply:'',repliedAt:''});
+          localStorage.setItem('ysmc_consultations',JSON.stringify(list));
+          alert('상담 신청이 완료되었습니다.\n진료일 기준 24시간 내 연락드리겠습니다.\n감사합니다.');
+          document.getElementById('cName').value='';
+          document.getElementById('cPhone').value='';
+          document.getElementById('cAge').value='';
+          document.getElementById('cCategory').value='';
+          document.getElementById('cContent').value='';
+          document.getElementById('privacyAgree').checked=false;
+        })()">
+          상담 신청하기
+        </button>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="form-sidebar">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title"><span></span> 빠른 문의</div>
+          <div class="sidebar-info-item">
+            
+            <div class="sii-text"><strong>전화 상담</strong><br>042-000-0000<br>평일 09:00 – 18:00</div>
+          </div>
+          <div class="sidebar-info-item">
+            
+            <div class="sii-text"><strong>카카오톡 상담</strong><br>@유성선병원성형외과<br>평균 응답 30분 이내</div>
+          </div>
+        </div>
+
+        <div class="sidebar-card" style="background:#fffde6; border: 1px solid rgba(255,215,0,0.3);">
+          <div class="sidebar-card-title" style="color:#3C1E1E;"><span></span> 카카오톡 상담</div>
+          <p style="font-size:13px; color:#5a3a1a; line-height:1.7; margin-bottom:16px;">사진 첨부가 필요하거나 즉시 답변이 필요하신 경우 카카오톡 상담을 이용해주세요.</p>
+          <a href="#" class="sidebar-kakao-btn">카카오톡으로 바로 문의</a>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title"><span></span> 상담 전 유의사항</div>
+          <ul class="caution-list">
+            <li>온라인 상담은 의학적 진단이 아닌 일반적인 안내 목적으로 제공됩니다.</li>
+            <li>정확한 진단은 내원 후 전문의 직접 진료를 통해서만 가능합니다.</li>
+            <li>답변은 진료일 기준 24시간 내 연락처로 드립니다.</li>
+            <li>응급 상황의 경우 즉시 응급실을 방문하거나 119에 신고해주세요.</li>
+            <li>상담 내용은 진료 목적 이외에 활용되지 않습니다.</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card" style="background: linear-gradient(140deg, #F3E8E4, #FBF5F3);">
+          <div class="sidebar-card-title" style="color:#fff;"><span></span> <span style="color:#fff;">진료 예약</span></div>
+          <p style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:16px;">대기 없이 정시에 진료받고 싶으시면 사전 예약을 추천드립니다.</p>
+          <a href="booking.html" style="display:block; background:var(--primary); color:#fff; text-align:center; padding:12px; border-radius:8px; font-size:14px; font-weight:700;">진료 예약하기</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-section">
+    <div>
+      <h2>더 빠른 답변을 원하신다면</h2>
+      <p>전화나 카카오톡으로 문의하시면 더욱 신속하게 도움드릴 수 있습니다.</p>
+      <div class="cta-buttons">
+        <a href="tel:042-000-0000" class="cta-btn-outline">전화 042-000-0000</a>
+        <a href="#" class="cta-btn-kakao">카카오톡 문의</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">선메디컬센터 유성선병원 성형외과</div>
+        <div class="footer-detail">
+          대전광역시 유성구 계룡로 105 (봉명동)<br>
+          대표전화: 042-000-0000&nbsp;&nbsp;|&nbsp;&nbsp;팩스: 042-000-0001<br>
+          진료시간: 평일 09:00 – 18:00&nbsp;&nbsp;|&nbsp;&nbsp;토요일 09:00 – 13:00<br>
+          응급: 24시간 응급실 운영
+        </div>
+      </div>
+      <div class="footer-quick">
+        <a href="consultation.html" class="footer-quick-item">
+          
+          <span class="footer-quick-label">온라인 상담</span>
+        </a>
+        <a href="booking.html" class="footer-quick-item">
+          
+          <span class="footer-quick-label">진료 예약</span>
+        </a>
+        <a href="tel:042-000-0000" class="footer-quick-item">
+          
+          <span class="footer-quick-label">전화 문의</span>
+        </a>
+        <a href="#" class="footer-quick-item">
+          
+          <span class="footer-quick-label">카카오톡</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 선메디컬센터 유성선병원 성형외과. All rights reserved.</span>
+      <span class="footer-copy">개인정보처리방침&nbsp;&nbsp;|&nbsp;&nbsp;이용약관</span>
+    </div>
+  </footer>
+
+  <!-- ===== MOBILE STICKY CTA ===== -->
+  <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
+    <div class="mobile-cta-inner">
+      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
+    </div>
+  </div>
+
+</body>
+</html>
