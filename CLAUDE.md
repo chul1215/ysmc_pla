@@ -33,7 +33,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 미용·성형 상세 8개: `eye`, `nose`, `lifting`, `male`, `fat`, `breast`, `other`, `petit`
 - 치료·재건 상세 4개: `trauma`, `burn`, `reconstruction`, `pediatric`
 - 기관 소개: `about`, `doctor`, `tour`
-- 커뮤니티: `community`, `consultation`, `booking`, `notice`
+- 커뮤니티: `community`, `consultation`, `booking`, `notice`, `reviews`
+  - `reviews.html` — 수술후기 목록 페이지. `localStorage: ysmc_reviews`에서 공개 후기(`visible !== false`)를 동적 로딩. 카테고리 필터 탭, 카드 그리드(3→2→1열), 클릭 시 상세 모달. admin에서 등록한 후기가 자동 반영됨.
   - `news.html` — 파일은 존재하나 **모든 GNB/모바일 nav에서 링크 제거됨** (언론보도 게시판 비활성화)
 - `_archive/` — 미사용 보관
 - `delivery/` — 퍼블리싱 전달용 (공개 HTML + images + 명세서, 소스와 별도 관리)
@@ -104,7 +105,7 @@ grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/O
   - about/doctor/tour → 병원소개 active
   - 미용성형 상세 + cosmetic → 미용성형센터 active
   - 치료재건 상세 + medical → 외상·재건센터 active
-  - community/consultation/booking/notice → 커뮤니티 active
+  - community/consultation/booking/notice/reviews → 커뮤니티 active
   - index → active 없음
 - **헤더 높이**: PC 48px / 모바일 44px → `.page-hero { margin-top: 48px }`
 
@@ -115,6 +116,7 @@ grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/O
 - **cosmetic.html / medical.html**: IIFE — 자동 슬라이드쇼(3초 전환), 카테고리 스크롤 drag-to-scroll, 플로팅 CTA 토글
 - **about.html**: IIFE — 카드 stagger 애니메이션. 오시는 길 섹션에 Google Maps iframe 내장 (`https://www.google.com/maps?q=...&output=embed`), API 키 불필요
 - **tour.html**: 터치 스와이프 슬라이더 (화살표 + dot 인디케이터)
+- **reviews.html**: IIFE — `localStorage: ysmc_reviews` 로딩 후 카드 렌더링, 카테고리 필터(`data-cat` 속성), 클릭 시 상세 모달 (`modal-overlay.open` 토글 + `document.body.style.overflow` 제어)
 
 ### 허브 페이지 섹션 구성 (cosmetic.html / medical.html)
 
@@ -211,11 +213,12 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 - **인증**: `sessionStorage('ysmc_admin')` — 비밀번호는 JS 내 `ADMIN_PW` 상수 (정적 사이트 한계, 실 운영 시 서버 사이드 인증 필요)
 - **테마**: `<html class="dark">` 고정 (라이트 모드 없음)
 - **4개 관리 메뉴**: 팝업 관리 / 수술후기 관리 / 공지사항 관리 / 온라인 상담
-- **localStorage 데이터 계약** — 공개 페이지와 연동 완료:
-  - `ysmc_popup` → `index.html` 팝업 오버레이 표시 (날짜 범위 + "오늘 하루 보지 않기" 지원)
-  - `ysmc_reviews` → 수술후기 목록
-  - `ysmc_notices` → `notice.html` 공지사항 동적 로딩 (기존 하드코딩 목록 위에 prepend, 클릭 시 본문 모달)
-  - `ysmc_consultations` → `consultation.html` 폼 submit → admin에서 미확인/확인/답변완료 관리
+- **이미지 업로드**: 팝업 및 수술후기의 이미지 필드는 `<input type="file">` → `FileReader.readAsDataURL()` → Base64 Data URL로 localStorage에 저장. 선택 즉시 썸네일 미리보기 표시, × 버튼으로 삭제. 고해상도 원본 업로드 시 localStorage 5MB 한도 주의.
+- **localStorage 데이터 계약** — 공개 페이지 연동 현황:
+  - `ysmc_popup` → `index.html` 팝업 오버레이 표시 (날짜 범위 + "오늘 하루 보지 않기" 지원) ✅
+  - `ysmc_reviews` → `reviews.html` 수술후기 목록 동적 로딩 (카테고리 필터 + 상세 모달) ✅
+  - `ysmc_notices` → `notice.html` 공지사항 동적 로딩 (기존 하드코딩 목록 위에 prepend, 클릭 시 본문 모달) ✅
+  - `ysmc_consultations` → `consultation.html` 폼 submit → admin에서 미확인/확인/답변완료 관리 ✅
 - **미확인 상담 뱃지**: 사이드바에 `pending` 상태 건수 표시, 상담 클릭 시 `pending→read` 자동 전환
 
 ## dashboard.html 특이사항
@@ -227,6 +230,7 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 
 - 최대 너비: `1280px` / 섹션 패딩: 상하 `100px`, 좌우 `40px`
 - 폰트: Pretendard (CDN) → `'Apple SD Gothic Neo'` → `'Malgun Gothic'`
+  - 예외: `community.html`, `reviews.html`은 Manrope(Google Fonts)를 1순위로 사용 (`'Manrope', 'Pretendard', ...`)
 
 ## OG / SNS 공유 메타태그
 
