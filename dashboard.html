@@ -47,10 +47,11 @@
             border: 1px solid rgba(255, 255, 255, 0.125);
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
+
         .glass-panel:hover {
             transform: translateY(-2px);
             background: rgba(255, 255, 255, 0.065);
-            box-shadow: 0 14px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.14);
+            box-shadow: 0 14px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.14);
         }
 
         .glass-panel-light {
@@ -132,9 +133,12 @@
         }
 
         /* Smooth theme transition */
-        .mesh-gradient, .glass-panel, .glass-panel-light, body {
+        .mesh-gradient,
+        .glass-panel,
+        .glass-panel-light,
+        body {
             transition: background 0.35s ease, background-color 0.35s ease,
-                        border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
+                border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
         }
 
         /* ===== LIGHT MODE ===== */
@@ -142,74 +146,145 @@
             color: #1c1c2e;
             background-color: #FBF5F3 !important;
         }
+
         html.light-mode .mesh-gradient {
             background-color: #FBF5F3;
             background-image:
-                radial-gradient(at 0% 0%,   hsla(7,  80%, 88%, 0.55) 0px, transparent 50%),
-                radial-gradient(at 50% 0%,  hsla(7,  70%, 85%, 0.4)  0px, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(47, 60%, 88%, 0.4)  0px, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(7,  60%, 90%, 0.3)  0px, transparent 50%),
-                radial-gradient(at 50% 100%,hsla(220,30%, 88%, 0.3)  0px, transparent 50%),
-                radial-gradient(at 100% 100%,hsla(47,50%, 88%, 0.3)  0px, transparent 50%);
+                radial-gradient(at 0% 0%, hsla(7, 80%, 88%, 0.55) 0px, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(7, 70%, 85%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(47, 60%, 88%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(7, 60%, 90%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, hsla(220, 30%, 88%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(47, 50%, 88%, 0.3) 0px, transparent 50%);
         }
+
         html.light-mode .glass-panel {
-            background: rgba(255,255,255,0.72) !important;
-            border: 1px solid rgba(0,0,0,0.07) !important;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            background: rgba(255, 255, 255, 0.72) !important;
+            border: 1px solid rgba(0, 0, 0, 0.07) !important;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
         }
+
         html.light-mode .glass-panel:hover {
-            background: rgba(255,255,255,0.92) !important;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
             transform: translateY(-2px);
         }
+
         html.light-mode .glass-panel-light {
-            background: rgba(255,255,255,0.85);
-            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
+
         /* Scrollbar */
         html.light-mode .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(0,0,0,0.12);
+            background: rgba(0, 0, 0, 0.12);
         }
+
         html.light-mode .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(0,0,0,0.22);
+            background: rgba(0, 0, 0, 0.22);
         }
+
         /* Text */
-        html.light-mode .text-white               { color: #1c1c2e !important; }
-        html.light-mode .text-white\/90           { color: rgba(28,28,46,0.9) !important; }
-        html.light-mode .text-white\/80           { color: rgba(28,28,46,0.8) !important; }
-        html.light-mode .text-white\/70           { color: rgba(28,28,46,0.7) !important; }
-        html.light-mode .text-white\/60           { color: rgba(28,28,46,0.6) !important; }
-        html.light-mode .text-white\/50           { color: rgba(28,28,46,0.5) !important; }
-        html.light-mode .text-white\/40           { color: rgba(28,28,46,0.4) !important; }
-        html.light-mode .text-white\/30           { color: rgba(28,28,46,0.3) !important; }
-        html.light-mode .hover\:text-white:hover  { color: #1c1c2e !important; }
+        html.light-mode .text-white {
+            color: #1c1c2e !important;
+        }
+
+        html.light-mode .text-white\/90 {
+            color: rgba(28, 28, 46, 0.9) !important;
+        }
+
+        html.light-mode .text-white\/80 {
+            color: rgba(28, 28, 46, 0.8) !important;
+        }
+
+        html.light-mode .text-white\/70 {
+            color: rgba(28, 28, 46, 0.7) !important;
+        }
+
+        html.light-mode .text-white\/60 {
+            color: rgba(28, 28, 46, 0.6) !important;
+        }
+
+        html.light-mode .text-white\/50 {
+            color: rgba(28, 28, 46, 0.5) !important;
+        }
+
+        html.light-mode .text-white\/40 {
+            color: rgba(28, 28, 46, 0.4) !important;
+        }
+
+        html.light-mode .text-white\/30 {
+            color: rgba(28, 28, 46, 0.3) !important;
+        }
+
+        html.light-mode .hover\:text-white:hover {
+            color: #1c1c2e !important;
+        }
+
         /* Backgrounds */
-        html.light-mode .bg-white\/5             { background-color: rgba(0,0,0,0.04) !important; }
-        html.light-mode .bg-white\/10            { background-color: rgba(0,0,0,0.06) !important; }
-        html.light-mode .bg-white\/15            { background-color: rgba(0,0,0,0.08) !important; }
-        html.light-mode .bg-white\/20            { background-color: rgba(0,0,0,0.10) !important; }
-        html.light-mode .hover\:bg-white\/5:hover  { background-color: rgba(0,0,0,0.05) !important; }
-        html.light-mode .hover\:bg-white\/20:hover { background-color: rgba(0,0,0,0.09) !important; }
+        html.light-mode .bg-white\/5 {
+            background-color: rgba(0, 0, 0, 0.04) !important;
+        }
+
+        html.light-mode .bg-white\/10 {
+            background-color: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html.light-mode .bg-white\/15 {
+            background-color: rgba(0, 0, 0, 0.08) !important;
+        }
+
+        html.light-mode .bg-white\/20 {
+            background-color: rgba(0, 0, 0, 0.10) !important;
+        }
+
+        html.light-mode .hover\:bg-white\/5:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        html.light-mode .hover\:bg-white\/20:hover {
+            background-color: rgba(0, 0, 0, 0.09) !important;
+        }
+
         /* Borders */
-        html.light-mode .border-white\/10        { border-color: rgba(0,0,0,0.08) !important; }
-        html.light-mode .border-white\/20        { border-color: rgba(0,0,0,0.12) !important; }
+        html.light-mode .border-white\/10 {
+            border-color: rgba(0, 0, 0, 0.08) !important;
+        }
+
+        html.light-mode .border-white\/20 {
+            border-color: rgba(0, 0, 0, 0.12) !important;
+        }
+
         /* Mobile overlay */
-        html.light-mode #mobile-overlay          { background: rgba(0,0,0,0.35); }
+        html.light-mode #mobile-overlay {
+            background: rgba(0, 0, 0, 0.35);
+        }
 
         /* Competitor Modal */
         @keyframes modal-in {
-            from { opacity: 0; transform: translateY(18px) scale(0.96); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
-        .modal-animate { animation: modal-in 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+        .modal-animate {
+            animation: modal-in 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
 
         html.light-mode #competitor-modal-card {
-            background: rgba(255,255,255,0.95) !important;
-            border: 1px solid rgba(0,0,0,0.1) !important;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
         }
+
         html.light-mode #competitor-modal-backdrop {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
         }
     </style>
 </head>
@@ -338,7 +413,8 @@
                     <span class="material-icons-round">menu</span>
                 </button>
                 <div class="min-w-0 flex-1">
-                    <h1 class="text-base md:text-2xl font-bold leading-tight truncate">선메디컬센터 유성선병원 성형외과 신설 홍보 마켓팅 기획안</h1>
+                    <h1 class="text-base md:text-2xl font-bold leading-tight truncate">선메디컬센터 유성선병원 성형외과 신설 홍보 마켓팅 기획안
+                    </h1>
                     <p class="text-white/50 text-xs md:text-sm hidden sm:block">홍보·마케팅 최종 실행 계획 대시보드</p>
                 </div>
                 <div class="flex items-center gap-4">
@@ -370,7 +446,7 @@
                             <span class="text-xs font-medium text-accent">5개</span>
                         </div>
                         <h3 class="text-white/50 text-sm font-medium">진료축</h3>
-                        <p class="text-2xl font-bold mt-1">5대 센터</p>
+                        <p class="text-2xl font-bold mt-1">5대 진료축</p>
                     </div>
 
                     <div class="glass-panel p-5 rounded-xl">
@@ -605,7 +681,8 @@
                             <h2 class="text-lg font-bold">사이트 페이지 현황</h2>
                             <p class="text-white/40 text-xs">전체 23페이지 — 섹션별 구성</p>
                         </div>
-                        <div class="ml-auto flex items-center gap-2 px-3 py-1.5 bg-primary/20 border border-primary/30 rounded-lg">
+                        <div
+                            class="ml-auto flex items-center gap-2 px-3 py-1.5 bg-primary/20 border border-primary/30 rounded-lg">
                             <span class="material-icons-round text-primary text-sm">description</span>
                             <span class="text-sm font-bold text-primary">총 23페이지</span>
                         </div>
@@ -644,18 +721,22 @@
                                     <div class="w-2 h-2 rounded-full bg-primary"></div>
                                     <h3 class="font-bold text-sm">홈 + 허브</h3>
                                 </div>
-                                <span class="text-xs px-2 py-0.5 bg-primary/20 text-primary rounded-full font-semibold">3페이지</span>
+                                <span
+                                    class="text-xs px-2 py-0.5 bg-primary/20 text-primary rounded-full font-semibold">3페이지</span>
                             </div>
                             <div class="space-y-1.5">
-                                <a href="index.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="index.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">메인 랜딩</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">index.html</span>
                                 </a>
-                                <a href="cosmetic.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="cosmetic.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">미용·성형 허브</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">cosmetic.html</span>
                                 </a>
-                                <a href="medical.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="medical.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">치료·재건 허브</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">medical.html</span>
                                 </a>
@@ -669,18 +750,22 @@
                                     <div class="w-2 h-2 rounded-full bg-blue-400"></div>
                                     <h3 class="font-bold text-sm">기관 소개</h3>
                                 </div>
-                                <span class="text-xs px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded-full font-semibold">3페이지</span>
+                                <span
+                                    class="text-xs px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded-full font-semibold">3페이지</span>
                             </div>
                             <div class="space-y-1.5">
-                                <a href="about.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="about.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">소개</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">about.html</span>
                                 </a>
-                                <a href="doctor.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="doctor.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">의료진소개</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">doctor.html</span>
                                 </a>
-                                <a href="tour.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="tour.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">병원 둘러보기</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">tour.html</span>
                                 </a>
@@ -694,38 +779,47 @@
                                     <div class="w-2 h-2 rounded-full bg-purple-400"></div>
                                     <h3 class="font-bold text-sm">미용·성형 진료</h3>
                                 </div>
-                                <span class="text-xs px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded-full font-semibold">8페이지</span>
+                                <span
+                                    class="text-xs px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded-full font-semibold">8페이지</span>
                             </div>
                             <div class="space-y-1.5">
-                                <a href="eye.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="eye.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">눈성형</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">eye.html</span>
                                 </a>
-                                <a href="nose.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="nose.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">코성형</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">nose.html</span>
                                 </a>
-                                <a href="lifting.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="lifting.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">리프팅</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">lifting.html</span>
                                 </a>
-                                <a href="male.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="male.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">남자성형</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">male.html</span>
                                 </a>
-                                <a href="fat.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="fat.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">지방성형</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">fat.html</span>
                                 </a>
-                                <a href="breast.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="breast.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">가슴성형</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">breast.html</span>
                                 </a>
-                                <a href="other.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="other.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">기타수술</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">other.html</span>
                                 </a>
-                                <a href="petit.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="petit.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">쁘띠·시술</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">petit.html</span>
                                 </a>
@@ -739,22 +833,28 @@
                                     <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
                                     <h3 class="font-bold text-sm">치료·재건 진료</h3>
                                 </div>
-                                <span class="text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full font-semibold">4페이지</span>
+                                <span
+                                    class="text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full font-semibold">4페이지</span>
                             </div>
                             <div class="space-y-1.5">
-                                <a href="trauma.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="trauma.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">상처·외상</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">trauma.html</span>
                                 </a>
-                                <a href="burn.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="burn.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">화상</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">burn.html</span>
                                 </a>
-                                <a href="reconstruction.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="reconstruction.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">피부종양</span>
-                                    <span class="text-xs text-white/30 group-hover:text-white/60">reconstruction.html</span>
+                                    <span
+                                        class="text-xs text-white/30 group-hover:text-white/60">reconstruction.html</span>
                                 </a>
-                                <a href="pediatric.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="pediatric.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">소아진료</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">pediatric.html</span>
                                 </a>
@@ -768,26 +868,33 @@
                                     <div class="w-2 h-2 rounded-full bg-amber-400"></div>
                                     <h3 class="font-bold text-sm">커뮤니티</h3>
                                 </div>
-                                <span class="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded-full font-semibold">5페이지</span>
+                                <span
+                                    class="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded-full font-semibold">5페이지</span>
                             </div>
                             <div class="space-y-1.5">
-                                <a href="community.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="community.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">커뮤니티</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">community.html</span>
                                 </a>
-                                <a href="consultation.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="consultation.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">온라인상담</span>
-                                    <span class="text-xs text-white/30 group-hover:text-white/60">consultation.html</span>
+                                    <span
+                                        class="text-xs text-white/30 group-hover:text-white/60">consultation.html</span>
                                 </a>
-                                <a href="booking.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="booking.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">진료예약</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">booking.html</span>
                                 </a>
-                                <a href="news.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="news.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">언론보도</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">news.html</span>
                                 </a>
-                                <a href="notice.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
+                                <a href="notice.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white">공지사항</span>
                                     <span class="text-xs text-white/30 group-hover:text-white/60">notice.html</span>
                                 </a>
@@ -795,7 +902,8 @@
                         </div>
 
                         <!-- 구성 요약 -->
-                        <div class="bg-gradient-to-b from-primary/10 to-transparent rounded-xl border border-primary/20 p-4">
+                        <div
+                            class="bg-gradient-to-b from-primary/10 to-transparent rounded-xl border border-primary/20 p-4">
                             <div class="flex items-center gap-2 mb-4">
                                 <div class="w-2 h-2 rounded-full bg-primary"></div>
                                 <h3 class="font-bold text-sm">구성 요약</h3>
@@ -873,7 +981,8 @@
                         <a href="index.html" target="_blank"
                             class="group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-primary/50 transition-all">
                             <div class="flex items-center gap-3 mb-3">
-                                <div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <div
+                                    class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <span class="material-icons-round text-primary text-xl">home</span>
                                 </div>
                                 <div>
@@ -892,7 +1001,8 @@
                         <a href="cosmetic.html" target="_blank"
                             class="group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-purple-500/50 transition-all">
                             <div class="flex items-center gap-3 mb-3">
-                                <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <div
+                                    class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <span class="material-icons-round text-purple-400 text-xl">face</span>
                                 </div>
                                 <div>
@@ -912,7 +1022,8 @@
                         <a href="medical.html" target="_blank"
                             class="group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-emerald-500/50 transition-all">
                             <div class="flex items-center gap-3 mb-3">
-                                <div class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <div
+                                    class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <span class="material-icons-round text-emerald-400 text-xl">healing</span>
                                 </div>
                                 <div>
@@ -934,35 +1045,43 @@
                     <p class="text-xs font-bold text-white/40 uppercase tracking-wider mb-3 mt-6">미용·성형 상세 — 8페이지</p>
                     <div class="bg-purple-500/5 border border-purple-500/20 rounded-xl p-4 mb-2">
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                            <a href="eye.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
+                            <a href="eye.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">눈성형</span>
                                 <span class="text-xs text-white/30 group-hover:text-purple-300">eye.html</span>
                             </a>
-                            <a href="nose.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
+                            <a href="nose.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">코성형</span>
                                 <span class="text-xs text-white/30 group-hover:text-purple-300">nose.html</span>
                             </a>
-                            <a href="lifting.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
+                            <a href="lifting.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">리프팅</span>
                                 <span class="text-xs text-white/30 group-hover:text-purple-300">lifting.html</span>
                             </a>
-                            <a href="male.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
+                            <a href="male.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">남성성형</span>
                                 <span class="text-xs text-white/30 group-hover:text-purple-300">male.html</span>
                             </a>
-                            <a href="fat.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
+                            <a href="fat.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">지방성형</span>
                                 <span class="text-xs text-white/30 group-hover:text-purple-300">fat.html</span>
                             </a>
-                            <a href="breast.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
+                            <a href="breast.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">가슴성형</span>
                                 <span class="text-xs text-white/30 group-hover:text-purple-300">breast.html</span>
                             </a>
-                            <a href="other.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
+                            <a href="other.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">기타수술</span>
                                 <span class="text-xs text-white/30 group-hover:text-purple-300">other.html</span>
                             </a>
-                            <a href="petit.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
+                            <a href="petit.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-purple-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">쁘띠·시술</span>
                                 <span class="text-xs text-white/30 group-hover:text-purple-300">petit.html</span>
                             </a>
@@ -973,19 +1092,24 @@
                     <p class="text-xs font-bold text-white/40 uppercase tracking-wider mb-3 mt-6">치료·재건 상세 — 4페이지</p>
                     <div class="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4 mb-2">
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                            <a href="trauma.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-emerald-500/10 transition-all group">
+                            <a href="trauma.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-emerald-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">상처·외상</span>
                                 <span class="text-xs text-white/30 group-hover:text-emerald-300">trauma.html</span>
                             </a>
-                            <a href="burn.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-emerald-500/10 transition-all group">
+                            <a href="burn.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-emerald-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">화상</span>
                                 <span class="text-xs text-white/30 group-hover:text-emerald-300">burn.html</span>
                             </a>
-                            <a href="reconstruction.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-emerald-500/10 transition-all group">
+                            <a href="reconstruction.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-emerald-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">피부종양</span>
-                                <span class="text-xs text-white/30 group-hover:text-emerald-300">reconstruction.html</span>
+                                <span
+                                    class="text-xs text-white/30 group-hover:text-emerald-300">reconstruction.html</span>
                             </a>
-                            <a href="pediatric.html" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg hover:bg-emerald-500/10 transition-all group">
+                            <a href="pediatric.html" target="_blank"
+                                class="flex items-center justify-between p-2.5 rounded-lg hover:bg-emerald-500/10 transition-all group">
                                 <span class="text-xs text-white/70 group-hover:text-white font-medium">소아진료</span>
                                 <span class="text-xs text-white/30 group-hover:text-emerald-300">pediatric.html</span>
                             </a>
@@ -999,15 +1123,18 @@
                         <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4">
                             <p class="text-xs font-semibold text-blue-400 mb-2">기관소개 — 3페이지</p>
                             <div class="space-y-1">
-                                <a href="about.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-500/10 transition-all group">
+                                <a href="about.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-500/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white font-medium">소개</span>
                                     <span class="text-xs text-white/30 group-hover:text-blue-300">about.html</span>
                                 </a>
-                                <a href="doctor.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-500/10 transition-all group">
+                                <a href="doctor.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-500/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white font-medium">의료진소개</span>
                                     <span class="text-xs text-white/30 group-hover:text-blue-300">doctor.html</span>
                                 </a>
-                                <a href="tour.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-500/10 transition-all group">
+                                <a href="tour.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-500/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white font-medium">병원둘러보기</span>
                                     <span class="text-xs text-white/30 group-hover:text-blue-300">tour.html</span>
                                 </a>
@@ -1017,23 +1144,29 @@
                         <div class="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
                             <p class="text-xs font-semibold text-amber-400 mb-2">커뮤니티 — 5페이지</p>
                             <div class="space-y-1">
-                                <a href="community.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
+                                <a href="community.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white font-medium">커뮤니티</span>
                                     <span class="text-xs text-white/30 group-hover:text-amber-300">community.html</span>
                                 </a>
-                                <a href="consultation.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
+                                <a href="consultation.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white font-medium">온라인상담</span>
-                                    <span class="text-xs text-white/30 group-hover:text-amber-300">consultation.html</span>
+                                    <span
+                                        class="text-xs text-white/30 group-hover:text-amber-300">consultation.html</span>
                                 </a>
-                                <a href="booking.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
+                                <a href="booking.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white font-medium">진료예약</span>
                                     <span class="text-xs text-white/30 group-hover:text-amber-300">booking.html</span>
                                 </a>
-                                <a href="news.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
+                                <a href="news.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white font-medium">언론보도</span>
                                     <span class="text-xs text-white/30 group-hover:text-amber-300">news.html</span>
                                 </a>
-                                <a href="notice.html" target="_blank" class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
+                                <a href="notice.html" target="_blank"
+                                    class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-500/10 transition-all group">
                                     <span class="text-xs text-white/70 group-hover:text-white font-medium">공지사항</span>
                                     <span class="text-xs text-white/30 group-hover:text-amber-300">notice.html</span>
                                 </a>
@@ -2370,91 +2503,105 @@
                             </thead>
                             <tbody class="divide-y divide-white/5">
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('닥터스미')">닥터스미</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('닥터스미')">닥터스미</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">안면윤곽, 가슴, 눈, 코, 쁘띠 (3인 전문의)</td>
                                     <td class="py-2.5 pr-4 text-white/60">인스타+플랫폼</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('페이스')">페이스</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('페이스')">페이스</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">안면윤곽, 양악, 눈, 코, 리프팅</td>
                                     <td class="py-2.5 pr-4 text-white/60">유튜브+인스타</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('미래')">미래</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('미래')">미래</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 탄방동</td>
                                     <td class="py-2.5 pr-4 text-white/60">눈, 코, 쁘띠, 리프팅, 피부</td>
                                     <td class="py-2.5 pr-4 text-white/60">블로그</td>
                                     <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('숨은그림')">숨은그림</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('숨은그림')">숨은그림</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">눈 전문 (쌍꺼풀, 눈매교정, 트임)</td>
                                     <td class="py-2.5 pr-4 text-white/60">블로그</td>
                                     <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('희소')">희소</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('희소')">희소</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
-                                    <td class="py-2.5 pr-4 text-white/60">눈, 코, 리프팅, 줄기세포 <span class="text-amber-400">⚠ 메시지 유사</span></td>
+                                    <td class="py-2.5 pr-4 text-white/60">눈, 코, 리프팅, 줄기세포 <span class="text-amber-400">⚠
+                                            메시지 유사</span></td>
                                     <td class="py-2.5 pr-4 text-white/60">인스타+유튜브</td>
                                     <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('비포애프')">비포애프</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('비포애프')">비포애프</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">눈, 코, 지방성형, 리프팅</td>
                                     <td class="py-2.5 pr-4 text-white/60">인스타+플랫폼</td>
                                     <td class="py-2.5 text-center text-blue-400 font-bold text-[11px]">★★☆☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('오체안 대전')">오체안 대전</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('오체안 대전')">오체안 대전</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">양성종양, 흉터, 상처봉합, 재건 (치료특화)</td>
                                     <td class="py-2.5 pr-4 text-white/60">유튜브(본사)</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('갤러리')">갤러리</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('갤러리')">갤러리</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">성형외과 일반</td>
                                     <td class="py-2.5 pr-4 text-white/60">최소</td>
                                     <td class="py-2.5 text-center text-white/40 font-bold text-[11px]">★☆☆☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('뉴진')">뉴진</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('뉴진')">뉴진</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">코, 눈, 리프팅, 지방이식</td>
                                     <td class="py-2.5 pr-4 text-white/60">인스타 활발</td>
                                     <td class="py-2.5 text-center text-blue-400 font-bold text-[11px]">★★☆☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors bg-amber-500/5">
-                                    <td class="py-2.5 pr-4 font-bold text-amber-300 cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('올웨이즈윤대영')">올웨이즈윤대영 ①</td>
+                                    <td class="py-2.5 pr-4 font-bold text-amber-300 cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('올웨이즈윤대영')">올웨이즈윤대영 ①</td>
                                     <td class="py-2.5 pr-4 text-amber-300/80">유성구 봉명동</td>
                                     <td class="py-2.5 pr-4 text-white/60">성형+피부+외과 복합의원</td>
                                     <td class="py-2.5 pr-4 text-white/60">미약</td>
                                     <td class="py-2.5 text-center text-yellow-400 font-bold text-[11px]">★★★☆☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors bg-red-500/5">
-                                    <td class="py-2.5 pr-4 font-bold text-red-300 cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('을지대병원')">을지대병원 ②</td>
+                                    <td class="py-2.5 pr-4 font-bold text-red-300 cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('을지대병원')">을지대병원 ②</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 둔산동</td>
                                     <td class="py-2.5 pr-4 text-white/60">미용+재건 양축 (대학병원 인프라)</td>
                                     <td class="py-2.5 pr-4 text-white/60">소극적</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★★</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('건양대병원')">건양대병원</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('건양대병원')">건양대병원</td>
                                     <td class="py-2.5 pr-4 text-white/60">서구 관저동</td>
                                     <td class="py-2.5 pr-4 text-white/60">눈, 코, 외상, 수부재건, 화상 (상급종합)</td>
                                     <td class="py-2.5 pr-4 text-white/60">소극적</td>
                                     <td class="py-2.5 text-center text-red-400 font-bold text-[11px]">★★★★☆</td>
                                 </tr>
                                 <tr class="hover:bg-white/3 transition-colors">
-                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40" onclick="openCompetitorModal('충남대병원')">충남대병원</td>
+                                    <td class="py-2.5 pr-4 font-bold cursor-pointer hover:text-primary transition-colors underline underline-offset-2 decoration-primary/40"
+                                        onclick="openCompetitorModal('충남대병원')">충남대병원</td>
                                     <td class="py-2.5 pr-4 text-white/60">중구</td>
                                     <td class="py-2.5 pr-4 text-white/60">재건, 수부, 안면외상, 유방재건 (6교수)</td>
                                     <td class="py-2.5 pr-4 text-white/60">소극적</td>
@@ -2797,12 +2944,12 @@
             localStorage.setItem('dashboardTheme', isLight ? 'light' : 'dark');
         }
         // Restore saved theme
-        (function() {
+        (function () {
             if (localStorage.getItem('dashboardTheme') === 'light') {
                 document.documentElement.classList.add('light-mode');
             }
         })();
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             if (document.documentElement.classList.contains('light-mode')) {
                 document.getElementById('theme-icon').textContent = 'dark_mode';
             }
@@ -2971,10 +3118,10 @@
 
             const infoRows = [
                 data.location && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">위치</span><span class="text-white/80">${data.location}</span></div>`,
-                data.phone    && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">전화</span><span class="text-white/80">${data.phone}</span></div>`,
-                data.doctors  && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">의료진</span><span class="text-white/80">${data.doctors}</span></div>`,
+                data.phone && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">전화</span><span class="text-white/80">${data.phone}</span></div>`,
+                data.doctors && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">의료진</span><span class="text-white/80">${data.doctors}</span></div>`,
                 data.specialty && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">주력</span><span class="text-white/80">${data.specialty}</span></div>`,
-                data.slogan   && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">슬로건</span><span class="text-white/80 italic">${data.slogan}</span></div>`,
+                data.slogan && `<div class="flex gap-2.5 items-start"><span class="text-white/40 shrink-0 w-14">슬로건</span><span class="text-white/80 italic">${data.slogan}</span></div>`,
             ].filter(Boolean).join('');
 
             const toList = (items, color) => items.map(s =>
@@ -3012,7 +3159,7 @@
             `;
 
             const modal = document.getElementById('competitor-modal');
-            const card  = document.getElementById('competitor-modal-card');
+            const card = document.getElementById('competitor-modal-card');
             modal.classList.remove('hidden');
             card.classList.remove('modal-animate');
             void card.offsetWidth;
@@ -3023,16 +3170,19 @@
             document.getElementById('competitor-modal').classList.add('hidden');
         }
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeCompetitorModal();
         });
     </script>
 
     <!-- Competitor Detail Modal -->
     <div id="competitor-modal" class="fixed inset-0 z-[300] hidden flex items-center justify-center p-4">
-        <div id="competitor-modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCompetitorModal()"></div>
-        <div id="competitor-modal-card" class="relative glass-panel rounded-2xl p-6 w-full max-w-lg max-h-[82vh] overflow-y-auto custom-scrollbar">
-            <button onclick="closeCompetitorModal()" class="absolute top-4 right-4 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors z-10">
+        <div id="competitor-modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onclick="closeCompetitorModal()"></div>
+        <div id="competitor-modal-card"
+            class="relative glass-panel rounded-2xl p-6 w-full max-w-lg max-h-[82vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeCompetitorModal()"
+                class="absolute top-4 right-4 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors z-10">
                 <span class="material-icons-round text-sm">close</span>
             </button>
             <div id="competitor-modal-body"></div>
