@@ -120,8 +120,13 @@
       "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Hospitals_in_South_Korea&cmtype=file&cmlimit=10&format=json&prop=imageinfo\")",
       "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Hospitals_in_South_Korea&cmtype=file&cmlimit=5&format=json\")",
       "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&titles=File:Chonnam_National_University_Hospital,_Dong-gu,_Gwangju_01.jpg|File:Chonnam_National_University_Hospital,_Dong-gu,_Gwangju_02.jpg|File:Chonnam_National_University_Hospital,_Dong-gu,_Gwangju_03.jpg&prop=imageinfo&iiprop=url&format=json\")",
+<<<<<<< HEAD
       "Bash(zip -r -q ysmc_pla_delivery.zip ysmc_pla_delivery/)",
       "Read(//Users/chul/.claude/projects/-Users-chul-Documents-WORK-ysmc-pla/aadefe6c-7c91-4c22-9f21-e27f26eae1da/subagents/**)"
+=======
+      "Bash(cp briefing/*.md briefing/*.html briefing/*.docx strategy/marketing/)",
+      "Bash(cp -r briefing/refer strategy/marketing/)"
+>>>>>>> 9e6853c5f00ad43d343d41f6707151b7e91781ee
     ]
   }
 }
