@@ -30,7 +30,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `admin.html` — 운영 관리 페이지 "유성선병원 성형외과 MASTER PAGE" (Tailwind CSS, **별도 아키텍처**, GNB 없음)
 - `dashboard.html` — 마케팅 대시보드 (Tailwind CSS, **별도 아키텍처**)
 - `cosmetic.html` / `medical.html` — 진료 허브 페이지 (각 카테고리 진입점)
-- 미용·성형 상세 8개: `eye`, `nose`, `lifting`, `male`, `fat`, `breast`, `other`, `petit`
+- 미용·성형 상세 7개 (+1 비활성): `eye`, `nose`, `lifting`, `fat`, `breast`, `other`, `petit` / `male` (GNB 미노출, 직접 접근만 가능)
 - 치료·재건 상세 4개: `trauma`, `burn`, `reconstruction`, `pediatric`
 - 기관 소개: `about`, `doctor`, `tour`
 - 커뮤니티: `community`, `consultation`, `booking`, `notice`, `reviews`
@@ -90,28 +90,34 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/OLD/NEW/g'
 ```
 
-### 헤더 구조 (모든 페이지 공통)
+### 헤더 구조
 
-단일 토바 (`.header-topbar`, 48px) 1줄 구성:
+**index.html만** 1줄 토바 (`.header-topbar`, 48px):
 
 ```
 [선메디컬센터 유성선병원 성형외과]    병원소개 | 미용성형센터 | 외상·재건센터 | 커뮤니티  [≡]
 ```
+- 헤더 높이: PC 48px / 모바일 44px. hero는 `height: 100svh` (margin-top 없음)
 
-- **좌측**: `.logo-text` (index.html 링크)
-- **우측**: `.topbar-nav` 안에 `.topbar-tab` 4개 + `.topbar-divider` 구분선
-- **모바일**: `.topbar-nav { display: none }`, 햄버거(`.menu-toggle`)만 표시 → 풀스크린 오버레이
-- **현재 페이지 표시**: 해당 `.topbar-tab`에 `.active` 클래스
-  - about/doctor/tour → 병원소개 active
-  - 미용성형 상세 + cosmetic → 미용성형센터 active
-  - 치료재건 상세 + medical → 외상·재건센터 active
-  - community/consultation/booking/notice/reviews → 커뮤니티 active
-  - index → active 없음
-- **헤더 높이**: PC 48px / 모바일 44px → `.page-hero { margin-top: 48px }`
+**나머지 모든 페이지** — 2단 헤더 (탭바 40px + GNB 64px = 104px):
+
+```
+         [미용성형센터 | 외상·재건센터]              ← 탭바 (.header-topbar, 중앙 정렬)
+[로고]  병원소개▼ 눈성형▼ 코성형▼ ... 쁘띠▼  [진료예약] [상담예약]  [≡]  ← GNB (.header-gnb-row)
+```
+
+- **탭바**: 미용성형센터 / 외상·재건센터 전환. `.topbar-tab.active`로 현재 섹션 표시
+- **GNB**: 미용성형 페이지는 cosmetic GNB (눈/코/가슴/동안/바디/쁘띠), 치료재건 페이지는 medical GNB (상처·외상/화상/피부종양/소아진료)
+- **드롭다운**: `.gnb-dropdown` (hover 시 표시), 눈성형은 `.dd-wide` 3컬럼
+- **현재 메뉴 표시**: `.gnb-item > a.current` 클래스
+- **CTA 버튼**: `.header-cta` 안에 `.btn-outline-w`(진료예약) + `.btn-solid-w`(상담 예약)
+- **모바일** (768px 이하): `.gnb, .header-cta { display: none }`, 햄버거만 표시 → 풀스크린 오버레이
+- **헤더 높이**: PC 104px / 모바일 96px (36+60) → `.page-hero { margin-top: 104px }`, 모바일 `96px`
+- **예외**: `burn.html`은 `emergency-banner`가 헤더 바로 아래에 오므로 margin-top이 banner에 적용됨
 
 ### JS 패턴
 
-- **진료 상세 페이지**: `<script>` 블록 없음. FAQ 아코디언은 `onclick="this.parentElement.classList.toggle('active')"` 방식
+- **진료 상세 페이지**: 플로팅 CTA 토글용 standalone `<script>` IIFE만 존재. FAQ 아코디언은 `onclick="this.parentElement.classList.toggle('active')"` 방식
 - **index.html**: IIFE — 헤더 스크롤, 모바일 메뉴, Intersection Observer fade-up, 스플릿 히어로 터치 (`height: 100svh`, `.sp-seam::before` 구분선은 `display: none` 상태 유지)
 - **cosmetic.html / medical.html**: IIFE — 자동 슬라이드쇼(3초 전환), 카테고리 스크롤 drag-to-scroll, 플로팅 CTA 토글
 - **about.html**: IIFE — 카드 stagger 애니메이션. 오시는 길 섹션에 Google Maps iframe 내장 (`https://www.google.com/maps?q=...&output=embed`), API 키 불필요
@@ -120,7 +126,7 @@ grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/O
 
 ### 허브 페이지 섹션 구성 (cosmetic.html / medical.html)
 
-**cosmetic.html:** 히어로 슬라이드쇼(눈/코/리프팅/남자/지방/가슴/기타/쁘띠 — 8종) → 카테고리 스크롤 8종 → Why Choose Us → 의료진 소개 → CTA
+**cosmetic.html:** 히어로 슬라이드쇼(눈/코/리프팅/지방/가슴/기타/쁘띠 — 7종) → 카테고리 스크롤 7종 → Why Choose Us → 의료진 소개 → CTA
 
 **medical.html:** 프로모션 배너(응급/조직검사/소아) → 히어로 슬라이드쇼(외상/화상/피부종양/소아) → 카테고리 스크롤 4종 → 안전 시스템 → 의료진 소개 → CTA
 
@@ -157,7 +163,7 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 
 커스텀 예약 폼 없음. 3채널 카드로만 구성:
 - **온라인 예약** → 본원 예약시스템 외부 링크 (`href="#"`, `<!-- TODO -->` 주석으로 URL 교체 위치 표시)
-- **전화 예약** → 성형외과 직통 내선 (`href="tel:042-000-0000"`, 실제 내선번호로 교체 필요)
+- **전화 예약** → 성형외과 직통 (`href="tel:042-609-1190"`)
 - **카카오톡 예약** → 카카오 케어챗 링크 (`href="#"`, `<!-- TODO -->` 주석으로 URL 교체 위치 표시)
 
 ### 모바일 주의사항
@@ -170,26 +176,7 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 
 페이지 그룹별로 색상 팔레트가 다르다. 수정 전 해당 파일의 `:root`를 반드시 확인할 것.
 
-**허브·인덱스 페이지** (`index.html`, `cosmetic.html`, `medical.html`) — teal 계열:
-```css
-:root {
-  --primary: #42c0bf;       /* 메인 컬러 (teal/cyan) */
-  --primary-light: #63c3c2;
-  --primary-dark: #2da8a7;
-  --wine: #232942;          /* 딥 다크네이비 (미용성형 히어로 배경) */
-  --navy: #0d1f2e;          /* 다크 네이비 (치료재건 배경) */
-  --navy-mid: #303947;
-  --accent: #b2e4e4;        /* 서브 컬러 (라이트 teal) */
-  --accent-light: #d2f0f0;
-  --bg-off: #f0fafa;        /* 섹션 배경 (teal 오프화이트) */
-  --text-dark: #1A1A1A;
-  --text-mid: #555;
-  --text-light: #888;
-  --white: #FFFFFF;
-}
-```
-
-**기관 소개 페이지** (`about.html`, `doctor.html`, `tour.html`) — 로즈/와인 계열:
+**전 페이지 공통** (index, cosmetic, medical, about, doctor, tour, 상세 페이지 등) — 로즈/와인 계열:
 ```css
 :root {
   --primary: #9E6B7B;
@@ -212,11 +199,11 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 - **CDN 의존**: Tailwind CSS (커스텀 teal/surface 컬러 확장), Google Fonts (Noto Sans KR) — 인터넷 필수
 - **인증**: `sessionStorage('ysmc_admin')` — 비밀번호는 JS 내 `ADMIN_PW` 상수 (정적 사이트 한계, 실 운영 시 서버 사이드 인증 필요)
 - **테마**: `<html class="dark">` 고정 (라이트 모드 없음)
-- **4개 관리 메뉴**: 팝업 관리 / 수술후기 관리 / 공지사항 관리 / 온라인 상담
+- **3개 관리 메뉴**: 팝업 관리 / 공지사항 관리 / 온라인 상담 (수술후기 관리는 2026-04-17 제거됨)
 - **이미지 업로드**: 팝업 및 수술후기의 이미지 필드는 `<input type="file">` → `FileReader.readAsDataURL()` → Base64 Data URL로 localStorage에 저장. 선택 즉시 썸네일 미리보기 표시, × 버튼으로 삭제. 고해상도 원본 업로드 시 localStorage 5MB 한도 주의.
 - **localStorage 데이터 계약** — 공개 페이지 연동 현황:
   - `ysmc_popup` → `index.html` 팝업 오버레이 표시 (날짜 범위 + "오늘 하루 보지 않기" 지원) ✅
-  - `ysmc_reviews` → `reviews.html` 수술후기 목록 동적 로딩 (카테고리 필터 + 상세 모달) ✅
+  - `ysmc_reviews` → `reviews.html` 수술후기 (admin에서 제거됨, 공개 페이지는 잔존하나 비활성 상태)
   - `ysmc_notices` → `notice.html` 공지사항 동적 로딩 (기존 하드코딩 목록 위에 prepend, 클릭 시 본문 모달) ✅
   - `ysmc_consultations` → `consultation.html` 폼 submit → admin에서 미확인/확인/답변완료 관리 ✅
 - **미확인 상담 뱃지**: 사이드바에 `pending` 상태 건수 표시, 상담 클릭 시 `pending→read` 자동 전환
@@ -247,8 +234,10 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 - **핵심 메시지**: "종합병원의 안전함에 섬세함을 더하다"
 - **의료진 호칭**: "전문의" 또는 "과장" 사용. **"원장" 사용 금지** (종합병원 진료과 형태)
 - **담당의**: 신정환 과장 (성형외과 전문의, 가톨릭중앙의료원 출신)
-- **CTA 4종 (순서 고정)**: 전화 상담(`tel:042-000-0000`) → 진료 예약(`booking.html`) → 카카오 상담 → 네이버 예약
-- **플로팅 CTA** (데스크탑 우측): 전화 상담 / 카톡 상담 / 네이버 예약
+- **대표전화**: `042-609-1190` (전 페이지 적용됨)
+- **CTA 4종 (순서 고정)**: 전화 상담(`tel:042-609-1190`) → 진료 예약(`booking.html`) → 카카오 상담 → 네이버 예약
+- **플로팅 CTA** (데스크탑 우측, 전 페이지): 전화 상담 / 카톡 상담 / 네이버 예약 — `.float-cta` + 토글 JS, 태블릿/모바일에서 `display: none`
+- **남성성형**: `male.html` 파일은 존재하나 GNB/모바일nav/cosmetic 슬라이드에서 **링크 제거됨** (직접 URL 접근만 가능)
 - **미용성형 컬러**: `--primary` / **치료재건 컬러**: `--navy-mid`
 - **의료법 준수**: "최고", "완벽한", "100% 만족" 등 과장 표현 금지
 
