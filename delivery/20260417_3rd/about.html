@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>소개 | 선메디컬센터 유성선병원 성형외과</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Manrope', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; color: #181C1E; line-height: 1.6; background: #fff; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    :root {
+      --primary: #9E6B7B;
+      --primary-light: #D4A5B5;
+      --primary-dark: #8A5568;
+      --wine: #2D1F24;
+      --navy: #2D1F24;
+      --navy-mid: #6B5258;
+      --accent: #D4A5B5;
+      --accent-light: #C09070;
+      --bg-off: #F3E8E4;
+      --text-dark: #2D1F24;
+      --text-mid: #6B5258;
+      --text-light: #9A8B90;
+      --white: #FFFFFF;
+      --primary-container: #F3E8E4;
+      --secondary: #C09070;
+      --secondary-light: #D4A5B5;
+      --secondary-container: #F3E8E4;
+      --tertiary: #8A5568;
+      --tertiary-light: #D4A5B5;
+      --surface: #FBF5F3;
+      --surface-low: #F3E8E4;
+      --surface-lowest: #FBF5F3;
+      --on-surface: #2D1F24;
+      --outline-variant: rgba(107, 82, 88, 0.15);
+    }
+
+    /* ===== Header / GNB ===== */
+    .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; display: flex; flex-direction: column; background: rgba(251, 245, 243, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 2px 20px rgba(158, 107, 123, 0.08); transition: background 0.35s, box-shadow 0.35s; }
+    .header.scrolled { background: rgba(251, 245, 243, 0.98); box-shadow: 0 4px 24px rgba(158, 107, 123, 0.10); }
+    .header-topbar { height: 40px; display: flex; align-items: center; justify-content: center; gap: 0; border-bottom: 1px solid rgba(158, 107, 123, 0.12); background: rgba(243, 232, 228, 0.5); }
+    .topbar-tab { display: flex; align-items: center; height: 40px; padding: 0 28px; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; color: rgba(0,0,0,0.35); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .topbar-tab:hover { color: var(--primary); }
+    .topbar-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .topbar-divider { width: 1px; height: 16px; background: rgba(0,0,0,0.15); }
+    .header-gnb-row { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; }
+    .logo-text { font-size: 16px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.4px; flex-shrink: 0; white-space: nowrap; }
+    .gnb { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
+    .gnb-item { position: relative; }
+    .gnb-item > a { display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: rgba(0,0,0,0.60); letter-spacing: 0.3px; padding: 0 14px; height: 64px; transition: color 0.22s; white-space: nowrap; }
+    .gnb-item > a:hover, .gnb-item > a.current { color: var(--text-dark); }
+    .gnb-item > a.current { border-bottom: 2px solid var(--primary); }
+    .gnb-arrow { font-size: 9px; opacity: 0.5; transition: transform 0.22s; }
+    .gnb-item:hover .gnb-arrow { transform: rotate(180deg); opacity: 1; }
+    .gnb-dropdown { position: absolute; top: 64px; left: 50%; transform: translateX(-50%) translateY(-8px); background: rgba(251, 245, 243, 0.97); border: none; border-top: 2px solid var(--primary); min-width: 200px; padding: 16px 0; opacity: 0; visibility: hidden; transition: opacity 0.22s, transform 0.22s, visibility 0.22s; border-radius: 0 0 6px 6px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+    .gnb-dropdown.dd-wide { display: flex; min-width: 520px; padding: 24px 0; }
+    .gnb-dropdown.dd-wide-4 { min-width: 700px; }
+    .gnb-item:hover .gnb-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dd-col { flex: 1; padding: 0 8px; }
+    .dd-col + .dd-col { border-left: 1px solid rgba(0,0,0,0.07); }
+    .dd-col-label { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(0,0,0,0.35); padding: 0 16px 10px; margin-bottom: 4px; }
+    .gnb-dropdown a { display: block; font-size: 13px; font-weight: 500; color: rgba(0,0,0,0.65); padding: 9px 16px; transition: color 0.18s, background 0.18s; white-space: nowrap; }
+    .gnb-dropdown a:hover { color: var(--text-dark); background: rgba(158,107,123,0.10); }
+    .header-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .header-cta a { padding: 7px 18px; border-radius: 9999px; font-size: 13px; font-weight: 600; transition: all 0.25s; }
+    .btn-outline-w { background: var(--surface-low, #F3E8E4); border: none; color: var(--on-surface, #181C1E); border-radius: 9999px; }
+    .btn-outline-w:hover { background: var(--accent, #D4A5B5); color: var(--primary-dark); }
+    .btn-solid-w { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; border-radius: 9999px; }
+    .btn-solid-w:hover { background: linear-gradient(135deg, #8A5568, #9E6B7B); }
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; z-index: 1100; }
+    .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav-overlay { display: none; position: fixed; inset: 0; background: rgba(251, 245, 243, 0.97); z-index: 1050; flex-direction: column; align-items: center; justify-content: flex-start; overflow-y: auto; padding: 116px 32px 40px; opacity: 0; transition: opacity 0.3s; }
+    .mobile-nav-overlay.open { display: flex; opacity: 1; }
+    .mob-nav-section { width: 100%; max-width: 320px; margin-bottom: 8px; }
+    .mob-center-switcher { display: flex; gap: 0; border: 1px solid rgba(158,107,123,0.2); border-radius: 9999px; overflow: hidden; margin-bottom: 20px; }
+    .mob-switch-tab { flex: 1; text-align: center; padding: 10px 16px; font-size: 13px; font-weight: 700; color: rgba(0,0,0,0.45); background: transparent; transition: all 0.2s; }
+    .mob-switch-tab.active { background: var(--primary); color: #fff; }
+    .mob-sub-title { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(0,0,0,0.35); padding: 16px 0 8px; }
+    .mob-sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 8px; }
+    .mob-sub-grid a { font-size: 14px; font-weight: 500; color: rgba(0,0,0,0.60); padding: 10px 12px; background: rgba(0,0,0,0.04); border-radius: 9999px; transition: color 0.18s, background 0.18s; }
+    .mob-sub-grid a:hover { color: var(--text-dark); background: rgba(158,107,123,0.15); }
+    .mobile-nav-divider { width: 100%; max-width: 320px; height: 1px; background: rgba(0,0,0,0.08); margin: 16px 0; }
+    .mobile-nav-cta { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 320px; }
+    .mobile-nav-cta a { font-size: 15px !important; font-weight: 600 !important; padding: 14px 0 !important; text-align: center; border-radius: 9999px; }
+    .mobile-nav-cta .nav-phone { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; }
+    .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
+
+    /* ===== Hero Banner ===== */
+    .hero-banner {
+      margin-top: 104px;
+      height: 340px;
+      background: #F3E8E4;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(140deg, rgba(251,245,243,0.95) 0%, rgba(232,220,200,0.6) 100%);
+      z-index: 1;
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute; right: -60px; top: -60px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(158,107,123,0.18);
+      z-index: 1;
+    }
+
+    .hero-banner-inner {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto; padding: 0 40px; width: 100%;
+    }
+
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(107,82,88,0.5); margin-bottom: 16px; }
+    .hero-title { font-size: clamp(36px, 4.5vw, 56px); font-weight: 800; color: #2D1F24; letter-spacing: -2px; line-height: 1.1; margin-bottom: 14px; }
+    .hero-subtitle { font-size: 15px; color: rgba(107,82,88,0.65); line-height: 1.8; max-width: 480px; }
+
+    /* ===== Section Common ===== */
+    .section { padding: 100px 40px; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+    .section-label { display: inline-block; font-size: 10px; font-weight: 600; color: var(--primary); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; line-height: 1.25; margin-bottom: 14px; }
+    .section-desc { font-size: 15px; color: var(--text-mid); line-height: 1.8; }
+
+    /* ===== About Body Section ===== */
+    .about-intro { background: #fff; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-text h2 { font-size: 30px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; margin-bottom: 24px; line-height: 1.35; }
+
+    .about-text p { font-size: 16px; color: var(--text-mid); line-height: 1.9; margin-bottom: 20px; }
+
+    .about-text p strong { color: var(--text-dark); font-weight: 700; }
+
+    .info-box {
+      background: var(--surface, #FBF5F3);
+      border-radius: 12px;
+      padding: 36px 32px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .info-box-title { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); margin-bottom: 24px; }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: none;
+    }
+
+    .stat-item:last-child { border-bottom: none; }
+
+    .stat-num { font-size: 30px; font-weight: 800; color: var(--primary); letter-spacing: -1px; min-width: 80px; }
+    .stat-label { font-size: 14px; color: var(--text-mid); line-height: 1.5; }
+    .stat-label strong { display: block; font-size: 15px; color: var(--text-dark); font-weight: 700; }
+
+    /* ===== Mission Cards ===== */
+    .mission { background: var(--surface, #FBF5F3); }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 60px;
+    }
+
+    .mission-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .mission-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+
+    .mission-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #9E6B7B, #D4A5B5);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 28px;
+    }
+
+    .mission-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .mission-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .mission-card:hover .mission-img img { transform: scale(1.06); }
+
+    .mission-card-body { padding: 28px 28px 36px; }
+
+    .mission-card h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; letter-spacing: -0.3px; }
+    .mission-card p { font-size: 14px; color: var(--text-mid); line-height: 1.8; }
+
+    /* ===== Location ===== */
+    .location { background: #fff; }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .location-info h3 { font-size: 22px; font-weight: 700; color: var(--text-dark); margin-bottom: 28px; }
+
+    .location-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+
+    .location-icon { width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .location-label { font-size: 12px; font-weight: 700; color: var(--text-light); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
+    .location-value { font-size: 15px; color: var(--text-dark); line-height: 1.6; }
+
+    .map-placeholder {
+      height: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-placeholder iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .map-kakao-link {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: #fff;
+      color: var(--text-dark);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: box-shadow 0.2s;
+    }
+
+    .map-kakao-link:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.22); }
+
+    /* ===== CTA ===== */
+    .cta-section { background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); padding: 80px 40px; text-align: center; border-top: 1px solid rgba(158,107,123,0.15); }
+    .cta-section h2 { font-size: 32px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; margin-bottom: 12px; }
+    .cta-section p { font-size: 15px; color: var(--text-mid); margin-bottom: 36px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn-primary { padding: 14px 32px; background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; border-radius: 6px; font-size: 15px; font-weight: 700; transition: background 0.25s; }
+    .cta-btn-primary:hover { background: var(--primary-light); }
+    .cta-btn-outline { padding: 14px 32px; border: 1.5px solid rgba(158,107,123,0.40); color: var(--primary-dark); border-radius: 6px; font-size: 15px; font-weight: 600; transition: all 0.25s; }
+    .cta-btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .cta-btn-kakao { padding: 14px 32px; background: #FEE500; color: #3C1E1E; border-radius: 6px; font-size: 15px; font-weight: 700; transition: opacity 0.25s; }
+    .cta-btn-kakao:hover { opacity: 0.88; }
+
+    /* ===== Footer ===== */
+    .footer { background: #F3E8E4; color: #6B5258; }
+    .footer-top { display: flex; justify-content: center; text-align: center; }
+    .footer-logo { font-size: 16px; font-weight: 700; color: #2D1F24; margin-bottom: 16px; }
+    .footer-detail { font-size: 13px; line-height: 2.1; }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; padding: 20px 40px; border-top: 1px solid rgba(107,82,88,0.15); display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 12px; color: rgba(107,82,88,0.55); }
+
+    /* ===== Desktop Floating CTA ===== */
+    .float-cta {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 980;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .float-cta-toggle {
+      position: absolute;
+      top: -32px;
+      right: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.20);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .float-cta-toggle:hover { background: rgba(0,0,0,0.40); }
+
+    .float-cta.hidden .float-cta-btns { display: none; }
+
+    .float-cta-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .float-cta-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+
+    .float-cta-btn:hover { transform: translateX(-4px); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
+
+    .float-cta-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .float-btn-phone { background: #fff; color: var(--primary-dark); }
+    .float-btn-phone .float-cta-icon { background: var(--primary); }
+    .float-btn-kakao { background: #FEE500; color: #3C1E1E; }
+    .float-btn-kakao .float-cta-icon { background: rgba(0,0,0,0.10); }
+    .float-btn-carechat { background: #3C1E1E; color: #FEE500; }
+    .float-btn-naver { background: #03C75A; color: #fff; }
+    .float-btn-naver .float-cta-icon { background: rgba(255,255,255,0.20); }
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .float-cta { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .info-box { max-width: 480px; }
+      .mission-grid { grid-template-columns: 1fr 1fr; }
+      .location-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .float-cta { display: none; }
+      .header-topbar { height: 36px; }
+      .topbar-tab { font-size: 11px; padding: 0 18px; height: 36px; }
+      .header-gnb-row { height: 60px; padding: 0 20px; }
+      .gnb, .header-cta { display: none; }
+      .menu-toggle { display: flex; }
+      .gnb-dropdown { display: none !important; }
+      .hero-banner { margin-top: 96px; height: 280px; }
+      .hero-banner-inner { padding: 0 20px; }
+      .section { padding: 60px 20px; }
+      .section-title { font-size: 26px; }
+      .about-text h2 { font-size: 24px; }
+      .mission-grid { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; gap: 36px; padding: 44px 20px 28px; }
+
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding: 18px 20px; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .mobile-cta { display: block !important; }
+      .footer { padding-bottom: 76px; }
+    }
+
+    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 990; background: var(--surface, #FBF5F3); box-shadow: 0 -2px 20px rgba(0,0,0,0.4); padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+    .mobile-cta-inner { display: flex; gap: 10px; }
+    .mobile-cta-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.25s; }
+    .mobile-cta-btn:active { opacity: 0.8; }
+    .cta-phone { background: #9E6B7B; color: #2D1F24; }
+    .cta-kakao { background: #FEE500; color: #3C1E1E; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <nav class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-label="모바일 메뉴">
+    <div class="mob-nav-section">
+      <div class="mob-center-switcher">
+        <a href="cosmetic.html" class="mob-switch-tab active">미용성형센터</a>
+        <a href="medical.html" class="mob-switch-tab">외상·재건센터</a>
+      </div>
+      <div class="mob-sub-title">병원소개</div>
+      <div class="mob-sub-grid">
+        <a href="notice.html">공지사항</a>
+        <a href="tour.html">병원둘러보기</a>
+        <a href="doctor.html">의료진소개</a>
+        <a href="about.html" class="current">오시는 길</a>
+        
+        
+      </div>
+      <div class="mob-sub-title">미용성형</div>
+      <div class="mob-sub-grid">
+        <a href="eye.html">눈성형</a>
+        <a href="nose.html">코성형</a>
+        <a href="breast.html">가슴성형</a>
+        <a href="lifting.html">동안성형</a>
+        <a href="fat.html">바디성형</a>
+        <a href="petit.html">쁘띠</a>
+      </div>
+    </div>
+    <div class="mobile-nav-divider"></div>
+    <div class="mobile-nav-cta">
+      <a href="tel:042-609-1190" class="nav-phone">전화 상담 042-609-1190</a>
+      <a href="#" class="nav-kakao">카카오톡으로 문의하기</a>
+    </div>
+  </nav>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header-topbar">
+      <a href="cosmetic.html" class="topbar-tab active">미용성형센터</a>
+      <span class="topbar-divider"></span>
+      <a href="medical.html" class="topbar-tab">외상·재건센터</a>
+    </div>
+    <div class="header-gnb-row">
+      <a href="index.html" class="logo-text">선메디컬센터 유성선병원 성형외과</a>
+      <nav class="gnb" aria-label="주 메뉴">
+        <div class="gnb-item"><a href="about.html" class="current">병원소개 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="notice.html">공지사항</a><a href="tour.html">병원둘러보기</a><a href="doctor.html">의료진소개</a><a href="about.html" class="current">오시는 길</a></div></div>
+        <div class="gnb-item">
+          <a href="eye.html">눈성형 <span class="gnb-arrow">&#9662;</span></a>
+          <div class="gnb-dropdown dd-wide dd-wide-4">
+            <div class="dd-col"><div class="dd-col-label">쌍꺼풀 성형술</div><a href="eye.html#double-eyelid">매몰법</a><a href="eye.html#double-eyelid">부분절개법</a><a href="eye.html#double-eyelid">절개법</a></div>
+            <div class="dd-col"><div class="dd-col-label">중년 눈 성형술</div><a href="eye.html#middle-eye">상안검성형술</a><a href="eye.html#middle-eye">눈썹하거상술</a><a href="eye.html#middle-eye">하안검성형술</a></div>
+            <div class="dd-col"><div class="dd-col-label">트임술</div><a href="eye.html#trim">앞트임</a><a href="eye.html#trim">뒷트임</a><a href="eye.html#trim">밑트임</a><a href="eye.html#trim">듀얼트임</a><a href="eye.html#trim">윗트임</a></div>
+            <div class="dd-col"><div class="dd-col-label">눈밑 성형술</div><a href="eye.html#under-eye">눈밑지방재배치</a><a href="eye.html#under-eye">하안검성형술</a></div>
+          </div>
+        </div>
+        <div class="gnb-item"><a href="nose.html">코성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="nose.html">콧대성형</a><a href="nose.html">코끝성형</a><a href="nose.html">콧볼축소</a><a href="nose.html">코 재수술</a><a href="nose.html">기능성 코성형</a></div></div>
+        <div class="gnb-item"><a href="breast.html">가슴성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="breast.html">가슴확대술</a><a href="breast.html">가슴축소술</a><a href="breast.html">유두축소술</a><a href="breast.html">함몰유두</a><a href="breast.html">여유증</a></div></div>
+        <div class="gnb-item"><a href="lifting.html">동안성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="lifting.html">안면거상술</a><a href="lifting.html">반거상술</a><a href="lifting.html">미니거상술</a><a href="lifting.html">목 거상술</a></div></div>
+        <div class="gnb-item"><a href="fat.html">바디성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="fat.html">얼굴지방흡입술</a><a href="fat.html">복부지방흡입술</a><a href="fat.html">허벅지 지방흡입술</a></div></div>
+        <div class="gnb-item"><a href="petit.html">쁘띠 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="petit.html">울쎄라</a><a href="petit.html">써마지</a><a href="petit.html">보톡스</a><a href="petit.html">필러</a><a href="petit.html">레이저</a></div></div>
+      </nav>
+      <div class="header-cta">
+        <a href="booking.html" class="btn-outline-w">진료예약</a>
+        <a href="consultation.html" class="btn-solid-w">상담 예약</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav"
+        onclick="var o=document.getElementById('mobileNav'),t=document.getElementById('menuToggle'),isOpen=o.classList.contains('open');if(isOpen){o.classList.remove('open');t.classList.remove('open');document.body.style.overflow='';}else{o.classList.add('open');t.classList.add('open');document.body.style.overflow='hidden';}">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO BANNER ===== -->
+  <section class="hero-banner" aria-label="소개 페이지 히어로">
+    <div class="hero-banner-inner">
+      <div class="hero-eyebrow">ABOUT · 선메디컬센터 유성선병원 성형외과</div>
+      <h1 class="hero-title">대학병원의 안전함에<br>섬세함을 더하다</h1>
+      <p class="hero-subtitle">가톨릭중앙의료원 출신 전문의가 이끄는 선메디컬센터 유성선병원 성형외과</p>
+    </div>
+  </section>
+
+  <!-- ===== 병원 소개 ===== -->
+  <section class="section about-intro">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-label">Hospital Overview</div>
+          <h2>선메디컬센터 유성선병원 성형외과,<br>안전과 섬세함의 균형</h2>
+          <p>
+            유성선병원은 의료법인 영훈의료재단이 운영하는 대전·충청권 대표 종합병원으로, 각 진료과의 전문의들이 유기적으로 협력하는 안전한 의료 환경을 갖추고 있습니다. 성형외과는 <strong>가톨릭중앙의료원 출신 신정환 과장</strong>이 이끌며, 미용·성형부터 외상·재건까지 폭넓은 진료를 제공합니다.
+          </p>
+          <p>
+            단순한 외모 개선을 넘어 <strong>기능과 안전을 함께 고려하는 진료 철학</strong>을 바탕으로, 환자 개개인의 상황에 맞는 최적의 치료 방법을 제시합니다. 개인의원에서는 갖추기 어려운 마취과 협진 시스템, 24시간 응급 대응 체계, 종합병원 인프라를 그대로 활용합니다.
+          </p>
+          <p>
+            선메디컬센터 유성선병원 성형외과는 <strong>자연스러운 결과</strong>를 최우선으로 합니다. 수술 전 충분한 상담과 정확한 진단을 통해 적절한 수술 범위를 설정하고, 불필요한 과잉 시술을 지양합니다. 환자 한 분 한 분의 개성과 얼굴 구조를 존중하는 맞춤형 접근이 저희의 기본입니다.
+          </p>
+        </div>
+
+        <aside class="info-box">
+          <div class="info-box-title">주요 현황</div>
+
+          <div class="stat-item">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">
+              <strong>전문의 경력</strong>
+              수련·임상 포함 총 경력
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-num">5개</div>
+            <div class="stat-label">
+              <strong>진료 분야</strong>
+              눈·리프팅·쁘띠·외상·재건
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-num">24h</div>
+            <div class="stat-label">
+              <strong>응급 대응</strong>
+              외상·응급 환자 24시간
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">
+              <strong>전담 마취과</strong>
+              종합병원 마취과 협진
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 미션·비전 ===== -->
+  <section class="section mission">
+    <div class="section-inner">
+      <div style="text-align:center">
+        <div class="section-label">Mission &amp; Values</div>
+        <h2 class="section-title">선메디컬센터 유성선병원 성형외과가<br>추구하는 세 가지 가치</h2>
+        <p class="section-desc">모든 진료의 기준이 되는 핵심 원칙입니다.</p>
+      </div>
+      <div class="mission-grid">
+        <article class="mission-card">
+          <div class="mission-img">
+            <img src="images/card-image/values/safety-first.jpg" alt="안전 우선 — 종합병원 의료 인프라" loading="lazy">
+          </div>
+          <div class="mission-card-body">
+            <h3>안전 우선</h3>
+            <p>종합병원의 완비된 의료 인프라와 전담 마취과 협진 시스템을 통해, 수술의 안전성을 최우선으로 확보합니다. 응급 상황에 즉각 대응할 수 있는 체계가 갖춰져 있습니다.</p>
+          </div>
+        </article>
+        <article class="mission-card">
+          <div class="mission-img">
+            <img src="images/card-image/values/precise-surgery.jpg" alt="섬세한 수술 — 정밀한 술기" loading="lazy">
+          </div>
+          <div class="mission-card-body">
+            <h3>섬세한 수술</h3>
+            <p>대학병원 수련 과정에서 익힌 정밀한 술기와 해부학적 이해를 바탕으로, 자연스럽고 오래 지속되는 결과를 만들어냅니다. 과하지 않은 아름다움을 설계합니다.</p>
+          </div>
+        </article>
+        <article class="mission-card">
+          <div class="mission-img">
+            <img src="images/card-image/values/patient-care.jpg" alt="환자 중심 진료 — 충분한 설명과 상담" loading="lazy">
+          </div>
+          <div class="mission-card-body">
+            <h3>환자 중심 진료</h3>
+            <p>충분한 설명과 진솔한 상담을 통해 환자가 스스로 선택할 수 있도록 돕습니다. 불필요한 수술을 권하지 않으며, 환자의 장기적인 건강과 만족을 목표로 합니다.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 오시는 길 ===== -->
+  <section class="section location">
+    <div class="section-inner">
+      <div class="location-grid">
+        <div class="location-info">
+          <div class="section-label">Location</div>
+          <h2 class="section-title">오시는 길</h2>
+          <div class="location-item">
+            <div>
+              <div class="location-label">주소</div>
+              <div class="location-value">대전광역시 유성구 북유성대로 93 (지족동)<br>선메디컬센터 유성선병원 성형외과</div>
+            </div>
+          </div>
+          <div class="location-item">
+            <div>
+              <div class="location-label">대중교통</div>
+              <div class="location-value">지하철 1호선 지족역 2번 출구 도보 5분<br>버스 311, 611, 102번 유성선병원 정류장</div>
+            </div>
+          </div>
+          <div class="location-item">
+            <div>
+              <div class="location-label">자가용</div>
+              <div class="location-value">병원 내 무료 주차 가능 (외래 3시간)<br>북유성대로 진입 후 유성선병원 표지 따라</div>
+            </div>
+          </div>
+          <div class="location-item">
+            <div>
+              <div class="location-label">진료시간</div>
+              <div class="location-value">평일 09:00 – 17:30<br>토요일 09:00 – 12:30<br>일요일·공휴일 휴진 (응급환자 24h)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <iframe
+            src="https://www.google.com/maps?q=대전광역시+유성구+북유성대로+93+유성선병원&output=embed"
+            title="유성선병원 위치"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+          <a href="https://map.kakao.com/?q=유성선병원" target="_blank" rel="noopener" class="map-kakao-link">
+             카카오맵으로 보기
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-section">
+    <h2>지금 바로 상담을 시작하세요</h2>
+    <p>궁금한 점은 온라인 상담 또는 전화로 편하게 문의하세요</p>
+    <div class="cta-buttons">
+      <a href="consultation.html" class="cta-btn-primary">온라인 상담 신청</a>
+      <a href="tel:042-609-1190" class="cta-btn-outline">042-609-1190 전화문의</a>
+      <a href="#" class="cta-btn-kakao">카카오톡 문의</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-info">
+        <div class="footer-logo">선메디컬센터 유성선병원 성형외과</div>
+        <address class="footer-detail" style="font-style:normal">
+          의료법인 영훈의료재단 유성선병원<br>
+          진료과: 성형외과<br>
+          주소: 대전광역시 유성구 북유성대로 93 (지족동)<br>
+          대표전화: <a href="tel:042-609-1190" style="color:inherit">042-609-1190</a><br>
+          진료시간: 평일 09:00 – 17:30 | 토요일 09:00 – 12:30<br>
+          (일요일 및 공휴일 휴진 / 응급환자 24시간 대응)
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 선메디컬센터 유성선병원 성형외과. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== DESKTOP FLOATING CTA ===== -->
+  <div class="float-cta" id="floatCta" role="complementary" aria-label="빠른 연락">
+    <button class="float-cta-toggle" id="floatCtaToggle" aria-label="플로팅 메뉴 닫기"></button>
+    <div class="float-cta-btns">
+      <a href="tel:042-609-1190" class="float-cta-btn float-btn-phone">
+        전화 상담
+      </a>
+      <a href="#" class="float-cta-btn float-btn-kakao">
+        카톡 상담
+      </a>
+      <a href="#" class="float-cta-btn float-btn-carechat">
+        카카오 케어챗 예약
+      </a>
+      <a href="#naver-booking" class="float-cta-btn float-btn-naver">
+        <span class="float-cta-icon">N</span>네이버 예약
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== MOBILE STICKY CTA ===== -->
+  <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
+    <div class="mobile-cta-inner">
+      <a href="tel:042-609-1190" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.mission-card').forEach(function(el, i) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity 0.55s ease ' + (i % 3 * 0.1) + 's, transform 0.55s ease ' + (i % 3 * 0.1) + 's, box-shadow 0.3s';
+      io.observe(el);
+    });
+
+    /* ── Desktop Floating CTA toggle ── */
+    var floatCta = document.getElementById('floatCta');
+    var floatToggle = document.getElementById('floatCtaToggle');
+    var floatVisible = true;
+
+    floatToggle.addEventListener('click', function() {
+      floatVisible = !floatVisible;
+      if (floatVisible) {
+        floatCta.classList.remove('hidden');
+        floatToggle.textContent = '';
+        floatToggle.setAttribute('aria-label', '플로팅 메뉴 닫기');
+      } else {
+        floatCta.classList.add('hidden');
+        floatToggle.textContent = '＋';
+        floatToggle.setAttribute('aria-label', '플로팅 메뉴 열기');
+      }
+    });
+  })();
+  </script>
+
+</body>
+</html>
