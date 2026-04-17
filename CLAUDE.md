@@ -31,8 +31,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `dashboard.html` — 마케팅 대시보드 (Tailwind CSS, **별도 아키텍처**)
 - `cosmetic.html` / `medical.html` — 진료 허브 페이지 (각 카테고리 진입점)
 - 미용·성형 상세 7개 (+1 비활성): `eye`, `nose`, `lifting`, `fat`, `breast`, `other`, `petit` / `male` (GNB 미노출, 직접 접근만 가능)
-- 치료·재건 상세 4개: `trauma`, `burn`, `reconstruction`, `pediatric`
-- 기관 소개: `about`, `doctor`, `tour`
+- 치료·재건 상세 5개: `trauma`, `burn`, `scar`, `reconstruction`, `fracture` (소아진료 `pediatric.html`은 2026-04-17 삭제, 내용은 trauma/burn으로 분산)
+- 기관 소개: `about`, `doctor`, `tour`, `events`(이벤트), `hours`(진료시간표)
 - 커뮤니티: `community`, `consultation`, `booking`, `notice`, `reviews`
   - `reviews.html` — 수술후기 목록 페이지. `localStorage: ysmc_reviews`에서 공개 후기(`visible !== false`)를 동적 로딩. 카테고리 필터 탭, 카드 그리드(3→2→1열), 클릭 시 상세 모달. admin에서 등록한 후기가 자동 반영됨.
   - `news.html` — 파일은 존재하나 **모든 GNB/모바일 nav에서 링크 제거됨** (언론보도 게시판 비활성화)
@@ -107,8 +107,12 @@ grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/O
 ```
 
 - **탭바**: 미용성형센터 / 외상·재건센터 전환. `.topbar-tab.active`로 현재 섹션 표시
-- **GNB**: 미용성형 페이지는 cosmetic GNB (눈/코/가슴/동안/바디/쁘띠), 치료재건 페이지는 medical GNB (상처·외상/화상/피부종양/소아진료)
-- **드롭다운**: `.gnb-dropdown` (hover 시 표시), 눈성형은 `.dd-wide` 3컬럼
+- **GNB**: 전 페이지가 동일한 구조 (병원소개 + 7개 카테고리). 2026-04-17 재구성
+  - Cosmetic (7 items): 병원소개 / 눈성형 / 코성형 / 가슴성형 / 동안성형 / 바디성형 / 쁘띠
+  - Medical (6 items): 병원소개 / 상처·외상 / 화상 / 흉터 / 피부종양 / 안면부골절
+  - 병원소개 드롭다운: 공지사항·병원둘러보기·의료진소개·오시는 길·이벤트·진료시간표
+  - 눈성형 드롭다운: 쌍꺼풀 성형술(매몰/부분절개/절개) / 중년 눈 성형술(상안검/눈썹하거상/하안검) / 트임술(앞/뒷/밑/듀얼/윗) / 눈밑 성형술(눈밑지방재배치/하안검성형술)
+- **드롭다운**: `.gnb-dropdown` (hover 시 표시), 눈성형은 `.dd-wide.dd-wide-4` 4컬럼 (min-width 700px)
 - **현재 메뉴 표시**: `.gnb-item > a.current` 클래스
 - **CTA 버튼**: `.header-cta` 안에 `.btn-outline-w`(진료예약) + `.btn-solid-w`(상담 예약)
 - **모바일** (768px 이하): `.gnb, .header-cta { display: none }`, 햄버거만 표시 → 풀스크린 오버레이

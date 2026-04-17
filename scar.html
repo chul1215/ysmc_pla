@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>눈 성형 - 선메디컬센터 유성선병원 성형외과</title>
+  <title>흉터 - 선메디컬센터 유성선병원 성형외과</title>
   <style>
     /* ===== Reset & Base ===== */
     *,
@@ -25,7 +25,7 @@
 
     body {
       font-family: 'Manrope', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-      color: #181C1E;
+      color: #2D1F24;
       line-height: 1.6;
       background: #fff;
     }
@@ -50,20 +50,19 @@
       --primary: #9E6B7B;
       --primary-light: #D4A5B5;
       --primary-dark: #8A5568;
-      --wine: #2D1F24;
-      --navy: #2D1F24;
-      --navy-mid: #6B5258;
       --accent: #D4A5B5;
       --accent-light: #C09070;
       --bg-off: #F3E8E4;
+      --surface-low: #F3E8E4;
       --text-dark: #2D1F24;
       --text-mid: #6B5258;
       --text-light: #9A8B90;
       --white: #FFFFFF;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
       --primary-container: #F3E8E4;
       --secondary: #C09070;
       --secondary-light: #D4A5B5;
-      --secondary-container: #F3E8E4;
       --tertiary: #8A5568;
       --tertiary-light: #D4A5B5;
       --surface: #FBF5F3;
@@ -102,9 +101,9 @@
     .header-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .header-cta a { padding: 7px 18px; border-radius: 9999px; font-size: 13px; font-weight: 600; transition: all 0.25s; }
     .btn-outline-w { background: #f0f0f0; border: none; color: #181C1E; border-radius: 9999px; }
-    .btn-outline-w:hover { background: #e0e0e0; color: var(--primary-dark); }
-    .btn-solid-w { background: linear-gradient(135deg, var(--primary), var(--primary-light, #D4A5B5)); color: #FFFFFF; border-radius: 9999px; }
-    .btn-solid-w:hover { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); }
+    .btn-outline-w:hover { background: #e0e0e0; }
+    .btn-solid-w { background: linear-gradient(135deg, var(--primary), var(--primary-light, #63c3c2)); color: #FFFFFF; border-radius: 9999px; }
+    .btn-solid-w:hover { opacity: 0.9; }
     .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; z-index: 1100; }
     .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
     .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -123,7 +122,7 @@
     .mobile-nav-divider { width: 100%; max-width: 320px; height: 1px; background: rgba(0,0,0,0.08); margin: 16px 0; }
     .mobile-nav-cta { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 320px; }
     .mobile-nav-cta a { font-size: 15px !important; font-weight: 600 !important; padding: 14px 0 !important; text-align: center; border-radius: 9999px; }
-    .mobile-nav-cta .nav-phone { background: linear-gradient(135deg, var(--primary), var(--primary-light, #D4A5B5)); color: #FFFFFF; }
+    .mobile-nav-cta .nav-phone { background: linear-gradient(135deg, var(--primary), var(--primary-light, #63c3c2)); color: #FFFFFF; }
     .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
 
     /* ===== Page Hero ===== */
@@ -131,7 +130,7 @@
       margin-top: 104px;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(251,245,243,0.30) 0%, rgba(243,232,228,0.30) 100%), url(images/eye-correction.png) center/cover no-repeat;
+      background: linear-gradient(135deg, rgba(45,168,167,0.30) 0%, rgba(66,192,191,0.30) 100%), url(images/surgery-room.jpg) center/cover no-repeat;
       padding: 100px 40px 80px;
     }
 
@@ -139,14 +138,14 @@
       max-width: 1280px;
       margin: 0 auto;
       text-align: center;
-      color: var(--text-dark);
+      color: var(--white);
     }
 
     .page-hero-badge {
       display: inline-block;
-      background: rgba(158, 107, 123, 0.10);
-      border: 1px solid rgba(158, 107, 123, 0.25);
-      color: var(--primary-dark);
+      background: rgba(248, 242, 220, 0.25);
+      border: 1px solid rgba(248, 242, 220, 0.5);
+      color: var(--accent-light);
       padding: 6px 16px;
       border-radius: 20px;
       font-size: 13px;
@@ -210,7 +209,7 @@
       line-height: 1.7;
     }
 
-    /* ===== Surgery Principle Section ===== */
+    /* ===== Treatment Principle Section ===== */
     .principle {
       background: var(--white);
     }
@@ -298,7 +297,7 @@
       justify-content: center;
       margin: 0 auto 24px;
       font-size: 36px;
-      color: var(--text-dark);
+      color: var(--white);
     }
 
     .point-card h3 {
@@ -318,12 +317,9 @@
     .point-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
     .point-card:hover .point-card-img img { transform: scale(1.06); }
 
-    /* ===== Surgery Types Section ===== */
-    .surgery-types {
+    /* ===== Treatment Types Section ===== */
+    .treatment-types {
       background: var(--surface-low, #F3E8E4);
-    }
-    .surgery-types.alt {
-      background: var(--surface, #FBF5F3);
     }
 
     .types-grid {
@@ -335,7 +331,7 @@
     .type-card {
       background: var(--white);
       border-radius: 20px;
-      overflow: hidden;
+      padding: 36px 32px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.05);
       transition: transform 0.3s, box-shadow 0.3s;
     }
@@ -343,24 +339,6 @@
     .type-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-    }
-
-    .type-card-visual {
-      height: 220px;
-      background: var(--surface, #FBF5F3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .type-card-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 20px;
-    }
-
-    .type-card-body {
-      padding: 32px 28px;
     }
 
     .type-card-title {
@@ -430,7 +408,7 @@
     }
 
     .faq-question:hover {
-      background: rgba(158, 107, 123, 0.05);
+      background: rgba(106, 190, 167, 0.05);
     }
 
     .faq-q-icon {
@@ -438,7 +416,7 @@
       width: 36px;
       height: 36px;
       background: var(--primary);
-      color: var(--text-dark);
+      color: var(--white);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -483,10 +461,9 @@
 
     /* ===== CTA Section ===== */
     .cta {
-      background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%);
-      color: var(--text-dark);
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: var(--white);
       text-align: center;
-      border-top: 1px solid rgba(158,107,123,0.15);
     }
 
     .cta h2 {
@@ -510,7 +487,7 @@
 
     .cta-btn {
       padding: 16px 40px;
-      border-radius: 9999px;
+      border-radius: 8px;
       font-size: 16px;
       font-weight: 700;
       transition: all 0.3s;
@@ -519,38 +496,37 @@
     }
 
     .cta-btn-primary {
-      background: linear-gradient(135deg, #9E6B7B, #D4A5B5);
-      color: #FFFFFF;
+      background: var(--accent);
+      color: var(--primary-dark);
     }
 
     .cta-btn-primary:hover {
-      background: linear-gradient(135deg, #8A5568, #9E6B7B);
+      background: var(--accent-light);
       transform: translateY(-2px);
     }
 
     .cta-btn-outline {
-      background: rgba(158, 107, 123, 0.08);
-      color: var(--primary-dark);
-      border: 1.5px solid rgba(158, 107, 123, 0.30);
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.4);
     }
 
     .cta-btn-outline:hover {
-      background: rgba(158, 107, 123, 0.14);
-      border-color: var(--primary);
-      color: var(--primary);
+      border-color: var(--white);
+      background: rgba(255, 255, 255, 0.1);
     }
 
     /* ===== Footer ===== */
     .footer {
       background: var(--surface-low, #F3E8E4);
-      color: var(--text-mid);
+      color: rgba(255, 255, 255, 0.7);
       padding: 40px 40px 24px;
       text-align: center;
     }
 
     .footer-copy {
       font-size: 13px;
-      color: var(--text-light);
+      color: rgba(255, 255, 255, 0.4);
     }
 
     /* ===== Desktop Floating CTA ===== */
@@ -629,6 +605,7 @@
     /* ===== Mobile Responsive ===== */
     @media (max-width: 1024px) {
       .float-cta { display: none; }
+
       .principle-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -644,15 +621,17 @@
     }
 
     @media (max-width: 768px) {
+      .float-cta { display: none; }
+
       .header-topbar { height: 36px; }
       .topbar-tab { font-size: 11px; padding: 0 18px; height: 36px; }
       .header-gnb-row { height: 60px; padding: 0 20px; }
       .gnb, .header-cta { display: none; }
       .menu-toggle { display: flex; }
       .gnb-dropdown { display: none !important; }
-      .page-hero { margin-top: 96px; }
 
       .page-hero {
+        margin-top: 96px;
         padding: 56px 20px 52px;
       }
       .page-hero-title {
@@ -764,7 +743,7 @@
     .mobile-cta-btn:active { opacity: 0.8; }
     .cta-phone { background: #9E6B7B; color: #2D1F24; }
     .cta-kakao { background: #FEE500; color: #3C1E1E; }
-    @media (max-width: 768px) { .float-cta { display: none; } .mobile-cta { display: block; } }
+    @media (max-width: 768px) { .mobile-cta { display: block; } }
   </style>
 </head>
 
@@ -774,8 +753,8 @@
   <nav class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-label="모바일 메뉴">
     <div class="mob-nav-section">
       <div class="mob-center-switcher">
-        <a href="cosmetic.html" class="mob-switch-tab active">미용성형센터</a>
-        <a href="medical.html" class="mob-switch-tab">외상·재건센터</a>
+        <a href="cosmetic.html" class="mob-switch-tab">미용성형센터</a>
+        <a href="medical.html" class="mob-switch-tab active">외상·재건센터</a>
       </div>
       <div class="mob-sub-title">병원소개</div>
       <div class="mob-sub-grid">
@@ -786,14 +765,13 @@
         <a href="events.html">이벤트</a>
         <a href="hours.html">진료시간표</a>
       </div>
-      <div class="mob-sub-title">미용성형</div>
+      <div class="mob-sub-title">외상·재건</div>
       <div class="mob-sub-grid">
-        <a href="eye.html" class="current">눈성형</a>
-        <a href="nose.html">코성형</a>
-        <a href="breast.html">가슴성형</a>
-        <a href="lifting.html">동안성형</a>
-        <a href="fat.html">바디성형</a>
-        <a href="petit.html">쁘띠</a>
+        <a href="trauma.html">상처/외상</a>
+        <a href="burn.html">화상</a>
+        <a href="scar.html" class="current">흉터</a>
+        <a href="reconstruction.html">피부종양</a>
+        <a href="fracture.html">안면부골절</a>
       </div>
     </div>
     <div class="mobile-nav-divider"></div>
@@ -806,28 +784,19 @@
   <!-- ===== HEADER ===== -->
   <header class="header" id="header">
     <div class="header-topbar">
-      <a href="cosmetic.html" class="topbar-tab active">미용성형센터</a>
+      <a href="cosmetic.html" class="topbar-tab">미용성형센터</a>
       <span class="topbar-divider"></span>
-      <a href="medical.html" class="topbar-tab">외상·재건센터</a>
+      <a href="medical.html" class="topbar-tab active">외상·재건센터</a>
     </div>
     <div class="header-gnb-row">
       <a href="index.html" class="logo-text">선메디컬센터 유성선병원 성형외과</a>
       <nav class="gnb" aria-label="주 메뉴">
         <div class="gnb-item"><a href="about.html">병원소개 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="notice.html">공지사항</a><a href="tour.html">병원둘러보기</a><a href="doctor.html">의료진소개</a><a href="about.html">오시는 길</a><a href="events.html">이벤트</a><a href="hours.html">진료시간표</a></div></div>
-        <div class="gnb-item">
-          <a href="eye.html" class="current">눈성형 <span class="gnb-arrow">&#9662;</span></a>
-          <div class="gnb-dropdown dd-wide dd-wide-4">
-            <div class="dd-col"><div class="dd-col-label">쌍꺼풀 성형술</div><a href="eye.html#double-eyelid">매몰법</a><a href="eye.html#double-eyelid">부분절개법</a><a href="eye.html#double-eyelid">절개법</a></div>
-            <div class="dd-col"><div class="dd-col-label">중년 눈 성형술</div><a href="eye.html#middle-eye">상안검성형술</a><a href="eye.html#middle-eye">눈썹하거상술</a><a href="eye.html#middle-eye">하안검성형술</a></div>
-            <div class="dd-col"><div class="dd-col-label">트임술</div><a href="eye.html#trim">앞트임</a><a href="eye.html#trim">뒷트임</a><a href="eye.html#trim">밑트임</a><a href="eye.html#trim">듀얼트임</a><a href="eye.html#trim">윗트임</a></div>
-            <div class="dd-col"><div class="dd-col-label">눈밑 성형술</div><a href="eye.html#under-eye">눈밑지방재배치</a><a href="eye.html#under-eye">하안검성형술</a></div>
-          </div>
-        </div>
-        <div class="gnb-item"><a href="nose.html">코성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="nose.html">콧대성형</a><a href="nose.html">코끝성형</a><a href="nose.html">콧볼축소</a><a href="nose.html">코 재수술</a><a href="nose.html">기능성 코성형</a></div></div>
-        <div class="gnb-item"><a href="breast.html">가슴성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="breast.html">가슴확대술</a><a href="breast.html">가슴축소술</a><a href="breast.html">유두축소술</a><a href="breast.html">함몰유두</a><a href="breast.html">여유증</a></div></div>
-        <div class="gnb-item"><a href="lifting.html">동안성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="lifting.html">안면거상술</a><a href="lifting.html">반거상술</a><a href="lifting.html">미니거상술</a><a href="lifting.html">목 거상술</a></div></div>
-        <div class="gnb-item"><a href="fat.html">바디성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="fat.html">얼굴지방흡입술</a><a href="fat.html">복부지방흡입술</a><a href="fat.html">허벅지 지방흡입술</a></div></div>
-        <div class="gnb-item"><a href="petit.html">쁘띠 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="petit.html">울쎄라</a><a href="petit.html">써마지</a><a href="petit.html">보톡스</a><a href="petit.html">필러</a><a href="petit.html">레이저</a></div></div>
+        <div class="gnb-item"><a href="trauma.html">상처/외상 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="trauma.html">열상</a><a href="trauma.html">찰과상</a><a href="trauma.html">소아열상</a></div></div>
+        <div class="gnb-item"><a href="burn.html">화상 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="burn.html">소아화상</a><a href="burn.html">구축성형술</a><a href="burn.html">화상흉터재건</a></div></div>
+        <div class="gnb-item"><a href="scar.html" class="current">흉터 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="scar.html">흉터성형술</a><a href="scar.html">흉터치료</a></div></div>
+        <div class="gnb-item"><a href="reconstruction.html">피부종양 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="reconstruction.html">모반</a><a href="reconstruction.html">피지낭종</a><a href="reconstruction.html">황색종</a></div></div>
+        <div class="gnb-item"><a href="fracture.html">안면부골절 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="fracture.html">안와골절</a><a href="fracture.html">비골골절</a><a href="fracture.html">관골골절</a><a href="fracture.html">하악골 골절</a></div></div>
       </nav>
       <div class="header-cta">
         <a href="booking.html" class="btn-outline-w">진료예약</a>
@@ -843,33 +812,33 @@
   <!-- ===== PAGE HERO ===== -->
   <section class="page-hero">
     <div class="page-hero-inner">
-      <div class="page-hero-badge">EYE CENTER</div>
-      <h1 class="page-hero-title">라인보다,<br>눈이 편안해지는 게 먼저입니다</h1>
-      <p class="page-hero-desc">처진 눈꺼풀·눈밑 고민을 기능과 인상 기준으로 함께 봅니다.</p>
+      <div class="page-hero-badge">SCAR</div>
+      <h1 class="page-hero-title">흉터가 보이지 않게,<br>자연스럽게 되돌립니다</h1>
+      <p class="page-hero-desc">오래된 흉터부터 최근 상처 자국까지 상태에 따른 맞춤 치료를 제공합니다.</p>
     </div>
   </section>
 
-  <!-- ===== SURGERY PRINCIPLE ===== -->
+  <!-- ===== TREATMENT PRINCIPLE ===== -->
   <section class="section principle">
     <div class="section-inner">
       <div class="section-header">
-        <div class="section-label">Surgery Principle</div>
-        <h2 class="section-title">눈 성형의 원리</h2>
-        <p class="section-desc">개인별 눈의 구조와 기능을 정밀 분석하여<br>가장 자연스럽고 안전한 수술 방법을 설계합니다.</p>
+        <div class="section-label">Treatment Principle</div>
+        <h2 class="section-title">흉터 치료의 원리</h2>
+        <p class="section-desc">흉터 종류와 부위, 깊이에 따라<br>레이저·수술·복합 치료를 조합합니다.</p>
       </div>
       <div class="principle-grid">
         <div class="principle-image">
-          <img src="images/눈매교정.png" alt="눈 성형 원리">
+          <img src="images/images2/medical/reconstruction/accurate-diagnosis.png" alt="흉터 맞춤 치료">
         </div>
         <div class="principle-content">
-          <h3>가능/불가능을 명확히 정리하고<br>회복 루틴을 현실적으로 안내</h3>
-          <p>눈은 단순히 쌍꺼풀 라인만의 문제가 아닙니다. 처진 피부, 약해진 근육, 지방의 재배치, 그리고 눈을 뜨는 힘까지 모두 고려되어야 합니다.</p>
-          <p>선메디컬센터 유성선병원 성형외과는 기능적 문제(시야 제한, 눈꺼풀 처짐)와 인상 개선을 동시에 해결하는 통합적 접근을 통해 자연스럽고 과하지 않은 결과를 만들어냅니다.</p>
+          <h3>흉터 상태를 먼저 읽고<br>가장 효과적인 방법을 선택합니다</h3>
+          <p>흉터는 깊이·면적·형태·경과 기간에 따라 필요한 접근이 다릅니다. 얕은 색소 흉터에는 레이저가, 넓거나 두꺼운 흉터에는 절제 후 재봉합(흉터성형술)이, 비정상적으로 증식하는 켈로이드성 흉터에는 주사·수술·방사선의 복합 치료가 필요합니다.</p>
+          <p>선메디컬센터 유성선병원 성형외과는 상처의 경과와 조직 특성을 평가하여 가장 효과적인 조합을 설계합니다.</p>
           <div class="principle-tags">
-            <span class="principle-tag">#처진눈꺼풀</span>
-            <span class="principle-tag">#눈밑지방</span>
-            <span class="principle-tag">#눈매교정</span>
-            <span class="principle-tag">#자연스러운라인</span>
+            <span class="principle-tag">#흉터성형술</span>
+            <span class="principle-tag">#흉터레이저</span>
+            <span class="principle-tag">#켈로이드</span>
+            <span class="principle-tag">#맞춤치료</span>
           </div>
         </div>
       </div>
@@ -885,228 +854,73 @@
       </div>
       <div class="points-grid">
         <div class="point-card">
-          <div class="point-card-img"><img src="images/images2/cosmetic/eye/hospital-safety.jpg" alt="종합병원 안전 시스템" loading="lazy"></div>
-          <h3>종합병원 안전 시스템</h3>
-          <p>응급의학과, 마취통증의학과 전문의 상주로 수술 전후 안전한 관리가 이루어집니다.</p>
+          <div class="point-card-img"><img src="images/images2/medical/reconstruction/diagnosis-system.jpg" alt="정밀 평가" loading="lazy"></div>
+          <h3>흉터 단계별 정밀 평가</h3>
+          <p>상처 경과·깊이·혈류 상태를 평가하여 현재 흉터의 단계에 맞는 치료 순서를 제시합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-card-img"><img src="images/images2/cosmetic/eye/specialist-surgeon.jpg" alt="성형외과 전문의 직접 집도" loading="lazy"></div>
-          <h3>성형외과 전문의 직접 집도</h3>
-          <p>가톨릭중앙의료원 출신 전문의가 상담부터 수술, 회복까지 책임지고 케어합니다.</p>
+          <div class="point-card-img"><img src="images/images2/medical/reconstruction/specialist-surgery.png" alt="성형외과 전문의 시술" loading="lazy"></div>
+          <h3>성형외과 전문의 직접 시술</h3>
+          <p>흉터성형술과 레이저, 주사 치료 모두 성형외과 전문의가 일관된 치료 계획으로 관리합니다.</p>
         </div>
         <div class="point-card">
-          <div class="point-card-img"><img src="images/images2/cosmetic/eye/custom-design.png" alt="개인 맞춤 설계" loading="lazy"></div>
-          <h3>개인 맞춤 설계</h3>
-          <p>피부 두께, 근육 상태, 지방 분포를 정밀 분석하여 개인에게 최적화된 수술 계획을 수립합니다.</p>
+          <div class="point-card-img"><img src="images/images2/medical/reconstruction/minimal-scar.jpg" alt="흉터 재발 방지" loading="lazy"></div>
+          <h3>재발 방지 장기 관리</h3>
+          <p>수술 후 흉터 증식 위험이 높은 경우 스테로이드 주사·압박·자외선 차단 등 장기 관리 계획을 함께 제공합니다.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== SURGERY TYPES ===== -->
-  <!-- ===== 쌍꺼풀 성형술 ===== -->
-  <section class="section surgery-types" id="double-eyelid">
+  <!-- ===== TREATMENT TYPES ===== -->
+  <section class="section treatment-types">
     <div class="section-inner">
       <div class="section-header">
-        <div class="section-label">Double Eyelid Surgery</div>
-        <h2 class="section-title">쌍꺼풀 성형술</h2>
-        <p class="section-desc">눈꺼풀 상태·두께·지방 정도에 따라 맞춤 방식으로 진행합니다.</p>
+        <div class="section-label">Treatment Types</div>
+        <h2 class="section-title">흉터 치료 종류</h2>
       </div>
       <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual"><img src="images/매몰법_den.png" alt="매몰법"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">매몰법</h3>
-            <p class="type-card-desc">절개 없이 실로 고정하는 방법으로, 회복이 빠르고 흉터가 거의 없습니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">붓기가 적고 회복이 빠름</div>
-              <div class="type-card-feature">자연스러운 쌍꺼풀 라인</div>
-              <div class="type-card-feature">피부가 얇고 지방이 적은 경우 적합</div>
-            </div>
+          <h3 class="type-card-title">흉터성형술</h3>
+          <p class="type-card-desc">흉터 조직을 절제하고 주변을 재배열하여 다시 봉합하는 수술입니다. 두껍거나 넓은 흉터, 움직임을 제한하는 구축성 흉터에 적용합니다.</p>
+          <div class="type-card-features">
+            <div class="type-card-feature">흉터 절제 후 정밀 봉합</div>
+            <div class="type-card-feature">구축성 흉터에 Z-성형술</div>
+            <div class="type-card-feature">방향·장력 고려 설계</div>
+            <div class="type-card-feature">수술 후 레이저 병행</div>
           </div>
         </div>
-        <div class="type-card">
-          <div class="type-card-visual"><img src="images/부분절개법_dep.png" alt="부분절개법"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">부분절개법</h3>
-            <p class="type-card-desc">필요한 부분만 최소 절개해 지방 제거와 쌍꺼풀 고정을 동시에 진행합니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">매몰법·절개법 장점 결합</div>
-              <div class="type-card-feature">적당량의 지방 제거 가능</div>
-              <div class="type-card-feature">회복 기간 단축</div>
-            </div>
-          </div>
-        </div>
-        <div class="type-card">
-          <div class="type-card-visual"><img src="images/절개법_dei.png" alt="절개법"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">절개법</h3>
-            <p class="type-card-desc">쌍꺼풀 라인을 따라 절개하여 불필요한 피부와 지방을 함께 제거합니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">오래 지속되는 결과</div>
-              <div class="type-card-feature">처진 피부 동시 개선</div>
-              <div class="type-card-feature">두꺼운 피부·지방이 많은 경우 적합</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== 상안검 성형술 ===== -->
-  <section class="section surgery-types alt" id="upper-blepharoplasty">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-label">Upper Blepharoplasty</div>
-        <h2 class="section-title">상안검 성형술</h2>
-        <p class="section-desc">중년 눈 성형술의 한 방법으로, 처진 윗눈꺼풀 피부를 정리합니다.</p>
-      </div>
-      <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual"><img src="images/눈매교정.png" alt="상안검 성형술"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">상안검 성형술</h3>
-            <p class="type-card-desc">눈을 덮고 있는 처진 윗눈꺼풀 피부를 절제하여 답답한 눈매와 시야를 개선합니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">눈꺼풀 처짐 개선</div>
-              <div class="type-card-feature">시야 확보</div>
-              <div class="type-card-feature">젊은 인상 회복</div>
-            </div>
+          <h3 class="type-card-title">흉터 레이저 치료</h3>
+          <p class="type-card-desc">레이저 광선으로 흉터 조직을 자극·리모델링하여 색소와 두께를 개선합니다. 피코·프락셀 등 흉터 특성에 맞는 레이저를 선택합니다.</p>
+          <div class="type-card-features">
+            <div class="type-card-feature">색소·붉은기 개선</div>
+            <div class="type-card-feature">피부 깊은 층 리모델링</div>
+            <div class="type-card-feature">통증·열감 최소화</div>
+            <div class="type-card-feature">흉터성형술과 복합 가능</div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== 눈썹하 거상술 ===== -->
-  <section class="section surgery-types" id="brow-lift">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-label">Sub-brow Lift</div>
-        <h2 class="section-title">눈썹하 거상술</h2>
-        <p class="section-desc">중년 눈 성형술의 한 방법으로, 눈썹 아래 피부를 절제해 눈두덩을 끌어올립니다.</p>
-      </div>
-      <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual"><img src="images/눈썹밑거상_SB.png" alt="눈썹하 거상술"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">눈썹하 거상술</h3>
-            <p class="type-card-desc">눈썹 바로 아래 피부를 절제하여 처진 눈두덩을 자연스럽게 끌어올립니다. 이마 흉터를 남기지 않는 중년 눈 성형 방법입니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">자연스러운 눈매 회복</div>
-              <div class="type-card-feature">이마 흉터 최소화</div>
-              <div class="type-card-feature">중년 처진 눈꺼풀 개선</div>
-            </div>
+          <h3 class="type-card-title">켈로이드 치료</h3>
+          <p class="type-card-desc">상처 경계를 넘어 비정상적으로 증식한 흉터를 관리합니다. 스테로이드 주사·수술적 절제·방사선 치료를 조합합니다.</p>
+          <div class="type-card-features">
+            <div class="type-card-feature">스테로이드 주사 1차 치료</div>
+            <div class="type-card-feature">필요 시 외과적 절제</div>
+            <div class="type-card-feature">재발 예방 압박·방사선 병행</div>
+            <div class="type-card-feature">장기 경과 관찰</div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== 트임술 ===== -->
-  <section class="section surgery-types alt" id="trim">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-label">Canthoplasty</div>
-        <h2 class="section-title">트임술</h2>
-        <p class="section-desc">눈의 가로·세로 폭을 조절해 원하는 눈매 비율을 만듭니다.</p>
-      </div>
-      <div class="types-grid">
         <div class="type-card">
-          <div class="type-card-visual"><img src="images/앞트임_epi.png" alt="앞트임"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">앞트임</h3>
-            <p class="type-card-desc">안쪽 몽고주름을 개선해 눈의 가로 길이를 늘리고 답답한 인상을 완화합니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">답답한 인상 완화</div>
-              <div class="type-card-feature">또렷한 눈매</div>
-              <div class="type-card-feature">자연스러운 결과</div>
-            </div>
-          </div>
-        </div>
-        <div class="type-card">
-          <div class="type-card-visual"><img src="images/듀얼트임.png" alt="뒷트임"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">뒷트임</h3>
-            <p class="type-card-desc">바깥쪽 눈꼬리를 연장해 눈의 가로 폭을 키우고 시원한 인상을 만듭니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">눈의 가로 확장</div>
-              <div class="type-card-feature">시원한 인상</div>
-              <div class="type-card-feature">작은 눈 개선</div>
-            </div>
-          </div>
-        </div>
-        <div class="type-card">
-          <div class="type-card-visual"><img src="images/하안검.jpg" alt="밑트임"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">밑트임</h3>
-            <p class="type-card-desc">눈 아래쪽을 자연스럽게 열어 세로 폭을 확장하고 부드러운 표정을 연출합니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">눈의 세로 확대</div>
-              <div class="type-card-feature">졸림 인상 개선</div>
-              <div class="type-card-feature">온화한 표정</div>
-            </div>
-          </div>
-        </div>
-        <div class="type-card">
-          <div class="type-card-visual"><img src="images/듀얼트임.png" alt="듀얼트임"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">듀얼트임</h3>
-            <p class="type-card-desc">앞트임과 뒷트임을 병행하여 눈매의 양방향 확장 효과를 제공합니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">양방향 확장</div>
-              <div class="type-card-feature">전반적 인상 개선</div>
-              <div class="type-card-feature">큰 눈매 연출</div>
-            </div>
-          </div>
-        </div>
-        <div class="type-card">
-          <div class="type-card-visual"><img src="images/위트임.png" alt="윗트임"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">윗트임</h3>
-            <p class="type-card-desc">눈꺼풀 위쪽을 자연스럽게 열어 쌍꺼풀 라인을 더 뚜렷하게 표현합니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">또렷한 라인</div>
-              <div class="type-card-feature">이중선 강조</div>
-              <div class="type-card-feature">부드러운 마무리</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 눈밑 성형술 ===== -->
-  <section class="section surgery-types" id="under-eye">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-label">Under-eye Surgery</div>
-        <h2 class="section-title">눈밑 성형술</h2>
-        <p class="section-desc">눈 아래 지방과 처진 피부를 정리해 피로해 보이는 인상을 개선합니다.</p>
-      </div>
-      <div class="types-grid">
-        <div class="type-card">
-          <div class="type-card-visual"><img src="images/지방재배치.jpg" alt="눈밑지방재배치"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">눈밑지방재배치</h3>
-            <p class="type-card-desc">튀어나온 눈밑 지방을 재배치하여 다크서클과 눈밑 처짐을 개선합니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">다크서클 개선</div>
-              <div class="type-card-feature">눈밑 처짐 해결</div>
-              <div class="type-card-feature">자연스러운 볼륨 복원</div>
-            </div>
-          </div>
-        </div>
-        <div class="type-card" id="lower-blepharoplasty">
-          <div class="type-card-visual"><img src="images/하안검.jpg" alt="하안검성형술"></div>
-          <div class="type-card-body">
-            <h3 class="type-card-title">하안검성형술 <span style="font-size:11px; color:var(--text-mid); font-weight:500;">· 중년 눈 성형술</span></h3>
-            <p class="type-card-desc">처진 아래눈꺼풀 피부와 지방을 정리해 밝고 건강한 인상을 만듭니다. 중년 눈 성형술에 포함됩니다.</p>
-            <div class="type-card-features">
-              <div class="type-card-feature">아래눈꺼풀 처짐 개선</div>
-              <div class="type-card-feature">다크서클 보완</div>
-              <div class="type-card-feature">중년 눈매 회복</div>
-            </div>
+          <h3 class="type-card-title">귀 켈로이드</h3>
+          <p class="type-card-desc">귀걸이 구멍이나 외상 이후 발생한 귀 켈로이드를 절제와 압박·주사로 치료합니다. 재발률 관리가 핵심입니다.</p>
+          <div class="type-card-features">
+            <div class="type-card-feature">완전 절제 후 압박 치료</div>
+            <div class="type-card-feature">압박 귀걸이 착용 가이드</div>
+            <div class="type-card-feature">추가 주사·레이저 병행</div>
+            <div class="type-card-feature">재발률 낮추기 위한 장기 케어</div>
           </div>
         </div>
       </div>
@@ -1124,12 +938,12 @@
         <div class="faq-item">
           <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
             <div class="faq-q-icon">Q</div>
-            <div class="faq-q-text">눈 성형 후 일상생활 복귀는 언제 가능한가요?</div>
+            <div class="faq-q-text">얼굴에 몽우리가 생겼는데 큰 병인가요?</div>
             <div class="faq-toggle">∨</div>
           </div>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              매몰법의 경우 3-4일, 절개법의 경우 7-10일 정도면 대부분의 붓기가 빠져 일상생활이 가능합니다. 다만 완전한 회복은 개인차가 있으며, 1-3개월 정도 소요됩니다.
+              대부분의 경우 양성 종양이지만, 정확한 진단을 위해 전문의 진찰이 필요합니다. 지방종, 표피낭종, 피지낭종 등이 흔하며, 크기가 커지거나 통증이 있다면 빠른 내원을 권장합니다.
             </div>
           </div>
         </div>
@@ -1137,13 +951,13 @@
         <div class="faq-item">
           <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
             <div class="faq-q-icon">Q</div>
-            <div class="faq-q-text">매몰법과 절개법 중 어떤 방법이 나에게 맞나요?</div>
+            <div class="faq-q-text">제거하면 흉터가 크게 남나요?</div>
             <div class="faq-toggle">∨</div>
           </div>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              피부 두께, 지방량, 나이, 원하는 쌍꺼풀 모양 등을 종합적으로 고려하여 결정합니다. 피부가 얇고 지방이 적으면 매몰법이, 피부 처짐이나 지방이 많으면 절개법이 적합합니다. 정확한 진단은
-              전문의 상담을 통해 확인하세요.
+              위치, 크기, 깊이에 따라 다르지만, 성형외과 전문의의 미세 봉합 기술로 흉터를 최소화합니다. 피부 주름선을 따라 절개하고, 층별로 정밀하게 봉합하여 눈에 잘 띄지 않도록 합니다. 수술 후
+              레이저 흉터 관리 프로그램도 제공합니다.
             </div>
           </div>
         </div>
@@ -1151,12 +965,12 @@
         <div class="faq-item">
           <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
             <div class="faq-q-icon">Q</div>
-            <div class="faq-q-text">수술 후 흉터가 남나요?</div>
+            <div class="faq-q-text">조직검사는 꼭 필요한가요?</div>
             <div class="faq-toggle">∨</div>
           </div>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              매몰법은 절개를 하지 않아 흉터가 거의 없으며, 절개법도 쌍꺼풀 라인을 따라 절개하기 때문에 눈을 감았을 때만 얇은 선으로 보이고 시간이 지나면 거의 보이지 않습니다.
+              정확한 진단과 악성 여부 확인을 위해 조직검사를 권장합니다. 대부분 양성이지만, 드물게 악성 종양일 수 있으므로 제거한 조직을 병리검사하는 것이 안전합니다.
             </div>
           </div>
         </div>
@@ -1164,13 +978,12 @@
         <div class="faq-item">
           <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
             <div class="faq-q-icon">Q</div>
-            <div class="faq-q-text">나이가 있어도 눈 수술이 가능한가요?</div>
+            <div class="faq-q-text">제거 후 재발할 수 있나요?</div>
             <div class="faq-toggle">∨</div>
           </div>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              네, 가능합니다. 오히려 나이가 들면서 처진 눈꺼풀로 시야가 불편하거나 눈이 작아 보이는 경우가 많아 눈 수술의 만족도가 높습니다. 다만 피부 탄력과 근육 상태를 고려한 맞춤 수술이
-              필요하며, 유성선병원은 다양한 연령대의 눈 수술 경험을 보유하고 있습니다.
+              완전히 제거하면 재발 가능성은 낮습니다. 다만 표피낭종이나 피지낭종의 경우 낭종 벽을 완전히 제거하지 못하면 재발할 수 있으므로, 숙련된 전문의의 정밀한 수술이 중요합니다.
             </div>
           </div>
         </div>
@@ -1178,12 +991,12 @@
         <div class="faq-item">
           <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
             <div class="faq-q-icon">Q</div>
-            <div class="faq-q-text">재수술도 가능한가요?</div>
+            <div class="faq-q-text">보험 적용이 되나요?</div>
             <div class="faq-toggle">∨</div>
           </div>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              가능합니다. 다만 재수술은 초기 수술보다 더 정밀한 분석과 계획이 필요합니다. 유성선병원은 재수술 케이스에 대한 풍부한 경험을 바탕으로 안전하고 자연스러운 결과를 만들어냅니다.
+              기능적 문제가 있거나 의학적 이유로 제거가 필요한 경우 건강보험이 적용됩니다. 단순 미용 목적의 경우 비보험이 될 수 있으며, 정확한 보험 적용 여부는 진료 시 상담해드립니다.
             </div>
           </div>
         </div>
@@ -1194,8 +1007,8 @@
   <!-- ===== CTA ===== -->
   <section class="section cta">
     <div class="section-inner">
-      <h2>눈 성형 상담 예약</h2>
-      <p>정확한 진단과 맞춤 솔루션을 위해 전문의 상담을 받아보세요.</p>
+      <h2>재건/종괴 상담 예약</h2>
+      <p>정확한 진단과 치료 계획을 위해 전문의 상담을 받아보세요.</p>
       <div class="cta-buttons">
         <button class="cta-btn cta-btn-primary">온라인 상담 예약</button>
         <a href="tel:042-609-1190" class="cta-btn cta-btn-outline">전화 상담 042-609-1190</a>
@@ -1257,7 +1070,7 @@
         floatToggle.setAttribute('aria-label', '플로팅 메뉴 닫기');
       } else {
         floatCta.classList.add('hidden');
-        floatToggle.textContent = '＋';
+        floatToggle.textContent = '\uff0b';
         floatToggle.setAttribute('aria-label', '플로팅 메뉴 열기');
       }
     });

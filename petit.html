@@ -91,6 +91,7 @@
     .gnb-item:hover .gnb-arrow { transform: rotate(180deg); opacity: 1; }
     .gnb-dropdown { position: absolute; top: 64px; left: 50%; transform: translateX(-50%) translateY(-8px); background: rgba(255, 255, 255, 0.97); border: none; border-top: 2px solid var(--primary); min-width: 200px; padding: 16px 0; opacity: 0; visibility: hidden; transition: opacity 0.22s, transform 0.22s, visibility 0.22s; border-radius: 0 0 6px 6px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
     .gnb-dropdown.dd-wide { display: flex; min-width: 520px; padding: 24px 0; }
+    .gnb-dropdown.dd-wide-4 { min-width: 700px; }
     .gnb-item:hover .gnb-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
     .dd-col { flex: 1; padding: 0 8px; }
     .dd-col + .dd-col { border-left: 1px solid rgba(0,0,0,0.07); }
@@ -778,16 +779,12 @@
         <a href="tour.html">병원둘러보기</a>
         <a href="doctor.html">의료진소개</a>
         <a href="about.html">오시는 길</a>
+        <a href="events.html">이벤트</a>
+        <a href="hours.html">진료시간표</a>
       </div>
-      <div class="mob-sub-title">눈성형</div>
+      <div class="mob-sub-title">미용성형</div>
       <div class="mob-sub-grid">
-        <a href="eye.html">쌍꺼풀 성형술</a>
-        <a href="eye.html">상안검성형술</a>
-        <a href="eye.html">트임술</a>
-        <a href="eye.html">눈밑지방재배치</a>
-      </div>
-      <div class="mob-sub-title">코·가슴·기타</div>
-      <div class="mob-sub-grid">
+        <a href="eye.html">눈성형</a>
         <a href="nose.html">코성형</a>
         <a href="breast.html">가슴성형</a>
         <a href="lifting.html">동안성형</a>
@@ -812,37 +809,21 @@
     <div class="header-gnb-row">
       <a href="index.html" class="logo-text">선메디컬센터 유성선병원 성형외과</a>
       <nav class="gnb" aria-label="주 메뉴">
-        <div class="gnb-item">
-          <a href="about.html">병원소개 <span class="gnb-arrow">&#9662;</span></a>
-          <div class="gnb-dropdown"><a href="notice.html">공지사항</a><a href="tour.html">병원둘러보기</a><a href="doctor.html">의료진소개</a><a href="about.html">오시는 길</a></div>
-        </div>
+        <div class="gnb-item"><a href="about.html">병원소개 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="notice.html">공지사항</a><a href="tour.html">병원둘러보기</a><a href="doctor.html">의료진소개</a><a href="about.html">오시는 길</a><a href="events.html">이벤트</a><a href="hours.html">진료시간표</a></div></div>
         <div class="gnb-item">
           <a href="eye.html">눈성형 <span class="gnb-arrow">&#9662;</span></a>
-          <div class="gnb-dropdown dd-wide">
-            <div class="dd-col"><div class="dd-col-label">눈꺼풀</div><a href="eye.html">쌍꺼풀 성형술</a><a href="eye.html">매몰법</a><a href="eye.html">절개법</a><a href="eye.html">부분절개법</a></div>
-            <div class="dd-col"><div class="dd-col-label">눈 교정</div><a href="eye.html">눈매교정술</a><a href="eye.html">상안검성형술</a><a href="eye.html">트임술</a></div>
-            <div class="dd-col"><div class="dd-col-label">눈 주변</div><a href="eye.html">눈밑지방재배치</a><a href="eye.html">눈썹밑거상술</a><a href="eye.html">나노지방이식</a></div>
+          <div class="gnb-dropdown dd-wide dd-wide-4">
+            <div class="dd-col"><div class="dd-col-label">쌍꺼풀 성형술</div><a href="eye.html#double-eyelid">매몰법</a><a href="eye.html#double-eyelid">부분절개법</a><a href="eye.html#double-eyelid">절개법</a></div>
+            <div class="dd-col"><div class="dd-col-label">중년 눈 성형술</div><a href="eye.html#middle-eye">상안검성형술</a><a href="eye.html#middle-eye">눈썹하거상술</a><a href="eye.html#middle-eye">하안검성형술</a></div>
+            <div class="dd-col"><div class="dd-col-label">트임술</div><a href="eye.html#trim">앞트임</a><a href="eye.html#trim">뒷트임</a><a href="eye.html#trim">밑트임</a><a href="eye.html#trim">듀얼트임</a><a href="eye.html#trim">윗트임</a></div>
+            <div class="dd-col"><div class="dd-col-label">눈밑 성형술</div><a href="eye.html#under-eye">눈밑지방재배치</a><a href="eye.html#under-eye">하안검성형술</a></div>
           </div>
         </div>
-        <div class="gnb-item">
-          <a href="nose.html">코성형 <span class="gnb-arrow">&#9662;</span></a>
-          <div class="gnb-dropdown"><a href="nose.html">콧대성형</a><a href="nose.html">코끝성형</a><a href="nose.html">콧볼·인중축소</a><a href="nose.html">재수술</a><a href="nose.html">기능성 코성형</a></div>
-        </div>
-        <div class="gnb-item">
-          <a href="breast.html">가슴성형 <span class="gnb-arrow">&#9662;</span></a>
-          <div class="gnb-dropdown"><a href="breast.html">가슴확대</a><a href="breast.html">가슴축소</a><a href="breast.html">함몰유두</a><a href="breast.html">유두성형</a></div>
-        </div>
-        <div class="gnb-item">
-          <a href="lifting.html">동안성형 <span class="gnb-arrow">&#9662;</span></a>
-          <div class="gnb-dropdown"><a href="lifting.html">울쎄라</a><a href="lifting.html">써마지</a><a href="lifting.html">안면거상술</a><a href="lifting.html">복합리프팅</a></div>
-        </div>
-        <div class="gnb-item">
-          <a href="fat.html">바디성형 <span class="gnb-arrow">&#9662;</span></a>
-        </div>
-        <div class="gnb-item">
-          <a href="petit.html" class="current">쁘띠 <span class="gnb-arrow">&#9662;</span></a>
-          <div class="gnb-dropdown"><a href="petit.html">보톡스</a><a href="petit.html">필러</a><a href="petit.html">스킨부스터</a><a href="petit.html">레이저</a></div>
-        </div>
+        <div class="gnb-item"><a href="nose.html">코성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="nose.html">콧대성형</a><a href="nose.html">코끝성형</a><a href="nose.html">콧볼축소</a><a href="nose.html">코 재수술</a><a href="nose.html">기능성 코성형</a></div></div>
+        <div class="gnb-item"><a href="breast.html">가슴성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="breast.html">가슴확대술</a><a href="breast.html">가슴축소술</a><a href="breast.html">유두축소술</a><a href="breast.html">함몰유두</a><a href="breast.html">여유증</a></div></div>
+        <div class="gnb-item"><a href="lifting.html">동안성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="lifting.html">안면거상술</a><a href="lifting.html">반거상술</a><a href="lifting.html">미니거상술</a><a href="lifting.html">목 거상술</a></div></div>
+        <div class="gnb-item"><a href="fat.html">바디성형 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="fat.html">얼굴지방흡입술</a><a href="fat.html">복부지방흡입술</a><a href="fat.html">허벅지 지방흡입술</a></div></div>
+        <div class="gnb-item"><a href="petit.html" class="current">쁘띠 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="petit.html">울쎄라</a><a href="petit.html">써마지</a><a href="petit.html">보톡스</a><a href="petit.html">필러</a><a href="petit.html">레이저</a></div></div>
       </nav>
       <div class="header-cta">
         <a href="booking.html" class="btn-outline-w">진료예약</a>
@@ -926,6 +907,34 @@
         <h2 class="section-title">쁘띠 시술 종류</h2>
       </div>
       <div class="types-grid">
+        <div class="type-card">
+          <div class="type-card-visual"><img src="images/images2/cosmetic/lifting/ulthera.jpg" alt="울쎄라" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="type-card-body">
+            <h3 class="type-card-title">울쎄라 (Ulthera)</h3>
+            <p class="type-card-desc">초음파 에너지를 피부 깊은 층(SMAS)까지 전달하여 콜라겐 재생과 리프팅 효과를 유도합니다.</p>
+            <div class="type-card-features">
+              <div class="type-card-feature">비수술 리프팅의 대표 시술</div>
+              <div class="type-card-feature">피부 깊은 층까지 작용</div>
+              <div class="type-card-feature">시술 후 3~6개월 지속 효과</div>
+              <div class="type-card-feature">회복 기간 없음</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div class="type-card-visual"><img src="images/images2/cosmetic/lifting/thermage.jpg" alt="써마지" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="type-card-body">
+            <h3 class="type-card-title">써마지 (Thermage)</h3>
+            <p class="type-card-desc">고주파 에너지로 진피층을 가열하여 콜라겐 수축과 재생을 동시에 유도하는 탄력 시술입니다.</p>
+            <div class="type-card-features">
+              <div class="type-card-feature">넓은 면적 탄력 개선</div>
+              <div class="type-card-feature">피부 톤 개선 효과</div>
+              <div class="type-card-feature">안전하고 검증된 기술</div>
+              <div class="type-card-feature">얼굴과 몸 모두 적용 가능</div>
+            </div>
+          </div>
+        </div>
+
         <div class="type-card">
           <div class="type-card-visual"><img src="images/images2/cosmetic/petit/botox.jpg" alt="보톡스" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="type-card-body">

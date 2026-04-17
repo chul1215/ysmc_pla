@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>커뮤니티 | 선메디컬센터 유성선병원 성형외과</title>
+  <title>이벤트 | 선메디컬센터 유성선병원 성형외과</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -98,124 +98,54 @@
 
 
     /* ===== Hero ===== */
-    .hero-banner { margin-top: 104px; height: 320px; background: linear-gradient(140deg, #F3E8E4 0%, #FBF5F3 100%); display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero-banner { margin-top: 104px; height: 280px; background: linear-gradient(140deg, #F3E8E4 0%, #FBF5F3 100%); display: flex; align-items: center; position: relative; overflow: hidden; }
     .hero-banner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(140deg, rgba(212, 165, 181, 0.12) 0%, rgba(243, 232, 228, 0.08) 100%) 100%); z-index: 1; }
     .hero-banner-inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 0 40px; width: 100%; }
     0}
-    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(107,82,88,0.5); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(36px, 4.5vw, 56px); font-weight: 800; color: #2D1F24; letter-spacing: -2px; line-height: 1.1; margin-bottom: 14px; }
-    .hero-subtitle { font-size: 15px; color: rgba(107,82,88,0.65); line-height: 1.8; }
+    .hero-title { font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: #2D1F24; letter-spacing: -2px; line-height: 1.1; margin-bottom: 14px; }
+    .hero-subtitle { font-size: 15px; color: rgba(0,0,0,0.60); line-height: 1.8; }
 
-    /* ===== Common ===== */
-    .section { padding: 100px 40px; }
-    .section-inner { max-width: 1280px; margin: 0 auto; }
+    /* ===== Notice List ===== */
+    .notice-section { background: var(--surface, #FBF5F3); padding: 80px 40px; }
+    .notice-inner { max-width: 1280px; margin: 0 auto; }
     .section-label { display: inline-block; font-size: 10px; font-weight: 600; color: var(--primary); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
-    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; line-height: 1.25; margin-bottom: 14px; }
-    .section-desc { font-size: 15px; color: var(--text-mid); line-height: 1.8; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; line-height: 1.25; margin-bottom: 40px; }
 
-    /* ===== Quick Nav Cards ===== */
-    .quicknav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 56px; }
+    .notice-table-wrap { background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(158, 107, 123, 0.06); overflow: hidden; margin-bottom: 36px; }
 
-    .qnav-card {
-      border-radius: 16px;
-      padding: 36px 24px;
-      text-align: center;
-      border: 1px solid rgba(0,0,0,0.07);
-      transition: all 0.25s;
-      display: block;
-      cursor: pointer;
-    }
+    .notice-table { width: 100%; border-collapse: collapse; }
 
-    .qnav-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .notice-table thead tr { background: var(--text-dark); }
+    .notice-table thead th { padding: 16px 20px; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); text-align: left; }
+    .notice-table thead th:first-child { width: 60px; text-align: center; }
+    .notice-table thead th:nth-child(3) { width: 100px; text-align: center; }
+    .notice-table thead th:last-child { width: 80px; text-align: center; }
 
-    .qnav-card.card-consult { background: linear-gradient(140deg, #FBF5F3, #fff); }
-    .qnav-card.card-consult:hover { background: linear-gradient(140deg, #F3E8E4, #E8DAD5); border-color: rgba(158,107,123,0.25); }
-    .qnav-card.card-consult:hover .qnav-title { color: var(--primary-dark); }
-    .qnav-card.card-consult:hover .qnav-desc { color: var(--text-mid); }
-    .qnav-card.card-consult:hover .qnav-icon-wrap { background: rgba(158,107,123,0.12); }
+    .notice-table tbody tr { border-bottom: none; transition: background 0.15s; cursor: pointer; }
+    .notice-table tbody tr:last-child { border-bottom: none; }
+    .notice-table tbody tr:hover { background: var(--surface, #FBF5F3); }
+    .notice-table tbody tr.pinned { background: rgba(158,107,123,0.03); }
 
-    .qnav-card.card-kakao { background: linear-gradient(140deg, #FBF5F3, #fff); }
-    .qnav-card.card-kakao:hover { background: linear-gradient(140deg, #FFF8C0, #FFF0A0); border-color: rgba(203,169,0,0.25); }
-    .qnav-card.card-kakao:hover .qnav-title { color: #3C1E1E; }
-    .qnav-card.card-kakao:hover .qnav-desc { color: rgba(60,30,30,0.7); }
-    .qnav-card.card-kakao:hover .qnav-icon-wrap { background: rgba(60,30,30,0.08); }
+    .notice-table td { padding: 16px 20px; font-size: 14px; color: var(--text-mid); }
+    .notice-table td:first-child { text-align: center; font-size: 13px; color: var(--text-light); }
+    .notice-table td:nth-child(3) { text-align: center; font-size: 13px; }
+    .notice-table td:last-child { text-align: center; font-size: 13px; color: var(--text-light); }
 
-    .qnav-card.card-booking { background: linear-gradient(140deg, #FBF5F3, #fff); }
-    .qnav-card.card-booking:hover { background: linear-gradient(140deg, #F3E8E4, #E8DAD5); border-color: rgba(158,107,123,0.25); }
-    .qnav-card.card-booking:hover .qnav-title { color: var(--primary-dark); }
-    .qnav-card.card-booking:hover .qnav-desc { color: var(--text-mid); }
-    .qnav-card.card-booking:hover .qnav-icon-wrap { background: rgba(158,107,123,0.12); }
+    .notice-title-cell { display: flex; align-items: center; gap: 10px; }
+    .notice-title-text { color: var(--text-dark); font-weight: 600; font-size: 15px; transition: color 0.18s; }
+    .notice-table tbody tr:hover .notice-title-text { color: var(--primary); }
 
-    .qnav-card.card-news { background: linear-gradient(140deg, #FBF5F3, #fff); }
-    .qnav-card.card-news:hover { background: linear-gradient(140deg, #F3E8E4, #E8DAD5); border-color: rgba(158,107,123,0.25); }
-    .qnav-card.card-news:hover .qnav-title { color: var(--primary-dark); }
-    .qnav-card.card-news:hover .qnav-desc { color: var(--text-mid); }
-    .qnav-card.card-news:hover .qnav-icon-wrap { background: rgba(158,107,123,0.12); }
+    .n-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+    .n-badge-new { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; }
+    .n-badge-pin { background: var(--accent); color: var(--primary-dark); }
+    .n-badge-notice { background: rgba(0,0,0,0.06); color: var(--text-mid); }
 
-    .qnav-card.card-notice { background: linear-gradient(140deg, #FBF5F3, #fff); }
-    .qnav-card.card-notice:hover { background: linear-gradient(140deg, #F3E8E4, #E8DAD5); border-color: rgba(158,107,123,0.25); }
-    .qnav-card.card-notice:hover .qnav-title { color: var(--primary-dark); }
-    .qnav-card.card-notice:hover .qnav-desc { color: var(--text-mid); }
-    .qnav-card.card-notice:hover .qnav-icon-wrap { background: rgba(158,107,123,0.12); }
+    /* ===== Pagination ===== */
+    .pagination { display: flex; justify-content: center; align-items: center; gap: 6px; }
 
-    .qnav-icon-wrap { width: 56px; height: 56px; border-radius: 16px; background: rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 16px; transition: background 0.25s; }
-
-    .qnav-title { font-size: 15px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.3px; margin-bottom: 6px; transition: color 0.25s; }
-    .qnav-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; transition: color 0.25s; }
-
-    /* ===== Recent Notices ===== */
-    .notices-section { background: var(--surface, #FBF5F3); }
-
-    .notice-list { margin-top: 48px; }
-
-    .notice-item {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 18px 0;
-      border-bottom: none;
-      transition: color 0.18s;
-    }
-
-    .notice-item:last-child { border-bottom: none; }
-    .notice-item:hover .notice-title { color: var(--primary); }
-
-    .notice-badge { flex-shrink: 0; display: inline-block; padding: 3px 10px; background: var(--accent); color: var(--primary-dark); font-size: 11px; font-weight: 700; border-radius: 20px; white-space: nowrap; }
-    .notice-badge.badge-new { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; }
-
-    .notice-title { flex: 1; font-size: 15px; font-weight: 600; color: var(--text-dark); transition: color 0.18s; }
-    .notice-date { flex-shrink: 0; font-size: 13px; color: var(--text-light); }
-
-    .view-all { display: inline-block; margin-top: 24px; font-size: 14px; font-weight: 600; color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 2px; }
-
-    /* ===== Contact Methods ===== */
-    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
-
-    .contact-card {
-      border-radius: 16px;
-      padding: 40px 32px;
-      text-align: center;
-      border: 1px solid rgba(0,0,0,0.07);
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-
-    .contact-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
-
-    .contact-card.card-phone { border-top: 3px solid var(--primary); }
-    .contact-card.card-kakao-c { border-top: 3px solid #FEE500; }
-    .contact-card.card-online { border-top: 3px solid #3a5cd6; }
-
-    .contact-icon { font-size: 40px; margin-bottom: 16px; }
-    .contact-title { font-size: 18px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.4px; margin-bottom: 8px; }
-    .contact-info { font-size: 22px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; margin-bottom: 8px; }
-    .contact-desc { font-size: 13px; color: var(--text-mid); line-height: 1.7; margin-bottom: 20px; }
-
-    .contact-btn { display: inline-block; padding: 11px 24px; border-radius: 6px; font-size: 14px; font-weight: 700; transition: all 0.25s; }
-    .btn-primary-red { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; }
-    .btn-primary-red:hover { background: var(--primary-light); }
-    .btn-primary-yellow { background: #FEE500; color: #3C1E1E; }
-    .btn-primary-blue { background: var(--primary); color: #fff; }
-    .btn-primary-blue:hover { background: var(--primary-dark); }
+    .pg-btn { width: 40px; height: 40px; border-radius: 8px; border: 1.5px solid rgba(0,0,0,0.1); background: #fff; font-size: 14px; font-weight: 600; color: var(--text-mid); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.18s; }
+    .pg-btn:hover, .pg-btn.active { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; border-color: var(--primary); }
+    .pg-btn.arrow { font-size: 12px; }
 
     /* ===== CTA ===== */
     .cta-section { background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); padding: 80px 40px; text-align: center; border-top: 1px solid rgba(158,107,123,0.15); }
@@ -310,13 +240,6 @@
     .float-btn-naver .float-cta-icon { background: rgba(255,255,255,0.20); }
 
 
-    @media (max-width: 1024px) {
-      .float-cta { display: none; }
-
-      .quicknav-grid { grid-template-columns: repeat(2, 1fr); }
-      .contact-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
-    }
-
     @media (max-width: 768px) {
       .float-cta { display: none; }
 
@@ -326,16 +249,22 @@
       .gnb, .header-cta { display: none; }
       .menu-toggle { display: flex; }
       .gnb-dropdown { display: none !important; }
-      .hero-banner { height: 260px; margin-top: 96px; }
+      .hero-banner { margin-top: 96px; height: 240px; }
       .hero-banner-inner { padding: 0 20px; }
-      .section { padding: 60px 20px; }
-      .section-title { font-size: 26px; }
-      .quicknav-grid { grid-template-columns: 1fr 1fr; }
+      .notice-section { padding: 60px 20px; }
+      .notice-table-wrap { overflow-x: auto; }
+      .notice-table { min-width: 560px; }
       .footer-top { flex-direction: column; gap: 36px; padding: 44px 20px 28px; }
       .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding: 18px 20px; }
       .cta-buttons { flex-direction: column; align-items: center; }
       .mobile-cta { display: block !important; }
       .footer { padding-bottom: 76px; }
+    }
+
+    @media (max-width: 1024px) {
+      .float-cta { display: none; }
+
+      .section { padding: 80px 32px; }
     }
 
     .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 990; background: var(--surface, #FBF5F3); box-shadow: 0 -2px 20px rgba(0,0,0,0.4); padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
@@ -361,7 +290,7 @@
         <a href="tour.html">병원둘러보기</a>
         <a href="doctor.html">의료진소개</a>
         <a href="about.html">오시는 길</a>
-        <a href="events.html">이벤트</a>
+        <a href="events.html" class="current">이벤트</a>
         <a href="hours.html">진료시간표</a>
       </div>
       <div class="mob-sub-title">미용성형</div>
@@ -390,7 +319,7 @@
     <div class="header-gnb-row">
       <a href="index.html" class="logo-text">선메디컬센터 유성선병원 성형외과</a>
       <nav class="gnb" aria-label="주 메뉴">
-        <div class="gnb-item"><a href="about.html">병원소개 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="notice.html">공지사항</a><a href="tour.html">병원둘러보기</a><a href="doctor.html">의료진소개</a><a href="about.html">오시는 길</a><a href="events.html">이벤트</a><a href="hours.html">진료시간표</a></div></div>
+        <div class="gnb-item"><a href="about.html" class="current">병원소개 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="notice.html">공지사항</a><a href="tour.html">병원둘러보기</a><a href="doctor.html">의료진소개</a><a href="about.html">오시는 길</a><a href="events.html" class="current">이벤트</a><a href="hours.html">진료시간표</a></div></div>
         <div class="gnb-item">
           <a href="eye.html">눈성형 <span class="gnb-arrow">&#9662;</span></a>
           <div class="gnb-dropdown dd-wide dd-wide-4">
@@ -420,115 +349,141 @@
   <!-- ===== HERO ===== -->
   <section class="hero-banner">
     <div class="hero-banner-inner">
-      <div class="hero-eyebrow">COMMUNITY · 커뮤니티</div>
-      <h1 class="hero-title">커뮤니티</h1>
-      <p class="hero-subtitle">궁금하신 점을 편하게 물어보세요. 빠르고 친절하게 답변드립니다.</p>
+      <div class="hero-eyebrow">EVENTS · 진행 이벤트</div>
+      <h1 class="hero-title">이벤트</h1>
+      <p class="hero-subtitle">계절별 이벤트와 특별 프로모션 소식을 안내합니다</p>
     </div>
   </section>
 
-  <!-- ===== QUICK NAV ===== -->
-  <section class="section" style="background:#fff;">
-    <div class="section-inner">
-      <div class="section-label">Quick Navigation</div>
-      <h2 class="section-title">무엇을 도와드릴까요?</h2>
-      <p class="section-desc">아래 메뉴에서 원하시는 항목을 선택해주세요.</p>
+  <!-- ===== NOTICE LIST ===== -->
+  <section class="notice-section">
+    <div class="notice-inner">
+      <div class="section-label">Announcements</div>
+      <h2 class="section-title">진행 중인 이벤트</h2>
 
-      <div class="quicknav-grid">
-        <a href="consultation.html" class="qnav-card card-consult">
-          <div class="qnav-title">온라인 상담</div>
-          <div class="qnav-desc">궁금한 점을<br>온라인으로 문의</div>
-        </a>
-        <a href="#" class="qnav-card card-kakao">
-          <div class="qnav-title">카카오톡 상담</div>
-          <div class="qnav-desc">카카오로<br>빠른 답변 받기</div>
-        </a>
-        <a href="booking.html" class="qnav-card card-booking">
-          <div class="qnav-title">진료 예약</div>
-          <div class="qnav-desc">편한 날짜에<br>예약하기</div>
-        </a>
-        <a href="notice.html" class="qnav-card card-notice">
-          <div class="qnav-title">공지사항</div>
-          <div class="qnav-desc">병원 소식<br>및 안내</div>
-        </a>
+      <div class="notice-table-wrap">
+        <table class="notice-table">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>제목</th>
+              <th>날짜</th>
+              <th>조회</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="pinned">
+              <td><span class="n-badge n-badge-pin">공지</span></td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">선메디컬센터 유성선병원 성형외과 신규 개설 및 진료 안내 (필독)</span>
+                  <span class="n-badge n-badge-new">NEW</span>
+                </div>
+              </td>
+              <td>2025.02.28</td>
+              <td>1,284</td>
+            </tr>
+            <tr class="pinned">
+              <td><span class="n-badge n-badge-pin">공지</span></td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">외상 응급 환자 24시간 접수 시스템 도입 안내</span>
+                </div>
+              </td>
+              <td>2025.02.15</td>
+              <td>876</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">2025년 3월 진료시간 변경 안내 — 토요일 오후 진료 추가</span>
+                  <span class="n-badge n-badge-new">NEW</span>
+                </div>
+              </td>
+              <td>2025.03.10</td>
+              <td>312</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">신정환 과장 MBC 대전 뉴스 출연 안내 (2025.02.20)</span>
+                </div>
+              </td>
+              <td>2025.02.18</td>
+              <td>541</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">2025년 설날 연휴 진료 일정 안내 (1/28 ~ 1/30 휴진)</span>
+                </div>
+              </td>
+              <td>2025.01.20</td>
+              <td>623</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">실손보험 청구 서류 발급 서비스 안내</span>
+                </div>
+              </td>
+              <td>2025.01.10</td>
+              <td>488</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">카카오톡 상담 채널 개설 안내 (@유성선병원성형외과)</span>
+                </div>
+              </td>
+              <td>2025.01.05</td>
+              <td>712</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">온라인 예약 시스템 오픈 안내</span>
+                </div>
+              </td>
+              <td>2024.12.20</td>
+              <td>395</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">개인정보처리방침 개정 안내 (2024년 12월 시행)</span>
+                </div>
+              </td>
+              <td>2024.12.10</td>
+              <td>228</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>
+                <div class="notice-title-cell">
+                  <span class="notice-title-text">선메디컬센터 유성선병원 성형외과 홈페이지 오픈 안내</span>
+                </div>
+              </td>
+              <td>2024.12.01</td>
+              <td>1,045</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
-  </section>
 
-  <!-- ===== RECENT NOTICES ===== -->
-  <section class="section notices-section">
-    <div class="section-inner">
-      <div class="section-label">Latest Notices</div>
-      <h2 class="section-title">최근 공지사항</h2>
-
-      <div class="notice-list">
-        <div class="notice-item">
-          <span class="notice-badge badge-new">NEW</span>
-          <span class="notice-title">2025년 3월 진료시간 변경 안내 — 토요일 오후 진료 추가</span>
-          <span class="notice-date">2025.03.10</span>
-        </div>
-        <div class="notice-item">
-          <span class="notice-badge badge-new">NEW</span>
-          <span class="notice-title">선메디컬센터 유성선병원 성형외과 신규 개설 안내</span>
-          <span class="notice-date">2025.02.28</span>
-        </div>
-        <div class="notice-item">
-          <span class="notice-badge">공지</span>
-          <span class="notice-title">외상 환자 신속 진료 시스템 도입 안내 (24시간 응급 접수)</span>
-          <span class="notice-date">2025.02.15</span>
-        </div>
-        <div class="notice-item">
-          <span class="notice-badge">공지</span>
-          <span class="notice-title">2025년 설날 연휴 진료 일정 안내</span>
-          <span class="notice-date">2025.01.20</span>
-        </div>
-        <div class="notice-item">
-          <span class="notice-badge">안내</span>
-          <span class="notice-title">실손보험 청구 서류 발급 서비스 안내</span>
-          <span class="notice-date">2025.01.10</span>
-        </div>
-      </div>
-      <a href="notice.html" class="view-all">전체 공지사항 보기 →</a>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT METHODS ===== -->
-  <section class="section" style="background:#fff;">
-    <div class="section-inner">
-      <div class="section-label">Contact</div>
-      <h2 class="section-title">상담 및 문의 방법</h2>
-      <p class="section-desc">편하신 방법으로 언제든지 문의해 주세요.</p>
-
-      <div class="contact-grid">
-        <div class="contact-card card-phone">
-          <div class="contact-title">전화 상담</div>
-          <div class="contact-info">042-609-1190</div>
-          <div class="contact-desc">
-            평일 09:00 – 18:00<br>
-            토요일 09:00 – 13:00<br>
-            점심시간: 12:30 – 13:30
-          </div>
-          <a href="tel:042-609-1190" class="contact-btn btn-primary-red">지금 전화하기</a>
-        </div>
-        <div class="contact-card card-kakao-c">
-          <div class="contact-title">카카오톡 상담</div>
-          <div class="contact-info" style="color:#3C1E1E; font-size:18px;">@유성선병원성형외과</div>
-          <div class="contact-desc">
-            카카오톡에서 병원명 검색 후<br>
-            채팅으로 편하게 문의<br>
-            평균 응답 시간 30분 이내
-          </div>
-          <a href="#" class="contact-btn btn-primary-yellow">카카오톡 문의</a>
-        </div>
-        <div class="contact-card card-online">
-          <div class="contact-title">온라인 상담</div>
-          <div class="contact-info" style="color:#3a5cd6; font-size:18px;">24시간 접수</div>
-          <div class="contact-desc">
-            언제든지 상담 신청 가능<br>
-            진료일 기준 24시간 내 답변<br>
-            개인정보 철저 보호
-          </div>
-          <a href="consultation.html" class="contact-btn btn-primary-blue">상담 신청하기</a>
-        </div>
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="pg-btn arrow">‹</button>
+        <button class="pg-btn active">1</button>
+        <button class="pg-btn">2</button>
+        <button class="pg-btn arrow">›</button>
       </div>
     </div>
   </section>
@@ -536,11 +491,11 @@
   <!-- ===== CTA ===== -->
   <section class="cta-section">
     <div>
-      <h2>지금 바로 문의해보세요</h2>
-      <p>작은 궁금증도 편하게 물어보세요. 진료 전 상담으로 불안함을 해소해드립니다.</p>
+      <h2>문의 사항이 있으신가요?</h2>
+      <p>진행 중인 이벤트 외에도 궁금한 점은 언제든지 문의해 주세요.</p>
       <div class="cta-buttons">
         <a href="consultation.html" class="cta-btn-primary">온라인 상담 신청</a>
-        <a href="booking.html" class="cta-btn-outline">진료 예약하기</a>
+        <a href="tel:042-609-1190" class="cta-btn-outline">전화 042-609-1190</a>
         <a href="#" class="cta-btn-kakao">카카오톡 문의</a>
       </div>
     </div>
@@ -609,23 +564,164 @@
 
   <script>
   (function() {
-    var floatCta = document.getElementById('floatCta');
-    var floatToggle = document.getElementById('floatCtaToggle');
-    if (!floatCta || !floatToggle) return;
-    var floatVisible = true;
-    floatToggle.addEventListener('click', function() {
-      floatVisible = !floatVisible;
-      if (floatVisible) {
-        floatCta.classList.remove('hidden');
-        floatToggle.textContent = '';
-        floatToggle.setAttribute('aria-label', '플로팅 메뉴 닫기');
-      } else {
-        floatCta.classList.add('hidden');
-        floatToggle.textContent = '\uff0b';
-        floatToggle.setAttribute('aria-label', '플로팅 메뉴 열기');
-      }
+    // --- Notice Modal ---
+    var modalOverlay = document.createElement('div');
+    modalOverlay.id = 'noticeModal';
+    modalOverlay.style.cssText = 'display:none;position:fixed;inset:0;z-index:2000;background:rgba(45,31,36,0.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);align-items:center;justify-content:center;';
+    modalOverlay.innerHTML =
+      '<div style="background:#fff;border-radius:16px;max-width:560px;width:90%;max-height:80vh;overflow-y:auto;padding:36px 32px 28px;box-shadow:0 20px 60px rgba(158,107,123,0.18);position:relative;">' +
+        '<button id="noticeModalClose" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;color:#9A8B90;cursor:pointer;padding:4px 8px;line-height:1;">&times;</button>' +
+        '<h3 id="noticeModalTitle" style="font-size:20px;font-weight:800;color:#2D1F24;margin-bottom:8px;padding-right:28px;line-height:1.4;"></h3>' +
+        '<div id="noticeModalDate" style="font-size:12px;color:#9A8B90;margin-bottom:20px;"></div>' +
+        '<div id="noticeModalBody" style="font-size:15px;color:#6B5258;line-height:1.8;white-space:pre-wrap;"></div>' +
+      '</div>';
+    document.body.appendChild(modalOverlay);
+
+    function openModal(title, date, body) {
+      document.getElementById('noticeModalTitle').textContent = title;
+      document.getElementById('noticeModalDate').textContent = date;
+      document.getElementById('noticeModalBody').textContent = body;
+      modalOverlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modalOverlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.getElementById('noticeModalClose').addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', function(e) {
+      if (e.target === modalOverlay) closeModal();
     });
-  })();
+
+    // --- Attach click handlers to existing hardcoded rows ---
+    var tbody = document.querySelector('.notice-table tbody');
+    if (tbody) {
+      var existingRows = tbody.querySelectorAll('tr');
+      existingRows.forEach(function(tr) {
+        tr.addEventListener('click', function() {
+          var titleEl = tr.querySelector('.notice-title-text');
+          var dateEl = tr.querySelectorAll('td')[2];
+          if (titleEl) {
+            openModal(
+              titleEl.textContent,
+              dateEl ? dateEl.textContent : '',
+              '자세한 내용은 병원에 문의해 주세요.\n\n전화: 042-609-1190\n진료시간: 평일 09:00 – 17:30 | 토요일 09:00 – 12:30'
+            );
+          }
+        });
+      });
+    }
+
+    // --- Load admin notices from localStorage ---
+    var raw = localStorage.getItem('ysmc_notices');
+    if (!raw) return;
+    var notices;
+    try { notices = JSON.parse(raw); } catch(e) { return; }
+    if (!Array.isArray(notices) || notices.length === 0) return;
+
+    var tbody = document.querySelector('.notice-table tbody');
+    if (!tbody) return;
+
+    var existingRows = tbody.querySelectorAll('tr');
+    var existingCount = 0;
+    existingRows.forEach(function(r) {
+      if (!r.classList.contains('pinned')) existingCount++;
+    });
+
+    var today = new Date();
+    today.setHours(0,0,0,0);
+    var sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    // Sort: pinned first, then by date descending
+    notices.sort(function(a, b) {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return (b.date || '').localeCompare(a.date || '');
+    });
+
+    var nonPinnedAdminCount = notices.filter(function(n) { return !n.pinned; }).length;
+    var nonPinnedIndex = existingCount + nonPinnedAdminCount;
+
+    var fragment = document.createDocumentFragment();
+
+    notices.forEach(function(notice) {
+      var tr = document.createElement('tr');
+      tr.style.cursor = 'pointer';
+
+      // First column: pinned badge or number
+      var tdNum = document.createElement('td');
+      if (notice.pinned) {
+        tr.classList.add('pinned');
+        tdNum.innerHTML = '<span class="n-badge n-badge-pin">공지</span>';
+      } else {
+        tdNum.textContent = nonPinnedIndex;
+        nonPinnedIndex--;
+      }
+      tr.appendChild(tdNum);
+
+      // Title column
+      var tdTitle = document.createElement('td');
+      var dateStr = (notice.date || '').replace(/-/g, '.');
+      var noticeDate = new Date(notice.date);
+      var isNew = noticeDate >= sevenDaysAgo;
+
+      var titleHtml = '<div class="notice-title-cell"><span class="notice-title-text">' +
+        escapeHtml(notice.title) + '</span>';
+      if (isNew) {
+        titleHtml += ' <span class="n-badge n-badge-new">NEW</span>';
+      }
+      titleHtml += '</div>';
+      tdTitle.innerHTML = titleHtml;
+      tr.appendChild(tdTitle);
+
+      // Date column
+      var tdDate = document.createElement('td');
+      tdDate.textContent = dateStr;
+      tr.appendChild(tdDate);
+
+      // Views column
+      var tdViews = document.createElement('td');
+      tdViews.textContent = '\u2014';
+      tr.appendChild(tdViews);
+
+      // Click handler
+      (function(n, d) {
+        tr.addEventListener('click', function() {
+          openModal(n.title, d, n.body || '');
+        });
+      })(notice, dateStr);
+
+      fragment.appendChild(tr);
+    });
+
+    // Prepend admin notices before existing rows
+    tbody.insertBefore(fragment, tbody.firstChild);
+
+    function escapeHtml(str) {
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+  
+      /* ── Desktop Floating CTA toggle ── */
+      var floatCta = document.getElementById('floatCta');
+      var floatToggle = document.getElementById('floatCtaToggle');
+      var floatVisible = true;
+
+      floatToggle.addEventListener('click', function() {
+        floatVisible = !floatVisible;
+        if (floatVisible) {
+          floatCta.classList.remove('hidden');
+          floatToggle.textContent = '';
+          floatToggle.setAttribute('aria-label', '플로팅 메뉴 닫기');
+        } else {
+          floatCta.classList.add('hidden');
+          floatToggle.textContent = '\uff0b';
+          floatToggle.setAttribute('aria-label', '플로팅 메뉴 열기');
+        }
+      });
+})();
   </script>
 
 </body>

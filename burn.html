@@ -63,6 +63,7 @@
     .gnb-item:hover .gnb-arrow { transform: rotate(180deg); opacity: 1; }
     .gnb-dropdown { position: absolute; top: 64px; left: 50%; transform: translateX(-50%) translateY(-8px); background: rgba(255, 255, 255, 0.97); border: none; border-top: 2px solid var(--primary); min-width: 200px; padding: 16px 0; opacity: 0; visibility: hidden; transition: opacity 0.22s, transform 0.22s, visibility 0.22s; border-radius: 0 0 6px 6px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
     .gnb-dropdown.dd-wide { display: flex; min-width: 520px; padding: 24px 0; }
+    .gnb-dropdown.dd-wide-4 { min-width: 700px; }
     .gnb-item:hover .gnb-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
     .dd-col { flex: 1; padding: 0 8px; }
     .dd-col + .dd-col { border-left: 1px solid rgba(0,0,0,0.07); }
@@ -335,13 +336,16 @@
         <a href="tour.html">병원둘러보기</a>
         <a href="doctor.html">의료진소개</a>
         <a href="about.html">오시는 길</a>
+        <a href="events.html">이벤트</a>
+        <a href="hours.html">진료시간표</a>
       </div>
       <div class="mob-sub-title">외상·재건</div>
       <div class="mob-sub-grid">
-        <a href="trauma.html">상처·외상</a>
+        <a href="trauma.html">상처/외상</a>
         <a href="burn.html" class="current">화상</a>
-        <a href="reconstruction.html">피부종양·흉터</a>
-        <a href="pediatric.html">소아진료</a>
+        <a href="scar.html">흉터</a>
+        <a href="reconstruction.html">피부종양</a>
+        <a href="fracture.html">안면부골절</a>
       </div>
     </div>
     <div class="mobile-nav-divider"></div>
@@ -361,11 +365,12 @@
     <div class="header-gnb-row">
       <a href="index.html" class="logo-text">선메디컬센터 유성선병원 성형외과</a>
       <nav class="gnb" aria-label="주 메뉴">
-        <div class="gnb-item"><a href="about.html">병원소개 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="notice.html">공지사항</a><a href="tour.html">병원둘러보기</a><a href="doctor.html">의료진소개</a><a href="about.html">오시는 길</a></div></div>
-        <div class="gnb-item"><a href="trauma.html">상처·외상 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="trauma.html">열상·찰과상</a><a href="trauma.html">안면부 외상</a><a href="trauma.html">흉터 레이저</a></div></div>
-        <div class="gnb-item"><a href="burn.html" class="current">화상 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="burn.html">급성 화상 치료</a><a href="burn.html">피부이식</a><a href="burn.html">화상 흉터 재건</a><a href="burn.html">구축 치료</a></div></div>
-        <div class="gnb-item"><a href="reconstruction.html">피부종양 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="reconstruction.html">점·사마귀</a><a href="reconstruction.html">지방종·낭종</a><a href="reconstruction.html">피부암</a></div></div>
-        <div class="gnb-item"><a href="pediatric.html">소아진료 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="pediatric.html">소아 화상</a><a href="pediatric.html">소아 외상</a><a href="pediatric.html">혈관기형</a><a href="pediatric.html">귀 교정</a></div></div>
+        <div class="gnb-item"><a href="about.html">병원소개 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="notice.html">공지사항</a><a href="tour.html">병원둘러보기</a><a href="doctor.html">의료진소개</a><a href="about.html">오시는 길</a><a href="events.html">이벤트</a><a href="hours.html">진료시간표</a></div></div>
+        <div class="gnb-item"><a href="trauma.html">상처/외상 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="trauma.html">열상</a><a href="trauma.html">찰과상</a><a href="trauma.html">소아열상</a></div></div>
+        <div class="gnb-item"><a href="burn.html" class="current">화상 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="burn.html">소아화상</a><a href="burn.html">구축성형술</a><a href="burn.html">화상흉터재건</a></div></div>
+        <div class="gnb-item"><a href="scar.html">흉터 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="scar.html">흉터성형술</a><a href="scar.html">흉터치료</a></div></div>
+        <div class="gnb-item"><a href="reconstruction.html">피부종양 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="reconstruction.html">모반</a><a href="reconstruction.html">피지낭종</a><a href="reconstruction.html">황색종</a></div></div>
+        <div class="gnb-item"><a href="fracture.html">안면부골절 <span class="gnb-arrow">&#9662;</span></a><div class="gnb-dropdown"><a href="fracture.html">안와골절</a><a href="fracture.html">비골골절</a><a href="fracture.html">관골골절</a><a href="fracture.html">하악골 골절</a></div></div>
       </nav>
       <div class="header-cta">
         <a href="booking.html" class="btn-outline-w">진료예약</a>
