@@ -98,7 +98,7 @@
 
     /* ===== Page Hero ===== */
     .page-hero {
-      margin-top: 48px; position: relative; overflow: hidden;
+      margin-top: 104px; position: relative; overflow: hidden;
       background: linear-gradient(120deg, rgba(251,245,243,0.30) 0%, rgba(243,232,228,0.30) 100%), url(images/images2/cosmetic/male/male-aesthetic.jpg) center/cover no-repeat;
       padding: 100px 40px 80px;
     }
@@ -179,12 +179,87 @@
     .footer-info { font-size: 14px; margin-bottom: 12px; line-height: 1.8; }
     .footer-copy { font-size: 13px; color: rgba(0,0,0,0.35); }
 
+    /* ===== Desktop Floating CTA ===== */
+    .float-cta {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 980;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .float-cta-toggle {
+      position: absolute;
+      top: -32px;
+      right: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.20);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .float-cta-toggle:hover { background: rgba(0,0,0,0.40); }
+
+    .float-cta.hidden .float-cta-btns { display: none; }
+
+    .float-cta-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .float-cta-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+
+    .float-cta-btn:hover { transform: translateX(-4px); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
+
+    .float-cta-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .float-btn-phone { background: #fff; color: var(--primary-dark); }
+    .float-btn-phone .float-cta-icon { background: var(--primary); }
+    .float-btn-kakao { background: #FEE500; color: #3C1E1E; }
+    .float-btn-kakao .float-cta-icon { background: rgba(0,0,0,0.10); }
+    .float-btn-naver { background: #03C75A; color: #fff; }
+    .float-btn-naver .float-cta-icon { background: rgba(255,255,255,0.20); }
+
     @media (max-width: 1024px) {
+      .float-cta { display: none; }
       .principle-grid { grid-template-columns: 1fr; gap: 40px; }
       .points-grid { grid-template-columns: 1fr 1fr; }
       .types-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
+      .float-cta { display: none; }
       .header-topbar { height: 36px; }
       .topbar-tab { font-size: 11px; padding: 0 18px; height: 36px; }
       .header-gnb-row { height: 60px; padding: 0 20px; }
@@ -269,7 +344,7 @@
     </div>
     <div class="mobile-nav-divider"></div>
     <div class="mobile-nav-cta">
-      <a href="tel:042-000-0000" class="nav-phone">전화 상담 042-000-0000</a>
+      <a href="tel:042-609-1190" class="nav-phone">전화 상담 042-609-1190</a>
       <a href="#" class="nav-kakao">카카오톡으로 문의하기</a>
     </div>
   </nav>
@@ -277,15 +352,49 @@
   <!-- ===== HEADER ===== -->
   <header class="header" id="header">
     <div class="header-topbar">
+      <a href="cosmetic.html" class="topbar-tab active">미용성형센터</a>
+      <span class="topbar-divider"></span>
+      <a href="medical.html" class="topbar-tab">외상·재건센터</a>
+    </div>
+    <div class="header-gnb-row">
       <a href="index.html" class="logo-text">선메디컬센터 유성선병원 성형외과</a>
-      <div class="topbar-nav">
-        <a href="about.html" class="topbar-tab">병원소개</a>
-        <span class="topbar-divider"></span>
-        <a href="cosmetic.html" class="topbar-tab active">미용성형센터</a>
-        <span class="topbar-divider"></span>
-        <a href="medical.html" class="topbar-tab">외상·재건센터</a>
-        <span class="topbar-divider"></span>
-        <a href="community.html" class="topbar-tab">커뮤니티</a>
+      <nav class="gnb" aria-label="주 메뉴">
+        <div class="gnb-item">
+          <a href="about.html">병원소개 <span class="gnb-arrow">&#9662;</span></a>
+          <div class="gnb-dropdown"><a href="notice.html">공지사항</a><a href="tour.html">병원둘러보기</a><a href="doctor.html">의료진소개</a><a href="about.html">오시는 길</a></div>
+        </div>
+        <div class="gnb-item">
+          <a href="eye.html">눈성형 <span class="gnb-arrow">&#9662;</span></a>
+          <div class="gnb-dropdown dd-wide">
+            <div class="dd-col"><div class="dd-col-label">눈꺼풀</div><a href="eye.html">쌍꺼풀 성형술</a><a href="eye.html">매몰법</a><a href="eye.html">절개법</a><a href="eye.html">부분절개법</a></div>
+            <div class="dd-col"><div class="dd-col-label">눈 교정</div><a href="eye.html">눈매교정술</a><a href="eye.html">상안검성형술</a><a href="eye.html">트임술</a></div>
+            <div class="dd-col"><div class="dd-col-label">눈 주변</div><a href="eye.html">눈밑지방재배치</a><a href="eye.html">눈썹밑거상술</a><a href="eye.html">나노지방이식</a></div>
+          </div>
+        </div>
+        <div class="gnb-item">
+          <a href="nose.html">코성형 <span class="gnb-arrow">&#9662;</span></a>
+          <div class="gnb-dropdown"><a href="nose.html">콧대성형</a><a href="nose.html">코끝성형</a><a href="nose.html">콧볼·인중축소</a><a href="nose.html">재수술</a><a href="nose.html">기능성 코성형</a></div>
+        </div>
+        <div class="gnb-item">
+          <a href="breast.html">가슴성형 <span class="gnb-arrow">&#9662;</span></a>
+          <div class="gnb-dropdown"><a href="breast.html">가슴확대</a><a href="breast.html">가슴축소</a><a href="breast.html">함몰유두</a><a href="breast.html">유두성형</a></div>
+        </div>
+        <div class="gnb-item">
+          <a href="lifting.html">동안성형 <span class="gnb-arrow">&#9662;</span></a>
+          <div class="gnb-dropdown"><a href="lifting.html">울쎄라</a><a href="lifting.html">써마지</a><a href="lifting.html">안면거상술</a><a href="lifting.html">복합리프팅</a></div>
+        </div>
+        <div class="gnb-item">
+          <a href="fat.html" class="current">바디성형 <span class="gnb-arrow">&#9662;</span></a>
+          <div class="gnb-dropdown"><a href="fat.html">얼굴지방이식</a><a href="fat.html">얼굴지방흡입</a><a href="fat.html">바디지방흡입</a><a href="male.html">남자성형</a></div>
+        </div>
+        <div class="gnb-item">
+          <a href="petit.html">쁘띠 <span class="gnb-arrow">&#9662;</span></a>
+          <div class="gnb-dropdown"><a href="petit.html">보톡스</a><a href="petit.html">필러</a><a href="petit.html">스킨부스터</a><a href="petit.html">레이저</a></div>
+        </div>
+      </nav>
+      <div class="header-cta">
+        <a href="booking.html" class="btn-outline-w">진료예약</a>
+        <a href="consultation.html" class="btn-solid-w">상담 예약</a>
       </div>
       <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav"
         onclick="var o=document.getElementById('mobileNav'),t=document.getElementById('menuToggle'),isOpen=o.classList.contains('open');if(isOpen){o.classList.remove('open');t.classList.remove('open');document.body.style.overflow='';}else{o.classList.add('open');t.classList.add('open');document.body.style.overflow='hidden';}">
@@ -548,7 +657,7 @@
       <p>남성의 인상 고민, 솔직하게 상담해 드립니다.</p>
       <div class="cta-buttons">
         <a href="booking.html" class="cta-btn cta-btn-primary">무료 상담 예약하기</a>
-        <a href="tel:042-000-0000" class="cta-btn cta-btn-outline">전화 문의 042-000-0000</a>
+        <a href="tel:042-609-1190" class="cta-btn cta-btn-outline">전화 문의 042-609-1190</a>
         <a href="#" class="cta-btn cta-btn-kakao">카카오톡 상담</a>
       </div>
     </div>
@@ -559,24 +668,61 @@
     <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:12px;">선메디컬센터 유성선병원 성형외과</div>
     <address style="font-size:12px;line-height:2;font-style:normal;color:rgba(255,255,255,0.5);margin-bottom:20px;">
       대전광역시 유성구 북유성대로 93 (지족동)<br>
-      대표전화: <a href="tel:042-000-0000" style="color:inherit;">042-000-0000</a><br>
+      대표전화: <a href="tel:042-609-1190" style="color:inherit;">042-609-1190</a><br>
       진료시간: 평일 09:00–17:30 | 토요일 09:00–12:30
     </address>
     <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
-      <a href="tel:042-000-0000" style="padding:10px 20px;background:rgba(255,255,255,0.06);border-radius:8px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;">전화 문의</a>
+      <a href="tel:042-609-1190" style="padding:10px 20px;background:rgba(255,255,255,0.06);border-radius:8px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;">전화 문의</a>
       <a href="#" style="padding:10px 20px;background:#FEE500;border-radius:8px;font-size:13px;color:#3C1E1E;font-weight:700;text-decoration:none;">카카오톡</a>
       <a href="booking.html" style="padding:10px 20px;background:rgba(255,255,255,0.06);border-radius:8px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;">진료예약</a>
     </div>
     <p style="font-size:12px;color:rgba(255,255,255,0.28);">&copy; 2026 선메디컬센터 유성선병원 성형외과. All rights reserved.</p>
   </footer>
 
+  <!-- ===== DESKTOP FLOATING CTA ===== -->
+  <div class="float-cta" id="floatCta" role="complementary" aria-label="빠른 연락">
+    <button class="float-cta-toggle" id="floatCtaToggle" aria-label="플로팅 메뉴 닫기"></button>
+    <div class="float-cta-btns">
+      <a href="tel:042-609-1190" class="float-cta-btn float-btn-phone">
+        전화 상담
+      </a>
+      <a href="#" class="float-cta-btn float-btn-kakao">
+        카톡 상담
+      </a>
+      <a href="#naver-booking" class="float-cta-btn float-btn-naver">
+        <span class="float-cta-icon">N</span>네이버 예약
+      </a>
+    </div>
+  </div>
+
   <!-- ===== MOBILE STICKY CTA ===== -->
   <div class="mobile-cta" role="complementary" aria-label="빠른 연락">
     <div class="mobile-cta-inner">
-      <a href="tel:042-000-0000" class="mobile-cta-btn cta-phone"> 전화 상담</a>
+      <a href="tel:042-609-1190" class="mobile-cta-btn cta-phone"> 전화 상담</a>
       <a href="#" class="mobile-cta-btn cta-kakao"> 카톡 문의</a>
     </div>
   </div>
+
+  <script>
+  (function() {
+    var floatCta = document.getElementById('floatCta');
+    var floatToggle = document.getElementById('floatCtaToggle');
+    if (!floatCta || !floatToggle) return;
+    var floatVisible = true;
+    floatToggle.addEventListener('click', function() {
+      floatVisible = !floatVisible;
+      if (floatVisible) {
+        floatCta.classList.remove('hidden');
+        floatToggle.textContent = '';
+        floatToggle.setAttribute('aria-label', '플로팅 메뉴 닫기');
+      } else {
+        floatCta.classList.add('hidden');
+        floatToggle.textContent = '＋';
+        floatToggle.setAttribute('aria-label', '플로팅 메뉴 열기');
+      }
+    });
+  })();
+  </script>
 
 </body>
 </html>
