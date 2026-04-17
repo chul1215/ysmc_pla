@@ -98,3 +98,6 @@ Desktop.ini
 *.png
 !images/**/*.png
 briefing/유성선병원_성형외과_신설_홍보마케팅_기획안.md
+
+# Secrets / local configs
+.nano-banana-config.json

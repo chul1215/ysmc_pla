@@ -32,7 +32,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `cosmetic.html` / `medical.html` — 진료 허브 페이지 (각 카테고리 진입점)
 - 미용·성형 상세 7개 (+1 비활성): `eye`, `nose`, `lifting`, `fat`, `breast`, `other`, `petit` / `male` (GNB 미노출, 직접 접근만 가능)
 - 치료·재건 상세 5개: `trauma`, `burn`, `scar`, `reconstruction`, `fracture` (소아진료 `pediatric.html`은 2026-04-17 삭제, 내용은 trauma/burn으로 분산)
-- 기관 소개: `about`, `doctor`, `tour`, `events`(이벤트), `hours`(진료시간표)
+- 기관 소개: `about`, `doctor`, `tour`
 - 커뮤니티: `community`, `consultation`, `booking`, `notice`, `reviews`
   - `reviews.html` — 수술후기 목록 페이지. `localStorage: ysmc_reviews`에서 공개 후기(`visible !== false`)를 동적 로딩. 카테고리 필터 탭, 카드 그리드(3→2→1열), 클릭 시 상세 모달. admin에서 등록한 후기가 자동 반영됨.
   - `news.html` — 파일은 존재하나 **모든 GNB/모바일 nav에서 링크 제거됨** (언론보도 게시판 비활성화)
@@ -90,6 +90,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/OLD/NEW/g'
 ```
 
+GNB나 모바일 nav 블록 전체를 일괄 재구성할 때는 `_scripts/phase1_gnb.py` 참조. 해당 스크립트는 22개 HTML에 대해 정규식으로 `<nav class="gnb">...</nav>` 블록과 `<div class="mob-nav-section">` 블록을 찾아 신규 템플릿으로 치환하며, 파일별 `current` 마커는 `COSMETIC_FILES`/`MEDICAL_FILES` 매핑으로 유지. 멀티라인 문자열 치환은 `perl -0 -i`, 단일라인은 `sed`로 처리한다.
+
 ### 헤더 구조
 
 **index.html만** 1줄 토바 (`.header-topbar`, 48px):
@@ -110,7 +112,7 @@ grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/O
 - **GNB**: 전 페이지가 동일한 구조 (병원소개 + 7개 카테고리). 2026-04-17 재구성
   - Cosmetic (7 items): 병원소개 / 눈성형 / 코성형 / 가슴성형 / 동안성형 / 바디성형 / 쁘띠
   - Medical (6 items): 병원소개 / 상처·외상 / 화상 / 흉터 / 피부종양 / 안면부골절
-  - 병원소개 드롭다운: 공지사항·병원둘러보기·의료진소개·오시는 길·이벤트·진료시간표
+  - 병원소개 드롭다운: 공지사항·병원둘러보기·의료진소개·오시는 길
   - 눈성형 드롭다운: 쌍꺼풀 성형술(매몰/부분절개/절개) / 중년 눈 성형술(상안검/눈썹하거상/하안검) / 트임술(앞/뒷/밑/듀얼/윗) / 눈밑 성형술(눈밑지방재배치/하안검성형술)
 - **드롭다운**: `.gnb-dropdown` (hover 시 표시), 눈성형은 `.dd-wide.dd-wide-4` 4컬럼 (min-width 700px)
 - **현재 메뉴 표시**: `.gnb-item > a.current` 클래스
@@ -132,7 +134,20 @@ grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/O
 
 **cosmetic.html:** 히어로 슬라이드쇼(눈/코/리프팅/지방/가슴/기타/쁘띠 — 7종) → 카테고리 스크롤 7종 → Why Choose Us → 의료진 소개 → CTA
 
-**medical.html:** 프로모션 배너(응급/조직검사/소아) → 히어로 슬라이드쇼(외상/화상/피부종양/소아) → 카테고리 스크롤 4종 → 안전 시스템 → 의료진 소개 → CTA
+**medical.html:** 프로모션 배너(응급/조직검사/안면부골절) → 히어로 슬라이드쇼(외상/화상/흉터/피부종양/안면부골절 — 5종) → 카테고리 스크롤 5종 → 안전 시스템 → 의료진 소개 → CTA
+
+### eye.html 본문 5블록 구조 (2026-04-17 재편)
+
+`surgery-types` 섹션을 5개 하위 섹션으로 분리하여 각각 `id`로 앵커링:
+1. `#double-eyelid` 쌍꺼풀 성형술 — 매몰법·부분절개법·절개법 3 카드
+2. `#upper-blepharoplasty` 상안검 성형술 — 1 카드 (surgery-types.alt 배경)
+3. `#brow-lift` 눈썹하 거상술 — 1 카드
+4. `#trim` 트임술 — 앞/뒷/밑/듀얼/윗 5 카드 (surgery-types.alt 배경)
+5. `#under-eye` 눈밑 성형술 — 눈밑지방재배치 + `#lower-blepharoplasty` 하안검성형술 2 카드
+
+GNB 드롭다운 중 "중년 눈 성형술" 라벨(상안검+눈썹하거상+하안검)은 본문에서는 #upper-blepharoplasty / #brow-lift / #lower-blepharoplasty 3군데로 분산 노출. 하안검성형술은 GNB 중년 눈 성형술과 본문 눈밑 성형술 **양쪽 모두에** 표시 (사용자 지시).
+
+`.surgery-types.alt { background: var(--surface) }` 스타일로 섹션이 교차 배경되도록 처리.
 
 ### 좌우 스크롤 트랙 정렬 패턴 (중요)
 
@@ -204,7 +219,7 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 - **인증**: `sessionStorage('ysmc_admin')` — 비밀번호는 JS 내 `ADMIN_PW` 상수 (정적 사이트 한계, 실 운영 시 서버 사이드 인증 필요)
 - **테마**: `<html class="dark">` 고정 (라이트 모드 없음)
 - **3개 관리 메뉴**: 팝업 관리 / 공지사항 관리 / 온라인 상담 (수술후기 관리는 2026-04-17 제거됨)
-- **이미지 업로드**: 팝업 및 수술후기의 이미지 필드는 `<input type="file">` → `FileReader.readAsDataURL()` → Base64 Data URL로 localStorage에 저장. 선택 즉시 썸네일 미리보기 표시, × 버튼으로 삭제. 고해상도 원본 업로드 시 localStorage 5MB 한도 주의.
+- **이미지 업로드**: 팝업의 이미지 필드는 `<input type="file">` → `FileReader.readAsDataURL()` → Base64 Data URL로 localStorage에 저장. 선택 즉시 썸네일 미리보기 표시, × 버튼으로 삭제. 고해상도 원본 업로드 시 localStorage 5MB 한도 주의.
 - **localStorage 데이터 계약** — 공개 페이지 연동 현황:
   - `ysmc_popup` → `index.html` 팝업 오버레이 표시 (날짜 범위 + "오늘 하루 보지 않기" 지원) ✅
   - `ysmc_reviews` → `reviews.html` 수술후기 (admin에서 제거됨, 공개 페이지는 잔존하나 비활성 상태)
@@ -239,8 +254,8 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 - **의료진 호칭**: "전문의" 또는 "과장" 사용. **"원장" 사용 금지** (종합병원 진료과 형태)
 - **담당의**: 신정환 과장 (성형외과 전문의, 가톨릭중앙의료원 출신)
 - **대표전화**: `042-609-1190` (전 페이지 적용됨)
-- **CTA 4종 (순서 고정)**: 전화 상담(`tel:042-609-1190`) → 진료 예약(`booking.html`) → 카카오 상담 → 네이버 예약
-- **플로팅 CTA** (데스크탑 우측, 전 페이지): 전화 상담 / 카톡 상담 / 네이버 예약 — `.float-cta` + 토글 JS, 태블릿/모바일에서 `display: none`
+- **CTA 4종 (순서 고정)**: 전화 상담(`tel:042-609-1190`) → 진료 예약(`booking.html`) → 카카오 상담 → 네이버 예약. 네이버 예약은 기능 여부 확인 중이라 병행 유지(확정 시 제거 여부 재결정).
+- **플로팅 CTA** (데스크탑 우측, 전 페이지): 전화 상담 / 카톡 상담 / 카카오 케어챗 예약 / 네이버 예약 — `.float-cta` + 토글 JS, 태블릿/모바일에서 `display: none`. 케어챗 버튼은 `.float-btn-carechat`(배경 `#3C1E1E` + 텍스트 `#FEE500`), 네이버 버튼은 `.float-btn-naver`(`#03C75A`), 둘 다 `href="#"` 상태로 URL 주입 대기
 - **남성성형**: `male.html` 파일은 존재하나 GNB/모바일nav/cosmetic 슬라이드에서 **링크 제거됨** (직접 URL 접근만 가능)
 - **미용성형 컬러**: `--primary` / **치료재건 컬러**: `--navy-mid`
 - **의료법 준수**: "최고", "완벽한", "100% 만족" 등 과장 표현 금지
