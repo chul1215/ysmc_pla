@@ -37,11 +37,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - `reviews.html` — 수술후기 목록 페이지. `localStorage: ysmc_reviews`에서 공개 후기(`visible !== false`)를 동적 로딩. 카테고리 필터 탭, 카드 그리드(3→2→1열), 클릭 시 상세 모달. admin에서 등록한 후기가 자동 반영됨.
   - `news.html` — 파일은 존재하나 **모든 GNB/모바일 nav에서 링크 제거됨** (언론보도 게시판 비활성화)
 - `_archive/` — 미사용 보관
-- `delivery/` — 퍼블리싱 전달용 (공개 HTML + images + 명세서, 소스와 별도 관리)
+- `delivery/` — 퍼블리싱 전달용 스냅샷. 커밋된 하위 폴더는 누적 이력으로 유지:
+  - `20260417_3rd/` (3차, 최신) — 공개 HTML 24 + `변경사항_20260417_3rd.md` + **신규/변경 이미지만** 상대경로 그대로 동봉(`images/medical-hero.jpg`, `images/images2/medical/scar/`, `images/images2/medical/fracture/`)
+  - `20260417/` (2차)·`20260417_ysmc_update2.zip` (2차 zip)은 **git untracked** 로컬 보관 — 사용자 지시로 커밋 제외
+  - 신규 폴더 만들 때 이전 폴더 전체 복제하지 말고, 이전 배포 이후 변경·신규된 파일만 복사 + 변경사항 md 작성. PNG도 포함되도록 `.gitignore`에 `!delivery/**/*.png` 예외 이미 적용됨
 
 ### 사용 가능한 이미지 (`images/` 폴더)
 
-루트: `surgery-room.jpg`, `lifting.jpg`, `shin_profile.jpg`, `eye-correction.png`, `petit-skin.png`, `doctor_shin.png` (의료진 실제 사진)
+루트: `medical-hero.jpg` (치료재건 대표 히어로 — index·fracture·scar·reconstruction 4개 페이지가 공유. Gemini 2.5 Flash Image 생성), `lifting.jpg`, `shin_profile.jpg`, `eye-correction.png`, `petit-skin.png`, `doctor_shin.png` (의료진 실제 사진). `surgery-room.jpg`는 2026-04-17 `medical-hero.jpg`로 교체되어 **현재 미참조** (로컬엔 보존).
 
 눈성형 시술 이미지 (eye.html 전용): `매몰법_den.png`, `절개법_dei.png`, `부분절개법_dep.png`, `앞트임_epi.png`, `눈매교정.png`, `눈_나노지방_nano.png`, `위트임.png`, `듀얼트임.png`, `하안검.jpg`, `지방재배치.jpg`, `눈썹밑거상_SB.png`, `기능코.jpg`, `콧볼_인중축소.jpg`, `무보형물_귀연골.jpg`, `무보형물_비중격.jpg`
 
@@ -71,8 +74,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `images/images2/medical/{page}/` — 치료재건 상세 페이지용 시술·특징 카드 이미지 (URL-safe):
 - `trauma/` → `emergency-consult`, `specialist-suture`, `scar-laser`
-- `pediatric/` → `pediatric-approach`, `pediatric-suture`, `pediatric-mole`, `pediatric-burn`, `pediatric-vascular`, `pediatric-ear`, `pediatric-scar`, `pediatric-anesthesia`, `growth-plan`, `guardian-care`
+- `pediatric/` → `pediatric-approach`, `pediatric-suture`, `pediatric-mole`, `pediatric-burn`, `pediatric-vascular`, `pediatric-ear`, `pediatric-scar`, `pediatric-anesthesia`, `growth-plan`, `guardian-care` (pediatric.html은 삭제됐지만 일부 이미지는 trauma/burn에서 재활용 가능)
 - `reconstruction/` → `accurate-diagnosis`, `diagnosis-system`, `specialist-surgery`, `minimal-scar`
+- `scar/` → `accurate-diagnosis`, `diagnosis-system`, `specialist-surgery`, `minimal-scar` (2026-04-17 Gemini 신규 생성 — 기존 reconstruction 이미지 공유 상태에서 전용으로 분리)
+- `fracture/` → `accurate-diagnosis`, `diagnosis-system`, `specialist-surgery`, `minimal-scar` (2026-04-17 Gemini 신규 생성)
 - `burn/` → `burn-stages`, `acute-burn`, `skin-graft`, `burn-scar-recon`, `contracture`, `burn-scar-nonsurgical`, `pediatric-burn`, `emergency-system`, `inpatient-care`, `long-term-scar`
 
 **이 목록에 없는 이미지 경로는 사용 금지** — 없는 이미지는 CSS 그라디언트로 처리.
@@ -91,6 +96,14 @@ grep -rl 'OLD' /Users/chul/Documents/WORK/ysmc_pla/*.html | xargs sed -i '' 's/O
 ```
 
 GNB나 모바일 nav 블록 전체를 일괄 재구성할 때는 `_scripts/phase1_gnb.py` 참조. 해당 스크립트는 22개 HTML에 대해 정규식으로 `<nav class="gnb">...</nav>` 블록과 `<div class="mob-nav-section">` 블록을 찾아 신규 템플릿으로 치환하며, 파일별 `current` 마커는 `COSMETIC_FILES`/`MEDICAL_FILES` 매핑으로 유지. 멀티라인 문자열 치환은 `perl -0 -i`, 단일라인은 `sed`로 처리한다.
+
+### `_scripts/` 디렉터리 도구 인벤토리
+
+전 페이지 일괄 치환은 `sed`로 안 되는(멀티라인/복합) 경우 이 스크립트들을 참고·재활용한다:
+
+- `phase1_gnb.py` — GNB/모바일 nav 블록 템플릿 치환기
+- `naver_to_carechat.py` / `restore_naver.py` — 플로팅 CTA 블록 치환·복원 템플릿. 정규식 `subn` + 단일 CSS 문자열 replace 구조라, 다른 다중 파일 블록 작업에 복제하기 좋은 레퍼런스
+- `gen_images.py` / `gen_index_medical.py` — Gemini 2.5 Flash Image 생성기. 자세한 워크플로는 아래 "Gemini 이미지 생성" 섹션
 
 ### 헤더 구조
 
@@ -112,13 +125,18 @@ GNB나 모바일 nav 블록 전체를 일괄 재구성할 때는 `_scripts/phase
 - **GNB**: 전 페이지가 동일한 구조 (병원소개 + 7개 카테고리). 2026-04-17 재구성
   - Cosmetic (7 items): 병원소개 / 눈성형 / 코성형 / 가슴성형 / 동안성형 / 바디성형 / 쁘띠
   - Medical (6 items): 병원소개 / 상처·외상 / 화상 / 흉터 / 피부종양 / 안면부골절
+  - **드롭다운이 정답이고 상세 페이지 내부 카드·태그가 여기에 맞춰져야 한다** — 드롭다운 변경 시 반드시 해당 페이지 `treatment-types`·`principle-tags`·FAQ까지 정합화. 현재 스냅샷:
+    - `burn.html` treatment-types 3종: 화상 흉터 재건 / 구축 교정 / 소아 화상 치료 (드롭다운 "소아화상/구축 교정/화상흉터재건"과 일치). "구축성형술"은 2026-04-17 "구축 교정"으로 전역 치환됨
+    - `reconstruction.html` treatment-types 3종: 모반 / 피지낭종 / 황색종 (본문 카드까지 질환별로 재작성)
+    - `scar.html` treatment-types 2종: 흉터성형술 / 흉터 레이저 치료 (켈로이드·귀 켈로이드 카드·태그·원리 문구 전부 삭제됨)
+    - `lifting.html`에서 **나노마이크로지방이식**, `petit.html`에서 **스킨부스터** 카드·태그·FAQ 문구 삭제됨. 실수로 복원하지 말 것
   - 병원소개 드롭다운: 공지사항·병원둘러보기·의료진소개·오시는 길
   - 눈성형 드롭다운: 쌍꺼풀 성형술(매몰/부분절개/절개) / 중년 눈 성형술(상안검/눈썹하거상/하안검) / 트임술(앞/뒷/밑/듀얼/윗) / 눈밑 성형술(눈밑지방재배치/하안검성형술)
 - **드롭다운**: `.gnb-dropdown` (hover 시 표시), 눈성형은 `.dd-wide.dd-wide-4` 4컬럼 (min-width 700px)
 - **현재 메뉴 표시**: `.gnb-item > a.current` 클래스
 - **CTA 버튼**: `.header-cta` 안에 `.btn-outline-w`(진료예약) + `.btn-solid-w`(상담 예약)
 - **모바일** (768px 이하): `.gnb, .header-cta { display: none }`, 햄버거만 표시 → 풀스크린 오버레이
-- **헤더 높이**: PC 104px / 모바일 96px (36+60) → `.page-hero { margin-top: 104px }`, 모바일 `96px`
+- **헤더 높이**: PC 104px(탭바 40 + GNB 64) / 모바일 96px(탭바 36 + GNB 60) → `.page-hero { margin-top: 104px }`, 모바일 `96px`. 모바일 축소 수치는 `@media (max-width: 768px)` 안에서 재정의됨
 - **예외**: `burn.html`은 `emergency-banner`가 헤더 바로 아래에 오므로 margin-top이 banner에 적용됨
 
 ### JS 패턴
@@ -292,6 +310,16 @@ Google Stitch MCP가 연결되어 있어 대화 중 UI 디자인 생성을 직�
 - **인증 만료 시**: `gcloud auth application-default login` 재실행
 
 Stitch로 생성한 HTML/CSS 결과물을 이 프로젝트에 통합할 때는 인라인 스타일 구조를 유지하고, CSS 변수를 프로젝트 색상 시스템으로 교체해야 한다.
+
+## Gemini 이미지 생성 (장면 실사진 합성)
+
+"우리 병원 분위기" 컷을 만들어낼 때 `nano-banana` MCP 또는 직접 REST 호출을 사용한다. `_scripts/gen_images.py`·`gen_index_medical.py`가 레퍼런스.
+
+- **모델**: `gemini-2.5-flash-image` — **`-preview` 접미사 안 붙은 쪽**. preview 모델명은 일부 프로젝트에서 404로 거절됨. `nano-banana-mcp` npm 패키지는 기본적으로 preview를 호출하므로 필요 시 `~/.npm/_npx/<hash>/node_modules/nano-banana-mcp/dist/index.js`에서 모델명 패치 후 `pkill -f nano-banana-mcp`로 프로세스 재시작
+- **결제 조건**: 이 모델은 **무료 티어 quota 0**. `AIza...` API 키 프로젝트에 Billing 활성화 필수. 비용은 장당 약 $0.04. Imagen 4 계열도 유료 전용
+- **키 주입**: 스크립트는 `os.environ["GEMINI_API_KEY"]`로 받음. 절대 소스에 하드코딩하지 말 것. MCP 등록은 `claude mcp add -s user -e GEMINI_API_KEY=... nano-banana -- npx -y nano-banana-mcp`
+- **출력 포맷**: 1024×1024 정사각 PNG/JPG. 세로/가로 비율이 필요해도 출력은 정사각으로 나오므로 프롬프트에서 "vertical 3:4 portrait composition" 같은 힌트만 가능. 최종 표시는 CSS `background-size: cover + position: center`로 대응
+- **프롬프트 지침**: "Korean plastic surgeon", "Korean university hospital OR", "dusty rose palette (#9E6B7B)" 같은 맥락 키워드 + "No text, no logo, no watermark" 필수. 의료 사이트라 Unsplash 등 스톡은 한국 의료진 부재로 대체재가 되지 못함
 
 ## 콘텐츠 전략 참고
 
