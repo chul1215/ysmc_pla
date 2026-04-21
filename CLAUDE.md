@@ -33,20 +33,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 미용·성형 상세 7개 (+1 비활성): `eye`, `nose`, `lifting`, `fat`, `breast`, `other`, `petit` / `male` (GNB 미노출, 직접 접근만 가능)
 - 치료·재건 상세 5개: `trauma`, `burn`, `scar`, `reconstruction`, `fracture` (소아진료 `pediatric.html`은 2026-04-17 삭제, 내용은 trauma/burn으로 분산)
 - 기관 소개: `about`, `doctor`, `tour`
-- 커뮤니티: `community`, `consultation`, `booking`, `notice`, `reviews`
+- 커뮤니티: `community`, `consultation`, `booking`, `notice`, `notice-detail`, `reviews`
+  - `notice.html` — 공지 목록. `localStorage: ysmc_notices` 기반 **완전 동적 렌더** (2026-04-21 하드코딩 `<tr>` 전량 제거). 행 클릭 시 `notice-detail.html?id=...`로 이동. pinned 최상단 + 게시일 내림차순 정렬.
+  - `notice-detail.html` — 공지 상세 페이지. `?id=` 쿼리 파라미터 → localStorage 조회 → 메타(작성자/게시일/수정일/조회수)·본문 HTML·첨부파일·이전/다음글·목록으로 버튼 렌더링. 조회수는 `sessionStorage('ysmc_notice_viewed_<id>')` 플래그로 탭 세션당 1회만 증가.
+  - `notice-seed.js` — 기존 하드코딩 공지 10건(본문 포함)을 localStorage에 1회 주입하는 공유 모듈. `NoticeSeed.seedIfNeeded()` + `ysmc_notices_seeded` 플래그. **CLAUDE.md의 자급자족 원칙 예외** (아래 코드 아키텍처 섹션 참조).
   - `reviews.html` — 수술후기 목록 페이지. `localStorage: ysmc_reviews`에서 공개 후기(`visible !== false`)를 동적 로딩. 카테고리 필터 탭, 카드 그리드(3→2→1열), 클릭 시 상세 모달. admin에서 등록한 후기가 자동 반영됨.
   - `news.html` — 파일은 존재하나 **모든 GNB/모바일 nav에서 링크 제거됨** (언론보도 게시판 비활성화)
 - `_archive/` — 미사용 보관
 - `delivery/` — 퍼블리싱 전달용 스냅샷. 커밋된 하위 폴더는 누적 이력으로 유지:
-  - `20260417_3rd/` (3차, 최신) — 공개 HTML 24 + `변경사항_20260417_3rd.md` + **신규/변경 이미지만** 상대경로 그대로 동봉(`images/medical-hero.jpg`, `images/images2/medical/scar/`, `images/images2/medical/fracture/`)
-  - `20260417/` (2차)·`20260417_ysmc_update2.zip` (2차 zip)은 **git untracked** 로컬 보관 — 사용자 지시로 커밋 제외
+  - `20260421_4th/` (4차, 최신) — 공지사항 시스템 재구성 배포. `admin.html`·`notice.html`·`notice-detail.html`(신규)·`notice-seed.js`(신규) 4개 + `변경사항_20260421_4th.md`. Toast UI Editor CDN 2건·localStorage 스키마 확장·테스트 시나리오 A/B/C 포함
+  - `20260417_3rd/` (3차) — 공개 HTML 24 + `변경사항_20260417_3rd.md` + **신규/변경 이미지만** 상대경로 그대로 동봉(`images/medical-hero.jpg`, `images/images2/medical/scar/`, `images/images2/medical/fracture/`)
+  - `20260417/` (2차)·`20260417_ysmc_update2.zip` (2차 zip)·`20260421_4th.zip`(4차 zip)은 **git untracked** 로컬 보관 — 사용자 지시로 커밋 제외
   - 신규 폴더 만들 때 이전 폴더 전체 복제하지 말고, 이전 배포 이후 변경·신규된 파일만 복사 + 변경사항 md 작성. PNG도 포함되도록 `.gitignore`에 `!delivery/**/*.png` 예외 이미 적용됨
 
 ### 사용 가능한 이미지 (`images/` 폴더)
 
 루트: `medical-hero.jpg` (치료재건 대표 히어로 — index·fracture·scar·reconstruction 4개 페이지가 공유. Gemini 2.5 Flash Image 생성), `lifting.jpg`, `shin_profile.jpg`, `eye-correction.png`, `petit-skin.png`, `doctor_shin.png` (의료진 실제 사진). `surgery-room.jpg`는 2026-04-17 `medical-hero.jpg`로 교체되어 **현재 미참조** (로컬엔 보존).
 
-눈성형 시술 이미지 (eye.html 전용): `매몰법_den.png`, `절개법_dei.png`, `부분절개법_dep.png`, `앞트임_epi.png`, `눈매교정.png`, `눈_나노지방_nano.png`, `위트임.png`, `듀얼트임.png`, `하안검.jpg`, `지방재배치.jpg`, `눈썹밑거상_SB.png`, `기능코.jpg`, `콧볼_인중축소.jpg`, `무보형물_귀연골.jpg`, `무보형물_비중격.jpg`
+눈성형 시술 이미지 (eye.html 전용): `매몰법_den.png`, `절개법_dei.png`, `부분절개법_dep.png`, `앞트임_epi.png`, `밑트임.png`, `위트임.png`, `듀얼트임.png`, `눈매교정.png`, `눈_나노지방_nano.png`, `눈썹밑거상_SB.png`, `지방재배치.png`, `하안검.png`, `기능코.jpg`, `콧볼_인중축소.jpg`, `무보형물_귀연골.jpg`, `무보형물_비중격.jpg`
+  - `밑트임.png`·`지방재배치.png`·`하안검.png` 3장은 2026-04-21 nano-banana MCP로 `앞트임_epi.png`를 레퍼런스 삼아 신규 생성 (4패널 가로 연속 컷, 한국 여성 눈 클로즈업 + 마킹 스타일). 이전에 있던 연필 손그림 스케치 사진 `지방재배치.jpg`·`하안검.jpg`는 **미사용** (로컬 보존, eye.html 3곳(밑트임/눈밑지방재배치/하안검성형술)에서 새 png 참조)
 
 `images/mc-image/미용성형/` — 카테고리 카드용 실사진 8종 + 메인/세컨페이지 이미지:
 - `미용성형 메인.jpg`, `미용성형 세컨페이지.jpg`
@@ -87,6 +92,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 코드 아키텍처: 파일 완전 자급자족 구조
 
 **공유 CSS/JS 파일이 없다.** 모든 스타일, GNB, 스크립트는 각 HTML 파일 내 `<style>`, `<script>` 블록에 인라인으로 존재한다.
+
+> **유일한 예외**: `notice-seed.js` — `notice.html` · `notice-detail.html` · `admin.html` 3개 페이지가 동일한 시드 데이터(10건 공지 본문 포함)를 참조해야 하고, 3파일 중복 시 수백 줄이 복제되어 유지보수 부담이 크기 때문에 공유 모듈로 분리. UI 코드(헤더·색상·GNB)는 절대 공유 파일로 빼지 말 것 — 자급자족 원칙은 이 부분에 적용됨.
 
 공통 요소(GNB, 색상 변수, 푸터 등)를 수정할 때는 **영향받는 모든 파일을 각각 수정**해야 한다. 다수 파일을 한 번에 고칠 때는 `grep -rl | xargs sed` 방식을 사용한다 (멀티라인 for 루프는 이 환경에서 동작하지 않음):
 
@@ -147,6 +154,8 @@ GNB나 모바일 nav 블록 전체를 일괄 재구성할 때는 `_scripts/phase
 - **about.html**: IIFE — 카드 stagger 애니메이션. 오시는 길 섹션에 Google Maps iframe 내장 (`https://www.google.com/maps?q=...&output=embed`), API 키 불필요
 - **tour.html**: 터치 스와이프 슬라이더 (화살표 + dot 인디케이터)
 - **reviews.html**: IIFE — `localStorage: ysmc_reviews` 로딩 후 카드 렌더링, 카테고리 필터(`data-cat` 속성), 클릭 시 상세 모달 (`modal-overlay.open` 토글 + `document.body.style.overflow` 제어)
+- **notice.html**: IIFE — `NoticeSeed.seedIfNeeded()` 호출(시드 1회 주입) → `ysmc_notices` 로드 → pinned/date 정렬 → tbody 렌더. 행 클릭 시 `notice-detail.html?id=<id>`로 `window.location.href` 이동. 모달 없음.
+- **notice-detail.html**: IIFE — URL `?id=` 파싱 → localStorage 조회 → 제목/작성자/게시일/수정일/조회수/본문(HTML 그대로 innerHTML)/첨부파일/이전·다음글 렌더. 본문 HTML은 admin만 작성 전제로 sanitize 없이 innerHTML 사용. 본문 내부 Toast UI Editor 산출물 스타일링은 `.detail-body h1/h2/ul/img/blockquote/table` 등으로 인라인 CSS 블록에 정의되어 있음.
 
 ### 허브 페이지 섹션 구성 (cosmetic.html / medical.html)
 
@@ -233,15 +242,23 @@ Chrome에서 `scroll-snap-type`을 가진 flex 컨테이너에 `padding-left`를
 
 공개 사이트와 완전히 분리된 운영 관리 페이지. GNB 없음, 공개 페이지에서 링크되지 않음.
 
-- **CDN 의존**: Tailwind CSS (커스텀 teal/surface 컬러 확장), Google Fonts (Noto Sans KR) — 인터넷 필수
+- **CDN 의존**: Tailwind CSS (커스텀 teal/surface 컬러 확장), Google Fonts (Noto Sans KR), **Toast UI Editor** (공지 본문 WYSIWYG+마크다운 에디터, `toastui-editor.min.css` + `toastui-editor-all.min.js`) — 인터넷 필수. CDN 차단 환경에선 사내 호스팅으로 교체 필요.
 - **인증**: `sessionStorage('ysmc_admin')` — 비밀번호는 JS 내 `ADMIN_PW` 상수 (정적 사이트 한계, 실 운영 시 서버 사이드 인증 필요)
-- **테마**: `<html class="dark">` 고정 (라이트 모드 없음)
+- **테마**: `<html class="dark">` 고정 (라이트 모드 없음). Toast UI Editor 영역만 `.editor-wrap` 커스텀 CSS로 라이트 배경 유지 (본문 가독성).
 - **3개 관리 메뉴**: 팝업 관리 / 공지사항 관리 / 온라인 상담 (수술후기 관리는 2026-04-17 제거됨)
-- **이미지 업로드**: 팝업의 이미지 필드는 `<input type="file">` → `FileReader.readAsDataURL()` → Base64 Data URL로 localStorage에 저장. 선택 즉시 썸네일 미리보기 표시, × 버튼으로 삭제. 고해상도 원본 업로드 시 localStorage 5MB 한도 주의.
+- **이미지/파일 업로드 패턴** — 두 가지 경로:
+  1. **팝업 이미지**: `<input type="file">` → `FileReader.readAsDataURL()` → Base64 Data URL 단일 필드로 저장. 선택 즉시 썸네일, × 로 삭제
+  2. **공지 본문 이미지**: Toast UI Editor `addImageBlobHook`으로 drag/paste/버튼 업로드 모두 Base64 변환 후 에디터 내부 HTML `<img src="data:...">`로 삽입
+  3. **공지 첨부파일**: `<input type="file" multiple>` → Base64 배열로 `attachments[]` 저장. `{name, type, size, data}` 구조, 개별 × 로 삭제. PDF/이미지/문서 허용. localStorage 5~10MB 한도 고려해 5MB 이내 권장
+- **공지 작성 UX (2026-04-21 재구성)**:
+  - 카테고리 "공지" 고정 (select 제거), 작성자 "관리자" 고정 (모달 상단 표기, 입력 불가)
+  - Toast UI Editor `lazy init` — 첫 `openNoticeModal()` 호출 시에만 생성, 이후 `setHTML('')`로 재사용
+  - 신규: `date = today, updatedAt = today, views = 0`. 수정: `date`·`views` 유지, `updatedAt`만 갱신. `content` 구 필드는 저장 시 자동 제거(하위 호환)
 - **localStorage 데이터 계약** — 공개 페이지 연동 현황:
   - `ysmc_popup` → `index.html` 팝업 오버레이 표시 (날짜 범위 + "오늘 하루 보지 않기" 지원) ✅
   - `ysmc_reviews` → `reviews.html` 수술후기 (admin에서 제거됨, 공개 페이지는 잔존하나 비활성 상태)
-  - `ysmc_notices` → `notice.html` 공지사항 동적 로딩 (기존 하드코딩 목록 위에 prepend, 클릭 시 본문 모달) ✅
+  - `ysmc_notices` → `notice.html` 목록 + `notice-detail.html` 상세. **스키마 (2026-04-21 확장)**: `{ id, category:'공지'(고정), title, body(HTML), author:'관리자'(고정), date(YYYY-MM-DD), updatedAt, views, pinned, visible, attachments:[{name,type,size,data}] }`. `body`는 Toast UI Editor 산출 HTML — 본문 내 이미지는 `<img src="data:...">` Base64 inline ✅
+  - `ysmc_notices_seeded` → `notice-seed.js`의 시드 1회성 주입 플래그. 관리자가 시드 삭제해도 복원되지 않음
   - `ysmc_consultations` → `consultation.html` 폼 submit → admin에서 미확인/확인/답변완료 관리 ✅
 - **미확인 상담 뱃지**: 사이드바에 `pending` 상태 건수 표시, 상담 클릭 시 `pending→read` 자동 전환
 
