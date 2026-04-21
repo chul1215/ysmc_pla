@@ -8,6 +8,9 @@
        실제 운영 배포 시 서버 사이드 인증(세션/JWT)으로 교체 필요합니다. -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Toast UI Editor (공지 본문 리치 텍스트 에디터) -->
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -41,6 +44,20 @@
     ::-webkit-scrollbar-thumb { background: #263849; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #42c0bf; }
     .status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; }
+    /* Toast UI Editor: 에디터 영역만 라이트 배경으로 복원 (가독성) */
+    .editor-wrap { background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #263849; }
+    .editor-wrap .toastui-editor-defaultUI { border: none; border-radius: 0; }
+    .editor-wrap .toastui-editor-defaultUI-toolbar { background: #f7f8fa; border-bottom: 1px solid #e5e9eb; }
+    .editor-wrap .ProseMirror { color: #2D1F24 !important; background: #fff !important; min-height: 320px; font-size: 14px; }
+    .editor-wrap .toastui-editor-md-container, .editor-wrap .toastui-editor-ww-container { background: #fff; }
+    .editor-wrap .toastui-editor-mode-switch { background: #f7f8fa; border-top: 1px solid #e5e9eb; }
+    .editor-wrap .toastui-editor-md-preview { background: #fafbfc; color: #2D1F24; }
+    /* 첨부파일 목록 */
+    .attach-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: #16232f; border: 1px solid #263849; border-radius: 8px; font-size: 12px; }
+    .attach-item .attach-name { flex: 1; color: #fff; word-break: break-all; }
+    .attach-item .attach-size { color: #9ca3af; flex-shrink: 0; }
+    .attach-item .attach-remove { background: transparent; border: none; color: #f87171; cursor: pointer; padding: 2px 6px; font-size: 14px; line-height: 1; }
+    .attach-item .attach-remove:hover { color: #ef4444; }
   </style>
 </head>
 <body class="bg-[#0a0f14] text-gray-100 min-h-screen">
@@ -291,34 +308,35 @@
 
 <!-- ===== NOTICE MODAL ===== -->
 <div id="noticeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-  <div class="modal-enter bg-[#0f1923] border border-[#1e2f3d] rounded-2xl w-full max-w-lg shadow-2xl">
+  <div class="modal-enter bg-[#0f1923] border border-[#1e2f3d] rounded-2xl w-full max-w-3xl shadow-2xl">
     <div class="flex items-center justify-between px-6 py-4 border-b border-[#1e2f3d]">
-      <h3 id="noticeModalTitle" class="text-sm font-semibold text-white">새 공지 작성</h3>
+      <div class="flex items-center gap-3">
+        <h3 id="noticeModalTitle" class="text-sm font-semibold text-white">새 공지 작성</h3>
+        <span class="text-[11px] text-gray-500">작성자 <span class="text-gray-300 font-medium">관리자</span> 고정</span>
+      </div>
       <button onclick="closeNoticeModal()" class="text-gray-500 hover:text-white transition-colors">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
     </div>
-    <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+    <div class="p-6 space-y-5 max-h-[78vh] overflow-y-auto">
       <input type="hidden" id="noticeId" />
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block text-xs font-medium text-gray-400 mb-1.5">카테고리</label>
-          <select id="noticeCategory" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#42c0bf]">
-            <option value="일반">일반</option>
-            <option value="이벤트">이벤트</option>
-            <option value="휴진안내">휴진안내</option>
-          </select>
-        </div>
-      </div>
       <div>
         <label class="block text-xs font-medium text-gray-400 mb-1.5">제목</label>
         <input id="noticeTitle" type="text" placeholder="공지 제목" class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf]" />
       </div>
       <div>
-        <label class="block text-xs font-medium text-gray-400 mb-1.5">내용</label>
-        <textarea id="noticeContent" rows="6" placeholder="공지 내용을 입력하세요..." class="w-full bg-[#16232f] border border-[#263849] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#42c0bf] resize-none"></textarea>
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">본문 <span class="text-gray-600 font-normal">(에디터에서 이미지 삽입 시 자동으로 Base64로 저장됩니다)</span></label>
+        <div id="noticeEditor" class="editor-wrap"></div>
       </div>
-      <div class="flex items-center gap-5">
+      <div>
+        <label class="block text-xs font-medium text-gray-400 mb-1.5">첨부파일 <span class="text-gray-600 font-normal">(PDF · 이미지 · 문서, 여러 개 가능)</span></label>
+        <div class="flex items-center gap-3">
+          <input type="file" id="noticeAttachInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.hwp,.png,.jpg,.jpeg,.gif,.webp" class="text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:bg-[#42c0bf] file:text-white file:text-xs file:font-semibold hover:file:bg-[#2da8a7] file:cursor-pointer" />
+          <span id="noticeAttachHint" class="text-[11px] text-gray-600">파일을 선택하면 Base64로 인코딩되어 저장됩니다. (전체 용량 5MB 이내 권장)</span>
+        </div>
+        <div id="noticeAttachList" class="mt-3 space-y-2"></div>
+      </div>
+      <div class="flex items-center gap-5 pt-1">
         <div class="flex items-center gap-2">
           <input id="noticePinned" type="checkbox" class="w-4 h-4 rounded accent-[#42c0bf]" />
           <label class="text-sm text-gray-300">상단 고정</label>
@@ -354,6 +372,7 @@
 <!-- ===== TOAST ===== -->
 <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
 
+<script src="notice-seed.js"></script>
 <script>
 (function() {
   'use strict';
@@ -579,24 +598,27 @@
     tbody.innerHTML = '';
     if (!notices.length) { empty.classList.remove('hidden'); return; }
     empty.classList.add('hidden');
-    const sorted = [...notices].sort((a,b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+    const sorted = [...notices].sort((a, b) => {
+      if (a.pinned !== b.pinned) return (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0);
+      return (b.date || '').localeCompare(a.date || '');
+    });
     sorted.forEach(n => {
-      const catColor = n.category === '이벤트' ? 'bg-amber-400/10 text-amber-400' :
-                       n.category === '휴진안내' ? 'bg-red-400/10 text-red-400' : 'bg-gray-700/50 text-gray-400';
       const tr = document.createElement('tr');
       tr.className = 'hover:bg-[#16232f] transition-colors';
+      const views = Number(n.views || 0);
       tr.innerHTML = `
         <td class="px-5 py-3">
-          <span class="status-badge ${catColor}">${n.category}</span>
+          <span class="status-badge bg-gray-700/50 text-gray-400">공지</span>
         </td>
         <td class="px-5 py-3 text-sm text-white font-medium">
           ${n.pinned ? '<span class="mr-1 text-[#42c0bf]">📌</span>' : ''}${escHtml(n.title)}
+          <span class="ml-2 text-[11px] text-gray-600 font-normal">· 조회 ${views.toLocaleString()}</span>
         </td>
         <td class="px-5 py-3 text-xs text-gray-500">${fmtDate(n.date)}</td>
         <td class="px-5 py-3 text-xs">${n.pinned ? '<span class="text-[#42c0bf]">고정</span>' : '<span class="text-gray-600">-</span>'}</td>
         <td class="px-5 py-3">
-          <span class="status-badge ${n.visible ? 'bg-[#42c0bf]/10 text-[#42c0bf]' : 'bg-gray-700/50 text-gray-500'}">
-            ${n.visible ? '공개' : '비공개'}
+          <span class="status-badge ${n.visible !== false ? 'bg-[#42c0bf]/10 text-[#42c0bf]' : 'bg-gray-700/50 text-gray-500'}">
+            ${n.visible !== false ? '공개' : '비공개'}
           </span>
         </td>
         <td class="px-5 py-3 text-center">
@@ -610,29 +632,125 @@
     });
   }
 
+  // ─── TOAST UI EDITOR (lazy init) ──────────────────────────────────
+  let noticeEditor = null;
+  function ensureEditor() {
+    if (noticeEditor) return;
+    if (!window.toastui || !window.toastui.Editor) {
+      console.warn('Toast UI Editor not loaded');
+      return;
+    }
+    noticeEditor = new window.toastui.Editor({
+      el: document.getElementById('noticeEditor'),
+      height: '380px',
+      initialEditType: 'wysiwyg',
+      previewStyle: 'vertical',
+      usageStatistics: false,
+      toolbarItems: [
+        ['heading', 'bold', 'italic', 'strike'],
+        ['hr', 'quote'],
+        ['ul', 'ol'],
+        ['table', 'image', 'link'],
+        ['code', 'codeblock']
+      ]
+    });
+    // 이미지 삽입 시 Base64 Data URL로 저장
+    noticeEditor.addHook('addImageBlobHook', function(blob, callback) {
+      const reader = new FileReader();
+      reader.onload = function() { callback(reader.result, blob.name || '이미지'); };
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  // ─── ATTACHMENTS ──────────────────────────────────────────────────
+  let noticeAttachState = [];
+
+  function formatBytes(bytes) {
+    if (!bytes) return '';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+  }
+
+  function renderAttachList() {
+    const wrap = document.getElementById('noticeAttachList');
+    if (!wrap) return;
+    if (!noticeAttachState.length) { wrap.innerHTML = ''; return; }
+    wrap.innerHTML = noticeAttachState.map((a, i) => {
+      const sizeText = a.size ? formatBytes(a.size) : '';
+      return `
+        <div class="attach-item">
+          <svg class="w-4 h-4 text-[#42c0bf] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/></svg>
+          <span class="attach-name">${escHtml(a.name || '첨부파일')}</span>
+          <span class="attach-size">${sizeText}</span>
+          <button type="button" class="attach-remove" onclick="removeNoticeAttach(${i})" aria-label="삭제">×</button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.removeNoticeAttach = function(idx) {
+    noticeAttachState.splice(idx, 1);
+    renderAttachList();
+  };
+
+  document.getElementById('noticeAttachInput').addEventListener('change', function(e) {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    let remaining = files.length;
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function() {
+        noticeAttachState.push({
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          data: reader.result
+        });
+        remaining--;
+        if (remaining === 0) {
+          renderAttachList();
+          e.target.value = '';
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+  // ─── MODAL OPEN / CLOSE / SAVE ────────────────────────────────────
   window.openNoticeModal = function(id) {
     const modal = document.getElementById('noticeModal');
     const title = document.getElementById('noticeModalTitle');
+
+    modal.classList.remove('hidden');
+    // 모달 표시 후 에디터 초기화 (DOM 크기 측정 이슈 회피)
+    setTimeout(ensureEditor, 0);
+
     if (id) {
       const n = getNotices().find(x => x.id === id);
       if (!n) return;
       title.textContent = '공지 수정';
       document.getElementById('noticeId').value = id;
-      document.getElementById('noticeCategory').value = n.category;
-      document.getElementById('noticeTitle').value = n.title;
-      document.getElementById('noticeContent').value = n.content;
-      document.getElementById('noticePinned').checked = n.pinned;
-      document.getElementById('noticeVisible').checked = n.visible;
+      document.getElementById('noticeTitle').value = n.title || '';
+      setTimeout(() => {
+        if (noticeEditor) noticeEditor.setHTML(n.body || n.content || '');
+      }, 30);
+      document.getElementById('noticePinned').checked = !!n.pinned;
+      document.getElementById('noticeVisible').checked = n.visible !== false;
+      noticeAttachState = Array.isArray(n.attachments) ? n.attachments.slice() : [];
     } else {
       title.textContent = '새 공지 작성';
       document.getElementById('noticeId').value = '';
-      document.getElementById('noticeCategory').value = '일반';
       document.getElementById('noticeTitle').value = '';
-      document.getElementById('noticeContent').value = '';
+      setTimeout(() => {
+        if (noticeEditor) noticeEditor.setHTML('');
+      }, 30);
       document.getElementById('noticePinned').checked = false;
       document.getElementById('noticeVisible').checked = true;
+      noticeAttachState = [];
     }
-    modal.classList.remove('hidden');
+    document.getElementById('noticeAttachInput').value = '';
+    renderAttachList();
   };
 
   window.closeNoticeModal = function() {
@@ -641,23 +759,48 @@
 
   window.saveNotice = function() {
     const id = document.getElementById('noticeId').value;
-    const data = {
-      id: id || genId(),
-      category: document.getElementById('noticeCategory').value,
-      title: document.getElementById('noticeTitle').value.trim(),
-      content: document.getElementById('noticeContent').value.trim(),
-      date: today(),
-      pinned: document.getElementById('noticePinned').checked,
-      visible: document.getElementById('noticeVisible').checked,
-    };
-    if (!data.title) { showToast('제목을 입력해 주세요.', 'error'); return; }
+    const title = document.getElementById('noticeTitle').value.trim();
+    if (!title) { showToast('제목을 입력해 주세요.', 'error'); return; }
+    const bodyHtml = noticeEditor ? noticeEditor.getHTML() : '';
+    const now = today();
     let notices = getNotices();
-    if (id) { notices = notices.map(n => n.id === id ? { ...data, date: n.date } : n); }
-    else { notices.unshift(data); }
+    let saved;
+    if (id) {
+      const original = notices.find(x => x.id === id) || {};
+      saved = Object.assign({}, original, {
+        id,
+        category: '공지',
+        title,
+        body: bodyHtml,
+        author: original.author || '관리자',
+        date: original.date || now,
+        updatedAt: now,
+        views: Number(original.views || 0),
+        pinned: document.getElementById('noticePinned').checked,
+        visible: document.getElementById('noticeVisible').checked,
+        attachments: noticeAttachState.slice()
+      });
+      delete saved.content;
+      notices = notices.map(n => n.id === id ? saved : n);
+    } else {
+      saved = {
+        id: genId(),
+        category: '공지',
+        title,
+        body: bodyHtml,
+        author: '관리자',
+        date: now,
+        updatedAt: now,
+        views: 0,
+        pinned: document.getElementById('noticePinned').checked,
+        visible: document.getElementById('noticeVisible').checked,
+        attachments: noticeAttachState.slice()
+      };
+      notices.unshift(saved);
+    }
     setNotices(notices);
     renderNotices();
     closeNoticeModal();
-    // TODO: notice.html 연동 — ysmc_notices localStorage 키를 notice.html에서 읽어 공지 목록 표시
     showToast(id ? '공지가 수정되었습니다.' : '새 공지가 등록되었습니다.');
   };
 
@@ -839,6 +982,9 @@
   // ─── INIT ──────────────────────────────────────────────────────────
   function initAll() {
     injectSampleData();
+    if (window.NoticeSeed && typeof window.NoticeSeed.seedIfNeeded === 'function') {
+      window.NoticeSeed.seedIfNeeded();
+    }
     loadPopupForm();
     renderNotices();
     renderConsultations();

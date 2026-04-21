@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>공지사항 | 선메디컬센터 유성선병원 성형외과</title>
+  <title>공지사항 상세 | 선메디컬센터 유성선병원 성형외과</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -96,142 +96,113 @@
     .mobile-nav-cta .nav-phone { background: linear-gradient(135deg, var(--primary), var(--primary-light, #D4A5B5)); color: #FFFFFF; }
     .mobile-nav-cta .nav-kakao { background: #FEE500; color: #3C1E1E !important; }
 
+    /* ===== Breadcrumb ===== */
+    .breadcrumb-bar { margin-top: 104px; background: var(--surface); border-bottom: 1px solid var(--outline-variant); }
+    .breadcrumb-inner { max-width: 1280px; margin: 0 auto; padding: 14px 40px; font-size: 12px; color: var(--text-mid); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .breadcrumb-inner a { color: var(--text-mid); transition: color 0.18s; }
+    .breadcrumb-inner a:hover { color: var(--primary); }
+    .breadcrumb-sep { color: var(--text-light); opacity: 0.6; }
+    .breadcrumb-current { color: var(--text-dark); font-weight: 600; }
 
-    /* ===== Hero ===== */
-    .hero-banner { margin-top: 104px; height: 280px; background: linear-gradient(140deg, #F3E8E4 0%, #FBF5F3 100%); display: flex; align-items: center; position: relative; overflow: hidden; }
-    .hero-banner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(140deg, rgba(212, 165, 181, 0.12) 0%, rgba(243, 232, 228, 0.08) 100%) 100%); z-index: 1; }
-    .hero-banner-inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 0 40px; width: 100%; }
-    0}
-    .hero-title { font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: #2D1F24; letter-spacing: -2px; line-height: 1.1; margin-bottom: 14px; }
-    .hero-subtitle { font-size: 15px; color: rgba(0,0,0,0.60); line-height: 1.8; }
+    /* ===== Notice Detail ===== */
+    .detail-section { background: var(--surface); padding: 48px 40px 80px; min-height: 60vh; }
+    .detail-inner { max-width: 920px; margin: 0 auto; }
 
-    /* ===== Notice List ===== */
-    .notice-section { background: var(--surface, #FBF5F3); padding: 80px 40px; }
-    .notice-inner { max-width: 1280px; margin: 0 auto; }
-    .section-label { display: inline-block; font-size: 10px; font-weight: 600; color: var(--primary); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
-    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; line-height: 1.25; margin-bottom: 40px; }
+    .detail-card { background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(158, 107, 123, 0.06); overflow: hidden; }
+    .detail-head { padding: 40px 48px 28px; border-bottom: 1px solid var(--outline-variant); }
+    .detail-badges { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .d-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .d-badge-pin { background: var(--accent); color: var(--primary-dark); }
+    .d-badge-new { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; }
+    .d-badge-cat { background: rgba(0,0,0,0.06); color: var(--text-mid); }
 
-    .notice-table-wrap { background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(158, 107, 123, 0.06); overflow: hidden; margin-bottom: 36px; }
+    .detail-title { font-size: clamp(22px, 3.2vw, 30px); font-weight: 800; color: var(--text-dark); letter-spacing: -0.6px; line-height: 1.35; word-break: keep-all; }
 
-    .notice-table { width: 100%; border-collapse: collapse; }
+    .detail-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 18px; font-size: 13px; color: var(--text-light); }
+    .detail-meta .meta-item { display: inline-flex; align-items: center; gap: 6px; }
+    .detail-meta .meta-label { color: var(--text-light); opacity: 0.75; }
+    .detail-meta .meta-value { color: var(--text-mid); font-weight: 500; }
 
-    .notice-table thead tr { background: var(--text-dark); }
-    .notice-table thead th { padding: 16px 20px; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); text-align: left; }
-    .notice-table thead th:first-child { width: 60px; text-align: center; }
-    .notice-table thead th:nth-child(3) { width: 100px; text-align: center; }
-    .notice-table thead th:last-child { width: 80px; text-align: center; }
+    .detail-body { padding: 36px 48px; font-size: 15.5px; color: var(--text-dark); line-height: 1.85; word-break: keep-all; }
+    .detail-body p { margin: 0 0 16px; }
+    .detail-body p:last-child { margin-bottom: 0; }
+    .detail-body h1, .detail-body h2, .detail-body h3, .detail-body h4 { color: var(--text-dark); font-weight: 700; margin: 28px 0 12px; line-height: 1.4; letter-spacing: -0.3px; }
+    .detail-body h1 { font-size: 24px; }
+    .detail-body h2 { font-size: 20px; }
+    .detail-body h3 { font-size: 17px; }
+    .detail-body h4 { font-size: 15px; }
+    .detail-body ul, .detail-body ol { padding-left: 22px; margin: 0 0 16px; }
+    .detail-body ul { list-style: disc; }
+    .detail-body ol { list-style: decimal; }
+    .detail-body li { margin-bottom: 6px; }
+    .detail-body a { color: var(--primary); text-decoration: underline; }
+    .detail-body a:hover { color: var(--primary-dark); }
+    .detail-body strong { font-weight: 700; color: var(--text-dark); }
+    .detail-body em { font-style: italic; }
+    .detail-body blockquote { border-left: 3px solid var(--primary); padding: 4px 0 4px 16px; margin: 18px 0; color: var(--text-mid); background: var(--surface); border-radius: 0 4px 4px 0; }
+    .detail-body img { max-width: 100%; height: auto; border-radius: 10px; margin: 18px 0; box-shadow: 0 4px 20px rgba(45, 31, 36, 0.08); }
+    .detail-body hr { border: none; border-top: 1px solid var(--outline-variant); margin: 24px 0; }
+    .detail-body code { background: var(--surface-low); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', Monaco, monospace; }
+    .detail-body pre { background: var(--text-dark); color: #fff; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+    .detail-body pre code { background: transparent; padding: 0; color: #fff; }
+    .detail-body table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+    .detail-body th, .detail-body td { border: 1px solid var(--outline-variant); padding: 10px 12px; text-align: left; }
+    .detail-body th { background: var(--surface-low); font-weight: 700; }
 
-    .notice-table tbody tr { border-bottom: none; transition: background 0.15s; cursor: pointer; }
-    .notice-table tbody tr:last-child { border-bottom: none; }
-    .notice-table tbody tr:hover { background: var(--surface, #FBF5F3); }
-    .notice-table tbody tr.pinned { background: rgba(158,107,123,0.03); }
+    /* ===== Attachments ===== */
+    .attachments-block { margin: 0 48px 32px; padding: 18px 20px; background: var(--surface-low); border-radius: 10px; }
+    .attachments-title { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--primary-dark); text-transform: uppercase; margin-bottom: 12px; }
+    .attachments-list { display: flex; flex-direction: column; gap: 6px; }
+    .attachment-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #fff; border-radius: 8px; transition: background 0.18s; cursor: pointer; border: 1px solid transparent; }
+    .attachment-item:hover { background: #fff; border-color: var(--primary-light); }
+    .attachment-icon { width: 32px; height: 32px; border-radius: 6px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+    .attachment-name { flex: 1; font-size: 13.5px; color: var(--text-dark); font-weight: 500; word-break: break-all; }
+    .attachment-size { font-size: 11px; color: var(--text-light); flex-shrink: 0; }
+    .attachment-dl { font-size: 12px; color: var(--primary); font-weight: 700; flex-shrink: 0; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--primary-light); }
+    .attachment-item:hover .attachment-dl { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    .notice-table td { padding: 16px 20px; font-size: 14px; color: var(--text-mid); }
-    .notice-table td:first-child { text-align: center; font-size: 13px; color: var(--text-light); }
-    .notice-table td:nth-child(3) { text-align: center; font-size: 13px; }
-    .notice-table td:last-child { text-align: center; font-size: 13px; color: var(--text-light); }
+    /* ===== Navigation (prev/next) ===== */
+    .detail-nav { margin-top: 24px; background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(158, 107, 123, 0.06); overflow: hidden; }
+    .nav-row { display: flex; align-items: center; padding: 18px 24px; border-bottom: 1px solid var(--outline-variant); gap: 16px; transition: background 0.18s; cursor: pointer; }
+    .nav-row:last-child { border-bottom: none; }
+    .nav-row:hover { background: var(--surface); }
+    .nav-row.disabled { cursor: default; opacity: 0.45; }
+    .nav-row.disabled:hover { background: transparent; }
+    .nav-label { flex-shrink: 0; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: var(--text-light); text-transform: uppercase; width: 72px; }
+    .nav-arrow { flex-shrink: 0; font-size: 14px; color: var(--text-light); width: 16px; }
+    .nav-title { flex: 1; font-size: 14px; color: var(--text-dark); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-row:hover:not(.disabled) .nav-title { color: var(--primary); }
+    .nav-date { flex-shrink: 0; font-size: 12px; color: var(--text-light); }
 
-    .notice-title-cell { display: flex; align-items: center; gap: 10px; }
-    .notice-title-text { color: var(--text-dark); font-weight: 600; font-size: 15px; transition: color 0.18s; }
-    .notice-table tbody tr:hover .notice-title-text { color: var(--primary); }
+    /* ===== Action Buttons ===== */
+    .detail-actions { margin-top: 32px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .btn-list { padding: 13px 36px; background: var(--text-dark); color: #fff; border-radius: 8px; font-size: 14px; font-weight: 700; transition: background 0.2s; }
+    .btn-list:hover { background: var(--primary); }
+    .btn-top { padding: 13px 28px; background: #fff; color: var(--text-mid); border: 1.5px solid var(--outline-variant); border-radius: 8px; font-size: 14px; font-weight: 600; transition: all 0.2s; }
+    .btn-top:hover { border-color: var(--primary); color: var(--primary); }
 
-    .n-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; flex-shrink: 0; }
-    .n-badge-new { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; }
-    .n-badge-pin { background: var(--accent); color: var(--primary-dark); }
-    .n-badge-notice { background: rgba(0,0,0,0.06); color: var(--text-mid); }
-
-    /* ===== Pagination ===== */
-    .pagination { display: flex; justify-content: center; align-items: center; gap: 6px; }
-
-    .pg-btn { width: 40px; height: 40px; border-radius: 8px; border: 1.5px solid rgba(0,0,0,0.1); background: #fff; font-size: 14px; font-weight: 600; color: var(--text-mid); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.18s; }
-    .pg-btn:hover, .pg-btn.active { background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; border-color: var(--primary); }
-    .pg-btn.arrow { font-size: 12px; }
-
-    /* ===== CTA ===== */
-    .cta-section { background: linear-gradient(135deg, #F3E8E4 0%, #FBF5F3 100%); padding: 80px 40px; text-align: center; border-top: 1px solid rgba(158,107,123,0.15); }
-    .cta-section h2 { font-size: 32px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.8px; margin-bottom: 12px; }
-    .cta-section p { font-size: 15px; color: var(--text-mid); margin-bottom: 36px; }
-    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .cta-btn-primary { padding: 14px 32px; background: linear-gradient(135deg, #9E6B7B, #D4A5B5); color: #FFFFFF; border-radius: 6px; font-size: 15px; font-weight: 700; transition: background 0.25s; }
-    .cta-btn-primary:hover { background: var(--primary-light); }
-    .cta-btn-outline { padding: 14px 32px; border: 1.5px solid rgba(158,107,123,0.40); color: var(--primary-dark); border-radius: 6px; font-size: 15px; font-weight: 600; transition: all 0.25s; }
-    .cta-btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-    .cta-btn-kakao { padding: 14px 32px; background: #FEE500; color: #3C1E1E; border-radius: 6px; font-size: 15px; font-weight: 700; }
+    /* ===== Not Found ===== */
+    .not-found { text-align: center; padding: 80px 20px; }
+    .not-found h2 { font-size: 28px; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; }
+    .not-found p { font-size: 15px; color: var(--text-mid); margin-bottom: 28px; }
 
     /* ===== Footer ===== */
     .footer { background: #F3E8E4; color: #6B5258; }
-    .footer-top { display: flex; justify-content: center; text-align: center; }
+    .footer-top { display: flex; justify-content: center; text-align: center; padding: 44px 40px 28px; }
     .footer-logo { font-size: 16px; font-weight: 700; color: #2D1F24; margin-bottom: 16px; }
     .footer-detail { font-size: 13px; line-height: 2.1; }
     .footer-bottom { max-width: 1280px; margin: 0 auto; padding: 20px 40px; border-top: 1px solid rgba(107,82,88,0.15); display: flex; justify-content: space-between; align-items: center; }
     .footer-copy { font-size: 12px; color: rgba(107,82,88,0.55); }
 
     /* ===== Desktop Floating CTA ===== */
-    .float-cta {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      z-index: 980;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .float-cta-toggle {
-      position: absolute;
-      top: -32px;
-      right: 0;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.20);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
+    .float-cta { position: fixed; bottom: 80px; right: 20px; z-index: 980; display: flex; flex-direction: column; gap: 8px; }
+    .float-cta-toggle { position: absolute; top: -32px; right: 0; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.20); color: #fff; border: none; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
     .float-cta-toggle:hover { background: rgba(0,0,0,0.40); }
-
     .float-cta.hidden .float-cta-btns { display: none; }
-
-    .float-cta-btns {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .float-cta-btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-    }
-
+    .float-cta-btns { display: flex; flex-direction: column; gap: 8px; }
+    .float-cta-btn { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,0.18); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
     .float-cta-btn:hover { transform: translateX(-4px); box-shadow: 0 6px 24px rgba(0,0,0,0.24); }
-
-    .float-cta-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 9999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
+    .float-cta-icon { width: 32px; height: 32px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
     .float-btn-phone { background: #fff; color: var(--primary-dark); }
     .float-btn-phone .float-cta-icon { background: var(--primary); }
     .float-btn-kakao { background: #FEE500; color: #3C1E1E; }
@@ -239,6 +210,18 @@
     .float-btn-carechat { background: #3C1E1E; color: #FEE500; }
     .float-btn-naver { background: #03C75A; color: #fff; }
     .float-btn-naver .float-cta-icon { background: rgba(255,255,255,0.20); }
+
+    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 990; background: var(--surface, #FBF5F3); box-shadow: 0 -2px 20px rgba(0,0,0,0.4); padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+    .mobile-cta-inner { display: flex; gap: 10px; }
+    .mobile-cta-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.25s; }
+    .mobile-cta-btn:active { opacity: 0.8; }
+    .cta-phone { background: #9E6B7B; color: #2D1F24; }
+    .cta-kakao { background: #FEE500; color: #3C1E1E; }
+
+    @media (max-width: 1024px) {
+      .float-cta { display: none; }
+    }
+
     @media (max-width: 768px) {
       .float-cta { display: none; }
 
@@ -248,30 +231,33 @@
       .gnb, .header-cta { display: none; }
       .menu-toggle { display: flex; }
       .gnb-dropdown { display: none !important; }
-      .hero-banner { margin-top: 96px; height: 240px; }
-      .hero-banner-inner { padding: 0 20px; }
-      .notice-section { padding: 60px 20px; }
-      .notice-table-wrap { overflow-x: auto; }
-      .notice-table { min-width: 560px; }
+
+      .breadcrumb-bar { margin-top: 96px; }
+      .breadcrumb-inner { padding: 12px 20px; font-size: 11px; }
+      .detail-section { padding: 28px 16px 60px; }
+      .detail-head { padding: 28px 20px 20px; }
+      .detail-title { font-size: 18px; line-height: 1.4; }
+      .detail-meta { gap: 10px; font-size: 12px; }
+      .detail-body { padding: 24px 20px; font-size: 14.5px; }
+      .detail-body h1 { font-size: 20px; }
+      .detail-body h2 { font-size: 17px; }
+      .attachments-block { margin: 0 20px 24px; padding: 14px; }
+      .attachment-item { padding: 8px 10px; gap: 8px; }
+      .attachment-name { font-size: 12.5px; }
+
+      .nav-row { padding: 14px 16px; }
+      .nav-label { width: 48px; font-size: 10px; }
+      .nav-title { font-size: 13px; }
+      .nav-date { display: none; }
+
+      .detail-actions { margin-top: 24px; }
+      .btn-list, .btn-top { padding: 12px 24px; font-size: 13px; }
+
       .footer-top { flex-direction: column; gap: 36px; padding: 44px 20px 28px; }
       .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding: 18px 20px; }
-      .cta-buttons { flex-direction: column; align-items: center; }
       .mobile-cta { display: block !important; }
       .footer { padding-bottom: 76px; }
     }
-
-    @media (max-width: 1024px) {
-      .float-cta { display: none; }
-
-      .section { padding: 80px 32px; }
-    }
-
-    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 990; background: var(--surface, #FBF5F3); box-shadow: 0 -2px 20px rgba(0,0,0,0.4); padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
-    .mobile-cta-inner { display: flex; gap: 10px; }
-    .mobile-cta-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.25s; }
-    .mobile-cta-btn:active { opacity: 0.8; }
-    .cta-phone { background: #9E6B7B; color: #2D1F24; }
-    .cta-kakao { background: #FEE500; color: #3C1E1E; }
   </style>
 </head>
 
@@ -289,8 +275,6 @@
         <a href="tour.html">병원둘러보기</a>
         <a href="doctor.html">의료진소개</a>
         <a href="about.html">오시는 길</a>
-        
-        
       </div>
       <div class="mob-sub-title">미용성형</div>
       <div class="mob-sub-grid">
@@ -345,57 +329,23 @@
     </div>
   </header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero-banner">
-    <div class="hero-banner-inner">
-      <div class="hero-eyebrow">NOTICE · 공지사항</div>
-      <h1 class="hero-title">공지사항</h1>
-      <p class="hero-subtitle">선메디컬센터 유성선병원 성형외과의 주요 공지 및 안내를 확인하세요</p>
+  <!-- ===== BREADCRUMB ===== -->
+  <div class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+      <a href="index.html">홈</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="notice.html">병원소개</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="notice.html">공지사항</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current" id="breadcrumbTitle">상세보기</span>
     </div>
-  </section>
+  </div>
 
-  <!-- ===== NOTICE LIST ===== -->
-  <section class="notice-section">
-    <div class="notice-inner">
-      <div class="section-label">Announcements</div>
-      <h2 class="section-title">전체 공지사항</h2>
-
-      <div class="notice-table-wrap">
-        <table class="notice-table">
-          <thead>
-            <tr>
-              <th>번호</th>
-              <th>제목</th>
-              <th>날짜</th>
-              <th>조회</th>
-            </tr>
-          </thead>
-          <tbody id="noticesTbody">
-            <!-- localStorage('ysmc_notices')에서 동적 렌더링 -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Pagination -->
-      <div class="pagination">
-        <button class="pg-btn arrow">‹</button>
-        <button class="pg-btn active">1</button>
-        <button class="pg-btn">2</button>
-        <button class="pg-btn arrow">›</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CTA ===== -->
-  <section class="cta-section">
-    <div>
-      <h2>문의 사항이 있으신가요?</h2>
-      <p>공지 내용 외에도 궁금한 점은 언제든지 문의해 주세요.</p>
-      <div class="cta-buttons">
-        <a href="consultation.html" class="cta-btn-primary">온라인 상담 신청</a>
-        <a href="tel:042-609-1190" class="cta-btn-outline">전화 042-609-1190</a>
-        <a href="#" class="cta-btn-kakao">카카오톡 문의</a>
-      </div>
+  <!-- ===== DETAIL SECTION ===== -->
+  <section class="detail-section">
+    <div class="detail-inner" id="detailRoot">
+      <!-- JS-rendered content -->
     </div>
   </section>
 
@@ -411,24 +361,6 @@
           응급: 24시간 응급실 운영
         </div>
       </div>
-      <div class="footer-quick">
-        <a href="consultation.html" class="footer-quick-item">
-          
-          <span class="footer-quick-label">온라인 상담</span>
-        </a>
-        <a href="booking.html" class="footer-quick-item">
-          
-          <span class="footer-quick-label">진료 예약</span>
-        </a>
-        <a href="tel:042-609-1190" class="footer-quick-item">
-          
-          <span class="footer-quick-label">전화 문의</span>
-        </a>
-        <a href="#" class="footer-quick-item">
-          
-          <span class="footer-quick-label">카카오톡</span>
-        </a>
-      </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 선메디컬센터 유성선병원 성형외과. All rights reserved.</span>
@@ -440,18 +372,10 @@
   <div class="float-cta" id="floatCta" role="complementary" aria-label="빠른 연락">
     <button class="float-cta-toggle" id="floatCtaToggle" aria-label="플로팅 메뉴 닫기"></button>
     <div class="float-cta-btns">
-      <a href="tel:042-609-1190" class="float-cta-btn float-btn-phone">
-        전화 상담
-      </a>
-      <a href="#" class="float-cta-btn float-btn-kakao">
-        카톡 상담
-      </a>
-      <a href="#" class="float-cta-btn float-btn-carechat">
-        카카오 케어챗 예약
-      </a>
-      <a href="#naver-booking" class="float-cta-btn float-btn-naver">
-        <span class="float-cta-icon">N</span>네이버 예약
-      </a>
+      <a href="tel:042-609-1190" class="float-cta-btn float-btn-phone">전화 상담</a>
+      <a href="#" class="float-cta-btn float-btn-kakao">카톡 상담</a>
+      <a href="#" class="float-cta-btn float-btn-carechat">카카오 케어챗 예약</a>
+      <a href="#naver-booking" class="float-cta-btn float-btn-naver"><span class="float-cta-icon">N</span>네이버 예약</a>
     </div>
   </div>
 
@@ -468,7 +392,7 @@
   (function() {
     'use strict';
 
-    // ─── Helpers ─────────────────────────────────────────────────
+    // ─── Helpers ────────────────────────────────────────────────────
     function escHtml(s) {
       if (s == null) return '';
       var d = document.createElement('div');
@@ -479,6 +403,16 @@
       if (!s) return '';
       return String(s).replace(/-/g, '.');
     }
+    function getParam(key) {
+      var m = location.search.match(new RegExp('[?&]' + key + '=([^&]*)'));
+      return m ? decodeURIComponent(m[1]) : '';
+    }
+    function formatBytes(bytes) {
+      if (!bytes) return '';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+    }
     function sortNotices(arr) {
       return arr.slice().sort(function(a, b) {
         if (a.pinned && !b.pinned) return -1;
@@ -487,74 +421,138 @@
       });
     }
 
-    // ─── Seed injection ─────────────────────────────────────────
+    // ─── Seed injection (shared with notice.html) ─────────────────
     if (window.NoticeSeed && typeof window.NoticeSeed.seedIfNeeded === 'function') {
       window.NoticeSeed.seedIfNeeded();
     }
 
-    // ─── Render list ────────────────────────────────────────────
-    var tbody = document.getElementById('noticesTbody');
-    if (!tbody) return;
-
+    // ─── Load data ────────────────────────────────────────────────
+    var root = document.getElementById('detailRoot');
+    var id = getParam('id');
+    var raw = localStorage.getItem('ysmc_notices');
     var all = [];
-    try { all = JSON.parse(localStorage.getItem('ysmc_notices') || '[]'); } catch(e) {}
-    if (!Array.isArray(all)) all = [];
+    try { all = JSON.parse(raw || '[]'); } catch(e) {}
+    var visible = sortNotices(all.filter(function(n) { return n.visible !== false; }));
 
-    var visible = sortNotices(all.filter(function(n) { return n && n.visible !== false; }));
+    var notice = null;
+    var idx = -1;
+    for (var i = 0; i < visible.length; i++) {
+      if (visible[i].id === id) { notice = visible[i]; idx = i; break; }
+    }
 
-    if (!visible.length) {
-      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:60px 20px; color:var(--text-light); font-size:14px;">등록된 공지사항이 없습니다.</td></tr>';
+    if (!notice) {
+      root.innerHTML =
+        '<div class="detail-card">' +
+          '<div class="not-found">' +
+            '<h2>공지를 찾을 수 없습니다</h2>' +
+            '<p>해당 공지가 삭제되었거나 비공개 처리되었을 수 있습니다.</p>' +
+            '<a href="notice.html" class="btn-list">목록으로 돌아가기</a>' +
+          '</div>' +
+        '</div>';
+      document.title = '공지사항 | 선메디컬센터 유성선병원 성형외과';
       return;
     }
 
-    var today = new Date(); today.setHours(0, 0, 0, 0);
-    var sevenDaysAgo = new Date(today); sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
-    var nonPinnedCount = visible.filter(function(n) { return !n.pinned; }).length;
-    var nonPinnedIndex = nonPinnedCount;
-
-    var fragment = document.createDocumentFragment();
-    visible.forEach(function(notice) {
-      var tr = document.createElement('tr');
-      tr.style.cursor = 'pointer';
-      tr.setAttribute('data-id', notice.id);
-      if (notice.pinned) tr.classList.add('pinned');
-
-      var tdNum = document.createElement('td');
-      if (notice.pinned) {
-        tdNum.innerHTML = '<span class="n-badge n-badge-pin">공지</span>';
-      } else {
-        tdNum.textContent = nonPinnedIndex--;
+    // ─── Views counter (increment once per session) ───────────────
+    try {
+      var seenKey = 'ysmc_notice_viewed_' + id;
+      if (!sessionStorage.getItem(seenKey)) {
+        var updated = all.map(function(n) {
+          if (n.id === id) return Object.assign({}, n, { views: (n.views || 0) + 1 });
+          return n;
+        });
+        localStorage.setItem('ysmc_notices', JSON.stringify(updated));
+        sessionStorage.setItem(seenKey, '1');
+        notice.views = (notice.views || 0) + 1;
       }
-      tr.appendChild(tdNum);
+    } catch(e) {}
 
-      var tdTitle = document.createElement('td');
-      var isNew = false;
-      try { isNew = new Date(notice.date) >= sevenDaysAgo; } catch(e) {}
-      var titleHtml = '<div class="notice-title-cell"><span class="notice-title-text">' + escHtml(notice.title) + '</span>';
-      if (isNew) titleHtml += '<span class="n-badge n-badge-new">NEW</span>';
-      titleHtml += '</div>';
-      tdTitle.innerHTML = titleHtml;
-      tr.appendChild(tdTitle);
+    // ─── Render ───────────────────────────────────────────────────
+    document.title = notice.title + ' | 공지사항 | 선메디컬센터 유성선병원 성형외과';
+    document.getElementById('breadcrumbTitle').textContent = notice.title;
 
-      var tdDate = document.createElement('td');
-      tdDate.textContent = fmtDate(notice.date);
-      tr.appendChild(tdDate);
+    var prev = idx > 0 ? visible[idx - 1] : null;
+    var next = idx < visible.length - 1 ? visible[idx + 1] : null;
 
-      var tdViews = document.createElement('td');
-      var views = Number(notice.views || 0);
-      tdViews.textContent = views.toLocaleString();
-      tr.appendChild(tdViews);
+    var badgesHtml = '';
+    if (notice.pinned) badgesHtml += '<span class="d-badge d-badge-pin">공지</span>';
+    badgesHtml += '<span class="d-badge d-badge-cat">' + escHtml(notice.category || '공지') + '</span>';
 
-      tr.addEventListener('click', function() {
-        window.location.href = 'notice-detail.html?id=' + encodeURIComponent(notice.id);
-      });
+    // NEW 뱃지 (7일 이내)
+    try {
+      var today = new Date(); today.setHours(0,0,0,0);
+      var sevenAgo = new Date(today); sevenAgo.setDate(sevenAgo.getDate() - 7);
+      var nd = new Date(notice.date);
+      if (nd >= sevenAgo) badgesHtml += '<span class="d-badge d-badge-new">NEW</span>';
+    } catch(e) {}
 
-      fragment.appendChild(tr);
-    });
+    var metaHtml =
+      '<span class="meta-item"><span class="meta-label">작성자</span><span class="meta-value">' + escHtml(notice.author || '관리자') + '</span></span>' +
+      '<span class="meta-item"><span class="meta-label">게시일</span><span class="meta-value">' + fmtDate(notice.date) + '</span></span>';
+    if (notice.updatedAt && notice.updatedAt !== notice.date) {
+      metaHtml += '<span class="meta-item"><span class="meta-label">수정일</span><span class="meta-value">' + fmtDate(notice.updatedAt) + '</span></span>';
+    }
+    metaHtml += '<span class="meta-item"><span class="meta-label">조회</span><span class="meta-value">' + (notice.views || 0).toLocaleString() + '</span></span>';
 
-    tbody.appendChild(fragment);
+    // 본문은 관리자(작성자=우리)가 생성한 HTML이므로 그대로 innerHTML 사용
+    var bodyHtml = notice.body || notice.content || '<p>내용이 등록되지 않았습니다.</p>';
 
+    // 첨부파일
+    var attachmentsHtml = '';
+    if (Array.isArray(notice.attachments) && notice.attachments.length) {
+      var items = notice.attachments.map(function(a) {
+        var ext = (a.name || '').split('.').pop().toUpperCase().slice(0, 4);
+        return '<a class="attachment-item" href="' + (a.data || '#') + '" download="' + escHtml(a.name || 'file') + '">' +
+          '<span class="attachment-icon">' + escHtml(ext || 'FILE') + '</span>' +
+          '<span class="attachment-name">' + escHtml(a.name || '첨부파일') + '</span>' +
+          (a.size ? '<span class="attachment-size">' + formatBytes(a.size) + '</span>' : '') +
+          '<span class="attachment-dl">다운로드</span>' +
+        '</a>';
+      }).join('');
+      attachmentsHtml =
+        '<div class="attachments-block">' +
+          '<div class="attachments-title">첨부파일 (' + notice.attachments.length + ')</div>' +
+          '<div class="attachments-list">' + items + '</div>' +
+        '</div>';
+    }
+
+    // Prev / Next
+    function navRow(item, label, direction) {
+      if (!item) {
+        return '<div class="nav-row disabled">' +
+          '<span class="nav-label">' + label + '</span>' +
+          '<span class="nav-arrow">' + (direction === 'prev' ? '↑' : '↓') + '</span>' +
+          '<span class="nav-title">' + (direction === 'prev' ? '이전 글이 없습니다' : '다음 글이 없습니다') + '</span>' +
+        '</div>';
+      }
+      return '<a class="nav-row" href="notice-detail.html?id=' + encodeURIComponent(item.id) + '">' +
+        '<span class="nav-label">' + label + '</span>' +
+        '<span class="nav-arrow">' + (direction === 'prev' ? '↑' : '↓') + '</span>' +
+        '<span class="nav-title">' + escHtml(item.title) + '</span>' +
+        '<span class="nav-date">' + fmtDate(item.date) + '</span>' +
+      '</a>';
+    }
+
+    root.innerHTML =
+      '<article class="detail-card">' +
+        '<header class="detail-head">' +
+          '<div class="detail-badges">' + badgesHtml + '</div>' +
+          '<h1 class="detail-title">' + escHtml(notice.title) + '</h1>' +
+          '<div class="detail-meta">' + metaHtml + '</div>' +
+        '</header>' +
+        '<div class="detail-body">' + bodyHtml + '</div>' +
+        attachmentsHtml +
+      '</article>' +
+      '<nav class="detail-nav" aria-label="이전/다음 글">' +
+        navRow(prev, '이전글', 'prev') +
+        navRow(next, '다음글', 'next') +
+      '</nav>' +
+      '<div class="detail-actions">' +
+        '<a href="notice.html" class="btn-list">목록으로</a>' +
+        '<button type="button" class="btn-top" onclick="window.scrollTo({top:0,behavior:\'smooth\'})">맨 위로</button>' +
+      '</div>';
+
+    // ─── Header scroll shadow ─────────────────────────────────────
     var header = document.getElementById('header');
     if (header) {
       window.addEventListener('scroll', function() {
@@ -563,6 +561,7 @@
       });
     }
 
+    // ─── Floating CTA toggle ──────────────────────────────────────
     var floatCta = document.getElementById('floatCta');
     var floatToggle = document.getElementById('floatCtaToggle');
     if (floatToggle) {
